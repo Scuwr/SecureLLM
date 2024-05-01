@@ -1,0 +1,753 @@
+[
+{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Chemistry'",
+   "question": "What is the name of the instructors who teach Chemistry?",
+   "seed": [0, 4, 0, 1, 0, 0, 0, 0, 2, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Chemistry'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Underwood House'\ncafeteria = 1\nteacher_age >= 35",
+   "question": "What are the names of pupils who live in Underwood House, have cafeteria access, and have instructors who are at least 35 years old?",
+   "seed": [1, 3, 1, 0, 0, 3, 0, 9, 0, 2, 0, 35, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Underwood House' AND pupils.cafeteria = 1 AND instructors.teacher_age >= 35"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Physics'",
+   "question": "What is the name of the instructors who teach Physics?",
+   "seed": [0, 4, 1, 0, 0, 0, 0, 0, 3, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Physics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nperformance < 2\nend_date = 2025\nteacher_age <= 84",
+   "question": "What are the names of pupils whose performance is less than 2, end date is 2025, and have instructors who are at most 84 years old?",
+   "seed": [1, 1, 0, 1, 4, 2, 1, 0, 3, 2, 1, 84, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.performance < 2 AND pupils.end_date = 2025 AND instructors.teacher_age <= 84"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Economics'\nteacher_age <= 52",
+   "question": "What are the names of pupils who study Economics and have instructors who are at most 52 years old?",
+   "seed": [1, 2, 1, 0, 0, 0, 0, 4, 2, 1, 52, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Economics' AND instructors.teacher_age <= 52"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Campbell Hall'\ncafeteria = 0\nclass_subject = 'music'\nlevel = 6\nyear <= 2016",
+   "question": "What are the names of pupils who live in Campbell Hall, do not have cafeteria access, but attend music classes at level 6 and year 2016 or earlier?",
+   "seed": [1, 0, 0, 3, 0, 7, 1, 1, 0, 6, 1, 11, 0, 3, 6, 1, 2016, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Campbell Hall' AND pupils.cafeteria = 0 AND classes.class_subject = 'music' AND classes.level = 6 AND classes.year <= 2016"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 80\nstudy = 'Computer Science'\ncafeteria = 1",
+   "question": "What are the names of instructors who are at most 80 years old, teach Computer Science, and have pupils with cafeteria access?",
+   "seed": [0, 1, 0, 2, 1, 80, 0, 2, 0, 14, 0, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 80 AND pupils.study = 'Computer Science' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'history'\nlevel = 6\nstudy = 'Economics'",
+   "question": "What are the names of instructors who teach history to pupils studying Economics at level 6?",
+   "seed": [0, 0, 1, 0, 4, 1, 5, 0, 9, 0, 0, 0, 4, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'history' AND classes.level = 6 AND pupils.study = 'Economics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Underwood House'",
+   "question": "What are the names of pupils who live in Underwood House?",
+   "seed": [1, 3, 0, 1, 0, 1, 0, 9, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Underwood House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 58\nend_date = 2027",
+   "question": "What are the names of instructors who are at most 58 years old and have pupils whose end date is 2027?",
+   "seed": [0, 4, 1, 0, 2, 1, 58, 1, 2, 0, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 58 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nyear >= 2013\nhousing = 'Lawson Hall'",
+   "question": "What are the names of instructors who teach classes since 2013 and have pupils who live in Lawson Hall?",
+   "seed": [0, 4, 1, 1, 1, 0, 2, 0, 0, 2013, 0, 1, 0, 6, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.year >= 2013 AND pupils.housing = 'Lawson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'psychology'\nyear <= 2012\nperformance > 1\nend_date > 2024",
+   "question": "What are the names of instructors who teach psychology classes before 2012, have pupils with performance greater than 1, and end date beyond 2024?",
+   "seed": [0, 2, 0, 1, 1, 0, 2, 1, 8, 1, 2012, 1, 4, 1, 0, 1, 0, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'psychology' AND classes.year <= 2012 AND pupils.performance > 1 AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Biology'\ncafeteria = 1\nclass_subject = 'sociology'\nlevel = 2\nyear >= 2014",
+   "question": "What are the names of pupils who study Biology, have cafeteria access, and attend sociology classes at level 2 since 2014?",
+   "seed": [1, 2, 0, 1, 0, 2, 0, 1, 0, 1, 0, 6, 1, 9, 0, 1, 0, 2014, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Biology' AND pupils.cafeteria = 1 AND classes.class_subject = 'sociology' AND classes.level = 2 AND classes.year >= 2014"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 48\nstudy = 'Classics'\ncafeteria = 1",
+   "question": "What are the names of instructors who are at least 48 years old, teach Classics, and have pupils with cafeteria access?",
+   "seed": [0, 3, 1, 0, 2, 0, 48, 0, 2, 0, 13, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 48 AND pupils.study = 'Classics' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 40\nperformance > 2\nend_date < 2025",
+   "question": "What are the names of instructors who are at least 40 years old, have pupils with performance greater than 2, and end date before 2025?",
+   "seed": [0, 4, 0, 1, 2, 0, 40, 1, 4, 1, 1, 2, 3, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 40 AND pupils.performance > 2 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Physics'\nteacher_age >= 57",
+   "question": "What are the names of pupils who study Physics and have instructors who are at least 57 years old?",
+   "seed": [1, 1, 1, 0, 0, 0, 3, 2, 0, 57, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Physics' AND instructors.teacher_age >= 57"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'English'",
+   "question": "What are the names of instructors who teach English?",
+   "seed": [0, 2, 1, 0, 1, 0, 0, 0, 0, 0, 0, 12, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE pupils.study = 'English'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Parker Hall'",
+   "question": "What are the names of instructors who teach pupils living in Parker Hall?",
+   "seed": [0, 1, 0, 0, 0, 1, 0, 2, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Parker Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nperformance > 2\ngrade <= 46",
+   "question": "What are the names of pupils with performance greater than 2 and attend classes with grade at most 46?",
+   "seed": [1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 46, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.performance > 2 AND classes.grade <= 46"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 74\nhousing = 'Franklin Hall'\ncafeteria = 0",
+   "question": "What are the names of instructors who are at most 74 years old, teach pupils who live in Franklin Hall, and do not have cafeteria access?",
+   "seed": [0, 4, 0, 0, 2, 1, 74, 0, 3, 0, 3, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 74 AND pupils.housing = 'Franklin Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 85\nstudy = 'Psychology'",
+   "question": "What are the names of instructors who are at most 85 years old and teach Psychology?",
+   "seed": [0, 0, 2, 1, 85, 0, 0, 0, 8, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 85 AND pupils.study = 'Psychology'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 49\nhousing = 'Underwood House'",
+   "question": "What are the names of instructors who are at least 49 years old and teach pupils living in Underwood House?",
+   "seed": [0, 0, 2, 0, 49, 0, 1, 0, 9, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 49 AND pupils.housing = 'Underwood House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Parker Hall'\ncafeteria = 0\nteacher_age >= 26",
+   "question": "What are the names of pupils who live in Parker Hall, do not have cafeteria access, and have instructors who are at least 26 years old?",
+   "seed": [1, 2, 0, 1, 0, 3, 0, 2, 1, 2, 0, 26, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Parker Hall' AND pupils.cafeteria = 0 AND instructors.teacher_age >= 26"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nperformance = 2\nend_date < 2026",
+   "question": "What are the names of instructors who have pupils with performance equal to 2 and end date before 2026?",
+   "seed": [0, 1, 1, 0, 1, 4, 0, 1, 2, 2, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.performance = 2 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Underwood House'\ncafeteria = 0\nclass_subject = 'sociology'",
+   "question": "What are the names of pupils who live in Underwood House, do not have cafeteria access, and attend sociology classes?",
+   "seed": [1, 3, 1, 1, 0, 3, 0, 9, 1, 1, 0, 0, 1, 9, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Underwood House' AND pupils.cafeteria = 0 AND classes.class_subject = 'sociology'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Mechanical Engineering'\nteacher_age >= 68",
+   "question": "What are the names of pupils who study Mechanical Engineering and have instructors who are at least 68 years old?",
+   "seed": [1, 4, 0, 1, 0, 0, 0, 15, 2, 0, 68, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Mechanical Engineering' AND instructors.teacher_age >= 68"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Carson Hall'\ncafeteria = 1",
+   "question": "What are the names of instructors who teach pupils living in Carson Hall and have cafeteria access?",
+   "seed": [0, 2, 1, 0, 0, 0, 3, 0, 5, 0, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Carson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 67\nperformance > 3\nend_date = 2024",
+   "question": "What are the names of instructors who are at most 67 years old, have pupils with performance greater than 3, and end date 2024?",
+   "seed": [0, 3, 0, 0, 2, 1, 67, 1, 4, 1, 2, 0, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 67 AND pupils.performance > 3 AND pupils.end_date = 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \ngrade >= 77\nhousing = 'Morgan House'\ncafeteria = 1",
+   "question": "What are the names of pupils with grades at least 77, living in Morgan House, and have cafeteria access?",
+   "seed": [0, 0, 1, 0, 1, 0, 0, 77, 0, 3, 0, 1, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.grade >= 77 AND pupils.housing = 'Morgan House' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Art'\ncafeteria = 1\nclass_subject = 'politics'\nlevel = 5",
+   "question": "What are the names of pupils who study Art, have cafeteria access, and attend politics classes at level 5?",
+   "seed": [1, 2, 1, 0, 0, 2, 0, 10, 0, 1, 0, 4, 1, 6, 0, 3, 5, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Art' AND pupils.cafeteria = 1 AND classes.class_subject = 'politics' AND classes.level = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nend_date = 2026",
+   "question": "What is the name of instructors whose pupils have an end date in the year 2026?",
+   "seed": [0, 3, 1, 1, 0, 1, 2, 0, 2, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 22\nstudy = 'Art'\ncafeteria = 0",
+   "question": "What is the name of instructors whose pupils study Art, don't use the cafeteria, and have instructors with an age of 22 or younger?",
+   "seed": [0, 3, 1, 0, 2, 1, 22, 0, 2, 0, 10, 1, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 22 AND pupils.study = 'Art' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 21\nstudy = 'Economics'",
+   "question": "What is the name of instructors whose pupils study Economics and have instructors with an age of 21 or younger?",
+   "seed": [0, 1, 1, 2, 1, 21, 0, 0, 0, 4, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 21 AND pupils.study = 'Economics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Sociology'\ncafeteria = 0",
+   "question": "What is the name of instructors whose pupils study Sociology and don't use the cafeteria?",
+   "seed": [0, 4, 1, 1, 0, 0, 2, 0, 9, 1, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Sociology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Davidson Hall'",
+   "question": "What are the names of pupils who live in Davidson Hall?",
+   "seed": [1, 1, 1, 0, 1, 0, 8, 0, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Davidson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 38\nperformance = 4",
+   "question": "What is the name of instructors whose pupils have a performance level of 4 and instructors with an age of 38 or younger?",
+   "seed": [0, 1, 1, 2, 1, 38, 1, 0, 0, 3, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 38 AND pupils.performance = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nlevel = 12\nyear >= 2009\nhousing = 'Parker Hall'",
+   "question": "What is the name of instructors who teach 12th grade classes since 2009 and whose pupils live in Parker Hall?",
+   "seed": [0, 4, 1, 1, 1, 0, 6, 0, 0, 3, 12, 0, 2009, 0, 1, 0, 2, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.level = 12 AND classes.year >= 2009 AND pupils.housing = 'Parker Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Lawson Hall'\nteacher_age <= 68",
+   "question": "What are the names of pupils who live in Lawson Hall and have instructors with an age of 68 or younger?",
+   "seed": [1, 1, 0, 0, 1, 0, 6, 2, 1, 68, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Lawson Hall' AND instructors.teacher_age <= 68"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nlevel = 10\ngrade <= 54\nstudy = 'Math'",
+   "question": "What is the name of instructors who teach 10th grade classes with a grade of 54 or lower and whose pupils study Math?",
+   "seed": [0, 1, 1, 1, 0, 5, 0, 0, 13, 1, 54, 0, 0, 0, 0, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.level = 10 AND classes.grade <= 54 AND pupils.study = 'Math'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 20\nperformance > 2",
+   "question": "What is the name of instructors whose pupils have a performance level higher than 2 and instructors with an age of 20 or older?",
+   "seed": [0, 3, 0, 1, 2, 0, 20, 1, 0, 1, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 20 AND pupils.performance > 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Physics'\ncafeteria = 1\nlevel = 6",
+   "question": "What are the names of pupils who study Physics, use the cafeteria, and attend 6th grade classes?",
+   "seed": [1, 0, 0, 2, 0, 3, 0, 1, 0, 4, 0, 0, 3, 6, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Physics' AND pupils.cafeteria = 1 AND classes.level = 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Mechanical Engineering'\nyear <= 2000",
+   "question": "What are the names of pupils who study Mechanical Engineering and attended classes before the year 2000?",
+   "seed": [1, 3, 0, 0, 0, 0, 0, 15, 1, 0, 2, 0, 1, 2000, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Mechanical Engineering' AND classes.year <= 2000"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Underwood House'\ncafeteria = 1",
+   "question": "What are the names of pupils who live in Underwood House and use the cafeteria?",
+   "seed": [1, 2, 1, 1, 0, 3, 0, 9, 0, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Underwood House' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'economics'\nhousing = 'Carson Hall'",
+   "question": "What is the name of instructors whose pupils live in Carson Hall and attend economics classes?",
+   "seed": [0, 0, 1, 0, 0, 1, 4, 0, 1, 0, 5, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'economics' AND pupils.housing = 'Carson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Norton Hall'\ncafeteria = 0\nclass_subject = 'biology'",
+   "question": "What are the names of pupils who live in Norton Hall, don't use the cafeteria, and attend biology classes?",
+   "seed": [1, 0, 0, 3, 0, 0, 1, 1, 0, 0, 1, 1, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0 AND classes.class_subject = 'biology'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'literature'\nhousing = 'Davidson Hall'\ncafeteria = 0",
+   "question": "What is the name of instructors whose pupils live in Davidson Hall, don't use the cafeteria, and attend literature classes?",
+   "seed": [0, 2, 1, 1, 1, 0, 0, 1, 13, 0, 3, 0, 8, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'literature' AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Lawson Hall'\nteacher_age <= 70",
+   "question": "What are the names of pupils who live in Lawson Hall and have instructors with an age of 70 or younger?",
+   "seed": [1, 0, 0, 1, 0, 6, 2, 1, 70, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Lawson Hall' AND instructors.teacher_age <= 70"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 59\nend_date < 2026",
+   "question": "What is the name of instructors whose pupils have an end date before 2026 and instructors with an age of 59 or older?",
+   "seed": [0, 1, 1, 2, 0, 59, 1, 2, 2, 2, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 59 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 34\nhousing = 'Campbell Hall'",
+   "question": "What is the name of instructors whose pupils live in Campbell Hall and instructors with an age of 34 or older?",
+   "seed": [0, 2, 1, 1, 2, 0, 34, 0, 1, 0, 7, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 34 AND pupils.housing = 'Campbell Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'math'\ngrade <= 31\nstudy = 'History'",
+   "question": "What is the name of instructors whose pupils study History, attend math classes with a grade of 31 or lower?",
+   "seed": [0, 4, 0, 0, 1, 0, 1, 1, 0, 1, 31, 0, 0, 0, 5, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'math' AND classes.grade <= 31 AND pupils.study = 'History'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Classics'\nlevel = 10\ngrade >= 78",
+   "question": "What are the names of pupils who study Classics, attend 10th grade classes, and have a grade of 78 or higher?",
+   "seed": [1, 3, 0, 1, 0, 0, 0, 13, 1, 0, 5, 0, 0, 13, 0, 78, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Classics' AND classes.level = 10 AND classes.grade >= 78"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Davidson Hall'\ncafeteria = 1\nlevel = 3",
+   "question": "What are the names of pupils who live in Davidson Hall, use the cafeteria, and attend 3rd grade classes?",
+   "seed": [1, 0, 0, 3, 0, 8, 0, 1, 0, 4, 0, 0, 6, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1 AND classes.level = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 43\nend_date > 2025",
+   "question": "What is the name of instructors whose pupils have an end date after 2025 and instructors with an age of 43 or younger?",
+   "seed": [0, 4, 0, 0, 2, 1, 43, 1, 2, 1, 3, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 43 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Math'",
+   "question": "What are the names of instructors whose pupils study Math?",
+   "seed": [0, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Math'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Franklin Hall'\nteacher_age <= 30",
+   "question": "What are the names of pupils who live in Franklin Hall and have instructors with an age of 30 or younger?",
+   "seed": [1, 4, 0, 1, 0, 1, 0, 3, 2, 1, 30, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Franklin Hall' AND instructors.teacher_age <= 30"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Computer Science'",
+   "question": "What are the names of pupils who study Computer Science?",
+   "seed": [1, 0, 0, 0, 0, 14, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Computer Science'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Mechanical Engineering'\nteacher_age <= 67",
+   "question": "What are the names of pupils who study Mechanical Engineering and have instructors with an age of 67 or younger?",
+   "seed": [1, 3, 1, 0, 0, 0, 0, 15, 2, 1, 67, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Mechanical Engineering' AND instructors.teacher_age <= 67"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Green Hall'\ncafeteria = 0\nclass_subject = 'sociology'\nyear >= 2006",
+   "question": "What are the names of pupils who live in Green Hall, don't use the cafeteria, and attend sociology classes since 2006?",
+   "seed": [1, 4, 1, 0, 0, 3, 0, 4, 1, 1, 0, 2, 1, 9, 0, 2006, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Green Hall' AND pupils.cafeteria = 0 AND classes.class_subject = 'sociology' AND classes.year >= 2006"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \ngrade <= 24\nperformance < 3\nend_date = 2027",
+   "question": "What is the name of instructors whose pupils have a performance level lower than 3, have a grade of 24 or lower, and have an end date in 2027?",
+   "seed": [0, 0, 1, 0, 1, 0, 1, 24, 1, 4, 2, 2, 0, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.grade <= 24 AND pupils.performance < 3 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Music'\ncafeteria = 0\nlevel = 7\ngrade <= 53",
+   "question": "What are the names of pupils who study Music, don't use the cafeteria, attend 7th grade classes, and have a grade of 53 or lower?",
+   "seed": [1, 2, 0, 0, 0, 2, 0, 11, 1, 1, 0, 5, 0, 0, 10, 1, 53, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Music' AND pupils.cafeteria = 0 AND classes.level = 7 AND classes.grade <= 53"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Davidson Hall'",
+   "question": "What are the names of instructors who have pupils in Davidson Hall?",
+   "seed": [0, 1, 0, 0, 0, 1, 0, 8, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Davidson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nlevel = 9\ngrade <= 33\nhousing = 'Parker Hall'\ncafeteria = 1",
+   "question": "Which instructors teach classes at level 9 with grades up to 33 and have pupils in Parker Hall with cafeteria access?",
+   "seed": [0, 0, 1, 0, 5, 0, 0, 3, 9, 1, 33, 0, 3, 0, 2, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.level = 9 AND classes.grade <= 33 AND pupils.housing = 'Parker Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 49\nstudy = 'Philosophy'\ncafeteria = 1",
+   "question": "Who are the instructors who teach pupils studying Philosophy, are over 49 years old, and have pupils in the cafeteria?",
+   "seed": [0, 1, 1, 2, 1, 49, 0, 2, 0, 7, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 49 AND pupils.study = 'Philosophy' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Political Science'\ncafeteria = 0\nteacher_age >= 61",
+   "question": "Who are the pupils studying Political Science who don't have cafeteria access and are taught by instructors over 60 years old?",
+   "seed": [1, 1, 1, 0, 2, 0, 6, 1, 2, 0, 61, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Political Science' AND pupils.cafeteria = 0 AND instructors.teacher_age >= 61"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Biology'\nteacher_age <= 71",
+   "question": "Who are the pupils studying Biology who are taught by instructors 71 years old or younger?",
+   "seed": [1, 2, 0, 0, 0, 0, 0, 1, 2, 1, 71, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Biology' AND instructors.teacher_age <= 71"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 66\nhousing = 'Underwood House'",
+   "question": "Which instructors teach pupils in Underwood House and are at least 66 years old?",
+   "seed": [0, 1, 1, 2, 0, 66, 0, 1, 0, 9, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 66 AND pupils.housing = 'Underwood House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \ngrade >= 65\nhousing = 'Lawson Hall'\ncafeteria = 0",
+   "question": "Which instructors teach classes with grades of at least 65 and have pupils in Lawson Hall without cafeteria access?",
+   "seed": [0, 0, 1, 0, 1, 0, 0, 65, 0, 3, 0, 6, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.grade >= 65 AND pupils.housing = 'Lawson Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nlevel = 9\ngrade >= 83\nhousing = 'Campbell Hall'\ncafeteria = 1",
+   "question": "Which instructors teach classes at level 9 with grades of at least 83 and have pupils in Campbell Hall with cafeteria access?",
+   "seed": [0, 0, 1, 0, 5, 0, 0, 3, 9, 0, 83, 0, 3, 0, 7, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.level = 9 AND classes.grade >= 83 AND pupils.housing = 'Campbell Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Morgan House'\nclass_subject = 'sociology'\nyear >= 2013",
+   "question": "Who are the pupils in Morgan House who study sociology and have classes taught since 2013?",
+   "seed": [1, 2, 1, 1, 0, 1, 0, 1, 1, 0, 2, 1, 9, 0, 2013, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Morgan House' AND classes.class_subject = 'sociology' AND classes.year >= 2013"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 81\nstudy = 'Mechanical Engineering'",
+   "question": "Who are the instructors who teach pupils studying Mechanical Engineering and are 81 years old or younger?",
+   "seed": [0, 0, 2, 1, 81, 0, 0, 0, 15, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 81 AND pupils.study = 'Mechanical Engineering'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Art'\ncafeteria = 1\nteacher_age >= 68",
+   "question": "Who are the pupils studying Art with cafeteria access and are taught by instructors 68 years old or older?",
+   "seed": [1, 2, 1, 1, 0, 2, 0, 10, 0, 2, 0, 68, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Art' AND pupils.cafeteria = 1 AND instructors.teacher_age >= 68"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Psychology'\nteacher_age >= 28",
+   "question": "Who are the pupils studying Psychology who are taught by instructors 28 years old or older?",
+   "seed": [1, 0, 0, 0, 0, 8, 2, 0, 28, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Psychology' AND instructors.teacher_age >= 28"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 86\nstudy = 'Physics'",
+   "question": "Who are the instructors who teach pupils studying Physics and are 86 years old or younger?",
+   "seed": [0, 0, 2, 1, 86, 0, 0, 0, 3, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 86 AND pupils.study = 'Physics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'math'\nlevel = 11\nyear <= 2004\nstudy = 'Mechanical Engineering'\ncafeteria = 0",
+   "question": "Who are the pupils studying Mechanical Engineering who have classes in math at level 11 before 2004 without cafeteria access?",
+   "seed": [0, 4, 1, 0, 1, 0, 6, 1, 0, 0, 3, 11, 1, 2004, 0, 2, 0, 15, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'math' AND classes.level = 11 AND classes.year <= 2004 AND pupils.study = 'Mechanical Engineering' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Underwood House'\nclass_subject = 'art'\nlevel = 6\ngrade <= 47",
+   "question": "Who are the pupils in Underwood House with classes in art at level 6 and grades up to 47?",
+   "seed": [1, 4, 0, 0, 0, 1, 0, 9, 1, 0, 5, 1, 10, 0, 3, 6, 1, 47, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Underwood House' AND classes.class_subject = 'art' AND classes.level = 6 AND classes.grade <= 47"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Lawson Hall'\nteacher_age >= 35",
+   "question": "Who are the pupils in Lawson Hall taught by instructors 35 years old or older?",
+   "seed": [1, 4, 0, 1, 0, 1, 0, 6, 2, 0, 35, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Lawson Hall' AND instructors.teacher_age >= 35"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Franklin Hall'\nlevel = 3\ngrade >= 90",
+   "question": "Who are the pupils in Franklin Hall with classes at level 3 and grades of at least 90?",
+   "seed": [1, 1, 0, 0, 1, 0, 3, 1, 0, 5, 0, 0, 6, 0, 90, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Franklin Hall' AND classes.level = 3 AND classes.grade >= 90"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 33\nhousing = 'Parker Hall'",
+   "question": "Who are the instructors who teach pupils in Parker Hall and are 33 years old or younger?",
+   "seed": [0, 1, 0, 2, 1, 33, 0, 1, 0, 2, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 33 AND pupils.housing = 'Parker Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 43\nhousing = 'Parker Hall'",
+   "question": "Who are the instructors who teach pupils in Parker Hall and are 43 years old or younger?",
+   "seed": [0, 3, 0, 0, 2, 1, 43, 0, 1, 0, 2, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 43 AND pupils.housing = 'Parker Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nperformance > 1\nend_date < 2025\nyear <= 2011",
+   "question": "Who are the pupils with performance greater than 1 and end dates before 2025 with classes before 2011?",
+   "seed": [1, 1, 1, 1, 4, 1, 0, 2, 3, 1, 0, 2, 0, 1, 2011, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.performance > 1 AND pupils.end_date < 2025 AND classes.year <= 2011"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nperformance < 4\nlevel = 12\ngrade >= 84",
+   "question": "Who are the pupils with performance less than 4 with classes at level 12 and grades of at least 84?",
+   "seed": [1, 1, 0, 1, 0, 2, 3, 1, 0, 5, 0, 0, 15, 0, 84, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.performance < 4 AND classes.level = 12 AND classes.grade >= 84"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nyear <= 2019\nhousing = 'Davidson Hall'\ncafeteria = 1",
+   "question": "Which instructors teach pupils in Davidson Hall with cafeteria access and have classes before 2019?",
+   "seed": [0, 4, 0, 1, 1, 0, 2, 0, 1, 2019, 0, 3, 0, 8, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.year <= 2019 AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Chemistry'\ncafeteria = 1\nteacher_age >= 49",
+   "question": "Who are the pupils studying Chemistry with cafeteria access and taught by instructors 49 years old or older?",
+   "seed": [1, 4, 1, 1, 0, 2, 0, 2, 0, 2, 0, 49, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Chemistry' AND pupils.cafeteria = 1 AND instructors.teacher_age >= 49"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'English'\ncafeteria = 1\nclass_subject = 'economics'\nlevel = 3",
+   "question": "Who are the pupils studying English with cafeteria access and classes in economics at level 3?",
+   "seed": [1, 1, 0, 0, 2, 0, 12, 0, 1, 0, 4, 1, 4, 0, 6, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'English' AND pupils.cafeteria = 1 AND classes.class_subject = 'economics' AND classes.level = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \ngrade <= 35\nhousing = 'Franklin Hall'",
+   "question": "Which instructors teach classes with grades up to 35 and have pupils in Franklin Hall?",
+   "seed": [0, 4, 1, 1, 1, 0, 1, 0, 1, 35, 0, 1, 0, 3, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.grade <= 35 AND pupils.housing = 'Franklin Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nend_date > 2026",
+   "question": "Who are the instructors who have pupils with end dates after 2026?",
+   "seed": [0, 4, 1, 1, 1, 0, 0, 0, 1, 2, 1, 2, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE pupils.end_date > 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 49\nhousing = 'Davidson Hall'",
+   "question": "Who are the instructors who have pupils in Davidson Hall and are 49 years old or younger?",
+   "seed": [0, 2, 0, 0, 2, 1, 49, 0, 1, 0, 8, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 49 AND pupils.housing = 'Davidson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Math'",
+   "question": "Who are the pupils studying Math?",
+   "seed": [1, 0, 0, 0, 0, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Math'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Political Science'\ncafeteria = 0\nlevel = 1",
+   "question": "Who are the pupils studying Political Science without cafeteria access and have classes at level 1?",
+   "seed": [1, 4, 0, 1, 0, 2, 0, 6, 1, 1, 0, 4, 0, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Political Science' AND pupils.cafeteria = 0 AND classes.level = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Classics'",
+   "question": "Who are the pupils studying Classics?",
+   "seed": [1, 3, 0, 0, 0, 0, 0, 13, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Classics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'english'\nstudy = 'Biology'\ncafeteria = 0",
+   "question": "What is the name of the instructor who teaches English classes to Biology students and does not serve in the cafeteria?",
+   "seed": [0, 0, 1, 0, 0, 1, 12, 0, 2, 0, 1, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'english' AND pupils.study = 'Biology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 84\nstudy = 'Physics'\ncafeteria = 1",
+   "question": "What is the name of the instructor who teaches Physics to students who have cafeteria service and whose age is less than or equal to 84?",
+   "seed": [0, 3, 1, 1, 2, 1, 84, 0, 2, 0, 3, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 84 AND pupils.study = 'Physics' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 54\nhousing = 'Davidson Hall'\ncafeteria = 1",
+   "question": "What is the name of the instructor who teaches students residing in Davidson Hall, has cafeteria service, and whose age is less than or equal to 54?",
+   "seed": [0, 1, 1, 2, 1, 54, 0, 3, 0, 8, 0, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 54 AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Morgan House'\nteacher_age >= 34",
+   "question": "What is the name of the student who resides in Morgan House and has an instructor with an age greater than or equal to 34?",
+   "seed": [1, 0, 0, 1, 0, 1, 2, 0, 34, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Morgan House' AND instructors.teacher_age >= 34"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nperformance > 3\nend_date < 2026",
+   "question": "What is the name of the student who has a performance score greater than 3 and an end date before 2026?",
+   "seed": [1, 4, 0, 1, 1, 4, 1, 2, 2, 2, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.performance > 3 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 32\nstudy = 'Biology'\ncafeteria = 0",
+   "question": "What is the name of the instructor who teaches Biology to students without cafeteria service and whose age is less than or equal to 32?",
+   "seed": [0, 2, 0, 0, 2, 1, 32, 0, 2, 0, 1, 1, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 32 AND pupils.study = 'Biology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Art'\nlevel = 7\nyear <= 2004",
+   "question": "What is the name of the student who studies Art, is in level 7 classes, and has classes before or in 2004?",
+   "seed": [1, 2, 0, 1, 0, 0, 0, 10, 1, 0, 6, 0, 0, 10, 1, 2004, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Art' AND classes.level = 7 AND classes.year <= 2004"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Psychology'\ncafeteria = 0",
+   "question": "What is the name of the student who studies Psychology and does not have cafeteria service?",
+   "seed": [1, 3, 1, 1, 0, 2, 0, 8, 1, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Psychology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'psychology'\nyear >= 2010\nhousing = 'Lawson Hall'\ncafeteria = 0",
+   "question": "What is the name of the instructor who teaches Psychology classes in Lawson Hall to students without cafeteria service, starting from 2010?",
+   "seed": [0, 2, 1, 0, 1, 0, 2, 1, 8, 0, 2010, 0, 3, 0, 6, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'psychology' AND classes.year >= 2010 AND pupils.housing = 'Lawson Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Davidson Hall'\nlevel = 5",
+   "question": "What is the name of the student who resides in Davidson Hall and is in level 5 classes?",
+   "seed": [1, 3, 1, 1, 0, 1, 0, 8, 1, 0, 4, 0, 0, 8, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Davidson Hall' AND classes.level = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nend_date > 2025\nclass_subject = 'english'\ngrade >= 78",
+   "question": "What is the name of the student who has an end date after 2025, attends English classes, and has a grade of at least 78?",
+   "seed": [1, 4, 1, 1, 1, 2, 1, 3, 1, 0, 1, 1, 12, 0, 78, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.end_date > 2025 AND classes.class_subject = 'english' AND classes.grade >= 78"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 22\nstudy = 'Music'\ncafeteria = 1",
+   "question": "What is the name of the instructor who teaches Music to students with cafeteria service and whose age is greater than or equal to 22?",
+   "seed": [0, 4, 1, 1, 2, 0, 22, 0, 2, 0, 11, 0, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 22 AND pupils.study = 'Music' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Norton Hall'",
+   "question": "What is the name of the student who resides in Norton Hall?",
+   "seed": [1, 3, 1, 1, 0, 1, 0, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Norton Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Parker Hall'\nteacher_age <= 81",
+   "question": "What is the name of the student who resides in Parker Hall and has an instructor with an age less than or equal to 81?",
+   "seed": [1, 1, 0, 0, 1, 0, 2, 2, 1, 81, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Parker Hall' AND instructors.teacher_age <= 81"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 45\nhousing = 'Carson Hall'",
+   "question": "What is the name of the student who has an instructor with an age less than or equal to 45 and resides in Carson Hall?",
+   "seed": [0, 4, 0, 1, 2, 1, 45, 0, 1, 0, 5, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 45 AND pupils.housing = 'Carson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Psychology'\ncafeteria = 1\nteacher_age <= 87",
+   "question": "What is the name of the student who studies Psychology, has cafeteria service, and has an instructor with an age less than or equal to 87?",
+   "seed": [1, 3, 0, 1, 0, 2, 0, 8, 0, 2, 1, 87, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Psychology' AND pupils.cafeteria = 1 AND instructors.teacher_age <= 87"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'biology'\nlevel = 3\ngrade >= 93\nstudy = 'Classics'\ncafeteria = 0",
+   "question": "What is the name of the instructor who teaches Biology to Classics students without cafeteria service, in level 3 classes, and has a grade of at least 93?",
+   "seed": [0, 4, 0, 0, 1, 0, 5, 1, 1, 0, 2, 0, 93, 0, 2, 0, 13, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'biology' AND classes.level = 3 AND classes.grade >= 93 AND pupils.study = 'Classics' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'literature'\nlevel = 11\ngrade >= 68\nhousing = 'Campbell Hall'\ncafeteria = 1",
+   "question": "What is the name of the instructor who teaches Literature to students residing in Campbell Hall, in level 11 classes, with a grade of at least 68 and cafeteria service?",
+   "seed": [0, 1, 0, 1, 0, 5, 1, 13, 0, 3, 11, 0, 68, 0, 3, 0, 7, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'literature' AND classes.level = 11 AND classes.grade >= 68 AND pupils.housing = 'Campbell Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Underwood House'\nteacher_age <= 39",
+   "question": "What is the name of the student who resides in Underwood House and has an instructor with an age less than or equal to 39?",
+   "seed": [1, 2, 1, 0, 0, 1, 0, 9, 2, 1, 39, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Underwood House' AND instructors.teacher_age <= 39"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Norton Hall'\ncafeteria = 0\nteacher_age >= 49",
+   "question": "What is the name of the student who resides in Norton Hall, does not have cafeteria service, and has an instructor with an age greater than or equal to 49?",
+   "seed": [1, 0, 0, 3, 0, 0, 1, 2, 0, 49, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0 AND instructors.teacher_age >= 49"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nend_date = 2025",
+   "question": "What is the name of the student who has an end date in 2025?",
+   "seed": [1, 1, 1, 1, 2, 0, 3, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'music'\nstudy = 'Philosophy'\ncafeteria = 1",
+   "question": "What is the name of the instructor who teaches Music classes to Philosophy students with cafeteria service?",
+   "seed": [0, 1, 0, 1, 0, 0, 1, 11, 0, 2, 0, 7, 0, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'music' AND pupils.study = 'Philosophy' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \ngrade <= 27\nstudy = 'Psychology'\ncafeteria = 0",
+   "question": "What is the name of the instructor who teaches Psychology to students without cafeteria service, in classes with a grade less than or equal to 27?",
+   "seed": [0, 0, 1, 0, 1, 0, 1, 27, 0, 2, 0, 8, 1, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.grade <= 27 AND pupils.study = 'Psychology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Green Hall'\ncafeteria = 1\nteacher_age >= 67",
+   "question": "What is the name of the student who resides in Green Hall, has cafeteria service, and has an instructor with an age greater than or equal to 67?",
+   "seed": [1, 3, 1, 0, 0, 3, 0, 4, 0, 2, 0, 67, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Green Hall' AND pupils.cafeteria = 1 AND instructors.teacher_age >= 67"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Norton Hall'\ncafeteria = 0",
+   "question": "What is the name of the instructor who teaches students residing in Norton Hall without cafeteria service?",
+   "seed": [0, 1, 1, 0, 0, 3, 0, 0, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Sociology'\ncafeteria = 0",
+   "question": "What is the name of the student who studies Sociology and does not have cafeteria service?",
+   "seed": [0, 2, 0, 0, 0, 0, 2, 0, 9, 1, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Sociology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Davidson Hall'\nlevel = 8\nyear >= 2013",
+   "question": "What is the name of the student who resides in Davidson Hall, is in level 8 classes, and has classes starting from 2013?",
+   "seed": [1, 3, 1, 1, 0, 1, 0, 8, 1, 0, 6, 0, 0, 11, 0, 2013, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Davidson Hall' AND classes.level = 8 AND classes.year >= 2013"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 44\nperformance < 4",
+   "question": "What is the name of the instructor who teaches students with a performance score less than 4 and whose age is greater than or equal to 44?",
+   "seed": [0, 1, 1, 2, 0, 44, 1, 0, 2, 3, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 44 AND pupils.performance < 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 80\nstudy = 'Sociology'\ncafeteria = 0",
+   "question": "What is the name of the instructor who teaches Sociology to students without cafeteria service and whose age is less than or equal to 80?",
+   "seed": [0, 1, 0, 2, 1, 80, 0, 2, 0, 9, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 80 AND pupils.study = 'Sociology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Music'\nclass_subject = 'biology'\nlevel = 10\nyear >= 2015",
+   "question": "What is the name of the student who studies Music, attends Biology classes in level 10, and has classes starting from 2015?",
+   "seed": [1, 4, 1, 0, 0, 0, 0, 11, 1, 0, 6, 1, 1, 0, 13, 0, 2015, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Music' AND classes.class_subject = 'biology' AND classes.level = 10 AND classes.year >= 2015"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nperformance < 3\nyear >= 2000",
+   "question": "Which pupils have performance less than 3 and are in classes from 2000 onwards?",
+   "seed": [1, 0, 1, 0, 2, 2, 1, 0, 2, 0, 0, 2000, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.performance < 3 AND classes.year >= 2000"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age >= 32\nstudy = 'Mechanical Engineering'\ncafeteria = 0",
+   "question": "Who are the instructors with age greater than or equal to 32 teaching Mechanical Engineering students who don't use the cafeteria?",
+   "seed": [0, 2, 0, 0, 2, 0, 32, 0, 2, 0, 15, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age >= 32 AND pupils.study = 'Mechanical Engineering' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Sociology'\ncafeteria = 0",
+   "question": "Which pupils study Sociology and don't use the cafeteria?",
+   "seed": [1, 2, 1, 0, 0, 2, 0, 9, 1, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Sociology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nperformance > 3\nend_date > 2025",
+   "question": "Which pupils have performance greater than 3 and an end date beyond 2025?",
+   "seed": [1, 1, 0, 1, 4, 1, 2, 1, 3, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.performance > 3 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Morgan House'\ncafeteria = 0",
+   "question": "Who are the instructors for pupils living in Morgan House who don't use the cafeteria?",
+   "seed": [0, 0, 0, 0, 3, 0, 1, 1, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Morgan House' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Chemistry'\nclass_subject = 'economics'\ngrade <= 28",
+   "question": "Which pupils study Chemistry and are in Economics classes with a grade less than or equal to 28?",
+   "seed": [1, 1, 0, 0, 0, 0, 2, 1, 0, 1, 1, 4, 1, 28, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Chemistry' AND classes.class_subject = 'economics' AND classes.grade <= 28"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Campbell Hall'",
+   "question": "Which pupils live in Campbell Hall?",
+   "seed": [1, 3, 1, 1, 0, 1, 0, 7, 0, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Campbell Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nperformance < 3\nend_date > 2025",
+   "question": "Who are the instructors for pupils with performance less than 3 and an end date beyond 2025?",
+   "seed": [0, 2, 1, 0, 0, 1, 4, 2, 2, 1, 3, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.performance < 3 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nperformance = 1",
+   "question": "Which pupils have performance equal to 1?",
+   "seed": [1, 3, 0, 1, 1, 0, 0, 0, 0, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.performance = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Sociology'\nyear <= 2011",
+   "question": "Which pupils study Sociology and are in classes from 2011 or earlier?",
+   "seed": [1, 0, 0, 0, 0, 9, 1, 0, 2, 0, 1, 2011, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Sociology' AND classes.year <= 2011"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Campbell Hall'\ncafeteria = 1",
+   "question": "Who are the instructors for pupils living in Campbell Hall who use the cafeteria?",
+   "seed": [0, 4, 0, 0, 0, 0, 3, 0, 7, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Campbell Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 57\nstudy = 'Computer Science'\ncafeteria = 1",
+   "question": "Who are the instructors with age less than or equal to 57 teaching Computer Science students who use the cafeteria?",
+   "seed": [0, 4, 1, 0, 2, 1, 57, 0, 2, 0, 14, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 57 AND pupils.study = 'Computer Science' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Political Science'\nclass_subject = 'biology'",
+   "question": "Which pupils study Political Science and are in Biology classes?",
+   "seed": [1, 4, 0, 0, 0, 0, 0, 6, 1, 0, 0, 1, 1, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Political Science' AND classes.class_subject = 'biology'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nend_date > 2025\nteacher_age >= 25",
+   "question": "Which pupils have an end date beyond 2025 and are taught by instructors aged 25 or older?",
+   "seed": [1, 0, 1, 2, 1, 3, 2, 0, 25, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.end_date > 2025 AND instructors.teacher_age >= 25"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Physics'",
+   "question": "Which pupils study Physics?",
+   "seed": [1, 2, 1, 1, 0, 0, 0, 3, 0, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Physics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nend_date > 2024\nclass_subject = 'english'\ngrade <= 57",
+   "question": "Which pupils have an end date beyond 2024 and are in English classes with a grade less than or equal to 57?",
+   "seed": [1, 1, 0, 1, 2, 1, 0, 1, 0, 1, 1, 12, 1, 57, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.end_date > 2024 AND classes.class_subject = 'english' AND classes.grade <= 57"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Classics'\nlevel = 1",
+   "question": "Which pupils study Classics and are in level 1 classes?",
+   "seed": [1, 2, 1, 1, 0, 0, 0, 13, 1, 0, 4, 0, 0, 4, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Classics' AND classes.level = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Davidson Hall'\nlevel = 4",
+   "question": "Which pupils live in Davidson Hall and are in level 4 classes?",
+   "seed": [1, 0, 0, 1, 0, 8, 1, 0, 4, 0, 0, 3, 4, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Davidson Hall' AND classes.level = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Lawson Hall'",
+   "question": "Which pupils live in Lawson Hall?",
+   "seed": [1, 3, 0, 1, 0, 1, 0, 6, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Lawson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 70\nstudy = 'Computer Science'",
+   "question": "Who are the instructors with age less than or equal to 70 teaching Computer Science students?",
+   "seed": [0, 1, 1, 2, 1, 70, 0, 0, 0, 14, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 70 AND pupils.study = 'Computer Science'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nstudy = 'Mechanical Engineering'\nlevel = 9\nyear >= 2020",
+   "question": "Which pupils study Mechanical Engineering and are in level 9 classes from 2020 onwards?",
+   "seed": [1, 3, 1, 0, 0, 0, 0, 15, 1, 0, 6, 0, 0, 3, 9, 0, 2020, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Mechanical Engineering' AND classes.level = 9 AND classes.year >= 2020"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nlevel = 5\nyear <= 2010\nstudy = 'Classics'\ncafeteria = 0",
+   "question": "Who are the instructors for pupils studying Classics, not using the cafeteria, in level 5 classes from 2010 or earlier?",
+   "seed": [0, 1, 0, 1, 0, 6, 0, 0, 8, 1, 2010, 0, 2, 0, 13, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.level = 5 AND classes.year <= 2010 AND pupils.study = 'Classics' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nhousing = 'Campbell Hall'\nteacher_age <= 29",
+   "question": "Which pupils live in Campbell Hall and are taught by instructors aged 29 or younger?",
+   "seed": [1, 4, 0, 1, 0, 1, 0, 7, 2, 1, 29, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.housing = 'Campbell Hall' AND instructors.teacher_age <= 29"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Green Hall'\nlevel = 2\ngrade <= 30",
+   "question": "Which pupils live in Green Hall and are in level 2 classes with a grade less than or equal to 30?",
+   "seed": [1, 0, 0, 1, 0, 4, 1, 0, 5, 0, 0, 5, 1, 30, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Green Hall' AND classes.level = 2 AND classes.grade <= 30"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Morgan House'\ncafeteria = 0\nyear <= 2013",
+   "question": "Which pupils live in Morgan House, don't use the cafeteria, and are in classes from 2013 or earlier?",
+   "seed": [1, 2, 1, 0, 0, 3, 0, 1, 1, 1, 0, 2, 0, 1, 2013, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Morgan House' AND pupils.cafeteria = 0 AND classes.year <= 2013"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nlevel = 11\nhousing = 'Lawson Hall'",
+   "question": "Who are the instructors for pupils in level 11 classes living in Lawson Hall?",
+   "seed": [0, 0, 1, 0, 4, 0, 0, 14, 0, 1, 0, 6, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.level = 11 AND pupils.housing = 'Lawson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nclass_subject = 'chemistry'\nyear >= 2012\nhousing = 'Morgan House'\ncafeteria = 1",
+   "question": "Who are the instructors for pupils in Morgan House, using the cafeteria, in Chemistry classes from 2012 onwards?",
+   "seed": [0, 0, 1, 0, 2, 1, 2, 0, 2012, 0, 3, 0, 1, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.class_subject = 'chemistry' AND classes.year >= 2012 AND pupils.housing = 'Morgan House' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nlevel = 9\ngrade >= 75\nhousing = 'Carson Hall'",
+   "question": "Who are the instructors for pupils in Carson Hall, in level 9 classes with a grade greater than or equal to 75?",
+   "seed": [0, 3, 1, 1, 1, 0, 5, 0, 0, 3, 9, 0, 75, 0, 1, 0, 5, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.level = 9 AND classes.grade >= 75 AND pupils.housing = 'Carson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'English'\ncafeteria = 1\nteacher_age <= 49",
+   "question": "Which pupils study English, use the cafeteria, and are taught by instructors aged 49 or younger?",
+   "seed": [1, 2, 0, 0, 0, 2, 0, 12, 0, 2, 1, 49, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'English' AND pupils.cafeteria = 1 AND instructors.teacher_age <= 49"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: classes, instructors, pupils\nconditions: \nhousing = 'Carson Hall'\nclass_subject = 'sociology'\nlevel = 8\nyear <= 2010",
+   "question": "Who are the instructors for pupils in Carson Hall, studying Sociology, in level 8 classes from 2010 or earlier?",
+   "seed": [1, 1, 0, 0, 1, 0, 5, 1, 0, 6, 1, 9, 0, 11, 1, 2010, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Carson Hall' AND classes.class_subject = 'sociology' AND classes.level = 8 AND classes.year <= 2010"
+}
+]

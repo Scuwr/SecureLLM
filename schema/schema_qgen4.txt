@@ -1,0 +1,102 @@
+:1: root : {whats_the} average {prop_number} {suffix} : T=AVG
+:1: root : {whats_the} mean {prop_number} {suffix} : T=AVG
+:1: root : {whats_the} maximum {prop_number} {suffix} : T=MAX
+:1: root : {whats_the} minimum {prop_number} {suffix} : T=MIN
+:1: root : {list_the} {prop_number} {suffix} : T=none
+:5: root : {whats_the} number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:5: root : Count the number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:5: root : {list_the} primary key of all {prop_countable} {suffix} : T=none
+:5: root : {list_the} names of all pilots {pilot_multi_cond} {suffix} : WANT=pilots.name
+
+# suffixes and prefixes
+:1: list_the : list the :
+:1: list_the : output {pre_alistof?} the :
+:1: list_the : provide {pre_me?} {pre_alistof?} the :
+:1: list_the : give {pre_me?} {pre_alistof?} the :
+:1: list_the : show {pre_me?} {pre_alistof?} the :
+:1: whats_the : what is the :
+:1: whats_the : what's the :
+:1: pre_me? : me :
+:1: pre_me? : :
+:1: pre_alistof? : a list of :
+:1: pre_alistof? : :
+
+:2: suffix : :
+:1: suffix : in the database :
+:1: suffix : in our database :
+
+
+# Count queries
+:4: prop_countable : pilots {pilot_multi_cond} : TABLES = pilots
+:2: prop_countable : type ratings {rating_time} {rating_cond} : TABLES = rating
+:1: prop_countable : type ratings {rating_cond} : TABLES = rating
+:1: prop_countable : type ratings {rating_time} : TABLES = rating
+#:1: prop_countable : aircrafts : TABLES = aircraft
+
+:1: prop_number : age of pilots {pilot_multi_cond} : WANT = pilots.age
+
+
+# Pilot conditions
+:1: pilot_multi_cond: :
+:4: pilot_multi_cond: {pilot_cond_age} :
+:4: pilot_multi_cond: {pilot_cond_time} :
+:4: pilot_multi_cond: {pilot_cond_rating} :
+# And conditions
+:4: pilot_multi_cond: {pilot_cond_age} {pilot_cond_rating} :
+:4: pilot_multi_cond: {pilot_cond_time} and {pilot_cond_rating} :
+:4: pilot_multi_cond: {pilot_cond_age} {pilot_cond_time} and {pilot_cond_rating} :
+# Or conditions
+:4: pilot_multi_cond: {pilot_cond_age} or {pilot_cond_rating} : ADDER_PROPS={"comb":"OR"}
+:4: pilot_multi_cond: {pilot_cond_time} or {pilot_cond_rating} : ADDER_PROPS={"comb":"OR"}
+
+:1: pilot_cond_age: who are {number,20,65} years old : CONDITIONS=pilots.age = {0}
+:1: pilot_cond_age: who are older than {number,20,65} years old : CONDITIONS=pilots.age >= {0}
+:1: pilot_cond_age: who are younger than {number,20,65} years old : CONDITIONS=pilots.age <= {0}
+
+:1: pilot_cond_time: with total time less than {number,1,20000} hours : CONDITIONS=pilots.total_time <= {0}
+:1: pilot_cond_time: with total time more than {number,1,20000} hours : CONDITIONS=pilots.total_time >= {0}
+
+:2: pilot_cond_rating: with type a rating {rating_time} {rating_cond} : none
+:1: pilot_cond_rating: with type a rating {rating_time} : none
+:1: pilot_cond_rating: with type a rating {rating_cond} : none
+
+# Rating conditions
+:1: rating_cond: that is current as of {month} {number,2020,2023} : CONDITIONS=rating.year*12+rating.month >= {1}*12+{num_month}
+:1: rating_cond: that is not current as of {month} {number,2020,2023} : CONDITIONS=rating.year*12+rating.month <= {1}*12+{num_month}
+:1: rating_time: with at least {number,25,2000} hours of experience : CONDITIONS=rating.experience_hours >= {0}
+:1: rating_time: with no less than {number,25,2000} hours of experience : CONDITIONS=rating.experience_hours >= {0}
+:1: rating_time: with at most {number,25,2000} hours of experience : CONDITIONS=rating.experience_hours <= {0}
+:1: rating_time: with no more than {number,25,2000} hours of experience : CONDITIONS=rating.experience_hours <= {0}
+
+
+:1: month: January : REFS = {"num_month": "1"}
+:1: month: February : REFS = {"num_month": "2"}
+:1: month: March : REFS = {"num_month": "3"}
+:1: month: April : REFS = {"num_month": "4"}
+:1: month: May : REFS = {"num_month": "5"}
+:1: month: June : REFS = {"num_month": "6"}
+:1: month: July : REFS = {"num_month": "7"}
+:1: month: August : REFS = {"num_month": "8"}
+:1: month: September : REFS = {"num_month": "9"}
+:1: month: October : REFS = {"num_month": "10"}
+:1: month: November : REFS = {"num_month": "11"}
+:1: month: December : REFS = {"num_month": "12"}
+
+
+
+
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+{
+    "JOINs": [
+        {"TABLES": ["pilots", "rating"], "COLUMNS": [["pilot_id", "pilot_id"]]},
+        {"TABLES": ["aircraft", "rating"], "COLUMNS": [["aircraft_id", "aircraft_id"]]},
+        {"TABLES": ["pilots", "aircraft"], "LINKING_TABLES": ["rating"]}
+    ],
+    "PKs": {
+        "pilots": "pilot_id",
+        "rating": "rating_id",
+        "aircraft": "aircraf_id"
+    }
+}
+
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------

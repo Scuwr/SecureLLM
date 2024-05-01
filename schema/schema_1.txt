@@ -1,0 +1,16 @@
+CREATE TABLE instructors(
+    teacher_id DECIMAL PRIMARY KEY, -- Unique ID for each Instructor
+    name TEXT, -- Name of each teacher
+    teacher_age DECIMAL -- Age of each teacher
+);
+
+CREATE TABLE classes(
+    class_id DECIMAL PRIMARY KEY, -- Unique ID for each class
+    teacher_id DECIMAL, -- ID of teacher who teaches the class
+    level DECIMAL, -- Grade level of the class
+    year DECIMAL, -- Year the class was taught
+    grade DECIMAL, -- Scored average of the class
+    class_subject TEXT -- Subject name of the class
+);
+
+-- instructors.teacher_id can be joined with classes.teacher_id

@@ -1,0 +1,108 @@
+:1: root : {whats_the} average {prop_number} {suffix} : T=AVG
+:1: root : {whats_the} maximum {prop_number} {suffix} : T=MAX
+:1: root : {whats_the} minimum {prop_number} {suffix} : T=MIN
+:1: root : {list_the} {prop_number} {suffix} : T=none
+:1: root : {whats_the} number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:1: root : Count the number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:1: root : {list_the} primary key of all {prop_countable} {suffix} : T=none
+:1: root : {list_the} names of all publishers {publisher_multi_cond} {suffix} : T=none ; WANT=publishers.name ; TABLES = publishers
+
+
+# suffixes and prefixes
+:1: list_the : list the : none
+:1: list_the : output {pre_alistof?} the : none
+:1: list_the : provide {pre_me?} {pre_alistof?} the : none
+:1: list_the : give {pre_me?} {pre_alistof?} the : none
+:1: list_the : show {pre_me?} {pre_alistof?} the : none
+:1: whats_the : what is the : none
+:1: whats_the : what's the : none
+:1: pre_me? : me : none
+:1: pre_me? : : none
+:1: pre_alistof? : a list of : none
+:1: pre_alistof? : : none
+
+
+:2: suffix : : none
+:1: suffix : in our records : none
+:1: suffix : by the publisher : none
+:1: suffix : in the database : none
+
+:1: prop_countable: publishers {publisher_multi_cond} : TABLES = publishers
+:1: prop_countable: {book} : TABLES = books
+:1: prop_number: founding years of all publisher {publisher_multi_cond} : WANT=publisher.year ; TABLES = publishers
+:1: prop_number: year of the {book} : WANT=books.year ; TABLES = books
+
+# Publisher conditions 
+:1: publisher_multi_cond: : none
+:4: publisher_multi_cond: {publisher_cond_year} :
+:4: publisher_multi_cond: {publisher_cond_state} :
+:4: publisher_multi_cond: {publisher_cond_size} :
+# And conditions
+:4: pilot_multi_cond: {publisher_cond_year} {publisher_cond_size} :
+:4: pilot_multi_cond: {publisher_cond_state} and {publisher_cond_size} :
+:4: pilot_multi_cond: {publisher_cond_year} {publisher_cond_state} and {publisher_cond_size} :
+# Or conditions 
+:4: pilot_multi_cond: {publisher_cond_year} or {publisher_cond_size} : ADDER_PROPS={"comb":"OR"}
+:4: pilot_multi_cond: {publisher_cond_state} or {publisher_cond_size} : ADDER_PROPS={"comb":"OR"}
+
+:1: publisher_cond_published: that published {class} : TABLES = books
+:1: publisher_cond_year: that are founded before {number,1580,2040} : CONDITIONS=publishers.year >= {0}
+:1: publisher_cond_year: that are founded after {number,1580,2040} : CONDITIONS=publishers.year <= {0}
+
+# list all books published before 2000
+# how many books were published before 2000
+# list all publishers that released books that were published before 2000
+:1: book: {genre} books : none
+:2: book: {genre} books that {book_author} : none
+:2: book: {genre} books that {book_year} : none
+:2: book: {genre} books that {book_author} and {book_year}: none
+# with book genre
+:2: book: {genre} books {book_genre_single} : none
+:2: book: {genre} books {book_genre_single} that {book_year} : none
+
+:1: book_genre_single: for {book_genre_th} : none
+:2: book_genre_th: Mystery : CONDITIONS=books.genre = 'Mystery'
+:1: book_genre_th: Science Fiction : CONDITIONS=books.genre = 'Science Fiction'
+:2: book_genre_th: Fantasy : CONDITIONS=books.genre = 'Fantasy'
+:2: book_genre_th: Romance : CONDITIONS=books.genre = 'Romance'
+:1: book_genre_th: Thriller : CONDITIONS=books.genre = 'Thriller'
+:1: book_genre_th: Horror : CONDITIONS=books.genre = 'Horror'
+:1: book_genre_th: Biography : CONDITIONS=books.genre = 'Biography'
+:1: book_genre_th: Historical Fiction : CONDITIONS=books.genre = 'Historical Fiction'
+:3: book_genre_th: Non-Fiction : CONDITIONS=books.genre = 'Non-Fiction'
+:1: book_genre_th: Drama : CONDITIONS=books.genre = 'Drama'
+:1: book_genre_th: Comedy : CONDITIONS=books.genre = 'Comedy'
+:1: book_genre_th: Action : CONDITIONS=books.genre = 'Action'
+:1: book_genre_th: Adventure : CONDITIONS=books.genre = 'Adventure'
+:1: book_genre_th: Poetry : CONDITIONS=books.genre = 'Poetry'
+:1: book_genre_th: Science : CONDITIONS=books.genre = 'Science'
+:1: book_genre_th: Self-Help : CONDITIONS=books.genre = 'Self-Help'
+:1: book_genre_th: Cookbook : CONDITIONS=books.genre = 'Cookbook'
+:1: book_genre_th: Travel : CONDITIONS=books.genre = 'Travel'
+:1: book_genre_th: Memoir : CONDITIONS=books.genre = 'Memoir'
+:1: book_genre_th: Graphic Novel : CONDITIONS=books.genre = 'Graphic Novel'
+:1: book_genre_th: Young Adult : CONDITIONS=books.genre = 'Young Adult'
+:1: book_genre_th: Children's : CONDITIONS=books.genre = 'Children\'s'
+:1: book_genre_th: Satire : CONDITIONS=books.genre = 'Satire'
+:1: book_genre_th: Western : CONDITIONS=books.genre = 'Western'
+:1: book_genre_th: Dystopian : CONDITIONS=books.genre = 'Dystopian'
+:1: book_genre_th: Manga : CONDITIONS=books.genre = 'Manga'
+:1: book_genre_th: Crime : CONDITIONS=books.genre = 'Crime'
+:1: book_genre_th: Espionage : CONDITIONS=books.genre = 'Espionage'
+
+:1: book_year: was published before {number,1580,2023} : CONDITIONS=publishers.year >= {0}
+:1: book_year: was published after {number,1580,2023} : CONDITIONS=publishers.year >= {0}
+
+
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+{
+    "JOINs": [
+        {"TABLES": ["publishers", "books"], "COLUMNS": [["publisher_id", "publisher_id"]]}
+    ],
+    "PKs": {
+        "publishers": "publisher_id",
+        "books": "book_id"
+    }
+}
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+

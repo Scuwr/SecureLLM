@@ -1,0 +1,214 @@
+# suffixes and prefixes
+:1: list_the : list the : none
+:1: list_the : output {pre_alistof?} the : none
+:1: list_the : provide {pre_me?} {pre_alistof?} the : none
+:1: list_the : give {pre_me?} {pre_alistof?} the : none
+:1: list_the : show {pre_me?} {pre_alistof?} the : none
+:1: whats_the : what is the : none
+:1: whats_the : what's the : none
+:1: pre_me? : me : none
+:1: pre_me? : : none
+:1: pre_alistof? : a list of : none
+:1: pre_alistof? : : none
+
+:2: suffix : : none
+
+
+:3: root: {list_the} names of all teachers {teacher_multi_cond} and the names of all managers {manager_multi_cond} {suffix} : T=none ; WANT=instructors.name
+:3: root: {list_the} names of all managers {manager_multi_cond} and the names of all teachers {teacher_multi_cond} {suffix} : T=none ; WANT=store.name
+
+
+
+
+
+:2: suffix : : none
+:1: suffix : in our records : none
+:1: suffix : in the database : none
+
+:1: prop_countable: teachers {teacher_multi_cond} : TABLES = instructors
+:1: prop_countable: {class} : TABLES = classes
+:1: prop_number: age of all teachers {teacher_multi_cond} : WANT=instructors.teacher_age ; TABLES = instructors
+:1: prop_number: grade of all {class} : WANT=classes.grade ; TABLES = classes
+
+:3: teacher_multi_cond: {teacher_cond_taught} : none
+:2: teacher_multi_cond: {teacher_cond_age} : none
+:4: teacher_multi_cond: {teacher_cond_age} and {teacher_cond_taught} : none
+:4: teacher_multi_cond: {teacher_cond_age} or {teacher_cond_taught} : ADDER_PROPS={"comb":"OR"}
+:1: teacher_cond_taught: that taught {class} : TABLES = classes
+:1: teacher_cond_age: that are older than {number,20,90} : CONDITIONS=instructors.teacher_age >= {0}
+:1: teacher_cond_age: that are younger than {number,20,90} : CONDITIONS=instructors.teacher_age <= {0}
+
+# list all classes that were conducted before 2010
+# how many classes were conducted before 2010
+# list all teachers that taught classes that were conducted before 2010
+:1: class: {subject} classes : none
+:2: class: {subject} classes that {class_avg} : none
+:2: class: {subject} classes that {class_year} : none
+:2: class: {subject} classes that {class_avg} and {class_year}: none
+# with class level
+:2: class: {subject} classes {class_level_single} : none
+:2: class: {subject} classes {class_level_single} that {class_avg} : none
+:2: class: {subject} classes {class_level_single} that {class_year} : none
+:2: class: {subject} classes {class_level_single} that {class_avg} and {class_year}: none
+
+:1: class_level_single: for {class_level_th} : none
+:1: class_level_th: 1st graders : CONDITIONS=classes.level = 1
+:1: class_level_th: 2nd graders : CONDITIONS=classes.level = 2
+:1: class_level_th: 3rd graders : CONDITIONS=classes.level = 3
+:9: class_level_th: {number,4,12}th graders : CONDITIONS=classes.level = {0}
+:1: class_level_th: first graders : CONDITIONS=classes.level = 1
+:1: class_level_th: second graders : CONDITIONS=classes.level = 2
+:1: class_level_th: third graders : CONDITIONS=classes.level = 3
+:1: class_level_th: fourth graders : CONDITIONS=classes.level = 4
+:1: class_level_th: fifth graders : CONDITIONS=classes.level = 5
+:1: class_level_th: sixth graders : CONDITIONS=classes.level = 6
+:1: class_level_th: seventh graders : CONDITIONS=classes.level = 7
+:1: class_level_th: eighth graders : CONDITIONS=classes.level = 8
+:1: class_level_th: ninth graders : CONDITIONS=classes.level = 9
+:1: class_level_th: tenth graders : CONDITIONS=classes.level = 10
+:1: class_level_th: eleventh graders : CONDITIONS=classes.level = 11
+:1: class_level_th: twelfth graders : CONDITIONS=classes.level = 12
+
+:1: class_avg: achieved a grade higher than {number,60,95} : CONDITIONS=classes.grade >= {0}
+:1: class_avg: achieved a grade lower than {number,20,60} : CONDITIONS=classes.grade <= {0}
+
+:1: class_year: were conducted after {number,2000,2020} : CONDITIONS=classes.year >= {0}
+:1: class_year: were conducted before {number,2000,2020} : CONDITIONS=classes.year <= {0}
+
+:1: subject: : none
+:1: subject: {single_subject} : CONDITIONS=classes.class_subject = '{0}'
+:1: subject: {single_subject} or {single_subject} : CONDITIONS=classes.class_subject = '{0}' OR classes.class_subject = '{1}'
+:1: subject: {single_subject}, {single_subject}, or {single_subject} : CONDITIONS=classes.class_subject = '{0}' OR classes.class_subject = '{1}' OR classes.class_subject = '{2}'
+
+:1: single_subject : math
+:1: single_subject : biology
+:1: single_subject : chemistry
+:1: single_subject : physics
+:1: single_subject : economics
+:1: single_subject : history
+:1: single_subject : politics
+:1: single_subject : philosophy
+:1: single_subject : psychology
+:1: single_subject : sociology
+:1: single_subject : art
+:1: single_subject : music
+:1: single_subject : english
+:1: single_subject : literature
+:1: single_subject : poetry
+
+
+####### SCHEMA 2
+
+
+:1: appliance_multi_cond: : none
+:2: appliance_multi_cond: {appliance_cond_type} : none
+:2: appliance_multi_cond: {appliance_cond_manufacturer} : none
+:2: appliance_multi_cond: {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_type} and {appliance_cond_manufacturer} : none
+:2: appliance_multi_cond: {appliance_cond_type} and {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_manufacturer} and {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_type} or {appliance_cond_manufacturer} : ADDER_PROPS={"comb":"OR"}
+:2: appliance_multi_cond: {appliance_cond_type} or {appliance_cond_rating} : ADDER_PROPS={"comb":"OR"}
+:2: appliance_multi_cond: {appliance_cond_manufacturer} or {appliance_cond_rating} : ADDER_PROPS={"comb":"OR"}
+
+:1: appliance_cond_type: that are {appliance_type}s : CONDITIONS=appliance.type = '{0}'
+:1: appliance_cond_type: that are {appliance_type}s or {appliance_type}s : CONDITIONS=appliance.type = '{0}' OR appliance.type = '{1}'
+:1: appliance_cond_type: that are {appliance_type}s, {appliance_type}s, or {appliance_type}s : CONDITIONS=appliance.type = '{0}' OR appliance.type = '{1}' OR appliance.type = '{2}'
+
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}'
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer} or {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}' OR appliance.company = '{1}'
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer}, {appliance_manufacturer}, or {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}' OR appliance.company = '{1}' OR appliance.company = '{2}'
+
+:1: appliance_cond_rating: with an appliance rating of {number,1,10} stars : CONDITIONS=appliance.appliance_rating = {0}
+:1: appliance_cond_rating: with an appliance rating higher than {number,2,9} stars : CONDITIONS=appliance.appliance_rating >= {0}
+:1: appliance_cond_rating: with an appliance rating lower than {number,2,9} stars : CONDITIONS=appliance.appliance_rating <= {0}
+
+
+:1: appliance_type : Refrigerator
+:1: appliance_type : Dishwasher
+:1: appliance_type : Oven
+:1: appliance_type : Microwave
+:1: appliance_type : Blender
+
+:1: appliance_manufacturer : LG
+:1: appliance_manufacturer : GE
+:1: appliance_manufacturer : Sony
+:1: appliance_manufacturer : Samsung
+:1: appliance_manufacturer : Panasonic
+:1: appliance_manufacturer : Bosch
+
+
+
+# --- Queries related to the manager table
+:1: prop_countable: managers {manager_multi_cond} : TABLES = store
+:1: prop_number: rating of all managers {manager_multi_cond} : WANT=store.star_rating
+
+:3: manager_multi_cond: {manager_cond_state} : none
+:3: manager_multi_cond: {manager_cond_rating} : none
+:3: manager_multi_cond: {manager_cond_state} and {manager_cond_rating} : none
+
+:1: manager_cond_state: located in {manager_state} : CONDITIONS=store.location = '{0}'
+:1: manager_cond_state: located in {manager_state} or {manager_state} : CONDITIONS=store.location = '{0}' OR store.location = '{1}'
+:1: manager_cond_state: located in {manager_state}, {manager_state}, or {manager_state} : CONDITIONS=store.location = '{0}' OR store.location = '{1}' OR store.location = '{2}'
+
+:1: manager_cond_rating: with a rating of {number,1,10} stars : CONDITIONS=store.star_rating = {0}
+:1: manager_cond_rating: with a rating higher than or equal to {number,2,9} stars : CONDITIONS=store.star_rating >= {0}
+:1: manager_cond_rating: with a rating lower than or equal to {number,2,9} stars : CONDITIONS=store.star_rating <= {0}
+
+:1: manager_state : MA
+:1: manager_state : IN
+:1: manager_state : CA
+:1: manager_state : NY
+:1: manager_state : TX
+
+
+
+# --- Queries related to the inventory table
+:1: prop_number: width of all appliances in the inventory {inventory_multi_cond} : WANT=inventory.width
+:1: prop_number: height of all appliances in the inventory {inventory_multi_cond} : WANT=inventory.height
+:1: prop_number: value of all appliances in the inventory {inventory_multi_cond} : WANT=inventory.value
+
+:1: inventory_multi_cond: : none
+:2: inventory_multi_cond: {inventory_cond_available} : none
+:2: inventory_multi_cond: {inventory_cond_unit} : none
+:2: inventory_multi_cond: {inventory_cond_available} and {inventory_cond_unit} : none
+:2: inventory_multi_cond: {inventory_cond_available} or {inventory_cond_unit} : ADDER_PROPS={"comb":"OR"}
+
+:6: inventory_multi_cond: {inventory_cond_available} in managers {manager_multi_cond} : none
+
+
+:1: inventory_cond_unit : which are taller than or equal to {number,1,100} inches : CONDITIONS=inventory.height >= {0}
+:1: inventory_cond_unit : with height more than or equal to {number,1,100} inches : CONDITIONS=inventory.height >= {0}
+:1: inventory_cond_unit : which are thinner than or equal to {number,1,100} inches : CONDITIONS=inventory.height <= {0}
+:1: inventory_cond_unit : with height less than or equal to {number,1,100} inches : CONDITIONS=inventory.height <= {0}
+:1: inventory_cond_unit : which are wider than or equal to {number,1,100} inches : CONDITIONS=inventory.width >= {0}
+:1: inventory_cond_unit : with width more than or equal to {number,1,100} inches : CONDITIONS=inventory.width >= {0}
+:1: inventory_cond_unit : with width less than or equal to {number,1,100} inches : CONDITIONS=inventory.width <= {0}
+:1: inventory_cond_unit : with width less than or equal to {number,1,100} inches : CONDITIONS=inventory.width <= {0}
+
+:2: inventory_cond_available: that are currently available : CONDITIONS=inventory.available = 1
+:1: inventory_cond_available: that are currently not available : CONDITIONS=inventory.available = 0
+:1: inventory_cond_available: that are currently unavailable : CONDITIONS=inventory.available = 0
+
+
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+{
+    "JOINs": [
+        {"TABLES": ["appliance", "inventory"], "COLUMNS": [["appliance_id", "appliance_id"]]},
+        {"TABLES": ["store", "inventory"], "COLUMNS": [["store_id", "store_id"]]},
+        {"TABLES": ["appliance", "store"], "LINKING_TABLES": ["inventory"]},
+
+        {"TABLES": ["instructors", "classes"], "COLUMNS": [["teacher_id", "teacher_id"]]},
+
+        {"TABLES": ["store", "instructors"], "COLUMNS": [["name", "name"]]},
+        {"TABLES": ["classes", "store"], "LINKING_TABLES": ["instructors"]}
+    ],
+    "PKs": {
+        "appliance": "appliance_id",
+        "store": "store_id",
+        "inventory": "inventory_id",
+        "instructors": "teacher_id",
+        "classes": "class_id"
+    }
+}
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------

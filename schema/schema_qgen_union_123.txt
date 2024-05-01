@@ -1,0 +1,387 @@
+# suffixes and prefixes
+:1: list_the : list the : none
+:1: list_the : output {pre_alistof?} the : none
+:1: list_the : provide {pre_me?} {pre_alistof?} the : none
+:1: list_the : give {pre_me?} {pre_alistof?} the : none
+:1: list_the : show {pre_me?} {pre_alistof?} the : none
+:1: whats_the : what is the : none
+:1: whats_the : what's the : none
+:1: pre_me? : me : none
+:1: pre_me? : : none
+:1: pre_alistof? : a list of : none
+:1: pre_alistof? : : none
+
+:2: suffix : : none
+:1: suffix : in our records : none
+:1: suffix : in the database : none
+
+
+:3: root: {list_the} names of all teachers {teacher_multi_cond}, the names of all managers {manager_multi_cond}, and the names of all students {student_multi_cond} {suffix} : T=none ; WANT=instructors.name
+:3: root: {list_the} names of all managers {manager_multi_cond}, the names of all teachers {teacher_multi_cond}, and the names of all students {student_multi_cond} {suffix} : T=none ; WANT=store.name
+:3: root: {list_the} names of all students {student_multi_cond}, the names of all teachers {teacher_multi_cond}, and the names of all managers {manager_multi_cond} {suffix} : T=none ; WANT=pupils.name
+
+
+### Schema 1
+
+:1: teacher_multi_cond: : none
+:3: teacher_multi_cond: {teacher_cond_taught} : none
+:2: teacher_multi_cond: {teacher_cond_age} : none
+:0: teacher_multi_cond: {teacher_cond_age} and {teacher_cond_taught} : none
+:0: teacher_multi_cond: {teacher_cond_age} or {teacher_cond_taught} : ADDER_PROPS={"comb":"OR"}
+:1: teacher_cond_taught: that taught {class} : TABLES = classes
+:1: teacher_cond_age: that are older than {number,20,90} : CONDITIONS=instructors.teacher_age >= {0}
+:1: teacher_cond_age: that are younger than {number,20,90} : CONDITIONS=instructors.teacher_age <= {0}
+
+# list all classes that were conducted before 2010
+# how many classes were conducted before 2010
+# list all teachers that taught classes that were conducted before 2010
+:2: class: {subject} classes : none
+:2: class: {subject} classes that {class_avg} : none
+:2: class: {subject} classes that {class_year} : none
+:0: class: {subject} classes that {class_avg} and {class_year}: none
+# with class level
+:2: class: {subject} classes {class_level_single} : none
+:2: class: {subject} classes {class_level_single} that {class_avg} : none
+:2: class: {subject} classes {class_level_single} that {class_year} : none
+:0: class: {subject} classes {class_level_single} that {class_avg} and {class_year}: none
+
+:1: class_level_single: for {class_level_th} : none
+:1: class_level_th: 1st graders : CONDITIONS=classes.level = 1
+:1: class_level_th: 2nd graders : CONDITIONS=classes.level = 2
+:1: class_level_th: 3rd graders : CONDITIONS=classes.level = 3
+:9: class_level_th: {number,4,12}th graders : CONDITIONS=classes.level = {0}
+:1: class_level_th: first graders : CONDITIONS=classes.level = 1
+:1: class_level_th: second graders : CONDITIONS=classes.level = 2
+:1: class_level_th: third graders : CONDITIONS=classes.level = 3
+:1: class_level_th: fourth graders : CONDITIONS=classes.level = 4
+:1: class_level_th: fifth graders : CONDITIONS=classes.level = 5
+:1: class_level_th: sixth graders : CONDITIONS=classes.level = 6
+:1: class_level_th: seventh graders : CONDITIONS=classes.level = 7
+:1: class_level_th: eighth graders : CONDITIONS=classes.level = 8
+:1: class_level_th: ninth graders : CONDITIONS=classes.level = 9
+:1: class_level_th: tenth graders : CONDITIONS=classes.level = 10
+:1: class_level_th: eleventh graders : CONDITIONS=classes.level = 11
+:1: class_level_th: twelfth graders : CONDITIONS=classes.level = 12
+
+:1: class_avg: achieved a grade higher than {number,60,95} : CONDITIONS=classes.grade >= {0}
+:1: class_avg: achieved a grade lower than {number,20,60} : CONDITIONS=classes.grade <= {0}
+
+:1: class_year: were conducted after {number,2000,2020} : CONDITIONS=classes.year >= {0}
+:1: class_year: were conducted before {number,2000,2020} : CONDITIONS=classes.year <= {0}
+
+:1: subject: : none
+:1: subject: {single_subject} : CONDITIONS=classes.class_subject = '{0}'
+:0: subject: {single_subject} or {single_subject} : CONDITIONS=classes.class_subject = '{0}' OR classes.class_subject = '{1}'
+:0: subject: {single_subject}, {single_subject}, or {single_subject} : CONDITIONS=classes.class_subject = '{0}' OR classes.class_subject = '{1}' OR classes.class_subject = '{2}'
+
+:1: single_subject : math
+:1: single_subject : biology
+:1: single_subject : chemistry
+:1: single_subject : physics
+:1: single_subject : economics
+:1: single_subject : history
+:1: single_subject : politics
+:1: single_subject : philosophy
+:1: single_subject : psychology
+:1: single_subject : sociology
+:1: single_subject : art
+:1: single_subject : music
+:1: single_subject : english
+:1: single_subject : literature
+:1: single_subject : poetry
+
+### Schema 2
+
+:1: appliance_multi_cond: : none
+:2: appliance_multi_cond: {appliance_cond_type} : none
+:2: appliance_multi_cond: {appliance_cond_manufacturer} : none
+:2: appliance_multi_cond: {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_type} and {appliance_cond_manufacturer} : none
+:2: appliance_multi_cond: {appliance_cond_type} and {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_manufacturer} and {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_type} or {appliance_cond_manufacturer} : ADDER_PROPS={"comb":"OR"}
+:2: appliance_multi_cond: {appliance_cond_type} or {appliance_cond_rating} : ADDER_PROPS={"comb":"OR"}
+:2: appliance_multi_cond: {appliance_cond_manufacturer} or {appliance_cond_rating} : ADDER_PROPS={"comb":"OR"}
+
+:1: appliance_cond_type: that are {appliance_type}s : CONDITIONS=appliance.type = '{0}'
+:1: appliance_cond_type: that are {appliance_type}s or {appliance_type}s : CONDITIONS=appliance.type = '{0}' OR appliance.type = '{1}'
+:1: appliance_cond_type: that are {appliance_type}s, {appliance_type}s, or {appliance_type}s : CONDITIONS=appliance.type = '{0}' OR appliance.type = '{1}' OR appliance.type = '{2}'
+
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}'
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer} or {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}' OR appliance.company = '{1}'
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer}, {appliance_manufacturer}, or {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}' OR appliance.company = '{1}' OR appliance.company = '{2}'
+
+:1: appliance_cond_rating: with an appliance rating of {number,1,10} stars : CONDITIONS=appliance.appliance_rating = {0}
+:1: appliance_cond_rating: with an appliance rating higher than {number,2,9} stars : CONDITIONS=appliance.appliance_rating >= {0}
+:1: appliance_cond_rating: with an appliance rating lower than {number,2,9} stars : CONDITIONS=appliance.appliance_rating <= {0}
+
+
+:1: appliance_type : Refrigerator
+:1: appliance_type : Dishwasher
+:1: appliance_type : Oven
+:1: appliance_type : Microwave
+:1: appliance_type : Blender
+
+:1: appliance_manufacturer : LG
+:1: appliance_manufacturer : GE
+:1: appliance_manufacturer : Sony
+:1: appliance_manufacturer : Samsung
+:1: appliance_manufacturer : Panasonic
+:1: appliance_manufacturer : Bosch
+
+
+
+# --- Queries related to the manager table
+:1: manager_multi_cond: : none
+:3: manager_multi_cond: {manager_cond_state} : none
+:3: manager_multi_cond: {manager_cond_rating} : none
+:0: manager_multi_cond: {manager_cond_state} and {manager_cond_rating} : none
+
+:1: manager_cond_state: located in {manager_state} : CONDITIONS=store.location = '{0}'
+:0: manager_cond_state: located in {manager_state} or {manager_state} : CONDITIONS=store.location = '{0}' OR store.location = '{1}'
+:0: manager_cond_state: located in {manager_state}, {manager_state}, or {manager_state} : CONDITIONS=store.location = '{0}' OR store.location = '{1}' OR store.location = '{2}'
+
+:1: manager_cond_rating: with a rating of {number,1,10} stars : CONDITIONS=store.star_rating = {0}
+:1: manager_cond_rating: with a rating higher than or equal to {number,2,9} stars : CONDITIONS=store.star_rating >= {0}
+:1: manager_cond_rating: with a rating lower than or equal to {number,2,9} stars : CONDITIONS=store.star_rating <= {0}
+
+:1: manager_state : MA
+:1: manager_state : IN
+:1: manager_state : CA
+:1: manager_state : NY
+:1: manager_state : TX
+
+
+
+# --- Queries related to the inventory table
+
+:1: inventory_multi_cond: : none
+:2: inventory_multi_cond: {inventory_cond_available} : none
+:2: inventory_multi_cond: {inventory_cond_unit} : none
+:2: inventory_multi_cond: {inventory_cond_available} and {inventory_cond_unit} : none
+:2: inventory_multi_cond: {inventory_cond_available} or {inventory_cond_unit} : ADDER_PROPS={"comb":"OR"}
+
+:6: inventory_multi_cond: {inventory_cond_available} in managers {manager_multi_cond} : none
+
+
+:1: inventory_cond_unit : which are taller than or equal to {number,1,100} inches : CONDITIONS=inventory.height >= {0}
+:1: inventory_cond_unit : with height more than or equal to {number,1,100} inches : CONDITIONS=inventory.height >= {0}
+:1: inventory_cond_unit : which are thinner than or equal to {number,1,100} inches : CONDITIONS=inventory.height <= {0}
+:1: inventory_cond_unit : with height less than or equal to {number,1,100} inches : CONDITIONS=inventory.height <= {0}
+:1: inventory_cond_unit : which are wider than or equal to {number,1,100} inches : CONDITIONS=inventory.width >= {0}
+:1: inventory_cond_unit : with width more than or equal to {number,1,100} inches : CONDITIONS=inventory.width >= {0}
+:1: inventory_cond_unit : with width less than or equal to {number,1,100} inches : CONDITIONS=inventory.width <= {0}
+:1: inventory_cond_unit : with width less than or equal to {number,1,100} inches : CONDITIONS=inventory.width <= {0}
+
+:2: inventory_cond_available: that are currently available : CONDITIONS=inventory.available = 1
+:1: inventory_cond_available: that are currently not available : CONDITIONS=inventory.available = 0
+:1: inventory_cond_available: that are currently unavailable : CONDITIONS=inventory.available = 0
+
+### Schema 3
+
+# College Conditions
+
+:1: college_conds_a : {college_cond_state} {college_cond_size} {college_cond_type} : none
+
+:1: college_conds_b : {college_cond_state} {college_cond_size} {college_cond_type} : none
+
+:1: college_cond_state : located in {state_name} : CONDITIONS=universities.territory = '{0}'
+:1: college_cond_state : located in {state_name} or {state_name} : CONDITIONS = universities.territory = '{0}' OR universities.territory = '{1}'
+
+:1: college_cond_size : with a size of {number, 1000, 21000} : CONDITIONS=universities.capacity = {0}
+:1: college_cond_size : with a size greater than {number,1000,20999} : CONDITIONS = universities.capacity > {0}
+:1: college_cond_size : with a size less than {number,10001,21000} : CONDITIONS = universities.capacity < {0}
+
+:1: college_cond_type : that is {public_private} : CONDITIONS=universities.funding = '{0}'
+
+:1: public_private: public
+:1: public_private: private
+
+:1: state_name: AZ 
+:1: state_name: MA
+:1: state_name: OR
+:1: state_name: GA
+:1: state_name: IN
+:1: state_name: MN
+:1: state_name: UT
+:1: state_name: MI
+:1: state_name: VT
+:1: state_name: CO
+:1: state_name: OK
+
+# Students
+
+:1: student_multi_cond : students {student_conds_a}: TABLES = pupils
+:1: student_multi_cond : students {student_conds_b}: TABLES = pupils
+:0: student_multi_cond : students {student_conds_a} and {student_conds_b}: TABLES = pupils
+
+:1: student_conds_a : {student_major_cond}: none
+:1: student_conds_a : {student_dorm_cond}: none
+:1: student_conds_a : {student_major_cond} {student_meal_cond}: none
+:1: student_conds_a : {student_dorm_cond} {student_meal_cond}: none
+
+
+:1: student_conds_b : {student_gpa_cond}: none
+:1: student_conds_b : {student_load_cond}: none
+:1: student_conds_b : {student_grad_cond}: none
+:1: student_conds_b : {student_gpa_cond} {student_load_cond}: none
+:1: student_conds_b : {student_gpa_cond} {student_grad_cond}: none
+:1: student_conds_b : {student_load_cond} {student_grad_cond}: none
+
+
+:1: student_grad_cond : with graduation year of {student_grad_year} : CONDITIONS = pupils.end_date = {0}
+:1: student_grad_cond : with graduation year after {student_grad_year} : CONDITIONS = pupils.end_date > {0}
+:1: student_grad_cond : with graduation year before {student_grad_year} : CONDITIONS = pupils.end_date < {0}
+
+:1: student_meal_cond : that has a meal plan : CONDITIONS=pupils.cafeteria = 1
+:1: student_meal_cond : that does not have a meal plan : CONDITIONS= pupils.cafeteria = 0
+
+:1: student_dorm_cond : living in dorm {dorm_name} : CONDITIONS = pupils.housing = '{0}'
+:0: student_dorm_cond : living in dorm {dorm_name} or {dorm_name} : CONDITIONS = pupils.housing = '{0}' OR pupils.housing = '{1}'
+:0: student_dorm_cond : living in dorm {dorm_name} or {dorm_name} or {dorm_name} : CONDITIONS = pupils.housing = '{0}' OR pupils.housing = '{1}' OR pupils.housing = '{2}'
+
+:1: student_major_cond : with major {student_major} : CONDITIONS = pupils.study = '{0}'
+:0: student_major_cond : with major {student_major} or {student_major} : CONDITIONS = pupils.study = '{0}' OR pupils.study = '{1}'
+:0: student_major_cond : with major {student_major} or {student_major} or {student_major} : CONDITIONS = pupils.study = '{0}' OR pupils.study = '{1}' OR pupils.study = '{2}'
+
+
+:1: student_gpa_cond : with a gpa of {student_gpa} : CONDITIONS = pupils.performance = {0}
+:1: student_gpa_cond : with gpa greater than {student_gpa} : CONDITIONS = pupils.performance > {0}
+:1: student_gpa_cond : with a gpa less than {student_gpa} : CONDITIONS = pupils.performance < {0}
+
+
+:1: student_load_cond : with a course load of {student_course_load} courses : CONDITIONS=pupils.classes = {0}
+
+:1: student_name : {student_first_name} {student_last_name}
+
+:1: student_first_name: John
+:1: student_first_name: Jane
+:1: student_first_name: Adam
+:1: student_first_name: Chris
+:1: student_first_name: Sally
+:1: student_first_name: Mike
+:1: student_first_name: Jill
+:1: student_first_name: Bob
+:1: student_first_name: Mary
+:1: student_first_name: Joe
+:1: student_first_name: Sue
+:1: student_first_name: Bill
+:1: student_first_name: Jen
+:1: student_first_name: Tom
+:1: student_first_name: Amy
+:1: student_first_name: Sam
+:1: student_first_name: Kim
+:1: student_first_name: Tim
+:1: student_first_name: Ann
+:1: student_first_name: Ron
+
+:1: student_last_name: Smith
+:1: student_last_name: Johnson
+:1: student_last_name: Williams
+:1: student_last_name: Jones
+:1: student_last_name: Brown
+:1: student_last_name: Davis
+:1: student_last_name: Miller
+:1: student_last_name: Wilson
+:1: student_last_name: Moore
+:1: student_last_name: Taylor
+:1: student_last_name: Anderson
+:1: student_last_name: Thomas
+:1: student_last_name: Jackson
+:1: student_last_name: White
+:1: student_last_name: Harris
+:1: student_last_name: Martin
+:1: student_last_name: Thompson
+:1: student_last_name: Garcia
+:1: student_last_name: Martinez
+:1: student_last_name: Robinson
+
+:1: student_meal_plan: yes
+:1: student_meal_plan: no
+
+:1: student_gpa : 1
+:1: student_gpa : 2
+:1: student_gpa : 3
+:1: student_gpa : 4
+
+:1: student_course_load: 4
+:1: student_course_load: 5
+:1: student_course_load: 6
+:1: student_course_load: 7
+:1: student_course_load: 8
+:1: student_course_load: 9
+:1: student_course_load: 10
+:1: student_course_load: 11
+:1: student_course_load: 12
+:1: student_course_load: 13
+:1: student_course_load: 14
+:1: student_course_load: 15
+:1: student_course_load: 16
+
+:1: student_grad_year: 2024
+:1: student_grad_year: 2027
+:1: student_grad_year: 2026
+:1: student_grad_year: 2025
+
+
+:1: student_major: Math
+:1: student_major: Biology
+:1: student_major: Chemistry
+:1: student_major: Physics
+:1: student_major: Economics
+:1: student_major: History
+:1: student_major: Political Science
+:1: student_major: Philosophy
+:1: student_major: Psychology
+:1: student_major: Sociology
+:1: student_major: Art
+:1: student_major: Music
+:1: student_major: English
+:1: student_major: Classics
+:1: student_major: Computer Science
+:1: student_major: Mechanical Engineering
+
+:1: dorm_name: Norton Hall
+:1: dorm_name: Morgan House
+:1: dorm_name: Parker Hall 
+:1: dorm_name: Franklin Hall
+:1: dorm_name: Green Hall
+:1: dorm_name: Carson Hall
+:1: dorm_name: Lawson Hall
+:1: dorm_name: Campbell Hall
+:1: dorm_name: Davidson Hall
+:1: dorm_name: Underwood House
+
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+{
+    "JOINs": [
+        {"TABLES": ["instructors", "classes"], "COLUMNS": [["teacher_id", "teacher_id"]]},
+
+        {"TABLES": ["appliance", "inventory"], "COLUMNS": [["appliance_id", "appliance_id"]]},
+        {"TABLES": ["store", "inventory"], "COLUMNS": [["store_id", "store_id"]]},
+        {"TABLES": ["appliance", "store"], "LINKING_TABLES": ["inventory"]},
+
+        {"TABLES": ["universities", "pupils"], "COLUMNS": [["school_id", "school_id"]]},
+
+        {"TABLES": ["store", "instructors"], "COLUMNS": [["name", "name"]]},
+        {"TABLES": ["pupils", "instructors"], "COLUMNS": [["name", "name"]]},
+        {"TABLES": ["pupils", "instructors"], "COLUMNS": [["name", "name"]]},
+        {"TABLES": ["store", "pupils"], "COLUMNS": [["name", "name"]]},
+
+        {"TABLES": ["classes", "store"], "LINKING_TABLES": ["instructors"]},
+        {"TABLES": ["classes", "pupils"], "LINKING_TABLES": ["instructors"]}
+        
+    ],
+    "PKs": {
+        "instructors": "teacher_id",
+        "classes": "class_id",
+
+        "appliance": "appliance_id",
+        "store": "store_id",
+        "inventory": "inventory_id",
+
+        "universities": "school_id",
+        "pupils": "pupil_id"
+    }
+}
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------

@@ -1,0 +1,206 @@
+:1: root : {whats_the} average {prop_number} {suffix} : T=AVG
+:1: root : {whats_the} mean {prop_number} {suffix} : T=AVG
+:1: root : {whats_the} maximum {prop_number} {suffix} : T=MAX
+:1: root : {whats_the} minimum {prop_number} {suffix} : T=MIN
+:1: root : {list_the} {prop_number} {suffix} : T=none
+:5: root : {whats_the} number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:5: root : Count the number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:5: root : {list_the} primary key of all {prop_countable} {suffix} : T=none
+
+:1: list_the : list the :
+:1: list_the : show me the :
+:1: list_the : display the :
+:1: list_the : find all the :
+:1: whats_the : what is the :
+:1: whats_the : what's the :
+
+:1: suffix : :
+:1: suffix : in the database :
+:1: suffix : in our records :
+
+
+
+:1: prop_number : gpa of students {student_conds_a} : WANT = pupils.performance
+:1: prop_number : gpa of student {student_conds_b} :  WANT = pupils.performance
+:1: prop_number : size of school {college_conds_a} : WANT = universities.capacity
+:1: prop_number : size of school {college_conds_b} : WANT = universities.capacity
+
+:1: prop_countable: colleges {college_conds_a}: TABLES = universities
+:1: prop_countable: colleges {college_conds_b}: TABLES = universities
+:1: prop_countable : students {student_conds_a}: TABLES = pupils
+:1: prop_countable : students {student_conds_b}: TABLES = pupils
+:1: prop_countable : students {student_conds_a} and {student_conds_b}: TABLES = pupils
+
+
+
+# College Conditions
+
+:1: college_conds_a : {college_cond_state} {college_cond_size} {college_cond_type} : none
+
+:1: college_conds_b : {college_cond_state} {college_cond_size} {college_cond_type} : none
+
+:1: college_cond_state : located in {state_name} : CONDITIONS=universities.territory = '{0}'
+:1: college_cond_state : located in {state_name} or {state_name} : CONDITIONS = universities.territory = '{0}' OR universities.territory = '{1}'
+
+:1: college_cond_size : with a size of {number, 1000, 21000} : CONDITIONS=universities.capacity = {0}
+:1: college_cond_size : with a size greater than {number,1000,20999} : CONDITIONS = universities.capacity > {0}
+:1: college_cond_size : with a size less than {number,10001,21000} : CONDITIONS = universities.capacity < {0}
+
+:1: college_cond_type : that is {public_private} : CONDITIONS=universities.funding = '{0}'
+
+:1: public_private: public
+:1: public_private: private
+
+:1: state_name: AZ 
+:1: state_name: MA
+:1: state_name: OR
+:1: state_name: GA
+:1: state_name: IN
+:1: state_name: MN
+:1: state_name: UT
+:1: state_name: MI
+:1: state_name: VT
+:1: state_name: CO
+:1: state_name: OK
+
+# Students
+
+:1: student_conds_a : {student_name_cond} {student_major_cond} {student_dorm_cond} {student_meal_cond}: none
+
+:1: student_conds_b : {student_gpa_cond} {student_load_cond} {student_grad_cond}: none
+
+
+:1: student_grad_cond : with graduation year of {student_grad_year} : CONDITIONS = pupils.end_date = {0}
+:1: student_grad_cond : with graduation year after {student_grad_year} : CONDITIONS = pupils.end_date > {0}
+:1: student_grad_cond : with graduation year before {student_grad_year} : CONDITIONS = pupils.end_date < {0}
+
+:1: student_meal_cond : that has a meal plan : CONDITIONS=pupils.cafeteria = 1
+:1: student_meal_cond : that does not have a meal plan : CONDITIONS= pupils.cafeteria = 0
+
+:1: student_dorm_cond : living in dorm {dorm_name} : CONDITIONS = pupils.housing = '{0}'
+:1: student_dorm_cond : living in dorm {dorm_name} or {dorm_name} : CONDITIONS = pupils.housing = '{0}' OR pupils.housing = '{1}'
+:1: student_dorm_cond : living in dorm {dorm_name} or {dorm_name} or {dorm_name} : CONDITIONS = pupils.housing = '{0}' OR pupils.housing = '{1}' OR pupils.housing = '{2}'
+
+:1: student_major_cond : with major {student_major} : CONDITIONS = pupils.study = '{0}'
+:1: student_major_cond : with major {student_major} or {student_major} : CONDITIONS = pupils.study = '{0}' OR pupils.study = '{1}'
+:1: student_major_cond : with major {student_major} or {student_major} or {student_major} : CONDITIONS = pupils.study = '{0}' OR pupils.study = '{1}' OR pupils.study = '{2}'
+
+:1: student_name_cond : with name {student_name} : CONDITIONS = pupils.name = '{0}'
+
+
+:1: student_gpa_cond : with a gpa of {student_gpa} : CONDITIONS = pupils.performance = {0}
+:1: student_gpa_cond : with gpa greater than {student_gpa} : CONDITIONS = pupils.performance > {0}
+:1: student_gpa_cond : with a gpa less than {student_gpa} : CONDITIONS = pupils.performance < {0}
+
+
+:1: student_load_cond : with a course load of {student_course_load} courses : CONDITIONS=pupils.classes = {0}
+
+:1: student_name : {student_first_name} {student_last_name}
+
+:1: student_first_name: John
+:1: student_first_name: Jane
+:1: student_first_name: Adam
+:1: student_first_name: Chris
+:1: student_first_name: Sally
+:1: student_first_name: Mike
+:1: student_first_name: Jill
+:1: student_first_name: Bob
+:1: student_first_name: Mary
+:1: student_first_name: Joe
+:1: student_first_name: Sue
+:1: student_first_name: Bill
+:1: student_first_name: Jen
+:1: student_first_name: Tom
+:1: student_first_name: Amy
+:1: student_first_name: Sam
+:1: student_first_name: Kim
+:1: student_first_name: Tim
+:1: student_first_name: Ann
+:1: student_first_name: Ron
+
+:1: student_last_name: Smith
+:1: student_last_name: Johnson
+:1: student_last_name: Williams
+:1: student_last_name: Jones
+:1: student_last_name: Brown
+:1: student_last_name: Davis
+:1: student_last_name: Miller
+:1: student_last_name: Wilson
+:1: student_last_name: Moore
+:1: student_last_name: Taylor
+:1: student_last_name: Anderson
+:1: student_last_name: Thomas
+:1: student_last_name: Jackson
+:1: student_last_name: White
+:1: student_last_name: Harris
+:1: student_last_name: Martin
+:1: student_last_name: Thompson
+:1: student_last_name: Garcia
+:1: student_last_name: Martinez
+:1: student_last_name: Robinson
+
+:1: student_meal_plan: yes
+:1: student_meal_plan: no
+
+:1: student_gpa : 1
+:1: student_gpa : 2
+:1: student_gpa : 3
+:1: student_gpa : 4
+
+:1: student_course_load: 4
+:1: student_course_load: 5
+:1: student_course_load: 6
+:1: student_course_load: 7
+:1: student_course_load: 8
+:1: student_course_load: 9
+:1: student_course_load: 10
+:1: student_course_load: 11
+:1: student_course_load: 12
+:1: student_course_load: 13
+:1: student_course_load: 14
+:1: student_course_load: 15
+:1: student_course_load: 16
+
+:1: student_grad_year: 2024
+:1: student_grad_year: 2027
+:1: student_grad_year: 2026
+:1: student_grad_year: 2025
+
+
+:1: student_major: Math
+:1: student_major: Biology
+:1: student_major: Chemistry
+:1: student_major: Physics
+:1: student_major: Economics
+:1: student_major: History
+:1: student_major: Political Science
+:1: student_major: Philosophy
+:1: student_major: Psychology
+:1: student_major: Sociology
+:1: student_major: Art
+:1: student_major: Music
+:1: student_major: English
+:1: student_major: Classics
+:1: student_major: Computer Science
+:1: student_major: Mechanical Engineering
+
+:1: dorm_name: Norton Hall
+:1: dorm_name: Morgan House
+:1: dorm_name: Parker Hall 
+:1: dorm_name: Franklin Hall
+:1: dorm_name: Green Hall
+:1: dorm_name: Carson Hall
+:1: dorm_name: Lawson Hall
+:1: dorm_name: Campbell Hall
+:1: dorm_name: Davidson Hall
+:1: dorm_name: Underwood House
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+{
+    "JOINs": [
+        {"TABLES": ["universities", "pupils"], "COLUMNS": [["school_id", "school_id"]]}
+    ],
+    "PKs": {
+        "universities": "school_id",
+        "pupils": "pupil_id"
+    }
+}

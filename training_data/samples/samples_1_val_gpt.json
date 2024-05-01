@@ -1,0 +1,603 @@
+[
+{"is_zero_record": false,
+   "pseudocode": "want: MIN(grade)\ntables: classes\nconditions: \nlevel = 5\ngrade <= 56\nyear <= 2007",
+   "question": "What is the minimum grade in classes where the level is 5, the grade is less than or equal to 56, and the year is less than or equal to 2007?",
+   "seed": [2, 0, 1, 7, 0, 0, 8, 1, 56, 1, 2007, 1],
+   "sql": "SELECT MIN(classes.grade)\nFROM classes\nWHERE classes.level = 5 AND classes.grade <= 56 AND classes.year <= 2007"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(grade)\ntables: classes\nconditions: \ngrade <= 42",
+   "question": "What is the maximum grade in classes where the grade is less than or equal to 42?",
+   "seed": [1, 0, 1, 1, 0, 1, 42, 1],
+   "sql": "SELECT MAX(classes.grade)\nFROM classes\nWHERE classes.grade <= 42"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \ngrade >= 65",
+   "question": "What is the average grade in classes where the grade is greater than or equal to 65?",
+   "seed": [0, 2, 1, 1, 0, 0, 65, 0],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE classes.grade >= 65"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors\nconditions: \nteacher_age >= 55",
+   "question": "Which teacher IDs correspond to instructors who are at least 55 years old?",
+   "seed": [6, 2, 0, 2, 0, 55, 0],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nWHERE instructors.teacher_age >= 55"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age >= 52\nclass_subject = 'music'\nlevel = 4",
+   "question": "What are the names of instructors who are at least 52 years old and teach music at level 4?",
+   "seed": [7, 3, 3, 0, 52, 0, 4, 1, 11, 0, 3, 4, 3],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 52 AND classes.class_subject = 'music' AND classes.level = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nteacher_age <= 80\nlevel = 2",
+   "question": "Which teacher IDs correspond to instructors who are at most 80 years old and teach at level 2?",
+   "seed": [6, 0, 0, 3, 1, 80, 0, 4, 0, 0, 5, 2],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 80 AND classes.level = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age >= 61\nclass_subject = 'physics'\nlevel = 10\ngrade <= 49",
+   "question": "What are the names of instructors who are at least 61 years old and teach physics at level 10 with a grade less than or equal to 49?",
+   "seed": [7, 0, 3, 0, 61, 0, 5, 1, 3, 0, 3, 10, 1, 49, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 61 AND classes.class_subject = 'physics' AND classes.level = 10 AND classes.grade <= 49"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nclass_subject = 'biology' OR class_subject = 'politics'\nyear <= 2005",
+   "question": "What is the average age of instructors who teach biology or politics classes before 2005?",
+   "seed": [0, 2, 0, 1, 0, 2, 2, 1, 6, 1, 2005, 0],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'biology' OR classes.class_subject = 'politics') AND classes.year <= 2005"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nclass_subject = 'physics' OR class_subject = 'literature'\ngrade <= 59",
+   "question": "Which teacher IDs correspond to instructors who teach physics or literature classes with a grade less than or equal to 59?",
+   "seed": [6, 0, 0, 1, 0, 1, 2, 3, 13, 1, 59, 2],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'physics' OR classes.class_subject = 'literature') AND classes.grade <= 59"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \nclass_subject = 'math' OR class_subject = 'literature'\nyear >= 2017",
+   "question": "Which class IDs correspond to classes in math or literature taught since 2017?",
+   "seed": [6, 0, 1, 2, 2, 0, 13, 0, 2017, 0],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE (classes.class_subject = 'math' OR classes.class_subject = 'literature') AND classes.year >= 2017"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nclass_subject = 'english' OR class_subject = 'chemistry'\ngrade <= 22",
+   "question": "Which teacher IDs correspond to instructors who teach English or chemistry classes with a grade less than or equal to 22?",
+   "seed": [6, 4, 0, 1, 0, 1, 2, 12, 2, 1, 22, 2],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'english' OR classes.class_subject = 'chemistry') AND classes.grade <= 22"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age >= 86 OR (class_subject = 'politics' OR class_subject = 'chemistry' OR class_subject = 'poetry') AND level = 8",
+   "question": "What are the names of instructors who are at least 86 years old or teach politics, chemistry, or poetry at level 8?",
+   "seed": [7, 3, 4, 0, 86, 0, 4, 3, 6, 2, 14, 0, 3, 8, 3],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 86 OR (classes.class_subject = 'politics' OR classes.class_subject = 'chemistry' OR classes.class_subject = 'poetry') AND classes.level = 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age <= 68\nclass_subject = 'poetry' OR class_subject = 'chemistry' OR class_subject = 'politics'",
+   "question": "What are the names of instructors who are at most 68 years old and teach poetry, chemistry, or politics?",
+   "seed": [7, 5, 3, 1, 68, 0, 0, 3, 14, 2, 6, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 68 AND (classes.class_subject = 'poetry' OR classes.class_subject = 'chemistry' OR classes.class_subject = 'politics')"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nclass_subject = 'physics' OR class_subject = 'music' OR class_subject = 'poetry'\nlevel = 2\ngrade <= 58\nyear >= 2012",
+   "question": "What are the grades of classes in physics, music, or poetry at level 2 with a grade less than or equal to 58 and taught since 2012?",
+   "seed": [3, 2, 1, 7, 3, 3, 11, 14, 0, 1, 1, 58, 0, 2012, 0],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE (classes.class_subject = 'physics' OR classes.class_subject = 'music' OR classes.class_subject = 'poetry') AND classes.level = 2 AND classes.grade <= 58 AND classes.year >= 2012"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nclass_subject = 'history' OR class_subject = 'art'\ngrade <= 25\nyear >= 2000",
+   "question": "What are the grades of classes in history or art with a grade less than or equal to 25 and taught since 2000?",
+   "seed": [3, 3, 1, 3, 2, 5, 10, 1, 25, 0, 2000, 3],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE (classes.class_subject = 'history' OR classes.class_subject = 'art') AND classes.grade <= 25 AND classes.year >= 2000"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(teacher_age)\ntables: instructors, classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'history'\nlevel = 4\ngrade <= 53\nyear <= 2013",
+   "question": "What is the minimum age of instructors who teach sociology or history at level 4 with a grade less than or equal to 53 and taught before 2013?",
+   "seed": [2, 3, 0, 1, 0, 7, 2, 9, 5, 0, 7, 1, 53, 1, 2013, 2],
+   "sql": "SELECT MIN(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'history') AND classes.level = 4 AND classes.grade <= 53 AND classes.year <= 2013"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nteacher_age <= 27 OR (class_subject = 'chemistry' OR class_subject = 'philosophy') AND level = 1 AND year <= 2002",
+   "question": "Which teacher IDs correspond to instructors who are at most 27 years old or teach chemistry or philosophy at level 1 before 2002?",
+   "seed": [6, 3, 0, 4, 1, 27, 0, 6, 2, 2, 7, 0, 4, 1, 2002, 2],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 27 OR (classes.class_subject = 'chemistry' OR classes.class_subject = 'philosophy') AND classes.level = 1 AND classes.year <= 2002"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age <= 48\nclass_subject = 'sociology' OR class_subject = 'history' OR class_subject = 'art'\nlevel = 4\ngrade >= 93",
+   "question": "What is the minimum age of instructors who are at most 48 years old and teach sociology, history, or art at level 4 with a grade of at least 93?",
+   "seed": [2, 3, 0, 3, 1, 48, 0, 5, 3, 9, 5, 10, 0, 3, 4, 0, 93, 1],
+   "sql": "SELECT MIN(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 48 AND (classes.class_subject = 'sociology' OR classes.class_subject = 'history' OR classes.class_subject = 'art') AND classes.level = 4 AND classes.grade >= 93"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'literature' OR class_subject = 'politics'\nlevel = 2",
+   "question": "What is the average grade in literature or politics classes at level 2?",
+   "seed": [0, 2, 1, 4, 2, 13, 6, 0, 5, 1],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'literature' OR classes.class_subject = 'politics') AND classes.level = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'english'\nyear >= 2015",
+   "question": "How many distinct class IDs are there for English classes taught since 2015?",
+   "seed": [4, 0, 1, 2, 1, 12, 0, 2015, 1],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE classes.class_subject = 'english' AND classes.year >= 2015"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nclass_subject = 'history' OR class_subject = 'philosophy'",
+   "question": "What are the grades of classes in history or philosophy?",
+   "seed": [3, 2, 1, 0, 2, 5, 7, 2],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.class_subject = 'history' OR classes.class_subject = 'philosophy'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors\nconditions: \nteacher_age >= 45",
+   "question": "How many distinct teacher IDs are there for instructors who are at least 45 years old?",
+   "seed": [4, 1, 0, 2, 0, 45, 2],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nWHERE instructors.teacher_age >= 45"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age >= 75 OR (class_subject = 'psychology' OR class_subject = 'physics') AND level = 4 AND grade <= 46",
+   "question": "How many distinct teacher IDs correspond to instructors who are at least 75 years old or teach psychology or physics at level 4 with a grade less than or equal to 46?",
+   "seed": [4, 0, 0, 4, 0, 75, 0, 5, 2, 8, 3, 0, 7, 1, 46, 2],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 75 OR (classes.class_subject = 'psychology' OR classes.class_subject = 'physics') AND classes.level = 4 AND classes.grade <= 46"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age <= 34 OR (class_subject = 'english' OR class_subject = 'literature') AND level = 1 AND grade <= 57",
+   "question": "How many distinct teacher IDs correspond to instructors who are at most 34 years old or teach English or literature at level 1 with a grade less than or equal to 57?",
+   "seed": [5, 0, 4, 1, 34, 0, 5, 2, 12, 13, 0, 0, 1, 57, 3],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 34 OR (classes.class_subject = 'english' OR classes.class_subject = 'literature') AND classes.level = 1 AND classes.grade <= 57"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nclass_subject = 'literature' OR class_subject = 'biology'\ngrade <= 26\nyear <= 2012",
+   "question": "Which teacher IDs correspond to instructors who teach literature or biology classes with a grade less than or equal to 26 and taught before 2012?",
+   "seed": [6, 0, 0, 1, 0, 3, 2, 13, 1, 1, 26, 1, 2012, 2],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'literature' OR classes.class_subject = 'biology') AND classes.grade <= 26 AND classes.year <= 2012"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors, classes\nconditions: \nclass_subject = 'music' OR class_subject = 'philosophy' OR class_subject = 'chemistry'\nlevel = 9\nyear >= 2008",
+   "question": "What are the ages of instructors who teach music, philosophy, or chemistry at level 9 since 2008?",
+   "seed": [3, 5, 0, 1, 0, 6, 3, 11, 7, 2, 0, 12, 0, 2008, 2],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'music' OR classes.class_subject = 'philosophy' OR classes.class_subject = 'chemistry') AND classes.level = 9 AND classes.year >= 2008"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age <= 64\nclass_subject = 'psychology'\nyear >= 2010",
+   "question": "What is the average age of instructors who teach psychology since 2010?",
+   "seed": [0, 2, 0, 3, 1, 64, 0, 2, 1, 8, 0, 2010, 1],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 64 AND classes.class_subject = 'psychology' AND classes.year >= 2010"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nteacher_age <= 37 OR (class_subject = 'history' OR class_subject = 'politics' OR class_subject = 'chemistry') AND level = 12",
+   "question": "Which teacher IDs correspond to instructors who are at most 37 years old or teach history, politics, or chemistry at level 12?",
+   "seed": [6, 1, 0, 4, 1, 37, 0, 4, 3, 5, 6, 2, 0, 15, 0],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 37 OR (classes.class_subject = 'history' OR classes.class_subject = 'politics' OR classes.class_subject = 'chemistry') AND classes.level = 12"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(grade)\ntables: classes\nconditions: \nclass_subject = 'sociology'\ngrade >= 86",
+   "question": "What is the minimum grade in sociology classes with a grade of at least 86?",
+   "seed": [2, 2, 1, 1, 1, 9, 0, 86, 2],
+   "sql": "SELECT MIN(classes.grade)\nFROM classes\nWHERE classes.class_subject = 'sociology' AND classes.grade >= 86"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'philosophy' OR class_subject = 'art'\nlevel = 10\ngrade <= 36\nyear >= 2011",
+   "question": "How many distinct class IDs are there for sociology, philosophy, or art classes at level 10 with a grade less than or equal to 36 and taught since 2011?",
+   "seed": [4, 2, 1, 7, 3, 9, 7, 10, 0, 13, 1, 36, 0, 2011, 0],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'philosophy' OR classes.class_subject = 'art') AND classes.level = 10 AND classes.grade <= 36 AND classes.year >= 2011"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \ngrade >= 60",
+   "question": "What are the grades of classes where the grade is greater than or equal to 60?",
+   "seed": [3, 3, 1, 1, 0, 0, 60, 0],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.grade >= 60"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \ngrade <= 22",
+   "question": "What are the names of instructors who teach classes where the grade is less than or equal to 22?",
+   "seed": [7, 4, 1, 0, 1, 0, 1, 22, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE classes.grade <= 22"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors, classes\nconditions: \nteacher_age >= 48\nclass_subject = 'art' OR class_subject = 'poetry'\ngrade <= 37",
+   "question": "What are the ages of instructors who teach art or poetry classes with a grade less than or equal to 37?",
+   "seed": [3, 2, 0, 3, 0, 48, 0, 1, 2, 10, 14, 1, 37, 2],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 48 AND (classes.class_subject = 'art' OR classes.class_subject = 'poetry') AND classes.grade <= 37"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age >= 23 OR class_subject = 'biology' AND grade <= 35 AND year <= 2013",
+   "question": "What is the average age of instructors who are at least 23 years old or teach biology classes with a grade less than or equal to 35 and the year is less than or equal to 2013?",
+   "seed": [0, 3, 0, 4, 0, 23, 0, 3, 1, 1, 1, 35, 1, 2013, 2],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 23 OR classes.class_subject = 'biology' AND classes.grade <= 35 AND classes.year <= 2013"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors\nconditions: \nteacher_age >= 58",
+   "question": "How many distinct teacher IDs are there for instructors who are at least 58 years old?",
+   "seed": [4, 3, 0, 2, 0, 58, 0],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nWHERE instructors.teacher_age >= 58"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(teacher_age)\ntables: instructors, classes\nconditions: \nclass_subject = 'music' OR class_subject = 'chemistry'\ngrade >= 95",
+   "question": "What is the maximum age of instructors who teach music or chemistry classes with a grade greater than or equal to 95?",
+   "seed": [1, 3, 0, 1, 0, 1, 2, 11, 2, 0, 95, 1],
+   "sql": "SELECT MAX(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'music' OR classes.class_subject = 'chemistry') AND classes.grade >= 95"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors\nconditions: \nteacher_age >= 23",
+   "question": "What are the ages of instructors who are at least 23 years old?",
+   "seed": [3, 1, 0, 2, 0, 23, 0],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nWHERE instructors.teacher_age >= 23"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nyear <= 2014",
+   "question": "How many distinct class IDs are there for classes with a year less than or equal to 2014?",
+   "seed": [4, 0, 1, 2, 0, 1, 2014, 1],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE classes.year <= 2014"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'poetry' OR class_subject = 'philosophy'\nlevel = 12\nyear <= 2001",
+   "question": "How many distinct teacher IDs are there for instructors who teach sociology, poetry, or philosophy classes at level 12 with a year less than or equal to 2001?",
+   "seed": [5, 0, 1, 0, 6, 3, 9, 14, 7, 0, 15, 1, 2001, 2],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'poetry' OR classes.class_subject = 'philosophy') AND classes.level = 12 AND classes.year <= 2001"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age <= 75\nclass_subject = 'sociology'\nlevel = 10\ngrade >= 82",
+   "question": "What are the names of instructors who are at most 75 years old and teach sociology classes at level 10 with a grade greater than or equal to 82?",
+   "seed": [7, 1, 3, 1, 75, 0, 5, 1, 9, 0, 13, 0, 82, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 75 AND classes.class_subject = 'sociology' AND classes.level = 10 AND classes.grade >= 82"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'philosophy' OR class_subject = 'history' OR class_subject = 'biology'\nlevel = 4\ngrade >= 66",
+   "question": "How many distinct class IDs are there for philosophy, history, or biology classes at level 4 with a grade greater than or equal to 66?",
+   "seed": [5, 1, 5, 3, 7, 5, 1, 0, 7, 0, 66, 3],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'philosophy' OR classes.class_subject = 'history' OR classes.class_subject = 'biology') AND classes.level = 4 AND classes.grade >= 66"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(grade)\ntables: classes\nconditions: \nlevel = 3\ngrade <= 50\nyear <= 2018",
+   "question": "What is the maximum grade of classes at level 3 with a grade less than or equal to 50 and a year less than or equal to 2018?",
+   "seed": [1, 2, 1, 7, 0, 0, 6, 1, 50, 1, 2018, 2],
+   "sql": "SELECT MAX(classes.grade)\nFROM classes\nWHERE classes.level = 3 AND classes.grade <= 50 AND classes.year <= 2018"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'art' OR class_subject = 'politics'\nyear >= 2008",
+   "question": "What is the average grade of classes in art or politics with a year greater than or equal to 2008?",
+   "seed": [0, 3, 1, 2, 2, 10, 6, 0, 2008, 1],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'art' OR classes.class_subject = 'politics') AND classes.year >= 2008"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \nlevel = 2\nyear <= 2019",
+   "question": "What are the class IDs of classes at level 2 with a year less than or equal to 2019?",
+   "seed": [6, 2, 1, 6, 0, 0, 5, 1, 2019, 2],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE classes.level = 2 AND classes.year <= 2019"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nclass_subject = 'math'\nlevel = 9\ngrade >= 66",
+   "question": "What are the names of instructors who teach math classes at level 9 with a grade greater than or equal to 66?",
+   "seed": [7, 4, 1, 0, 5, 1, 0, 0, 3, 9, 0, 66, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE classes.class_subject = 'math' AND classes.level = 9 AND classes.grade >= 66"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nlevel = 12\nyear >= 2016",
+   "question": "What are the grades of classes at level 12 with a year greater than or equal to 2016?",
+   "seed": [3, 1, 1, 6, 0, 0, 15, 0, 2016, 2],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.level = 12 AND classes.year >= 2016"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'history'\nlevel = 8\nyear >= 2011",
+   "question": "What is the average grade of history classes at level 8 with a year greater than or equal to 2011?",
+   "seed": [0, 0, 1, 6, 1, 5, 0, 11, 0, 2011, 0],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE classes.class_subject = 'history' AND classes.level = 8 AND classes.year >= 2011"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'poetry'\nlevel = 11",
+   "question": "What is the average grade of poetry classes at level 11?",
+   "seed": [0, 1, 1, 4, 1, 14, 0, 14, 0],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE classes.class_subject = 'poetry' AND classes.level = 11"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nlevel = 2\ngrade <= 23\nyear <= 2016",
+   "question": "What are the grades of classes at level 2 with a grade less than or equal to 23 and a year less than or equal to 2016?",
+   "seed": [3, 4, 1, 7, 0, 0, 5, 1, 23, 1, 2016, 3],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.level = 2 AND classes.grade <= 23 AND classes.year <= 2016"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(grade)\ntables: classes\nconditions: \nlevel = 3\nyear >= 2006",
+   "question": "What is the maximum grade of classes at level 3 with a year greater than or equal to 2006?",
+   "seed": [1, 3, 1, 6, 0, 0, 2, 0, 2006, 0],
+   "sql": "SELECT MAX(classes.grade)\nFROM classes\nWHERE classes.level = 3 AND classes.year >= 2006"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'math'\nyear <= 2019",
+   "question": "How many distinct class IDs are there for math classes with a year less than or equal to 2019?",
+   "seed": [4, 0, 1, 2, 1, 0, 1, 2019, 1],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE classes.class_subject = 'math' AND classes.year <= 2019"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nlevel = 10",
+   "question": "How many distinct class IDs are there for classes at level 10?",
+   "seed": [5, 1, 4, 0, 0, 3, 10, 3],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE classes.level = 10"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'biology' OR class_subject = 'politics'\nlevel = 7\ngrade <= 51\nyear >= 2020",
+   "question": "How many distinct class IDs are there for biology or politics classes at level 7 with a grade less than or equal to 51 and a year greater than or equal to 2020?",
+   "seed": [5, 1, 7, 2, 1, 6, 0, 3, 7, 1, 51, 0, 2020, 3],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'biology' OR classes.class_subject = 'politics') AND classes.level = 7 AND classes.grade <= 51 AND classes.year >= 2020"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age <= 39 OR class_subject = 'art' AND level = 3 AND grade >= 70 AND year >= 2020",
+   "question": "What are the names of instructors who are at most 39 years old or teach art classes at level 3 with a grade greater than or equal to 70 and a year greater than or equal to 2020?",
+   "seed": [7, 0, 4, 1, 39, 0, 7, 1, 10, 0, 6, 0, 70, 0, 2020, 2],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 39 OR classes.class_subject = 'art' AND classes.level = 3 AND classes.grade >= 70 AND classes.year >= 2020"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age <= 30 OR class_subject = 'english' AND grade <= 23",
+   "question": "How many distinct teacher IDs are there for instructors who are at most 30 years old or teach English classes with a grade less than or equal to 23?",
+   "seed": [5, 0, 4, 1, 30, 0, 1, 1, 12, 1, 23, 0],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 30 OR classes.class_subject = 'english' AND classes.grade <= 23"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nclass_subject = 'music' OR class_subject = 'philosophy'\nlevel = 11\ngrade >= 88\nyear <= 2008",
+   "question": "What are the grades of classes with music or philosophy classes at level 11 with a grade greater than or equal to 88 and a year less than or equal to 2008?",
+   "seed": [3, 1, 1, 7, 2, 11, 7, 0, 14, 0, 88, 1, 2008, 3],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE (classes.class_subject = 'music' OR classes.class_subject = 'philosophy') AND classes.level = 11 AND classes.grade >= 88 AND classes.year <= 2008"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age <= 84\nclass_subject = 'politics'\ngrade >= 72",
+   "question": "What is the average age of instructors who are at most 84 years old and teach politics classes with a grade greater than or equal to 72?",
+   "seed": [0, 2, 0, 3, 1, 84, 0, 1, 1, 6, 0, 72, 0],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 84 AND classes.class_subject = 'politics' AND classes.grade >= 72"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'psychology' OR class_subject = 'english' OR class_subject = 'art'\nyear <= 2015",
+   "question": "How many distinct class IDs are there for psychology, English, or art classes with a year less than or equal to 2015?",
+   "seed": [5, 1, 2, 3, 8, 12, 10, 1, 2015, 0],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'psychology' OR classes.class_subject = 'english' OR classes.class_subject = 'art') AND classes.year <= 2015"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nclass_subject = 'physics'\nlevel = 3",
+   "question": "What are the teacher IDs of instructors who teach physics classes at level 3?",
+   "seed": [6, 2, 0, 1, 0, 4, 1, 3, 0, 2, 1],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE classes.class_subject = 'physics' AND classes.level = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors\nconditions: \nteacher_age >= 36",
+   "question": "What are the names of instructors who are at least 36 years old?",
+   "seed": [7, 5, 2, 0, 36, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nWHERE instructors.teacher_age >= 36"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(grade)\ntables: classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'philosophy' OR class_subject = 'chemistry'\nlevel = 11\ngrade >= 75",
+   "question": "What is the minimum grade in classes where the subject is either sociology, philosophy, or chemistry, the level is 11, and the grade is greater than or equal to 75?",
+   "seed": [2, 3, 1, 5, 3, 9, 7, 2, 0, 14, 0, 75, 1],
+   "sql": "SELECT MIN(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'philosophy' OR classes.class_subject = 'chemistry') AND classes.level = 11 AND classes.grade >= 75"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'economics' OR class_subject = 'biology'\nlevel = 6\ngrade >= 74\nyear >= 2003",
+   "question": "How many unique class IDs are there in classes where the subject is either economics or biology, the level is 6, the grade is greater than or equal to 74, and the year is greater than or equal to 2003?",
+   "seed": [5, 1, 7, 2, 4, 1, 0, 9, 0, 74, 0, 2003, 0],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'economics' OR classes.class_subject = 'biology') AND classes.level = 6 AND classes.grade >= 74 AND classes.year >= 2003"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'sociology'\nlevel = 2",
+   "question": "What is the average grade in classes where the subject is sociology and the level is 2?",
+   "seed": [0, 3, 1, 4, 1, 9, 0, 5, 0],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE classes.class_subject = 'sociology' AND classes.level = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \nclass_subject = 'biology'\nlevel = 9",
+   "question": "What are the class IDs in classes where the subject is biology and the level is 9?",
+   "seed": [6, 1, 1, 4, 1, 1, 0, 3, 9, 0],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE classes.class_subject = 'biology' AND classes.level = 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age >= 87\nclass_subject = 'math' OR class_subject = 'english'\nlevel = 2",
+   "question": "How many unique teacher IDs are there in instructors who are at least 87 years old and teach either math or english at level 2?",
+   "seed": [5, 0, 3, 0, 87, 0, 4, 2, 0, 12, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 87 AND (classes.class_subject = 'math' OR classes.class_subject = 'english') AND classes.level = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \ngrade >= 60\nyear <= 2018",
+   "question": "What are the grades of classes where the grade is greater than or equal to 60 and the year is less than or equal to 2018?",
+   "seed": [3, 5, 1, 3, 0, 0, 60, 1, 2018, 3],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.grade >= 60 AND classes.year <= 2018"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age >= 62\nclass_subject = 'psychology' OR class_subject = 'literature'\nlevel = 1\ngrade >= 88",
+   "question": "What is the average age of instructors who are at least 62 years old and teach either psychology or literature at level 1 with grades greater than or equal to 88?",
+   "seed": [0, 2, 0, 3, 0, 62, 0, 5, 2, 8, 13, 0, 0, 0, 88, 0],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 62 AND (classes.class_subject = 'psychology' OR classes.class_subject = 'literature') AND classes.level = 1 AND classes.grade >= 88"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nclass_subject = 'history' OR class_subject = 'economics' OR class_subject = 'psychology'\nlevel = 6\nyear >= 2003",
+   "question": "What are the grades of classes where the subject is either history, economics, or psychology, the level is 6, and the year is greater than or equal to 2003?",
+   "seed": [3, 5, 1, 6, 3, 5, 4, 8, 0, 3, 6, 0, 2003, 0],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE (classes.class_subject = 'history' OR classes.class_subject = 'economics' OR classes.class_subject = 'psychology') AND classes.level = 6 AND classes.year >= 2003"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'politics' OR class_subject = 'economics'\nlevel = 8\nyear <= 2018",
+   "question": "How many unique class IDs are there in classes where the subject is either politics or economics, the level is 8, and the year is less than or equal to 2018?",
+   "seed": [5, 1, 6, 2, 6, 4, 0, 11, 1, 2018, 2],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'politics' OR classes.class_subject = 'economics') AND classes.level = 8 AND classes.year <= 2018"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age <= 62 OR grade >= 94",
+   "question": "What are the names of instructors who are at most 62 years old or teach classes with grades greater than or equal to 94?",
+   "seed": [7, 5, 4, 1, 62, 0, 1, 0, 0, 94, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 62 OR classes.grade >= 94"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age <= 48\nclass_subject = 'poetry' OR class_subject = 'economics' OR class_subject = 'chemistry'\ngrade <= 28\nyear <= 2011",
+   "question": "What are the names of instructors who are at most 48 years old and teach either poetry, economics, or chemistry with grades less than or equal to 28 and years less than or equal to 2011?",
+   "seed": [7, 5, 3, 1, 48, 0, 3, 3, 14, 4, 2, 1, 28, 1, 2011, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 48 AND (classes.class_subject = 'poetry' OR classes.class_subject = 'economics' OR classes.class_subject = 'chemistry') AND classes.grade <= 28 AND classes.year <= 2011"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \nclass_subject = 'music'",
+   "question": "What are the class IDs in classes where the subject is music?",
+   "seed": [6, 5, 1, 0, 1, 11, 0],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE classes.class_subject = 'music'"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nteacher_age >= 27 OR (class_subject = 'art' OR class_subject = 'chemistry') AND level = 1",
+   "question": "What are the teacher IDs of instructors who are at least 27 years old or teach either art or chemistry at level 1?",
+   "seed": [6, 4, 0, 4, 0, 27, 0, 4, 2, 10, 2, 0, 4, 0],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 27 OR (classes.class_subject = 'art' OR classes.class_subject = 'chemistry') AND classes.level = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nteacher_age <= 29 OR class_subject = 'chemistry' AND grade >= 71",
+   "question": "What are the teacher IDs of instructors who are at most 29 years old or teach chemistry with grades greater than or equal to 71?",
+   "seed": [6, 4, 0, 4, 1, 29, 0, 1, 1, 2, 0, 71, 3],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 29 OR classes.class_subject = 'chemistry' AND classes.grade >= 71"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(grade)\ntables: classes\nconditions: \nlevel = 3\ngrade <= 38\nyear >= 2013",
+   "question": "What is the maximum grade in classes where the level is 3, the grade is less than or equal to 38, and the year is greater than or equal to 2013?",
+   "seed": [1, 0, 1, 7, 0, 0, 2, 1, 38, 0, 2013, 0],
+   "sql": "SELECT MAX(classes.grade)\nFROM classes\nWHERE classes.level = 3 AND classes.grade <= 38 AND classes.year >= 2013"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nlevel = 1",
+   "question": "What is the average grade in classes where the level is 1?",
+   "seed": [0, 1, 1, 4, 0, 0, 0, 2],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE classes.level = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age <= 82\nclass_subject = 'politics'\nlevel = 1\nyear >= 2012",
+   "question": "What is the average age of instructors who are at most 82 years old and teach politics at level 1 with years greater than or equal to 2012?",
+   "seed": [0, 1, 0, 3, 1, 82, 0, 6, 1, 6, 0, 0, 0, 2012, 3],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 82 AND classes.class_subject = 'politics' AND classes.level = 1 AND classes.year >= 2012"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(grade)\ntables: classes\nconditions: \nclass_subject = 'art' OR class_subject = 'philosophy' OR class_subject = 'sociology'\nlevel = 11\nyear <= 2007",
+   "question": "What is the minimum grade in classes where the subject is either art, philosophy, or sociology, the level is 11, and the year is less than or equal to 2007?",
+   "seed": [2, 1, 1, 6, 3, 10, 7, 9, 0, 3, 11, 1, 2007, 3],
+   "sql": "SELECT MIN(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'art' OR classes.class_subject = 'philosophy' OR classes.class_subject = 'sociology') AND classes.level = 11 AND classes.year <= 2007"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(grade)\ntables: classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'economics' OR class_subject = 'music'\nlevel = 1\ngrade <= 56\nyear >= 2017",
+   "question": "What is the maximum grade in classes where the subject is either sociology, economics, or music, the level is 1, the grade is less than or equal to 56, and the year is greater than or equal to 2017?",
+   "seed": [1, 0, 1, 7, 3, 9, 4, 11, 0, 0, 1, 56, 0, 2017, 0],
+   "sql": "SELECT MAX(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'economics' OR classes.class_subject = 'music') AND classes.level = 1 AND classes.grade <= 56 AND classes.year >= 2017"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nlevel = 10\nyear >= 2010",
+   "question": "What are the grades of classes where the level is 10 and the year is greater than or equal to 2010?",
+   "seed": [3, 2, 1, 6, 0, 0, 13, 0, 2010, 2],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.level = 10 AND classes.year >= 2010"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'economics' OR class_subject = 'chemistry' OR class_subject = 'art'\nyear >= 2015",
+   "question": "What is the average grade in classes where the subject is either economics, chemistry, or art and the year is greater than or equal to 2015?",
+   "seed": [0, 3, 1, 2, 3, 4, 2, 10, 0, 2015, 1],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'economics' OR classes.class_subject = 'chemistry' OR classes.class_subject = 'art') AND classes.year >= 2015"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors, classes\nconditions: \nteacher_age <= 49\ngrade >= 84",
+   "question": "What are the ages of instructors who are at most 49 years old and teach classes with grades greater than or equal to 84?",
+   "seed": [3, 3, 0, 3, 1, 49, 0, 1, 0, 0, 84, 2],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 49 AND classes.grade >= 84"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_id\ntables: instructors, classes\nconditions: \nclass_subject = 'physics' OR class_subject = 'literature'\ngrade >= 70\nyear >= 2015",
+   "question": "What are the teacher IDs of instructors who teach either physics or literature with grades greater than or equal to 70 and years greater than or equal to 2015?",
+   "seed": [6, 4, 0, 1, 0, 3, 2, 3, 13, 0, 70, 0, 2015, 3],
+   "sql": "SELECT instructors.teacher_id\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'physics' OR classes.class_subject = 'literature') AND classes.grade >= 70 AND classes.year >= 2015"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'economics' OR class_subject = 'biology'\nlevel = 9\ngrade >= 73",
+   "question": "What is the average grade in classes where the subject is either economics or biology, the level is 9, and the grade is greater than or equal to 73?",
+   "seed": [0, 0, 1, 5, 2, 4, 1, 0, 12, 0, 73, 1],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'economics' OR classes.class_subject = 'biology') AND classes.level = 9 AND classes.grade >= 73"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nclass_subject = 'poetry'\nlevel = 7",
+   "question": "What are the grades of classes where the subject is poetry and the level is 7?",
+   "seed": [3, 3, 1, 4, 1, 14, 0, 10, 1],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.class_subject = 'poetry' AND classes.level = 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age <= 21\nclass_subject = 'chemistry' OR class_subject = 'politics' OR class_subject = 'math'\ngrade >= 65",
+   "question": "What are the names of instructors who are at most 21 years old and teach classes with grades greater than or equal to 65 in either chemistry, politics, or math?",
+   "seed": [7, 1, 3, 1, 21, 0, 1, 3, 2, 6, 0, 0, 65, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 21 AND (classes.class_subject = 'chemistry' OR classes.class_subject = 'politics' OR classes.class_subject = 'math') AND classes.grade >= 65"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors, classes\nconditions: \nlevel = 8\nyear <= 2009",
+   "question": "What are the ages of instructors who teach at level 8 with years less than or equal to 2009?",
+   "seed": [3, 0, 0, 1, 0, 6, 0, 0, 11, 1, 2009, 2],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE classes.level = 8 AND classes.year <= 2009"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nclass_subject = 'chemistry' OR class_subject = 'literature' OR class_subject = 'poetry'\nyear >= 2002",
+   "question": "How many unique teacher IDs are there in instructors who teach either chemistry, literature, or poetry with years greater than or equal to 2002?",
+   "seed": [5, 0, 1, 0, 2, 3, 2, 13, 14, 0, 2002, 0],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE (classes.class_subject = 'chemistry' OR classes.class_subject = 'literature' OR classes.class_subject = 'poetry') AND classes.year >= 2002"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(grade)\ntables: classes\nconditions: \nclass_subject = 'math' OR class_subject = 'psychology' OR class_subject = 'economics'\nlevel = 8\nyear <= 2010",
+   "question": "What is the minimum grade in classes where the subject is either math, psychology, or economics, the level is 8, and the year is less than or equal to 2010?",
+   "seed": [2, 2, 1, 6, 3, 0, 8, 4, 0, 11, 1, 2010, 3],
+   "sql": "SELECT MIN(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'math' OR classes.class_subject = 'psychology' OR classes.class_subject = 'economics') AND classes.level = 8 AND classes.year <= 2010"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age <= 43 OR level = 1",
+   "question": "How many unique teacher IDs are there in instructors who are at most 43 years old or teach at level 1?",
+   "seed": [5, 0, 4, 1, 43, 0, 4, 0, 0, 4, 0],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 43 OR classes.level = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age <= 30 OR class_subject = 'math' AND level = 9 AND year <= 2000",
+   "question": "What is the maximum age of instructors who are either aged 30 or younger or teach math at level 9 or below and have been teaching since the year 2000 or earlier?",
+   "seed": [1, 1, 0, 4, 1, 30, 0, 6, 1, 0, 0, 3, 9, 1, 2000, 1],
+   "sql": "SELECT MAX(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 30 OR classes.class_subject = 'math' AND classes.level = 9 AND classes.year <= 2000"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors, classes\nconditions: \nteacher_age >= 53 OR (class_subject = 'politics' OR class_subject = 'art' OR class_subject = 'english') AND level = 10",
+   "question": "What is the age of instructors who are aged 53 or older or teach politics, art, or English at level 10?",
+   "seed": [3, 1, 0, 4, 0, 53, 0, 4, 3, 6, 10, 12, 0, 3, 10, 0],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 53 OR (classes.class_subject = 'politics' OR classes.class_subject = 'art' OR classes.class_subject = 'english') AND classes.level = 10"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age >= 60\nlevel = 4",
+   "question": "What is the average age of instructors who are aged 60 or older and teach at level 4?",
+   "seed": [0, 0, 0, 3, 0, 60, 0, 4, 0, 0, 7, 2],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 60 AND classes.level = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'english' OR class_subject = 'math'\nyear <= 2009",
+   "question": "How many distinct classes teach English or math and were taught in the year 2009 or earlier?",
+   "seed": [5, 1, 2, 2, 12, 0, 1, 2009, 3],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'english' OR classes.class_subject = 'math') AND classes.year <= 2009"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(grade)\ntables: classes\nconditions: \nclass_subject = 'politics' OR class_subject = 'english'\ngrade >= 94",
+   "question": "What is the minimum grade of classes that teach politics or English and have a grade of 94 or higher?",
+   "seed": [2, 1, 1, 1, 2, 6, 12, 0, 94, 1],
+   "sql": "SELECT MIN(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'politics' OR classes.class_subject = 'english') AND classes.grade >= 94"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nlevel = 4",
+   "question": "What are the grades of classes at level 4?",
+   "seed": [3, 3, 1, 4, 0, 0, 7, 1],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.level = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'literature'\nlevel = 1",
+   "question": "How many distinct classes teach literature at level 1?",
+   "seed": [4, 1, 1, 4, 1, 13, 0, 4, 0],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE classes.class_subject = 'literature' AND classes.level = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age >= 61\nclass_subject = 'literature'\ngrade <= 26",
+   "question": "How many distinct instructors are aged 61 or older, teach literature, and have classes with a grade of 26 or lower?",
+   "seed": [4, 1, 0, 3, 0, 61, 0, 1, 1, 13, 1, 26, 1],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 61 AND classes.class_subject = 'literature' AND classes.grade <= 26"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \nclass_subject = 'english' OR class_subject = 'philosophy' OR class_subject = 'history'\nlevel = 12\nyear <= 2015",
+   "question": "What are the IDs of classes that teach English, philosophy, or history at level 12 or lower and were taught in the year 2015 or earlier?",
+   "seed": [6, 2, 1, 6, 3, 12, 7, 5, 0, 3, 12, 1, 2015, 0],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE (classes.class_subject = 'english' OR classes.class_subject = 'philosophy' OR classes.class_subject = 'history') AND classes.level = 12 AND classes.year <= 2015"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'biology' OR class_subject = 'chemistry' OR class_subject = 'sociology'\ngrade >= 60",
+   "question": "How many distinct classes teach biology, chemistry, or sociology and have a grade of 60 or higher?",
+   "seed": [5, 1, 1, 3, 1, 2, 9, 0, 60, 2],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'biology' OR classes.class_subject = 'chemistry' OR classes.class_subject = 'sociology') AND classes.grade >= 60"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nlevel = 7\ngrade <= 43\nyear >= 2005",
+   "question": "What are the grades of classes at level 7 with a grade of 43 or lower and were taught in the year 2005 or later?",
+   "seed": [3, 0, 1, 7, 0, 0, 10, 1, 43, 0, 2005, 3],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE classes.level = 7 AND classes.grade <= 43 AND classes.year >= 2005"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'philosophy' OR class_subject = 'sociology'\nlevel = 5\nyear <= 2002",
+   "question": "How many distinct classes teach philosophy or sociology at level 5 and were taught in the year 2002 or earlier?",
+   "seed": [5, 1, 6, 2, 7, 9, 0, 3, 5, 1, 2002, 3],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'philosophy' OR classes.class_subject = 'sociology') AND classes.level = 5 AND classes.year <= 2002"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'politics' OR class_subject = 'biology'\nlevel = 4",
+   "question": "What is the average grade of classes that teach politics or biology at level 4?",
+   "seed": [0, 1, 1, 4, 2, 6, 1, 0, 3, 4, 1],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'politics' OR classes.class_subject = 'biology') AND classes.level = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: grade\ntables: classes\nconditions: \nclass_subject = 'economics' OR class_subject = 'art'\nyear >= 2018",
+   "question": "What are the grades of classes that teach economics or art and were taught in the year 2018 or later?",
+   "seed": [3, 2, 1, 2, 2, 4, 10, 0, 2018, 1],
+   "sql": "SELECT classes.grade\nFROM classes\nWHERE (classes.class_subject = 'economics' OR classes.class_subject = 'art') AND classes.year >= 2018"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age <= 60\nlevel = 10\nyear >= 2011",
+   "question": "What is the average age of instructors who are aged 60 or younger, teach at level 10, and have been teaching since the year 2011 or later?",
+   "seed": [0, 0, 0, 3, 1, 60, 0, 6, 0, 0, 13, 0, 2011, 0],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 60 AND classes.level = 10 AND classes.year >= 2011"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, classes\nconditions: \nteacher_age >= 27 OR class_subject = 'philosophy' OR class_subject = 'math' OR class_subject = 'economics'",
+   "question": "What are the names of instructors who are aged 27 or older or teach philosophy, math, or economics?",
+   "seed": [7, 5, 4, 0, 27, 0, 0, 3, 7, 0, 4, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 27 OR classes.class_subject = 'philosophy' OR classes.class_subject = 'math' OR classes.class_subject = 'economics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'psychology' OR class_subject = 'biology'\nlevel = 1\ngrade <= 57",
+   "question": "How many distinct classes teach psychology or biology at level 1 with a grade of 57 or lower?",
+   "seed": [5, 1, 5, 2, 8, 1, 0, 0, 1, 57, 3],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'psychology' OR classes.class_subject = 'biology') AND classes.level = 1 AND classes.grade <= 57"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \nclass_subject = 'history' OR class_subject = 'economics'\ngrade <= 51\nyear <= 2015",
+   "question": "What are the IDs of classes that teach history or economics with a grade of 51 or lower and were taught in the year 2015 or earlier?",
+   "seed": [6, 1, 1, 3, 2, 5, 4, 1, 51, 1, 2015, 0],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE (classes.class_subject = 'history' OR classes.class_subject = 'economics') AND classes.grade <= 51 AND classes.year <= 2015"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(grade)\ntables: classes\nconditions: \nclass_subject = 'physics'\ngrade <= 58",
+   "question": "What is the average grade of classes that teach physics with a grade of 58 or lower?",
+   "seed": [0, 1, 1, 1, 1, 3, 1, 58, 2],
+   "sql": "SELECT AVG(classes.grade)\nFROM classes\nWHERE classes.class_subject = 'physics' AND classes.grade <= 58"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \nclass_subject = 'philosophy'\nyear >= 2017",
+   "question": "What are the IDs of classes that teach philosophy and were taught in the year 2017 or later?",
+   "seed": [6, 2, 1, 2, 1, 7, 0, 2017, 3],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE classes.class_subject = 'philosophy' AND classes.year >= 2017"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age >= 75 OR (class_subject = 'biology' OR class_subject = 'music' OR class_subject = 'economics') AND level = 1",
+   "question": "How many distinct instructors are aged 75 or older, teach biology, music, or economics at level 1?",
+   "seed": [5, 0, 4, 0, 75, 0, 4, 3, 1, 11, 4, 0, 4, 0],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 75 OR (classes.class_subject = 'biology' OR classes.class_subject = 'music' OR classes.class_subject = 'economics') AND classes.level = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors\nconditions: \nteacher_age <= 49",
+   "question": "What is the age of instructors who are aged 49 or younger?",
+   "seed": [3, 2, 0, 2, 1, 49, 1],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nWHERE instructors.teacher_age <= 49"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT class_id)\ntables: classes\nconditions: \nclass_subject = 'poetry' OR class_subject = 'economics'\nlevel = 6\ngrade >= 91",
+   "question": "How many distinct classes teach poetry or economics at level 6 with a grade of 91 or higher?",
+   "seed": [4, 3, 1, 5, 2, 14, 4, 0, 3, 6, 0, 91, 0],
+   "sql": "SELECT COUNT(DISTINCT classes.class_id)\nFROM classes\nWHERE (classes.class_subject = 'poetry' OR classes.class_subject = 'economics') AND classes.level = 6 AND classes.grade >= 91"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT teacher_id)\ntables: instructors, classes\nconditions: \nteacher_age <= 36\nclass_subject = 'history'",
+   "question": "How many distinct instructors are aged 36 or younger and teach history?",
+   "seed": [5, 0, 3, 1, 36, 0, 0, 1, 5, 1],
+   "sql": "SELECT COUNT(DISTINCT instructors.teacher_id)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 36 AND classes.class_subject = 'history'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(grade)\ntables: classes\nconditions: \ngrade >= 87",
+   "question": "What is the minimum grade of classes with a grade of 87 or higher?",
+   "seed": [2, 3, 1, 1, 0, 0, 87, 0],
+   "sql": "SELECT MIN(classes.grade)\nFROM classes\nWHERE classes.grade >= 87"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors, classes\nconditions: \nteacher_age <= 78\nclass_subject = 'economics' OR class_subject = 'politics'\ngrade <= 35",
+   "question": "What is the age of instructors who are aged 78 or younger and teach economics or politics with a grade of 35 or lower?",
+   "seed": [3, 4, 0, 3, 1, 78, 0, 1, 2, 4, 6, 1, 35, 3],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age <= 78 AND (classes.class_subject = 'economics' OR classes.class_subject = 'politics') AND classes.grade <= 35"
+},{"is_zero_record": false,
+   "pseudocode": "want: class_id\ntables: classes\nconditions: \ngrade <= 31\nyear >= 2007",
+   "question": "What are the IDs of classes with a grade of 31 or lower and were taught in the year 2007 or later?",
+   "seed": [6, 1, 1, 3, 0, 1, 31, 0, 2007, 3],
+   "sql": "SELECT classes.class_id\nFROM classes\nWHERE classes.grade <= 31 AND classes.year >= 2007"
+},{"is_zero_record": false,
+   "pseudocode": "want: teacher_age\ntables: instructors, classes\nconditions: \nteacher_age >= 63 OR level = 9 AND grade <= 55 AND year >= 2014",
+   "question": "What is the age of instructors who are aged 63 or older or teach at level 9 with a grade of 55 or lower and were teaching since the year 2014 or later?",
+   "seed": [3, 5, 0, 4, 0, 63, 0, 7, 0, 0, 3, 9, 1, 55, 0, 2014, 1],
+   "sql": "SELECT instructors.teacher_age\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 63 OR classes.level = 9 AND classes.grade <= 55 AND classes.year >= 2014"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(teacher_age)\ntables: instructors, classes\nconditions: \nteacher_age >= 72 OR class_subject = 'art' AND level = 9",
+   "question": "What is the average age of instructors who are aged 72 or older or teach art at level 9?",
+   "seed": [0, 1, 0, 4, 0, 72, 0, 4, 1, 10, 0, 3, 9, 2],
+   "sql": "SELECT AVG(instructors.teacher_age)\nFROM instructors\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE instructors.teacher_age >= 72 OR classes.class_subject = 'art' AND classes.level = 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(grade)\ntables: classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'philosophy'\nlevel = 5\ngrade <= 54",
+   "question": "What is the maximum grade of classes that teach sociology or philosophy at level 5 with a grade of 54 or lower?",
+   "seed": [1, 2, 1, 5, 2, 9, 7, 0, 8, 1, 54, 0],
+   "sql": "SELECT MAX(classes.grade)\nFROM classes\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'philosophy') AND classes.level = 5 AND classes.grade <= 54"
+}
+]

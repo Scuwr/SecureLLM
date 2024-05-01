@@ -1,0 +1,753 @@
+[
+{"is_zero_record": false,
+   "pseudocode": "want: store_id\ntables: store\nconditions: \nstar_rating <= 2",
+   "question": "What are the store IDs for stores with star ratings less than or equal to 2?",
+   "seed": [6, 3, 1, 1, 1, 2, 2, 2, 0],
+   "sql": "SELECT store.store_id\nFROM store\nWHERE store.star_rating <= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(height)\ntables: inventory\nconditions: \navailable = 0\nheight <= 49",
+   "question": "What is the average height of inventory items where they are not available and their height is less than or equal to 49?",
+   "seed": [0, 1, 3, 3, 2, 3, 49, 0],
+   "sql": "SELECT AVG(inventory.height)\nFROM inventory\nWHERE inventory.available = 0 AND inventory.height <= 49"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ncompany = 'Sony' OR company = 'Panasonic' OR company = 'Bosch' OR appliance_rating >= 3",
+   "question": "How many distinct appliance IDs are there for appliances from Sony, Panasonic, or Bosch, or with ratings greater than or equal to 3?",
+   "seed": [5, 0, 9, 2, 2, 4, 5, 1, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.company = 'Sony' OR appliance.company = 'Panasonic' OR appliance.company = 'Bosch' OR appliance.appliance_rating >= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'MA' OR location = 'CA' OR location = 'TX'",
+   "question": "What are the names of stores located in MA, CA, or TX?",
+   "seed": [9, 1, 1, 1, 2, 0, 2, 4, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'MA' OR store.location = 'CA' OR store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ntype = 'Dishwasher' OR type = 'Microwave' OR type = 'Refrigerator' OR appliance_rating <= 9",
+   "question": "How many distinct appliance IDs are there for Dishwashers, Microwaves, Refrigerators, or appliances with ratings less than or equal to 9?",
+   "seed": [4, 0, 0, 8, 2, 1, 3, 0, 2, 9, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.type = 'Dishwasher' OR appliance.type = 'Microwave' OR appliance.type = 'Refrigerator' OR appliance.appliance_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'TX' OR location = 'IN'\nstar_rating = 1",
+   "question": "What are the names of stores located in TX or IN with a star rating of 1?",
+   "seed": [9, 1, 0, 3, 1, 4, 1, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE (store.location = 'TX' OR store.location = 'IN') AND store.star_rating = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'TX' OR location = 'NY'",
+   "question": "What are the names of stores located in TX or NY?",
+   "seed": [9, 2, 1, 1, 1, 1, 4, 3, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'TX' OR store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance\nconditions: \ncompany = 'Samsung' OR company = 'Sony' OR company = 'Panasonic'",
+   "question": "What are the companies of appliances that are from Samsung, Sony, or Panasonic?",
+   "seed": [7, 3, 0, 0, 0, 2, 2, 3, 2, 4, 0],
+   "sql": "SELECT appliance.company\nFROM appliance\nWHERE appliance.company = 'Samsung' OR appliance.company = 'Sony' OR appliance.company = 'Panasonic'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(width)\ntables: inventory\nconditions: \navailable = 1\nheight <= 20",
+   "question": "What is the maximum width of inventory items where they are available and their height is less than or equal to 20?",
+   "seed": [1, 0, 2, 3, 0, 3, 20, 0],
+   "sql": "SELECT MAX(inventory.width)\nFROM inventory\nWHERE inventory.available = 1 AND inventory.height <= 20"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR type = 'Blender' OR appliance_rating <= 5",
+   "question": "What are the companies of appliances that are Refrigerators, Blenders, or have ratings less than or equal to 5?",
+   "seed": [7, 1, 1, 0, 8, 1, 0, 4, 2, 5, 0],
+   "sql": "SELECT appliance.company\nFROM appliance\nWHERE appliance.type = 'Refrigerator' OR appliance.type = 'Blender' OR appliance.appliance_rating <= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR type = 'Blender' OR type = 'Microwave'\ncompany = 'Panasonic' OR company = 'GE'",
+   "question": "How many distinct appliance IDs are there for Refrigerators, Blenders, Microwaves, from Panasonic or GE?",
+   "seed": [4, 1, 0, 4, 2, 0, 4, 3, 1, 4, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE (appliance.type = 'Refrigerator' OR appliance.type = 'Blender' OR appliance.type = 'Microwave') AND (appliance.company = 'Panasonic' OR appliance.company = 'GE')"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \ncompany = 'GE' OR company = 'Sony'",
+   "question": "What are the types of appliances that are from GE or Sony?",
+   "seed": [8, 0, 0, 2, 1, 1, 2, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE appliance.company = 'GE' OR appliance.company = 'Sony'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(height)\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'TX' OR location = 'MA'",
+   "question": "What is the average height of inventory items where they are not available and the store is located in TX or MA?",
+   "seed": [0, 0, 3, 5, 1, 1, 1, 4, 0, 0],
+   "sql": "SELECT AVG(inventory.height)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND (store.location = 'TX' OR store.location = 'MA')"
+},{"is_zero_record": false,
+   "pseudocode": "want: height\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'IN' OR location = 'NY' OR location = 'TX'\nstar_rating <= 7",
+   "question": "What are the heights of inventory items where they are not available and the store is located in IN, NY, or TX and the store's star rating is less than or equal to 7?",
+   "seed": [3, 4, 0, 0, 3, 5, 2, 3, 2, 1, 3, 4, 2, 7, 0],
+   "sql": "SELECT inventory.height\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND (store.location = 'IN' OR store.location = 'NY' OR store.location = 'TX') AND store.star_rating <= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(width)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'IN'",
+   "question": "What is the minimum width of inventory items where they are available and the store is located in IN?",
+   "seed": [2, 1, 2, 5, 0, 1, 0, 1, 0],
+   "sql": "SELECT MIN(inventory.width)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance, store, inventory\nconditions: \nstar_rating = 1",
+   "question": "What are the types of appliances sold in stores with a star rating of 1?",
+   "seed": [8, 0, 1, 2, 0, 1, 0],
+   "sql": "SELECT appliance.type\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE store.star_rating = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(value)\ntables: inventory\nconditions: \navailable = 1 OR width >= 77",
+   "question": "What is the minimum value of inventory items where they are available or their width is greater than or equal to 77?",
+   "seed": [2, 0, 4, 4, 0, 4, 77, 0],
+   "sql": "SELECT MIN(inventory.value)\nFROM inventory\nWHERE inventory.available = 1 OR inventory.width >= 77"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating >= 4",
+   "question": "What are the names of stores with star ratings greater than or equal to 4?",
+   "seed": [9, 1, 1, 2, 1, 4, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating >= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: height\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'CA' OR location = 'NY'\nstar_rating = 7",
+   "question": "What are the heights of inventory items where they are available and the store is located in CA or NY and the store's star rating is 7?",
+   "seed": [3, 1, 1, 3, 5, 0, 3, 1, 2, 3, 0, 7, 0],
+   "sql": "SELECT inventory.height\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'CA' OR store.location = 'NY') AND store.star_rating = 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(width)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'IN'",
+   "question": "What is the average width of inventory items where they are available and the store is located in IN?",
+   "seed": [0, 1, 2, 5, 0, 1, 0, 1, 0],
+   "sql": "SELECT AVG(inventory.width)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating <= 3",
+   "question": "What are the names of stores with star ratings less than or equal to 3?",
+   "seed": [9, 0, 2, 2, 3, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating <= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \nappliance_rating <= 8",
+   "question": "How many distinct appliance IDs are there for appliances with ratings less than or equal to 8?",
+   "seed": [4, 0, 0, 3, 2, 8, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.appliance_rating <= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating <= 5",
+   "question": "What are the names of stores with star ratings less than or equal to 5?",
+   "seed": [9, 2, 1, 1, 2, 2, 5, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating <= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: appliance_rating\ntables: appliance\nconditions: \ntype = 'Blender' OR type = 'Oven'",
+   "question": "What are the ratings of Blenders or Ovens?",
+   "seed": [3, 2, 0, 0, 0, 1, 1, 4, 2, 0],
+   "sql": "SELECT appliance.appliance_rating\nFROM appliance\nWHERE appliance.type = 'Blender' OR appliance.type = 'Oven'"
+},{"is_zero_record": false,
+   "pseudocode": "want: store_id\ntables: store\nconditions: \nstar_rating >= 8",
+   "question": "What are the store IDs for stores with star ratings greater than or equal to 8?",
+   "seed": [6, 1, 0, 1, 2, 1, 8, 0],
+   "sql": "SELECT store.store_id\nFROM store\nWHERE store.star_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: appliance_rating\ntables: appliance\nconditions: \ncompany = 'Panasonic'",
+   "question": "What are the ratings of appliances from Panasonic?",
+   "seed": [3, 1, 0, 0, 2, 0, 4, 0],
+   "sql": "SELECT appliance.appliance_rating\nFROM appliance\nWHERE appliance.company = 'Panasonic'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(appliance_rating)\ntables: appliance\nconditions: \ncompany = 'GE' OR appliance_rating = 4",
+   "question": "What is the average rating of appliances from GE or with a rating of 4?",
+   "seed": [0, 0, 0, 9, 0, 1, 0, 4, 0],
+   "sql": "SELECT AVG(appliance.appliance_rating)\nFROM appliance\nWHERE appliance.company = 'GE' OR appliance.appliance_rating = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(appliance_rating)\ntables: appliance\nconditions: \nappliance_rating >= 8",
+   "question": "What is the average rating of appliances with ratings greater than or equal to 8?",
+   "seed": [0, 0, 0, 3, 1, 8, 0],
+   "sql": "SELECT AVG(appliance.appliance_rating)\nFROM appliance\nWHERE appliance.appliance_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(star_rating)\ntables: store\nconditions: \nlocation = 'CA' OR location = 'TX'",
+   "question": "What is the maximum star rating of stores located in CA or TX?",
+   "seed": [1, 0, 1, 1, 1, 2, 4, 0],
+   "sql": "SELECT MAX(store.star_rating)\nFROM store\nWHERE store.location = 'CA' OR store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(height)\ntables: inventory\nconditions: \navailable = 1\nheight >= 3",
+   "question": "What is the minimum height of inventory items where they are available and their height is greater than or equal to 3?",
+   "seed": [2, 1, 3, 3, 0, 0, 3, 0],
+   "sql": "SELECT MIN(inventory.height)\nFROM inventory\nWHERE inventory.available = 1 AND inventory.height >= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ncompany = 'Panasonic'\nappliance_rating = 4",
+   "question": "How many distinct appliance IDs are there where the company is Panasonic and the appliance rating is 4?",
+   "seed": [4, 1, 0, 6, 0, 4, 0, 4, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.company = 'Panasonic' AND appliance.appliance_rating = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(appliance_rating)\ntables: appliance\nconditions: \ncompany = 'Sony' OR appliance_rating >= 7",
+   "question": "What is the minimum appliance rating for appliances where the company is Sony or the appliance rating is greater than or equal to 7?",
+   "seed": [2, 0, 0, 9, 0, 2, 1, 7, 0],
+   "sql": "SELECT MIN(appliance.appliance_rating)\nFROM appliance\nWHERE appliance.company = 'Sony' OR appliance.appliance_rating >= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \ncompany = 'Panasonic' OR company = 'LG' OR company = 'Samsung' OR appliance_rating <= 3",
+   "question": "What types of appliances are there where the company is Panasonic, LG, or Samsung, or the appliance rating is less than or equal to 3?",
+   "seed": [8, 2, 1, 1, 0, 9, 2, 4, 0, 3, 2, 3, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE appliance.company = 'Panasonic' OR appliance.company = 'LG' OR appliance.company = 'Samsung' OR appliance.appliance_rating <= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(value)\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'IN'\nstar_rating = 5",
+   "question": "What is the average value of inventory items that are not available in stores located in IN with a 5-star rating?",
+   "seed": [0, 1, 4, 5, 1, 3, 0, 1, 0, 5, 0],
+   "sql": "SELECT AVG(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND store.location = 'IN' AND store.star_rating = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance, store, inventory\nconditions: \nlocation = 'TX'",
+   "question": "Which companies' appliances are available in stores located in TX?",
+   "seed": [7, 4, 0, 1, 1, 1, 0, 4, 0],
+   "sql": "SELECT appliance.company\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating <= 3",
+   "question": "What are the names of stores with a star rating of 3 or lower?",
+   "seed": [9, 1, 0, 2, 2, 3, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating <= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: star_rating\ntables: store\nconditions: \nstar_rating = 6",
+   "question": "What is the star rating of stores with a star rating of 6?",
+   "seed": [3, 3, 1, 0, 1, 2, 0, 6, 0],
+   "sql": "SELECT store.star_rating\nFROM store\nWHERE store.star_rating = 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(height)\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'NY' OR location = 'CA' OR location = 'MA'\nstar_rating >= 2",
+   "question": "What is the minimum height of inventory items that are not available in stores located in NY, CA, or MA with a star rating greater than or equal to 2?",
+   "seed": [2, 1, 3, 5, 2, 3, 2, 3, 2, 0, 1, 2, 0],
+   "sql": "SELECT MIN(inventory.height)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND (store.location = 'NY' OR store.location = 'CA' OR store.location = 'MA') AND store.star_rating >= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance\nconditions: \ntype = 'Blender' OR company = 'GE' OR company = 'Panasonic'",
+   "question": "Which companies produce blenders or are GE or Panasonic?",
+   "seed": [7, 4, 1, 1, 0, 7, 0, 4, 1, 1, 4, 0],
+   "sql": "SELECT appliance.company\nFROM appliance\nWHERE appliance.type = 'Blender' OR appliance.company = 'GE' OR appliance.company = 'Panasonic'"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance, store, inventory\nconditions: \nlocation = 'IN' OR location = 'CA' OR location = 'NY'\nstar_rating <= 4",
+   "question": "What types of appliances are available in stores located in IN, CA, or NY with a star rating of 4 or lower?",
+   "seed": [8, 4, 0, 0, 1, 3, 2, 1, 2, 3, 2, 4, 0],
+   "sql": "SELECT appliance.type\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE (store.location = 'IN' OR store.location = 'CA' OR store.location = 'NY') AND store.star_rating <= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(star_rating)\ntables: store\nconditions: \nlocation = 'IN' OR location = 'TX' OR location = 'NY'",
+   "question": "What is the average star rating of stores located in IN, TX, or NY?",
+   "seed": [0, 1, 1, 1, 2, 1, 4, 3, 0],
+   "sql": "SELECT AVG(store.star_rating)\nFROM store\nWHERE store.location = 'IN' OR store.location = 'TX' OR store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating >= 2",
+   "question": "What are the names of stores with a star rating of 2 or higher?",
+   "seed": [9, 3, 0, 0, 2, 1, 2, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating >= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nstar_rating <= 6",
+   "question": "How many distinct store IDs are there where the star rating is 6 or lower?",
+   "seed": [5, 1, 2, 2, 6, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.star_rating <= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(star_rating)\ntables: store\nconditions: \nlocation = 'NY' OR location = 'IN' OR location = 'CA'",
+   "question": "What is the maximum star rating of stores located in NY, IN, or CA?",
+   "seed": [1, 1, 1, 1, 2, 3, 1, 2, 0],
+   "sql": "SELECT MAX(store.star_rating)\nFROM store\nWHERE store.location = 'NY' OR store.location = 'IN' OR store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(height)\ntables: inventory\nconditions: \navailable = 1\nheight <= 37",
+   "question": "What is the minimum height of inventory items that are available and have a height of 37 or lower?",
+   "seed": [2, 0, 3, 3, 0, 3, 37, 0],
+   "sql": "SELECT MIN(inventory.height)\nFROM inventory\nWHERE inventory.available = 1 AND inventory.height <= 37"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(star_rating)\ntables: store\nconditions: \nlocation = 'NY'\nstar_rating <= 2",
+   "question": "What is the maximum star rating of stores located in NY with a star rating of 2 or lower?",
+   "seed": [1, 0, 1, 3, 0, 3, 2, 2, 0],
+   "sql": "SELECT MAX(store.star_rating)\nFROM store\nWHERE store.location = 'NY' AND store.star_rating <= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: height\ntables: store, inventory\nconditions: \navailable = 0\nstar_rating >= 5",
+   "question": "What are the heights of inventory items that are not available in stores with a star rating of 5 or higher?",
+   "seed": [3, 0, 3, 5, 2, 2, 1, 5, 0],
+   "sql": "SELECT inventory.height\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND store.star_rating >= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'TX' OR location = 'NY' OR location = 'MA'\nstar_rating = 4",
+   "question": "What are the names of stores located in TX, NY, or MA with a star rating of 4?",
+   "seed": [9, 4, 0, 0, 3, 2, 4, 3, 0, 0, 4, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE (store.location = 'TX' OR store.location = 'NY' OR store.location = 'MA') AND store.star_rating = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nstar_rating = 1",
+   "question": "How many distinct store IDs are there where the star rating is 1?",
+   "seed": [4, 1, 1, 2, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.star_rating = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: star_rating\ntables: store\nconditions: \nlocation = 'CA' OR location = 'IN' OR location = 'MA'\nstar_rating <= 8",
+   "question": "What is the star rating of stores located in CA, IN, or MA with a star rating of 8 or lower?",
+   "seed": [3, 3, 0, 0, 1, 3, 2, 2, 1, 0, 2, 8, 0],
+   "sql": "SELECT store.star_rating\nFROM store\nWHERE (store.location = 'CA' OR store.location = 'IN' OR store.location = 'MA') AND store.star_rating <= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(star_rating)\ntables: store\nconditions: \nstar_rating = 9",
+   "question": "What is the average star rating of stores with a star rating of 9?",
+   "seed": [0, 0, 1, 2, 0, 9, 0],
+   "sql": "SELECT AVG(store.star_rating)\nFROM store\nWHERE store.star_rating = 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: width\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'MA'\nstar_rating = 3",
+   "question": "What is the width of inventory items that are not available in stores located in MA with a star rating of 3?",
+   "seed": [3, 3, 0, 1, 2, 5, 2, 3, 0, 0, 0, 3, 0],
+   "sql": "SELECT inventory.width\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND store.location = 'MA' AND store.star_rating = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(width)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'NY' OR location = 'IN'",
+   "question": "What is the maximum width of inventory items that are available in stores located in NY or IN?",
+   "seed": [1, 1, 2, 5, 0, 1, 1, 3, 1, 0],
+   "sql": "SELECT MAX(inventory.width)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'NY' OR store.location = 'IN')"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(star_rating)\ntables: store\nconditions: \nlocation = 'TX' OR location = 'MA'\nstar_rating <= 9",
+   "question": "What is the minimum star rating of stores located in TX or MA with a star rating of 9 or lower?",
+   "seed": [2, 1, 1, 3, 1, 4, 0, 2, 9, 0],
+   "sql": "SELECT MIN(store.star_rating)\nFROM store\nWHERE (store.location = 'TX' OR store.location = 'MA') AND store.star_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(appliance_rating)\ntables: appliance\nconditions: \ncompany = 'Samsung'\nappliance_rating >= 3",
+   "question": "What is the average appliance rating for appliances produced by Samsung with a rating of 3 or higher?",
+   "seed": [0, 1, 0, 6, 0, 3, 1, 3, 0],
+   "sql": "SELECT AVG(appliance.appliance_rating)\nFROM appliance\nWHERE appliance.company = 'Samsung' AND appliance.appliance_rating >= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance, store, inventory\nconditions: \nlocation = 'MA'",
+   "question": "What types of appliances are available in stores located in MA?",
+   "seed": [8, 0, 1, 1, 0, 0, 0],
+   "sql": "SELECT appliance.type\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'IN' OR location = 'MA'\nstar_rating = 10",
+   "question": "What are the names of stores located in IN or MA with a star rating of 10?",
+   "seed": [9, 0, 3, 1, 1, 0, 0, 10, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE (store.location = 'IN' OR store.location = 'MA') AND store.star_rating = 10"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'NY'",
+   "question": "What are the names of stores located in NY?",
+   "seed": [9, 4, 0, 1, 1, 0, 3, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(height)\ntables: store, inventory\nconditions: \navailable = 1\nstar_rating >= 6",
+   "question": "What is the maximum height of inventory items that are available in stores with a star rating of 6 or higher?",
+   "seed": [1, 1, 3, 5, 0, 2, 1, 6, 0],
+   "sql": "SELECT MAX(inventory.height)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND store.star_rating >= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'TX' OR location = 'MA'",
+   "question": "What are the names of stores located in TX or MA?",
+   "seed": [9, 3, 0, 1, 1, 1, 4, 0, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'TX' OR store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(star_rating)\ntables: store\nconditions: \nlocation = 'CA'\nstar_rating >= 8",
+   "question": "What is the maximum star rating of stores in California with a star rating of at least 8?",
+   "seed": [1, 1, 1, 3, 0, 2, 1, 8, 0],
+   "sql": "SELECT MAX(store.star_rating)\nFROM store\nWHERE store.location = 'CA' AND store.star_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nstar_rating = 5",
+   "question": "How many distinct store IDs are there for stores with a star rating of 5?",
+   "seed": [4, 1, 1, 2, 0, 5, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.star_rating = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(star_rating)\ntables: store\nconditions: \nlocation = 'TX'\nstar_rating <= 2",
+   "question": "What is the minimum star rating of stores in Texas with a star rating of 2 or less?",
+   "seed": [2, 1, 1, 3, 0, 4, 2, 2, 0],
+   "sql": "SELECT MIN(store.star_rating)\nFROM store\nWHERE store.location = 'TX' AND store.star_rating <= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'IN' OR location = 'TX' OR location = 'NY'\nstar_rating <= 9",
+   "question": "What are the names of stores in Indiana, Texas, or New York with a star rating of 9 or less?",
+   "seed": [9, 4, 0, 1, 3, 2, 1, 4, 3, 2, 9, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE (store.location = 'IN' OR store.location = 'TX' OR store.location = 'NY') AND store.star_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: height\ntables: inventory\nconditions: \navailable = 1",
+   "question": "What is the height of available inventory?",
+   "seed": [3, 4, 0, 1, 3, 1, 0, 0],
+   "sql": "SELECT inventory.height\nFROM inventory\nWHERE inventory.available = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(value)\ntables: store, inventory\nconditions: \navailable = 1\nstar_rating >= 8",
+   "question": "What is the maximum value of available inventory in stores with a star rating of at least 8?",
+   "seed": [1, 1, 4, 5, 0, 2, 1, 8, 0],
+   "sql": "SELECT MAX(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND store.star_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance, store, inventory\nconditions: \nlocation = 'NY'\nstar_rating <= 7",
+   "question": "What is the company of appliances available in New York stores with a star rating of 7 or less?",
+   "seed": [7, 4, 0, 1, 1, 3, 0, 3, 2, 7, 0],
+   "sql": "SELECT appliance.company\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE store.location = 'NY' AND store.star_rating <= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nlocation = 'MA' OR location = 'TX' OR location = 'NY'",
+   "question": "How many distinct store IDs are there for stores in Massachusetts, Texas, or New York?",
+   "seed": [5, 1, 1, 2, 0, 4, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.location = 'MA' OR store.location = 'TX' OR store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(width)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'MA' OR location = 'TX' OR location = 'NY'",
+   "question": "What is the average width of available inventory in stores in Massachusetts, Texas, or New York?",
+   "seed": [0, 0, 2, 5, 0, 1, 2, 0, 4, 3, 0],
+   "sql": "SELECT AVG(inventory.width)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'MA' OR store.location = 'TX' OR store.location = 'NY')"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(height)\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'CA' OR location = 'TX' OR location = 'NY'",
+   "question": "What is the minimum height of unavailable inventory in stores in California, Texas, or New York?",
+   "seed": [2, 0, 3, 5, 2, 1, 2, 2, 4, 3, 0],
+   "sql": "SELECT MIN(inventory.height)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND (store.location = 'CA' OR store.location = 'TX' OR store.location = 'NY')"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'CA' OR location = 'IN'",
+   "question": "What are the names of stores in California or Indiana?",
+   "seed": [9, 4, 1, 0, 1, 1, 2, 1, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'CA' OR store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR type = 'Dishwasher'",
+   "question": "What types of appliances are refrigerators or dishwashers?",
+   "seed": [8, 3, 0, 0, 0, 1, 1, 0, 1, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE appliance.type = 'Refrigerator' OR appliance.type = 'Dishwasher'"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance, store, inventory\nconditions: \nstar_rating >= 4",
+   "question": "What types of appliances are available in stores with a star rating of at least 4?",
+   "seed": [8, 2, 1, 1, 1, 2, 1, 4, 0],
+   "sql": "SELECT appliance.type\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE store.star_rating >= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(height)\ntables: inventory\nconditions: \navailable = 0",
+   "question": "What is the average height of unavailable inventory?",
+   "seed": [0, 0, 3, 1, 1, 0],
+   "sql": "SELECT AVG(inventory.height)\nFROM inventory\nWHERE inventory.available = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nlocation = 'NY' OR location = 'CA' OR location = 'TX'\nstar_rating = 7",
+   "question": "How many distinct store IDs are there for stores in New York, California, or Texas with a star rating of 7?",
+   "seed": [4, 1, 1, 3, 2, 3, 2, 4, 0, 7, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE (store.location = 'NY' OR store.location = 'CA' OR store.location = 'TX') AND store.star_rating = 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: star_rating\ntables: store\nconditions: \nlocation = 'NY' OR location = 'CA'",
+   "question": "What are the star ratings of stores in New York or California?",
+   "seed": [3, 0, 1, 1, 1, 3, 2, 0],
+   "sql": "SELECT store.star_rating\nFROM store\nWHERE store.location = 'NY' OR store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(star_rating)\ntables: store\nconditions: \nlocation = 'MA'\nstar_rating = 2",
+   "question": "What is the minimum star rating of stores in Massachusetts with a star rating of 2?",
+   "seed": [2, 1, 1, 3, 0, 0, 0, 2, 0],
+   "sql": "SELECT MIN(store.star_rating)\nFROM store\nWHERE store.location = 'MA' AND store.star_rating = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(appliance_rating)\ntables: appliance\nconditions: \ntype = 'Dishwasher'\nappliance_rating >= 7",
+   "question": "What is the average rating of dishwashers with a rating of at least 7?",
+   "seed": [0, 0, 0, 5, 0, 1, 1, 7, 0],
+   "sql": "SELECT AVG(appliance.appliance_rating)\nFROM appliance\nWHERE appliance.type = 'Dishwasher' AND appliance.appliance_rating >= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating <= 9",
+   "question": "What are the names of stores with a star rating of 9 or less?",
+   "seed": [9, 4, 1, 1, 2, 2, 9, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating <= 9",
+   "question": "What are the names of stores with a star rating of 9 or less?",
+   "seed": [9, 4, 0, 0, 2, 2, 9, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: width\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'IN' OR location = 'TX'\nstar_rating >= 8",
+   "question": "What is the width of available inventory in stores in Indiana or Texas with a star rating of at least 8?",
+   "seed": [3, 1, 1, 2, 5, 0, 3, 1, 1, 4, 1, 8, 0],
+   "sql": "SELECT inventory.width\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'IN' OR store.location = 'TX') AND store.star_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance\nconditions: \ntype = 'Dishwasher' OR type = 'Oven' OR type = 'Microwave' OR appliance_rating = 5",
+   "question": "What is the company of dishwashers, ovens, microwaves, or appliances with a rating of 5?",
+   "seed": [7, 4, 0, 0, 0, 8, 2, 1, 2, 3, 0, 5, 0],
+   "sql": "SELECT appliance.company\nFROM appliance\nWHERE appliance.type = 'Dishwasher' OR appliance.type = 'Oven' OR appliance.type = 'Microwave' OR appliance.appliance_rating = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nstar_rating <= 4",
+   "question": "How many distinct store IDs are there for stores with a star rating of 4 or less?",
+   "seed": [5, 1, 2, 2, 4, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.star_rating <= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'IN'",
+   "question": "What are the names of stores in Indiana?",
+   "seed": [9, 1, 0, 1, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: height\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'IN' OR location = 'CA'\nstar_rating = 9",
+   "question": "What is the height of unavailable inventory in stores in Indiana or California with a star rating of 9?",
+   "seed": [3, 3, 1, 0, 3, 5, 1, 3, 1, 1, 2, 0, 9, 0],
+   "sql": "SELECT inventory.height\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND (store.location = 'IN' OR store.location = 'CA') AND store.star_rating = 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(value)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'TX' OR location = 'CA' OR location = 'NY'\nstar_rating >= 5",
+   "question": "What is the maximum value of available inventory in stores in Texas, California, or New York with a star rating of at least 5?",
+   "seed": [1, 1, 4, 5, 0, 3, 2, 4, 2, 3, 1, 5, 0],
+   "sql": "SELECT MAX(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'TX' OR store.location = 'CA' OR store.location = 'NY') AND store.star_rating >= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance\nconditions: \ncompany = 'LG' OR company = 'Sony'",
+   "question": "What is the company of appliances manufactured by LG or Sony?",
+   "seed": [7, 3, 0, 0, 0, 2, 1, 0, 2, 0],
+   "sql": "SELECT appliance.company\nFROM appliance\nWHERE appliance.company = 'LG' OR appliance.company = 'Sony'"
+},{"is_zero_record": false,
+   "pseudocode": "want: appliance_id\ntables: appliance\nconditions: \ncompany = 'Samsung'",
+   "question": "What are the IDs of appliances manufactured by Samsung?",
+   "seed": [6, 2, 0, 0, 0, 2, 0, 3, 0],
+   "sql": "SELECT appliance.appliance_id\nFROM appliance\nWHERE appliance.company = 'Samsung'"
+},{"is_zero_record": false,
+   "pseudocode": "want: store_id\ntables: store\nconditions: \nlocation = 'NY' OR location = 'TX'",
+   "question": "What are the IDs of stores in New York or Texas?",
+   "seed": [6, 2, 0, 0, 1, 1, 1, 3, 4, 0],
+   "sql": "SELECT store.store_id\nFROM store\nWHERE store.location = 'NY' OR store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: appliance_rating\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR type = 'Oven' OR type = 'Microwave'\nappliance_rating <= 9",
+   "question": "What is the rating of refrigerators, ovens, or microwaves with a rating of 9 or less?",
+   "seed": [3, 2, 0, 0, 0, 5, 2, 0, 2, 3, 2, 9, 0],
+   "sql": "SELECT appliance.appliance_rating\nFROM appliance\nWHERE (appliance.type = 'Refrigerator' OR appliance.type = 'Oven' OR appliance.type = 'Microwave') AND appliance.appliance_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR company = 'GE' OR company = 'Bosch'",
+   "question": "How many distinct appliance IDs are there where the appliance type is Refrigerator or the company is GE or Bosch?",
+   "seed": [4, 0, 0, 7, 0, 0, 1, 1, 5, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.type = 'Refrigerator' OR appliance.company = 'GE' OR appliance.company = 'Bosch'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(width)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'CA' OR location = 'IN'",
+   "question": "What is the average width of available inventory in stores located in CA or IN?",
+   "seed": [0, 1, 2, 5, 0, 1, 1, 2, 1, 0],
+   "sql": "SELECT AVG(inventory.width)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'CA' OR store.location = 'IN')"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nlocation = 'MA' OR location = 'NY'",
+   "question": "How many distinct store IDs are there for stores located in MA or NY?",
+   "seed": [4, 1, 1, 1, 1, 0, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.location = 'MA' OR store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: star_rating\ntables: store\nconditions: \nlocation = 'MA' OR location = 'TX'",
+   "question": "What are the star ratings of stores located in MA or TX?",
+   "seed": [3, 3, 1, 1, 1, 1, 1, 0, 4, 0],
+   "sql": "SELECT store.star_rating\nFROM store\nWHERE store.location = 'MA' OR store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(value)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'IN' OR location = 'CA'\nstar_rating >= 6",
+   "question": "What is the average value of available inventory in stores located in IN or CA with a star rating of 6 or higher?",
+   "seed": [0, 0, 4, 5, 0, 3, 1, 1, 2, 1, 6, 0],
+   "sql": "SELECT AVG(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'IN' OR store.location = 'CA') AND store.star_rating >= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \ntype = 'Dishwasher' OR type = 'Oven' OR type = 'Refrigerator'\ncompany = 'Panasonic' OR company = 'Sony' OR company = 'GE'",
+   "question": "What types of appliances are made by Panasonic, Sony, or GE?",
+   "seed": [8, 0, 0, 4, 2, 1, 2, 0, 2, 4, 2, 1, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE (appliance.type = 'Dishwasher' OR appliance.type = 'Oven' OR appliance.type = 'Refrigerator') AND (appliance.company = 'Panasonic' OR appliance.company = 'Sony' OR appliance.company = 'GE')"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nstar_rating >= 9",
+   "question": "What are the names of stores with a star rating of 9 or higher?",
+   "seed": [9, 2, 1, 0, 2, 1, 9, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.star_rating >= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: height\ntables: inventory\nconditions: \navailable = 1",
+   "question": "What are the heights of available inventory?",
+   "seed": [3, 0, 3, 5, 0, 0, 0],
+   "sql": "SELECT inventory.height\nFROM inventory\nWHERE inventory.available = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: store_id\ntables: store\nconditions: \nstar_rating >= 3",
+   "question": "What are the store IDs of stores with a star rating of 3 or higher?",
+   "seed": [6, 3, 1, 0, 1, 2, 1, 3, 0],
+   "sql": "SELECT store.store_id\nFROM store\nWHERE store.star_rating >= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: appliance_id\ntables: appliance\nconditions: \ntype = 'Blender' OR type = 'Refrigerator'",
+   "question": "What are the appliance IDs for blenders or refrigerators?",
+   "seed": [6, 4, 1, 1, 0, 1, 1, 4, 0, 0],
+   "sql": "SELECT appliance.appliance_id\nFROM appliance\nWHERE appliance.type = 'Blender' OR appliance.type = 'Refrigerator'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(appliance_rating)\ntables: appliance\nconditions: \nappliance_rating = 4",
+   "question": "What is the highest appliance rating for appliances with a rating of 4?",
+   "seed": [1, 0, 0, 3, 0, 4, 0],
+   "sql": "SELECT MAX(appliance.appliance_rating)\nFROM appliance\nWHERE appliance.appliance_rating = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ntype = 'Blender' OR type = 'Refrigerator' OR type = 'Oven' OR appliance_rating = 3",
+   "question": "How many distinct appliance IDs are there for blenders, refrigerators, ovens, or appliances with a rating of 3?",
+   "seed": [4, 0, 0, 8, 2, 4, 0, 2, 0, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.type = 'Blender' OR appliance.type = 'Refrigerator' OR appliance.type = 'Oven' OR appliance.appliance_rating = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ncompany = 'Panasonic' OR company = 'Sony'\nappliance_rating <= 6",
+   "question": "How many distinct appliance IDs are there for Panasonic or Sony appliances with a rating of 6 or lower?",
+   "seed": [5, 0, 6, 1, 4, 2, 2, 6, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE (appliance.company = 'Panasonic' OR appliance.company = 'Sony') AND appliance.appliance_rating <= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(appliance_rating)\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR type = 'Blender' OR type = 'Oven'\ncompany = 'LG' OR company = 'GE'",
+   "question": "What is the lowest appliance rating for refrigerators, blenders, or ovens made by LG or GE?",
+   "seed": [2, 1, 0, 4, 2, 0, 4, 2, 1, 0, 1, 0],
+   "sql": "SELECT MIN(appliance.appliance_rating)\nFROM appliance\nWHERE (appliance.type = 'Refrigerator' OR appliance.type = 'Blender' OR appliance.type = 'Oven') AND (appliance.company = 'LG' OR appliance.company = 'GE')"
+},{"is_zero_record": false,
+   "pseudocode": "want: value\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'CA'",
+   "question": "What are the values of unavailable inventory in stores located in CA?",
+   "seed": [3, 4, 1, 0, 4, 5, 1, 1, 0, 2, 0],
+   "sql": "SELECT inventory.value\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(height)\ntables: inventory\nconditions: \nheight <= 6",
+   "question": "What is the highest height of inventory items with a height of 6 or lower?",
+   "seed": [1, 1, 3, 2, 3, 6, 0],
+   "sql": "SELECT MAX(inventory.height)\nFROM inventory\nWHERE inventory.height <= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'MA' OR location = 'TX'",
+   "question": "What are the names of stores located in MA or TX?",
+   "seed": [9, 4, 0, 0, 1, 1, 0, 4, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'MA' OR store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(height)\ntables: inventory\nconditions: \navailable = 0\nwidth <= 63",
+   "question": "What is the highest height of unavailable inventory items with a width of 63 or lower?",
+   "seed": [1, 1, 3, 3, 2, 6, 63, 0],
+   "sql": "SELECT MAX(inventory.height)\nFROM inventory\nWHERE inventory.available = 0 AND inventory.width <= 63"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(star_rating)\ntables: store\nconditions: \nlocation = 'CA'",
+   "question": "What is the lowest star rating for stores located in CA?",
+   "seed": [2, 1, 1, 1, 0, 2, 0],
+   "sql": "SELECT MIN(store.star_rating)\nFROM store\nWHERE store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(star_rating)\ntables: store\nconditions: \nstar_rating <= 9",
+   "question": "What is the average star rating for stores with a star rating of 9 or lower?",
+   "seed": [0, 1, 1, 2, 2, 9, 0],
+   "sql": "SELECT AVG(store.star_rating)\nFROM store\nWHERE store.star_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nstar_rating = 3",
+   "question": "How many distinct store IDs are there for stores with a star rating of 3?",
+   "seed": [5, 1, 2, 0, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.star_rating = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(value)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'NY' OR location = 'IN' OR location = 'TX'\nstar_rating = 1",
+   "question": "What is the highest value of available inventory in stores located in NY, IN, or TX with a star rating of 1?",
+   "seed": [1, 0, 4, 5, 0, 3, 2, 3, 1, 4, 0, 1, 0],
+   "sql": "SELECT MAX(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'NY' OR store.location = 'IN' OR store.location = 'TX') AND store.star_rating = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ntype = 'Microwave' OR type = 'Oven'",
+   "question": "How many distinct appliance IDs are there for microwaves or ovens?",
+   "seed": [5, 0, 1, 1, 3, 2, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.type = 'Microwave' OR appliance.type = 'Oven'"
+},{"is_zero_record": false,
+   "pseudocode": "want: appliance_id\ntables: appliance\nconditions: \ntype = 'Dishwasher' OR type = 'Refrigerator' OR company = 'Bosch' OR company = 'GE'",
+   "question": "What are the appliance IDs for dishwashers, refrigerators, Bosch appliances, or GE appliances?",
+   "seed": [6, 3, 1, 0, 0, 7, 1, 1, 0, 1, 5, 1, 0],
+   "sql": "SELECT appliance.appliance_id\nFROM appliance\nWHERE appliance.type = 'Dishwasher' OR appliance.type = 'Refrigerator' OR appliance.company = 'Bosch' OR appliance.company = 'GE'"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance, store, inventory\nconditions: \nstar_rating = 2",
+   "question": "What companies' appliances are sold in stores with a star rating of 2?",
+   "seed": [7, 1, 0, 1, 2, 0, 2, 0],
+   "sql": "SELECT appliance.company\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE store.star_rating = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance, store, inventory\nconditions: \nlocation = 'CA'",
+   "question": "What companies' appliances are sold in stores located in CA?",
+   "seed": [7, 3, 1, 1, 1, 1, 0, 2, 0],
+   "sql": "SELECT appliance.company\nFROM store\nINNER JOIN inventory ON store.store_id = inventory.store_id\nINNER JOIN appliance ON appliance.appliance_id = inventory.appliance_id\nWHERE store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(value)\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'TX' OR location = 'MA'\nstar_rating <= 6",
+   "question": "What is the lowest value of unavailable inventory in stores located in TX or MA with a star rating of 6 or lower?",
+   "seed": [2, 1, 4, 5, 2, 3, 1, 4, 0, 2, 6, 0],
+   "sql": "SELECT MIN(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND (store.location = 'TX' OR store.location = 'MA') AND store.star_rating <= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(appliance_rating)\ntables: appliance\nconditions: \ncompany = 'GE' OR company = 'Samsung'\nappliance_rating = 4",
+   "question": "What is the highest appliance rating for appliances made by GE or Samsung with a rating of 4?",
+   "seed": [1, 0, 0, 6, 1, 1, 3, 0, 4, 0],
+   "sql": "SELECT MAX(appliance.appliance_rating)\nFROM appliance\nWHERE (appliance.company = 'GE' OR appliance.company = 'Samsung') AND appliance.appliance_rating = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(value)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'NY' OR location = 'IN' OR location = 'MA'",
+   "question": "What is the average value of available inventory in stores located in NY, IN, or MA?",
+   "seed": [0, 1, 4, 5, 0, 1, 2, 3, 1, 0, 0],
+   "sql": "SELECT AVG(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND (store.location = 'NY' OR store.location = 'IN' OR store.location = 'MA')"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ncompany = 'Bosch' OR company = 'Sony' OR company = 'Panasonic' OR appliance_rating >= 4",
+   "question": "How many distinct appliance IDs are there for Bosch, Sony, Panasonic appliances, or appliances with a rating of 4 or higher?",
+   "seed": [5, 0, 9, 2, 5, 2, 4, 1, 4, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.company = 'Bosch' OR appliance.company = 'Sony' OR appliance.company = 'Panasonic' OR appliance.appliance_rating >= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(value)\ntables: store, inventory\nconditions: \navailable = 0\nlocation = 'IN' OR location = 'NY' OR location = 'CA'\nstar_rating = 6",
+   "question": "What is the minimum value of inventory where it is not available and the store's location is either in Indiana, New York, or California and the store's star rating is 6?",
+   "seed": [2, 0, 4, 5, 1, 3, 2, 1, 3, 2, 0, 6, 0],
+   "sql": "SELECT MIN(inventory.value)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND (store.location = 'IN' OR store.location = 'NY' OR store.location = 'CA') AND store.star_rating = 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \ntype = 'Dishwasher' OR type = 'Microwave' OR type = 'Blender'\ncompany = 'LG' OR company = 'Bosch'",
+   "question": "What are the types of appliances that are either Dishwashers, Microwaves, or Blenders and are from either LG or Bosch?",
+   "seed": [8, 3, 1, 0, 0, 4, 2, 1, 3, 4, 1, 0, 5, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE (appliance.type = 'Dishwasher' OR appliance.type = 'Microwave' OR appliance.type = 'Blender') AND (appliance.company = 'LG' OR appliance.company = 'Bosch')"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'TX' OR location = 'CA' OR location = 'MA'",
+   "question": "What are the names of stores located in Texas, California, or Massachusetts?",
+   "seed": [9, 0, 1, 2, 4, 2, 0, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'TX' OR store.location = 'CA' OR store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'IN'",
+   "question": "What are the names of stores located in Indiana?",
+   "seed": [9, 4, 1, 0, 1, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'IN' OR location = 'TX'",
+   "question": "What are the names of stores located in Indiana or Texas?",
+   "seed": [9, 0, 1, 1, 1, 4, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'IN' OR store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(height)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'IN'\nstar_rating <= 4",
+   "question": "What is the minimum height of inventory where it is available, located in Indiana, and the store's star rating is less than or equal to 4?",
+   "seed": [2, 1, 3, 5, 0, 3, 0, 1, 2, 4, 0],
+   "sql": "SELECT MIN(inventory.height)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND store.location = 'IN' AND store.star_rating <= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(appliance_rating)\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR type = 'Microwave' OR type = 'Dishwasher'\nappliance_rating >= 6",
+   "question": "What is the maximum appliance rating of appliances that are either Refrigerators, Microwaves, or Dishwashers and have an appliance rating of at least 6?",
+   "seed": [1, 1, 0, 5, 2, 0, 3, 1, 1, 6, 0],
+   "sql": "SELECT MAX(appliance.appliance_rating)\nFROM appliance\nWHERE (appliance.type = 'Refrigerator' OR appliance.type = 'Microwave' OR appliance.type = 'Dishwasher') AND appliance.appliance_rating >= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT appliance_id)\ntables: appliance\nconditions: \ncompany = 'LG'",
+   "question": "How many distinct appliance IDs belong to the company LG?",
+   "seed": [5, 0, 2, 0, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT appliance.appliance_id)\nFROM appliance\nWHERE appliance.company = 'LG'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(appliance_rating)\ntables: appliance\nconditions: \ntype = 'Dishwasher' OR type = 'Microwave' OR type = 'Oven'\nappliance_rating <= 5",
+   "question": "What is the average appliance rating of Dishwashers, Microwaves, or Ovens that have an appliance rating of 5 or less?",
+   "seed": [0, 1, 0, 5, 2, 1, 3, 2, 2, 5, 0],
+   "sql": "SELECT AVG(appliance.appliance_rating)\nFROM appliance\nWHERE (appliance.type = 'Dishwasher' OR appliance.type = 'Microwave' OR appliance.type = 'Oven') AND appliance.appliance_rating <= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(height)\ntables: inventory\nconditions: \navailable = 0",
+   "question": "What is the maximum height of inventory where it is not available?",
+   "seed": [1, 0, 3, 5, 1, 0, 0],
+   "sql": "SELECT MAX(inventory.height)\nFROM inventory\nWHERE inventory.available = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \ntype = 'Dishwasher'\ncompany = 'GE' OR company = 'Bosch' OR company = 'Samsung'",
+   "question": "What are the types of appliances that are Dishwashers and are from either GE, Bosch, or Samsung?",
+   "seed": [8, 2, 0, 0, 0, 4, 0, 1, 2, 1, 5, 3, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE appliance.type = 'Dishwasher' AND (appliance.company = 'GE' OR appliance.company = 'Bosch' OR appliance.company = 'Samsung')"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'NY' OR location = 'TX'",
+   "question": "What are the names of stores located in New York or Texas?",
+   "seed": [9, 0, 1, 1, 3, 4, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'NY' OR store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(width)\ntables: store, inventory\nconditions: \navailable = 1\nlocation = 'NY'\nstar_rating >= 4",
+   "question": "What is the maximum width of inventory where it is available, located in New York, and the store's star rating is at least 4?",
+   "seed": [1, 1, 2, 5, 0, 3, 0, 3, 1, 4, 0],
+   "sql": "SELECT MAX(inventory.width)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND store.location = 'NY' AND store.star_rating >= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \ntype = 'Refrigerator' OR type = 'Dishwasher' OR appliance_rating = 5",
+   "question": "What are the types of appliances that are Refrigerators, Dishwashers, or have an appliance rating of 5?",
+   "seed": [8, 2, 1, 1, 0, 8, 1, 0, 1, 0, 5, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE appliance.type = 'Refrigerator' OR appliance.type = 'Dishwasher' OR appliance.appliance_rating = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(appliance_rating)\ntables: appliance\nconditions: \ncompany = 'LG' OR company = 'Bosch' OR company = 'Sony' OR appliance_rating >= 9",
+   "question": "What is the average appliance rating of appliances belonging to LG, Bosch, Sony, or have an appliance rating of at least 9?",
+   "seed": [0, 0, 0, 9, 2, 0, 5, 2, 1, 9, 0],
+   "sql": "SELECT AVG(appliance.appliance_rating)\nFROM appliance\nWHERE appliance.company = 'LG' OR appliance.company = 'Bosch' OR appliance.company = 'Sony' OR appliance.appliance_rating >= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: value\ntables: inventory\nconditions: \nheight >= 27",
+   "question": "What are the values of inventory where the height is at least 27?",
+   "seed": [3, 4, 1, 0, 4, 2, 1, 27, 0],
+   "sql": "SELECT inventory.value\nFROM inventory\nWHERE inventory.height >= 27"
+},{"is_zero_record": false,
+   "pseudocode": "want: width\ntables: inventory\nconditions: \navailable = 0\nwidth <= 51",
+   "question": "What are the widths of inventory where it is not available and the width is at most 51?",
+   "seed": [3, 4, 0, 0, 2, 3, 1, 6, 51, 0],
+   "sql": "SELECT inventory.width\nFROM inventory\nWHERE inventory.available = 0 AND inventory.width <= 51"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'MA'\nstar_rating <= 2",
+   "question": "What are the names of stores located in Massachusetts and have a star rating of at most 2?",
+   "seed": [9, 0, 3, 0, 0, 2, 2, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'MA' AND store.star_rating <= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: store_id\ntables: store\nconditions: \nlocation = 'NY' OR location = 'MA' OR location = 'IN'\nstar_rating <= 3",
+   "question": "What are the store IDs of stores located in New York, Massachusetts, or Indiana and have a star rating of at most 3?",
+   "seed": [6, 1, 0, 1, 3, 2, 3, 0, 1, 2, 3, 0],
+   "sql": "SELECT store.store_id\nFROM store\nWHERE (store.location = 'NY' OR store.location = 'MA' OR store.location = 'IN') AND store.star_rating <= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(star_rating)\ntables: store\nconditions: \nlocation = 'NY'",
+   "question": "What is the minimum star rating of stores located in New York?",
+   "seed": [2, 1, 1, 1, 0, 3, 0],
+   "sql": "SELECT MIN(store.star_rating)\nFROM store\nWHERE store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nstar_rating <= 8",
+   "question": "How many distinct store IDs belong to stores with a star rating of at most 8?",
+   "seed": [5, 1, 2, 2, 8, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.star_rating <= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: value\ntables: store, inventory\nconditions: \navailable = 0\nstar_rating <= 7",
+   "question": "What are the values of inventory where it is not available and the store's star rating is at most 7?",
+   "seed": [3, 4, 0, 0, 4, 5, 2, 2, 2, 7, 0],
+   "sql": "SELECT inventory.value\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 0 AND store.star_rating <= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: height\ntables: inventory\nconditions: \navailable = 1 OR height >= 41",
+   "question": "What are the heights of inventory where it is available or the height is at least 41?",
+   "seed": [3, 0, 3, 4, 0, 1, 41, 0],
+   "sql": "SELECT inventory.height\nFROM inventory\nWHERE inventory.available = 1 OR inventory.height >= 41"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT store_id)\ntables: store\nconditions: \nlocation = 'MA'\nstar_rating <= 3",
+   "question": "How many distinct store IDs belong to stores located in Massachusetts and have a star rating of at most 3?",
+   "seed": [5, 1, 3, 0, 0, 2, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT store.store_id)\nFROM store\nWHERE store.location = 'MA' AND store.star_rating <= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance\nconditions: \nappliance_rating = 2",
+   "question": "What are the companies of appliances with an appliance rating of 2?",
+   "seed": [7, 4, 0, 1, 0, 3, 0, 2, 0],
+   "sql": "SELECT appliance.company\nFROM appliance\nWHERE appliance.appliance_rating = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(width)\ntables: store, inventory\nconditions: \navailable = 1\nstar_rating >= 7",
+   "question": "What is the minimum width of inventory where it is available, and the store's star rating is at least 7?",
+   "seed": [2, 0, 2, 5, 0, 2, 1, 7, 0],
+   "sql": "SELECT MIN(inventory.width)\nFROM inventory\nINNER JOIN store ON store.store_id = inventory.store_id\nWHERE inventory.available = 1 AND store.star_rating >= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: MIN(height)\ntables: inventory\nconditions: \navailable = 1",
+   "question": "What is the minimum height of inventory where it is available?",
+   "seed": [2, 1, 3, 1, 0, 0],
+   "sql": "SELECT MIN(inventory.height)\nFROM inventory\nWHERE inventory.available = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: company\ntables: appliance\nconditions: \ntype = 'Dishwasher' OR type = 'Refrigerator'\nappliance_rating >= 4",
+   "question": "What are the companies of appliances that are either Dishwashers or Refrigerators and have an appliance rating of at least 4?",
+   "seed": [7, 4, 1, 1, 0, 5, 1, 1, 0, 1, 4, 0],
+   "sql": "SELECT appliance.company\nFROM appliance\nWHERE (appliance.type = 'Dishwasher' OR appliance.type = 'Refrigerator') AND appliance.appliance_rating >= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: type\ntables: appliance\nconditions: \nappliance_rating = 2",
+   "question": "What are the types of appliances with an appliance rating of 2?",
+   "seed": [8, 4, 1, 0, 0, 3, 0, 2, 0],
+   "sql": "SELECT appliance.type\nFROM appliance\nWHERE appliance.appliance_rating = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: store\nconditions: \nlocation = 'MA'",
+   "question": "What are the names of stores located in Massachusetts?",
+   "seed": [9, 2, 1, 0, 1, 0, 0, 0],
+   "sql": "SELECT store.name\nFROM store\nWHERE store.location = 'MA'"
+}
+]

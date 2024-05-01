@@ -1,0 +1,603 @@
+[
+{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Tim Garcia'\nstudy = 'English' OR study = 'Biology' OR study = 'Sociology'\nhousing = 'Norton Hall' OR housing = 'Franklin Hall'\ncafeteria = 1\nperformance < 2\nclasses = 4\nend_date < 2024",
+   "question": "How many pupils named Tim Garcia study English, Biology, or Sociology, live in Norton Hall or Franklin Hall, have access to the cafeteria, have a performance score less than 2, are enrolled in 4 classes, and have an end date before 2024?",
+   "seed": [5, 1, 4, 0, 0, 0, 17, 17, 2, 12, 1, 9, 1, 0, 3, 0, 0, 2, 1, 0, 0, 2, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Tim Garcia' AND (pupils.study = 'English' OR pupils.study = 'Biology' OR pupils.study = 'Sociology') AND (pupils.housing = 'Norton Hall' OR pupils.housing = 'Franklin Hall') AND pupils.cafeteria = 1 AND pupils.performance < 2 AND pupils.classes = 4 AND pupils.end_date < 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MI'\ncapacity < 18997\nfunding = 'public'",
+   "question": "How many universities in Michigan have a capacity less than 18997 and are publically funded?",
+   "seed": [5, 0, 0, 0, 0, 7, 2, 18997, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MI' AND universities.capacity < 18997 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Tom Wilson'\nstudy = 'Psychology' OR study = 'Math'\nhousing = 'Franklin Hall'\ncafeteria = 1",
+   "question": "How many pupils named Tom Wilson study Psychology or Math, live in Franklin Hall, and have access to the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 13, 7, 1, 8, 0, 0, 3, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Tom Wilson' AND (pupils.study = 'Psychology' OR pupils.study = 'Math') AND pupils.housing = 'Franklin Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Mary Miller'\nstudy = 'Philosophy' OR study = 'Mechanical Engineering' OR study = 'English'\nhousing = 'Franklin Hall'\ncafeteria = 0",
+   "question": "How many pupils named Mary Miller study Philosophy, Mechanical Engineering, or English, live in Franklin Hall, and do not have access to the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 8, 6, 2, 7, 15, 12, 0, 3, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Mary Miller' AND (pupils.study = 'Philosophy' OR pupils.study = 'Mechanical Engineering' OR pupils.study = 'English') AND pupils.housing = 'Franklin Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 4\nclasses = 10\nend_date = 2025",
+   "question": "How many pupils have a performance score less than 4, are enrolled in 10 classes, and have an end date in 2025?",
+   "seed": [6, 3, 0, 2, 3, 0, 6, 0, 3, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 4 AND pupils.classes = 10 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Mary Thompson'\nstudy = 'Political Science' OR study = 'English' OR study = 'Computer Science'\nhousing = 'Parker Hall'\ncafeteria = 1",
+   "question": "How many pupils named Mary Thompson study Political Science, English, or Computer Science, live in Parker Hall, and have access to the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 8, 16, 2, 6, 12, 14, 0, 2, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Mary Thompson' AND (pupils.study = 'Political Science' OR pupils.study = 'English' OR pupils.study = 'Computer Science') AND pupils.housing = 'Parker Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(capacity)\ntables: universities\nconditions: \nterritory = 'CO' OR territory = 'MA'\ncapacity < 16615\nfunding = 'public'",
+   "question": "What is the average capacity of public universities in Colorado or Massachusetts with a capacity less than 16615?",
+   "seed": [1, 1, 3, 0, 1, 9, 1, 2, 16615, 0, 0, 0],
+   "sql": "SELECT AVG(universities.capacity)\nFROM universities\nWHERE (universities.territory = 'CO' OR universities.territory = 'MA') AND universities.capacity < 16615 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 2\nclasses = 13\nend_date < 2026",
+   "question": "How many pupils have a performance score less than 2, are enrolled in 13 classes, and have an end date before 2026?",
+   "seed": [5, 1, 3, 0, 2, 1, 0, 9, 2, 2, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 2 AND pupils.classes = 13 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Tim Robinson'\nstudy = 'Classics'\nhousing = 'Parker Hall'\ncafeteria = 1",
+   "question": "How many pupils named Tim Robinson study Classics, live in Parker Hall, and have access to the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 17, 19, 0, 13, 0, 2, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Tim Robinson' AND pupils.study = 'Classics' AND pupils.housing = 'Parker Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: school_id\ntables: universities\nconditions: \nterritory = 'UT' OR territory = 'CO'\ncapacity < 14557\nfunding = 'private'",
+   "question": "Which universities in Utah or Colorado have a capacity less than 14557 and are privately funded?",
+   "seed": [7, 0, 0, 0, 1, 6, 9, 2, 14557, 0, 1, 2],
+   "sql": "SELECT universities.school_id\nFROM universities\nWHERE (universities.territory = 'UT' OR universities.territory = 'CO') AND universities.capacity < 14557 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance = 1\nclasses = 9\nend_date < 2027",
+   "question": "How many pupils have a performance score of 1, are enrolled in 9 classes, and have an end date before 2027?",
+   "seed": [5, 1, 3, 0, 0, 0, 0, 5, 2, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance = 1 AND pupils.classes = 9 AND pupils.end_date < 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MA' OR territory = 'CO'\ncapacity = 2386\nfunding = 'public'",
+   "question": "How many universities in Massachusetts or Colorado have a capacity of 2386 and are publically funded?",
+   "seed": [5, 1, 1, 0, 1, 1, 9, 0, 2386, 0, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'MA' OR universities.territory = 'CO') AND universities.capacity = 2386 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Adam Smith'\nstudy = 'Biology'\nhousing = 'Green Hall'\ncafeteria = 1\nperformance > 1\nclasses = 12\nend_date = 2024",
+   "question": "How many pupils named Adam Smith study Biology, live in Green Hall, have access to the cafeteria, have a performance score greater than 1, are enrolled in 12 classes, and have an end date in 2024?",
+   "seed": [5, 1, 4, 0, 0, 0, 2, 0, 0, 1, 0, 4, 0, 0, 1, 0, 0, 8, 0, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Adam Smith' AND pupils.study = 'Biology' AND pupils.housing = 'Green Hall' AND pupils.cafeteria = 1 AND pupils.performance > 1 AND pupils.classes = 12 AND pupils.end_date = 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'GA'\ncapacity > 2888\nfunding = 'private'",
+   "question": "How many universities in Georgia have a capacity greater than 2888 and are privately funded?",
+   "seed": [6, 1, 0, 0, 3, 1, 2888, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'GA' AND universities.capacity > 2888 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'IN' OR territory = 'OK'\ncapacity > 11120\nfunding = 'private'",
+   "question": "How many universities in Indiana or Oklahoma have a capacity greater than 11120 and are privately funded?",
+   "seed": [6, 1, 0, 1, 4, 10, 1, 11120, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'IN' OR universities.territory = 'OK') AND universities.capacity > 11120 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance > 1\nclasses = 15\nend_date = 2025",
+   "question": "How many pupils have a performance score greater than 1, are enrolled in 15 classes, and have an end date in 2025?",
+   "seed": [5, 1, 3, 0, 1, 0, 0, 11, 0, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance > 1 AND pupils.classes = 15 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance = 4\nclasses = 15\nend_date > 2024",
+   "question": "How many pupils have a performance score of 4, are enrolled in 15 classes, and have an end date after 2024?",
+   "seed": [6, 3, 0, 0, 3, 0, 11, 1, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance = 4 AND pupils.classes = 15 AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Amy Moore'\nstudy = 'Physics'\nhousing = 'Underwood House'\ncafeteria = 0",
+   "question": "How many pupils named Amy Moore study Physics, live in Underwood House, and do not have access to the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 14, 8, 0, 3, 0, 9, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Amy Moore' AND pupils.study = 'Physics' AND pupils.housing = 'Underwood House' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Bob Moore'\nstudy = 'History'\nhousing = 'Norton Hall'\ncafeteria = 0",
+   "question": "How many pupils named Bob Moore study History, live in Norton Hall, and do not have access to the cafeteria?",
+   "seed": [5, 1, 2, 0, 0, 0, 7, 8, 0, 5, 0, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Bob Moore' AND pupils.study = 'History' AND pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: school_id\ntables: universities\nconditions: \nterritory = 'VT'\ncapacity > 14652\nfunding = 'private'",
+   "question": "Which universities in Vermont have a capacity greater than 14652 and are privately funded?",
+   "seed": [7, 2, 0, 0, 0, 8, 1, 14652, 0, 1, 2],
+   "sql": "SELECT universities.school_id\nFROM universities\nWHERE universities.territory = 'VT' AND universities.capacity > 14652 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 2\nclasses = 10\nend_date > 2025",
+   "question": "How many pupils have a performance score less than 2, are enrolled in 10 classes, and have an end date after 2025?",
+   "seed": [5, 0, 3, 0, 2, 1, 0, 6, 1, 3, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 2 AND pupils.classes = 10 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance = 3\nclasses = 5\nend_date = 2027",
+   "question": "How many pupils have a performance score of 3, are enrolled in 5 classes, and have an end date in 2027?",
+   "seed": [5, 1, 3, 0, 0, 2, 0, 1, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance = 3 AND pupils.classes = 5 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Mike Wilson'\nstudy = 'Physics' OR study = 'Mechanical Engineering'\nhousing = 'Norton Hall' OR housing = 'Morgan House' OR housing = 'Davidson Hall'\ncafeteria = 0\nperformance = 1\nclasses = 6\nend_date < 2025",
+   "question": "How many pupils named Mike Wilson study Physics or Mechanical Engineering, live in Norton Hall, Morgan House, or Davidson Hall, do not have access to the cafeteria, have a performance score of 1, are enrolled in 6 classes, and have an end date before 2025?",
+   "seed": [5, 1, 4, 0, 0, 0, 5, 7, 1, 3, 15, 2, 0, 1, 8, 1, 0, 0, 0, 0, 2, 2, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Mike Wilson' AND (pupils.study = 'Physics' OR pupils.study = 'Mechanical Engineering') AND (pupils.housing = 'Norton Hall' OR pupils.housing = 'Morgan House' OR pupils.housing = 'Davidson Hall') AND pupils.cafeteria = 0 AND pupils.performance = 1 AND pupils.classes = 6 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MI' OR territory = 'IN'\ncapacity > 1343\nfunding = 'private'",
+   "question": "How many universities in Michigan or Indiana have a capacity greater than 1343 and are privately funded?",
+   "seed": [5, 0, 0, 0, 1, 7, 4, 1, 1343, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'MI' OR universities.territory = 'IN') AND universities.capacity > 1343 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Adam Taylor'\nstudy = 'Mechanical Engineering'\nhousing = 'Parker Hall'\ncafeteria = 1",
+   "question": "How many pupils named Adam Taylor study Mechanical Engineering, live in Parker Hall, and have access to the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 2, 9, 0, 15, 0, 2, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Adam Taylor' AND pupils.study = 'Mechanical Engineering' AND pupils.housing = 'Parker Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Jill Martinez'\nstudy = 'Economics' OR study = 'Sociology'\nhousing = 'Campbell Hall'\ncafeteria = 1",
+   "question": "How many pupils named Jill Martinez study Economics or Sociology, live in Campbell Hall, and have access to the cafeteria?",
+   "seed": [5, 1, 2, 0, 0, 0, 6, 18, 1, 4, 9, 0, 7, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Jill Martinez' AND (pupils.study = 'Economics' OR pupils.study = 'Sociology') AND pupils.housing = 'Campbell Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 4\nclasses = 11\nend_date = 2026",
+   "question": "How many pupils have a performance score less than 4, are enrolled in 11 classes, and have an end date in 2026?",
+   "seed": [5, 0, 3, 0, 2, 3, 0, 7, 0, 2, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 4 AND pupils.classes = 11 AND pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'VT'\ncapacity = 11365\nfunding = 'public'",
+   "question": "How many universities in Vermont have a capacity of 11365 and are publically funded?",
+   "seed": [6, 1, 0, 0, 8, 0, 11365, 0, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'VT' AND universities.capacity = 11365 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 4\nclasses = 16\nend_date < 2026",
+   "question": "How many pupils have a performance score less than 4, are enrolled in 16 classes, and have an end date before 2026?",
+   "seed": [6, 3, 0, 2, 3, 0, 12, 2, 2, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 4 AND pupils.classes = 16 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MN' OR territory = 'GA'\ncapacity < 19321\nfunding = 'private'",
+   "question": "Which universities in Minnesota or Georgia have a capacity less than 19321 and are privately funded?",
+   "seed": [5, 1, 0, 0, 1, 5, 3, 2, 19321, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'MN' OR universities.territory = 'GA') AND universities.capacity < 19321 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance > 4\nclasses = 14\nend_date = 2027",
+   "question": "How many pupils have a performance greater than 4, are in class 14, and have an end date of 2027?",
+   "seed": [6, 3, 0, 1, 3, 0, 10, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance > 4 AND pupils.classes = 14 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'IN'\ncapacity < 20085\nfunding = 'private'",
+   "question": "How many universities in the territory 'IN' with capacity less than 20085 and funding as 'private'?",
+   "seed": [5, 1, 0, 0, 0, 4, 2, 20085, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'IN' AND universities.capacity < 20085 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Chris Wilson'\nstudy = 'Sociology' OR study = 'Art'\nhousing = 'Davidson Hall' OR housing = 'Green Hall'\ncafeteria = 1",
+   "question": "How many pupils named Chris Wilson are studying either Sociology or Art, staying in either Davidson Hall or Green Hall, and have a cafeteria plan?",
+   "seed": [5, 0, 2, 0, 0, 0, 3, 7, 1, 9, 10, 1, 8, 4, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Chris Wilson' AND (pupils.study = 'Sociology' OR pupils.study = 'Art') AND (pupils.housing = 'Davidson Hall' OR pupils.housing = 'Green Hall') AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MN'\ncapacity < 12895\nfunding = 'private'",
+   "question": "How many universities in the territory 'MN' with capacity less than 12895 and funding as 'private'?",
+   "seed": [5, 0, 1, 0, 0, 5, 2, 12895, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MN' AND universities.capacity < 12895 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(capacity)\ntables: universities\nconditions: \nterritory = 'UT'\ncapacity < 17829\nfunding = 'private'",
+   "question": "What is the average capacity of universities in the territory 'UT' with capacity less than 17829 and funding as 'private'?",
+   "seed": [0, 0, 2, 0, 0, 6, 2, 17829, 0, 1, 0],
+   "sql": "SELECT AVG(universities.capacity)\nFROM universities\nWHERE universities.territory = 'UT' AND universities.capacity < 17829 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'VT' OR territory = 'MN'\ncapacity > 1091\nfunding = 'public'",
+   "question": "How many universities in either territory 'VT' or 'MN' with capacity greater than 1091 and funding as 'public'?",
+   "seed": [6, 0, 0, 1, 8, 5, 1, 1091, 0, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'VT' OR universities.territory = 'MN') AND universities.capacity > 1091 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Sue Smith'\nstudy = 'Art'\nhousing = 'Franklin Hall' OR housing = 'Davidson Hall'\ncafeteria = 1",
+   "question": "How many pupils named Sue Smith are studying Art, staying in either Franklin Hall or Davidson Hall, and have a cafeteria plan?",
+   "seed": [5, 1, 2, 0, 0, 0, 10, 0, 0, 10, 1, 3, 8, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Sue Smith' AND pupils.study = 'Art' AND (pupils.housing = 'Franklin Hall' OR pupils.housing = 'Davidson Hall') AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Ron Jones'\nstudy = 'Political Science' OR study = 'Music'\nhousing = 'Lawson Hall'\ncafeteria = 1",
+   "question": "How many pupils named Ron Jones are studying either Political Science or Music, staying in Lawson Hall, and have a cafeteria plan?",
+   "seed": [5, 0, 2, 0, 0, 0, 19, 3, 1, 6, 11, 0, 6, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Ron Jones' AND (pupils.study = 'Political Science' OR pupils.study = 'Music') AND pupils.housing = 'Lawson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Sam Anderson'\nstudy = 'Physics'\nhousing = 'Carson Hall' OR housing = 'Franklin Hall' OR housing = 'Parker Hall'\ncafeteria = 0",
+   "question": "How many pupils named Sam Anderson are studying Physics, staying in either Carson Hall, Franklin Hall, or Parker Hall, and do not have a cafeteria plan?",
+   "seed": [6, 2, 0, 0, 0, 15, 10, 0, 3, 2, 5, 3, 2, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Sam Anderson' AND pupils.study = 'Physics' AND (pupils.housing = 'Carson Hall' OR pupils.housing = 'Franklin Hall' OR pupils.housing = 'Parker Hall') AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Chris Wilson'\nstudy = 'Biology' OR study = 'Math' OR study = 'Art'\nhousing = 'Franklin Hall'\ncafeteria = 1",
+   "question": "How many pupils named Chris Wilson are studying either Biology, Math, or Art, staying in Franklin Hall, and have a cafeteria plan?",
+   "seed": [5, 1, 2, 0, 0, 0, 3, 7, 2, 1, 0, 10, 0, 3, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Chris Wilson' AND (pupils.study = 'Biology' OR pupils.study = 'Math' OR pupils.study = 'Art') AND pupils.housing = 'Franklin Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 3\nclasses = 14\nend_date > 2026",
+   "question": "How many pupils have a performance less than 3, are in class 14, and have an end date after 2026?",
+   "seed": [6, 3, 0, 2, 2, 0, 10, 1, 2, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 3 AND pupils.classes = 14 AND pupils.end_date > 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Jill Johnson'\nstudy = 'Mechanical Engineering' OR study = 'Biology'\nhousing = 'Franklin Hall' OR housing = 'Campbell Hall'\ncafeteria = 0",
+   "question": "How many pupils named Jill Johnson are studying either Mechanical Engineering or Biology, staying in either Franklin Hall or Campbell Hall, and do not have a cafeteria plan?",
+   "seed": [6, 2, 0, 0, 0, 6, 1, 1, 15, 1, 1, 3, 7, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Jill Johnson' AND (pupils.study = 'Mechanical Engineering' OR pupils.study = 'Biology') AND (pupils.housing = 'Franklin Hall' OR pupils.housing = 'Campbell Hall') AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'UT' OR territory = 'CO'\ncapacity > 18093\nfunding = 'public'",
+   "question": "How many universities in either territory 'UT' or 'CO' with capacity greater than 18093 and funding as 'public'?",
+   "seed": [6, 1, 0, 1, 6, 9, 1, 18093, 0, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'UT' OR universities.territory = 'CO') AND universities.capacity > 18093 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'CO'\ncapacity = 4599\nfunding = 'public'",
+   "question": "How many universities in the territory 'CO' with a capacity of 4599 and funding as 'public'?",
+   "seed": [5, 0, 0, 0, 0, 9, 0, 4599, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'CO' AND universities.capacity = 4599 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: school_id\ntables: universities\nconditions: \nterritory = 'MA' OR territory = 'OK'\ncapacity > 4904\nfunding = 'public'",
+   "question": "Which universities are in either territory 'MA' or 'OK' with capacity greater than 4904 and funding as 'public'?",
+   "seed": [7, 3, 1, 0, 1, 1, 10, 1, 4904, 0, 0, 0],
+   "sql": "SELECT universities.school_id\nFROM universities\nWHERE (universities.territory = 'MA' OR universities.territory = 'OK') AND universities.capacity > 4904 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Bill Martinez'\nstudy = 'English'\nhousing = 'Morgan House' OR housing = 'Parker Hall'\ncafeteria = 0\nperformance < 3\nclasses = 14\nend_date > 2027",
+   "question": "How many pupils named Bill Martinez are studying English, staying in either Morgan House or Parker Hall, do not have a cafeteria plan, have a performance less than 3, are in class 14, and have an end date after 2027?",
+   "seed": [5, 1, 4, 0, 0, 0, 11, 18, 0, 12, 1, 1, 2, 1, 0, 2, 2, 0, 10, 1, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Bill Martinez' AND pupils.study = 'English' AND (pupils.housing = 'Morgan House' OR pupils.housing = 'Parker Hall') AND pupils.cafeteria = 0 AND pupils.performance < 3 AND pupils.classes = 14 AND pupils.end_date > 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(capacity)\ntables: universities\nconditions: \nterritory = 'UT' OR territory = 'MA'\ncapacity > 14621\nfunding = 'private'",
+   "question": "What is the maximum capacity of universities in either territory 'UT' or 'MA' with capacity greater than 14621 and funding as 'private'?",
+   "seed": [2, 0, 3, 0, 1, 6, 1, 1, 14621, 0, 1, 2],
+   "sql": "SELECT MAX(universities.capacity)\nFROM universities\nWHERE (universities.territory = 'UT' OR universities.territory = 'MA') AND universities.capacity > 14621 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MA' OR territory = 'IN'\ncapacity = 15943\nfunding = 'private'",
+   "question": "How many universities in either territory 'MA' or 'IN' with a capacity of 15943 and funding as 'private'?",
+   "seed": [6, 1, 0, 1, 1, 4, 0, 15943, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'MA' OR universities.territory = 'IN') AND universities.capacity = 15943 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'AZ' OR territory = 'MA'\ncapacity > 12263\nfunding = 'public'",
+   "question": "How many universities in either territory 'AZ' or 'MA' with capacity greater than 12263 and funding as 'public'?",
+   "seed": [6, 0, 0, 1, 0, 1, 1, 12263, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'AZ' OR universities.territory = 'MA') AND universities.capacity > 12263 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 2\nclasses = 15\nend_date = 2027",
+   "question": "How many pupils have a performance less than 2, are in class 15, and have an end date of 2027?",
+   "seed": [5, 0, 3, 0, 2, 1, 0, 11, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 2 AND pupils.classes = 15 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Mike Garcia'\nstudy = 'Chemistry' OR study = 'Math' OR study = 'Sociology'\nhousing = 'Davidson Hall'\ncafeteria = 1\nperformance = 3\nclasses = 4\nend_date < 2026",
+   "question": "How many pupils named Mike Garcia are studying either Chemistry, Math, or Sociology, staying in Davidson Hall, have a cafeteria plan, have a performance of 3, are in class 4, and have an end date before 2026?",
+   "seed": [6, 4, 0, 0, 0, 5, 17, 2, 2, 0, 9, 0, 8, 0, 0, 0, 2, 0, 0, 2, 2, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Mike Garcia' AND (pupils.study = 'Chemistry' OR pupils.study = 'Math' OR pupils.study = 'Sociology') AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1 AND pupils.performance = 3 AND pupils.classes = 4 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: capacity\ntables: universities\nconditions: \nterritory = 'CO' OR territory = 'IN'\ncapacity > 3746\nfunding = 'public'",
+   "question": "What are the capacities of universities in either territory 'CO' or 'IN' with capacity greater than 3746 and funding as 'public'?",
+   "seed": [4, 1, 2, 0, 1, 9, 4, 1, 3746, 0, 0, 0],
+   "sql": "SELECT universities.capacity\nFROM universities\nWHERE (universities.territory = 'CO' OR universities.territory = 'IN') AND universities.capacity > 3746 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Kim Brown'\nstudy = 'Mechanical Engineering' OR study = 'Sociology' OR study = 'Music'\nhousing = 'Green Hall'\ncafeteria = 0\nperformance < 3\nclasses = 14\nend_date = 2026",
+   "question": "How many pupils named Kim Brown are studying either Mechanical Engineering, Sociology, or Music, staying in Green Hall, do not have a cafeteria plan, have a performance less than 3, are in class 14, and have an end date of 2026?",
+   "seed": [6, 4, 0, 0, 0, 16, 4, 2, 15, 9, 11, 0, 4, 1, 0, 2, 2, 0, 10, 0, 2, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Kim Brown' AND (pupils.study = 'Mechanical Engineering' OR pupils.study = 'Sociology' OR pupils.study = 'Music') AND pupils.housing = 'Green Hall' AND pupils.cafeteria = 0 AND pupils.performance < 3 AND pupils.classes = 14 AND pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Mike Garcia'\nstudy = 'English' OR study = 'Philosophy' OR study = 'Physics'\nhousing = 'Carson Hall' OR housing = 'Davidson Hall'\ncafeteria = 1\nperformance > 2\nclasses = 4\nend_date < 2026",
+   "question": "How many pupils named Mike Garcia are studying either English, Philosophy, or Physics, staying in either Carson Hall or Davidson Hall, have a cafeteria plan, have a performance greater than 2, are in class 4, and have an end date before 2026?",
+   "seed": [5, 1, 4, 0, 0, 0, 5, 17, 2, 12, 7, 3, 1, 5, 8, 0, 0, 1, 1, 0, 0, 2, 2, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Mike Garcia' AND (pupils.study = 'English' OR pupils.study = 'Philosophy' OR pupils.study = 'Physics') AND (pupils.housing = 'Carson Hall' OR pupils.housing = 'Davidson Hall') AND pupils.cafeteria = 1 AND pupils.performance > 2 AND pupils.classes = 4 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'OR'\ncapacity > 2301\nfunding = 'private'",
+   "question": "How many universities in the territory 'OR' with capacity greater than 2301 and funding as 'private'?",
+   "seed": [6, 0, 0, 0, 2, 1, 2301, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'OR') AND universities.capacity > 2301 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 3\nclasses = 15\nend_date > 2027",
+   "question": "How many pupils have a performance less than 3, are in class 15, and have an end date after 2027?",
+   "seed": [5, 0, 3, 0, 2, 2, 0, 11, 1, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 3 AND pupils.classes = 15 AND pupils.end_date > 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: capacity\ntables: universities\nconditions: \nterritory = 'MA' OR territory = 'OK'\ncapacity < 14086\nfunding = 'public'",
+   "question": "What are the capacities of universities in either territory 'MA' or 'OK' with capacity less than 14086 and funding as 'public'?",
+   "seed": [4, 0, 2, 0, 1, 1, 10, 2, 14086, 0, 0, 1],
+   "sql": "SELECT universities.capacity\nFROM universities\nWHERE (universities.territory = 'MA' OR universities.territory = 'OK') AND universities.capacity < 14086 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Bill Davis'\nstudy = 'Psychology' OR study = 'Music' OR study = 'English'\nhousing = 'Norton Hall'\ncafeteria = 0",
+   "question": "How many pupils named Bill Davis are studying either Psychology, Music, or English, staying in Norton Hall, and do not have a cafeteria plan?",
+   "seed": [6, 2, 0, 0, 0, 11, 5, 2, 8, 11, 12, 0, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Bill Davis' AND (pupils.study = 'Psychology' OR pupils.study = 'Music' OR pupils.study = 'English') AND pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'OR'\ncapacity < 12873\nfunding = 'private'",
+   "question": "How many universities in the territory 'OR' with capacity less than 12873 and funding as 'private'?",
+   "seed": [6, 1, 0, 0, 2, 2, 12873, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'OR') AND universities.capacity < 12873 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Joe Moore'\nstudy = 'Psychology' OR study = 'Physics' OR study = 'Classics'\nhousing = 'Green Hall'\ncafeteria = 1\nperformance < 2\nclasses = 5\nend_date > 2024",
+   "question": "How many pupils named Joe Moore are studying either Psychology, Physics, or Classics, staying in Green Hall, have a cafeteria plan, have a performance less than 2, are in class 5, and have an end date after 2024?",
+   "seed": [5, 0, 4, 0, 0, 0, 9, 8, 2, 8, 3, 13, 0, 4, 0, 0, 2, 1, 0, 1, 1, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Joe Moore' AND (pupils.study = 'Psychology' OR pupils.study = 'Physics' OR pupils.study = 'Classics') AND pupils.housing = 'Green Hall' AND pupils.cafeteria = 1 AND pupils.performance < 2 AND pupils.classes = 5 AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'GA'\ncapacity > 14776\nfunding = 'private'",
+   "question": "How many distinct universities are there in Georgia with a capacity greater than 14,776 and private funding?",
+   "seed": [6, 1, 0, 0, 3, 1, 14776, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'GA' AND universities.capacity > 14776 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'CO'\ncapacity = 9264\nfunding = 'private'",
+   "question": "How many distinct universities are there in Colorado with a capacity of 9,264 and private funding?",
+   "seed": [6, 1, 0, 0, 9, 0, 9264, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'CO' AND universities.capacity = 9264 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 1\nclasses = 8\nend_date < 2025",
+   "question": "How many distinct pupils have a performance rating less than 1, are in the 8th class, and have an end date before 2025?",
+   "seed": [5, 0, 3, 0, 2, 0, 0, 4, 2, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 1 AND pupils.classes = 8 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance > 3\nclasses = 10\nend_date > 2024",
+   "question": "How many distinct pupils have a performance rating greater than 3, are in the 10th class, and have an end date after 2024?",
+   "seed": [5, 0, 3, 0, 1, 2, 0, 6, 1, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance > 3 AND pupils.classes = 10 AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 3\nclasses = 11\nend_date = 2026",
+   "question": "How many distinct pupils have a performance rating less than 3, are in the 11th class, and have an end date in 2026?",
+   "seed": [6, 3, 0, 2, 2, 0, 7, 0, 2, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 3 AND pupils.classes = 11 AND pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance = 3\nclasses = 8\nend_date = 2027",
+   "question": "How many distinct pupils have a performance rating of 3, are in the 8th class, and have an end date in 2027?",
+   "seed": [5, 0, 3, 0, 0, 2, 0, 4, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance = 3 AND pupils.classes = 8 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Bob Williams'\nstudy = 'Classics' OR study = 'Computer Science' OR study = 'Math'\nhousing = 'Campbell Hall' OR housing = 'Parker Hall' OR housing = 'Carson Hall'\ncafeteria = 1",
+   "question": "How many distinct pupils are named Bob Williams, studying either Classics, Computer Science, or Math, residing in either Campbell Hall, Parker Hall, or Carson Hall, and use the cafeteria?",
+   "seed": [5, 1, 2, 0, 0, 0, 7, 2, 2, 13, 14, 0, 2, 7, 2, 5, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Bob Williams' AND (pupils.study = 'Classics' OR pupils.study = 'Computer Science' OR pupils.study = 'Math') AND (pupils.housing = 'Campbell Hall' OR pupils.housing = 'Parker Hall' OR pupils.housing = 'Carson Hall') AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(capacity)\ntables: universities\nconditions: \nterritory = 'MI'\ncapacity < 13349\nfunding = 'public'",
+   "question": "What is the maximum capacity among public universities in Michigan with a capacity less than 13,349?",
+   "seed": [2, 0, 2, 0, 0, 7, 2, 13349, 0, 0, 1],
+   "sql": "SELECT MAX(universities.capacity)\nFROM universities\nWHERE universities.territory = 'MI' AND universities.capacity < 13349 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'CO' OR territory = 'AZ'\ncapacity = 18397\nfunding = 'public'",
+   "question": "How many distinct universities are either in Colorado or Arizona with a capacity of 18,397 and public funding?",
+   "seed": [6, 1, 0, 1, 9, 0, 0, 18397, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'CO' OR universities.territory = 'AZ') AND universities.capacity = 18397 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'UT' OR territory = 'GA'\ncapacity > 7609\nfunding = 'private'",
+   "question": "How many distinct universities are either in Utah or Georgia with a capacity greater than 7,609 and private funding?",
+   "seed": [5, 0, 0, 0, 1, 6, 3, 1, 7609, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'UT' OR universities.territory = 'GA') AND universities.capacity > 7609 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MA'\ncapacity > 16841\nfunding = 'private'",
+   "question": "How many distinct universities are there in Massachusetts with a capacity greater than 16,841 and private funding?",
+   "seed": [6, 1, 0, 0, 1, 1, 16841, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MA' AND universities.capacity > 16841 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'VT' OR territory = 'AZ'\ncapacity = 6451\nfunding = 'private'",
+   "question": "How many distinct universities are either in Vermont or Arizona with a capacity of 6,451 and private funding?",
+   "seed": [6, 0, 0, 1, 8, 0, 0, 6451, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'VT' OR universities.territory = 'AZ') AND universities.capacity = 6451 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 2\nclasses = 9\nend_date < 2024",
+   "question": "How many distinct pupils have a performance rating less than 2, are in the 9th class, and have an end date before 2024?",
+   "seed": [5, 1, 3, 0, 2, 1, 0, 5, 2, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 2 AND pupils.classes = 9 AND pupils.end_date < 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance > 1\nclasses = 8\nend_date = 2025",
+   "question": "How many distinct pupils have a performance rating greater than 1, are in the 8th class, and have an end date in 2025?",
+   "seed": [5, 0, 3, 0, 1, 0, 0, 4, 0, 3, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance > 1 AND pupils.classes = 8 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Chris Williams'\nstudy = 'Classics' OR study = 'Music'\nhousing = 'Parker Hall' OR housing = 'Green Hall'\ncafeteria = 0",
+   "question": "How many distinct pupils are named Chris Williams, studying either Classics or Music, residing in either Parker Hall or Green Hall, and do not use the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 3, 2, 1, 13, 11, 1, 2, 4, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Chris Williams' AND (pupils.study = 'Classics' OR pupils.study = 'Music') AND (pupils.housing = 'Parker Hall' OR pupils.housing = 'Green Hall') AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'IN' OR territory = 'AZ'\ncapacity = 14221\nfunding = 'private'",
+   "question": "How many distinct universities are either in Indiana or Arizona with a capacity of 14,221 and private funding?",
+   "seed": [5, 1, 0, 0, 1, 4, 0, 0, 14221, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'IN' OR universities.territory = 'AZ') AND universities.capacity = 14221 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'GA'\ncapacity < 19114\nfunding = 'public'",
+   "question": "How many distinct universities are there in Georgia with a capacity less than 19,114 and public funding?",
+   "seed": [6, 0, 0, 0, 3, 2, 19114, 0, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'GA' AND universities.capacity < 19114 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Sue White'\nstudy = 'Economics' OR study = 'History'\nhousing = 'Carson Hall' OR housing = 'Norton Hall' OR housing = 'Campbell Hall'\ncafeteria = 1",
+   "question": "How many distinct pupils are named Sue White, studying either Economics or History, residing in either Carson Hall, Norton Hall, or Campbell Hall, and use the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 10, 13, 1, 4, 5, 2, 5, 0, 7, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Sue White' AND (pupils.study = 'Economics' OR pupils.study = 'History') AND (pupils.housing = 'Carson Hall' OR pupils.housing = 'Norton Hall' OR pupils.housing = 'Campbell Hall') AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Adam Brown'\nstudy = 'Economics' OR study = 'Art' OR study = 'Math'\nhousing = 'Norton Hall'\ncafeteria = 1\nperformance > 3\nclasses = 10\nend_date > 2025",
+   "question": "How many distinct pupils are named Adam Brown, studying either Economics, Art, or Math, residing in Norton Hall, using the cafeteria, with a performance rating greater than 3, in the 10th class, and have an end date after 2025?",
+   "seed": [5, 0, 4, 0, 0, 0, 2, 4, 2, 4, 10, 0, 0, 0, 0, 0, 1, 2, 0, 6, 1, 3, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Adam Brown' AND (pupils.study = 'Economics' OR pupils.study = 'Art' OR pupils.study = 'Math') AND pupils.housing = 'Norton Hall' AND pupils.cafeteria = 1 AND pupils.performance > 3 AND pupils.classes = 10 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance < 2\nclasses = 5\nend_date > 2026",
+   "question": "How many distinct pupils have a performance rating less than 2, are in the 5th class, and have an end date after 2026?",
+   "seed": [6, 3, 0, 2, 1, 0, 1, 1, 2, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance < 2 AND pupils.classes = 5 AND pupils.end_date > 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Sally Thomas'\nstudy = 'Art' OR study = 'English'\nhousing = 'Norton Hall' OR housing = 'Underwood House' OR housing = 'Morgan House'\ncafeteria = 0\nperformance < 2\nclasses = 6\nend_date < 2027",
+   "question": "How many distinct pupils are named Sally Thomas, studying either Art or English, residing in either Norton Hall, Underwood House, or Morgan House, do not use the cafeteria, have a performance rating less than 2, are in the 6th class, and have an end date before 2027?",
+   "seed": [5, 1, 4, 0, 0, 0, 4, 11, 1, 10, 12, 2, 0, 9, 1, 1, 0, 2, 1, 0, 2, 2, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Sally Thomas' AND (pupils.study = 'Art' OR pupils.study = 'English') AND (pupils.housing = 'Norton Hall' OR pupils.housing = 'Underwood House' OR pupils.housing = 'Morgan House') AND pupils.cafeteria = 0 AND pupils.performance < 2 AND pupils.classes = 6 AND pupils.end_date < 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'VT'\ncapacity < 20197\nfunding = 'public'",
+   "question": "How many distinct universities are there in Vermont with a capacity less than 20,197 and public funding?",
+   "seed": [5, 1, 0, 0, 0, 8, 2, 20197, 0, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'VT' AND universities.capacity < 20197 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance = 2\nclasses = 6\nend_date = 2025",
+   "question": "How many distinct pupils have a performance rating of 2, are in the 6th class, and have an end date in 2025?",
+   "seed": [5, 0, 3, 0, 0, 1, 0, 2, 0, 3, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance = 2 AND pupils.classes = 6 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: MAX(capacity)\ntables: universities\nconditions: \nterritory = 'MI'\ncapacity < 14391\nfunding = 'private'",
+   "question": "What is the maximum capacity among private universities in Michigan with a capacity less than 14,391?",
+   "seed": [2, 0, 2, 0, 0, 7, 2, 14391, 0, 1, 2],
+   "sql": "SELECT MAX(universities.capacity)\nFROM universities\nWHERE universities.territory = 'MI' AND universities.capacity < 14391 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MN'\ncapacity = 9140\nfunding = 'public'",
+   "question": "How many distinct universities are there in Minnesota with a capacity of 9,140 and public funding?",
+   "seed": [5, 1, 1, 0, 0, 5, 0, 9140, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MN' AND universities.capacity = 9140 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MN'\ncapacity = 7773\nfunding = 'private'",
+   "question": "How many distinct universities are there in Minnesota with a capacity of 7,773 and private funding?",
+   "seed": [5, 1, 0, 0, 0, 5, 0, 7773, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MN' AND universities.capacity = 7773 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'AZ' OR territory = 'MN'\ncapacity > 17003\nfunding = 'private'",
+   "question": "How many distinct universities are either in Arizona or Minnesota with a capacity greater than 17,003 and private funding?",
+   "seed": [6, 1, 0, 1, 0, 5, 1, 17003, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'AZ' OR universities.territory = 'MN') AND universities.capacity > 17003 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Jen Taylor'\nstudy = 'Math' OR study = 'Music'\nhousing = 'Campbell Hall' OR housing = 'Green Hall' OR housing = 'Franklin Hall'\ncafeteria = 1\nperformance = 3\nclasses = 9\nend_date > 2025",
+   "question": "How many distinct pupils are named Jen Taylor, studying either Math or Music, residing in either Campbell Hall, Green Hall, or Franklin Hall, using the cafeteria, with a performance rating of 3, in the 9th class, and have an end date after 2025?",
+   "seed": [5, 0, 4, 0, 0, 0, 12, 9, 1, 0, 11, 2, 7, 4, 3, 0, 0, 0, 2, 0, 5, 1, 3, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Jen Taylor' AND (pupils.study = 'Math' OR pupils.study = 'Music') AND (pupils.housing = 'Campbell Hall' OR pupils.housing = 'Green Hall' OR pupils.housing = 'Franklin Hall') AND pupils.cafeteria = 1 AND pupils.performance = 3 AND pupils.classes = 9 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'John Jackson'\nstudy = 'Mechanical Engineering' OR study = 'Classics'\nhousing = 'Green Hall' OR housing = 'Campbell Hall' OR housing = 'Parker Hall'\ncafeteria = 0\nperformance = 2\nclasses = 15\nend_date = 2027",
+   "question": "How many distinct pupils are named John Jackson, studying either Mechanical Engineering or Classics, residing in either Green Hall, Campbell Hall, or Parker Hall, do not use the cafeteria, with a performance rating of 2, in the 15th class, and have an end date in 2027?",
+   "seed": [6, 4, 0, 0, 0, 0, 12, 1, 15, 13, 2, 4, 7, 2, 1, 0, 0, 1, 0, 11, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'John Jackson' AND (pupils.study = 'Mechanical Engineering' OR pupils.study = 'Classics') AND (pupils.housing = 'Green Hall' OR pupils.housing = 'Campbell Hall' OR pupils.housing = 'Parker Hall') AND pupils.cafeteria = 0 AND pupils.performance = 2 AND pupils.classes = 15 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Jill Jackson'\nstudy = 'Biology'\nhousing = 'Carson Hall'\ncafeteria = 1",
+   "question": "How many distinct pupils are named Jill Jackson, studying Biology, residing in Carson Hall, and use the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 6, 12, 0, 1, 0, 5, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Jill Jackson' AND pupils.study = 'Biology' AND pupils.housing = 'Carson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Adam Brown'\nstudy = 'Mechanical Engineering'\nhousing = 'Norton Hall'\ncafeteria = 0\nperformance < 1\nclasses = 13\nend_date = 2025",
+   "question": "How many pupils named Adam Brown study Mechanical Engineering, live in Norton Hall, do not use the cafeteria, have a performance score less than 1, take 13 classes, and have an end date of 2025?",
+   "seed": [6, 4, 0, 0, 0, 2, 4, 0, 15, 0, 0, 1, 0, 2, 0, 0, 9, 0, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Adam Brown' AND pupils.study = 'Mechanical Engineering' AND pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0 AND pupils.performance < 1 AND pupils.classes = 13 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'CO' OR territory = 'MN'\ncapacity < 20455\nfunding = 'private'",
+   "question": "How many universities in Colorado or Minnesota, with a capacity less than 20455 and private funding, are there?",
+   "seed": [6, 0, 0, 1, 9, 5, 2, 20455, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'CO' OR universities.territory = 'MN') AND universities.capacity < 20455 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MA'\ncapacity > 13315\nfunding = 'public'",
+   "question": "How many public universities in Massachusetts with a capacity greater than 13315 are there?",
+   "seed": [6, 0, 0, 0, 1, 1, 13315, 0, 0, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MA' AND universities.capacity > 13315 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'AZ'\ncapacity > 16320\nfunding = 'private'",
+   "question": "How many private universities in Arizona with a capacity greater than 16320 are there?",
+   "seed": [5, 1, 0, 0, 0, 0, 1, 16320, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'AZ' AND universities.capacity > 16320 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(capacity)\ntables: universities\nconditions: \nterritory = 'MI'\ncapacity < 15083\nfunding = 'public'",
+   "question": "What is the average capacity of public universities in Michigan with a capacity less than 15083?",
+   "seed": [0, 1, 3, 0, 0, 7, 2, 15083, 0, 0, 0],
+   "sql": "SELECT AVG(universities.capacity)\nFROM universities\nWHERE universities.territory = 'MI' AND universities.capacity < 15083 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Ann Martinez'\nstudy = 'History' OR study = 'English' OR study = 'Political Science'\nhousing = 'Parker Hall' OR housing = 'Carson Hall' OR housing = 'Underwood House'\ncafeteria = 1\nperformance > 3\nclasses = 13\nend_date < 2026",
+   "question": "How many pupils named Ann Martinez study History, English, or Political Science, live in Parker Hall, Carson Hall, or Underwood House, use the cafeteria, have a performance score greater than 3, take 13 classes, and have an end date before 2026?",
+   "seed": [5, 1, 4, 0, 0, 0, 18, 18, 2, 5, 12, 6, 2, 2, 5, 9, 0, 0, 1, 2, 0, 9, 2, 2, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Ann Martinez' AND (pupils.study = 'History' OR pupils.study = 'English' OR pupils.study = 'Political Science') AND (pupils.housing = 'Parker Hall' OR pupils.housing = 'Carson Hall' OR pupils.housing = 'Underwood House') AND pupils.cafeteria = 1 AND pupils.performance > 3 AND pupils.classes = 13 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'IN'\ncapacity = 3680\nfunding = 'private'",
+   "question": "How many private universities in Indiana with a capacity of 3680 are there?",
+   "seed": [5, 0, 1, 0, 0, 4, 0, 3680, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'IN' AND universities.capacity = 3680 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nperformance > 4\nclasses = 7\nend_date = 2026",
+   "question": "How many pupils have a performance score greater than 4, take 7 classes, and have an end date of 2026?",
+   "seed": [5, 0, 3, 0, 1, 3, 0, 3, 0, 2, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.performance > 4 AND pupils.classes = 7 AND pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Ron Thompson'\nstudy = 'History'\nhousing = 'Carson Hall' OR housing = 'Underwood House' OR housing = 'Franklin Hall'\ncafeteria = 1",
+   "question": "How many pupils named Ron Thompson study History, live in Carson Hall, Underwood House, or Franklin Hall, and use the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 19, 16, 0, 5, 2, 5, 9, 3, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Ron Thompson' AND pupils.study = 'History' AND (pupils.housing = 'Carson Hall' OR pupils.housing = 'Underwood House' OR pupils.housing = 'Franklin Hall') AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: AVG(capacity)\ntables: universities\nconditions: \nterritory = 'VT' OR territory = 'MN'\ncapacity < 20118\nfunding = 'private'",
+   "question": "What is the average capacity of private universities in Vermont or Minnesota with a capacity less than 20118?",
+   "seed": [0, 0, 3, 0, 1, 8, 5, 2, 20118, 0, 1, 1],
+   "sql": "SELECT AVG(universities.capacity)\nFROM universities\nWHERE (universities.territory = 'VT' OR universities.territory = 'MN') AND universities.capacity < 20118 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: school_id\ntables: universities\nconditions: \nterritory = 'MI'\ncapacity < 10153\nfunding = 'private'",
+   "question": "Which schools in Michigan with a capacity less than 10153 and private funding are there?",
+   "seed": [7, 3, 0, 0, 0, 7, 2, 10153, 0, 1, 1],
+   "sql": "SELECT universities.school_id\nFROM universities\nWHERE universities.territory = 'MI' AND universities.capacity < 10153 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MI'\ncapacity < 17006\nfunding = 'private'",
+   "question": "How many private universities in Michigan with a capacity less than 17006 are there?",
+   "seed": [6, 0, 0, 0, 7, 2, 17006, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MI' AND universities.capacity < 17006 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'UT'\ncapacity = 9865\nfunding = 'private'",
+   "question": "How many private universities in Utah with a capacity of 9865 are there?",
+   "seed": [5, 1, 0, 0, 0, 6, 0, 9865, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'UT' AND universities.capacity = 9865 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Sally Thompson'\nstudy = 'Political Science' OR study = 'Art'\nhousing = 'Carson Hall'\ncafeteria = 0\nperformance < 2\nclasses = 11\nend_date > 2027",
+   "question": "How many pupils named Sally Thompson study Political Science or Art, live in Carson Hall, do not use the cafeteria, have a performance score less than 2, take 11 classes, and have an end date after 2027?",
+   "seed": [6, 4, 0, 0, 0, 4, 16, 1, 6, 10, 0, 5, 1, 0, 2, 1, 0, 7, 1, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Sally Thompson' AND (pupils.study = 'Political Science' OR pupils.study = 'Art') AND pupils.housing = 'Carson Hall' AND pupils.cafeteria = 0 AND pupils.performance < 2 AND pupils.classes = 11 AND pupils.end_date > 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Bill Taylor'\nstudy = 'Psychology'\nhousing = 'Campbell Hall' OR housing = 'Franklin Hall' OR housing = 'Lawson Hall'\ncafeteria = 0",
+   "question": "How many pupils named Bill Taylor study Psychology, live in Campbell Hall, Franklin Hall, or Lawson Hall, and do not use the cafeteria?",
+   "seed": [5, 0, 2, 0, 0, 0, 11, 9, 0, 8, 2, 7, 3, 6, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Bill Taylor' AND pupils.study = 'Psychology' AND (pupils.housing = 'Campbell Hall' OR pupils.housing = 'Franklin Hall' OR pupils.housing = 'Lawson Hall') AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Tim Anderson'\nstudy = 'Biology'\nhousing = 'Campbell Hall' OR housing = 'Carson Hall'\ncafeteria = 0\nperformance = 1\nclasses = 16\nend_date > 2027",
+   "question": "How many pupils named Tim Anderson study Biology, live in Campbell Hall or Carson Hall, do not use the cafeteria, have a performance score of 1, take 16 classes, and have an end date after 2027?",
+   "seed": [5, 1, 4, 0, 0, 0, 17, 10, 0, 1, 1, 7, 5, 1, 0, 0, 0, 0, 12, 1, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Tim Anderson' AND pupils.study = 'Biology' AND (pupils.housing = 'Campbell Hall' OR pupils.housing = 'Carson Hall') AND pupils.cafeteria = 0 AND pupils.performance = 1 AND pupils.classes = 16 AND pupils.end_date > 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: school_id\ntables: universities\nconditions: \nterritory = 'IN'\ncapacity < 14364\nfunding = 'public'",
+   "question": "Which schools in Indiana with a capacity less than 14364 and public funding are there?",
+   "seed": [7, 2, 1, 0, 0, 4, 2, 14364, 0, 0, 0],
+   "sql": "SELECT universities.school_id\nFROM universities\nWHERE universities.territory = 'IN' AND universities.capacity < 14364 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'AZ' OR territory = 'MA'\ncapacity > 14372\nfunding = 'private'",
+   "question": "How many private universities in Arizona or Massachusetts with a capacity greater than 14372 are there?",
+   "seed": [5, 1, 1, 0, 1, 0, 1, 1, 14372, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'AZ' OR universities.territory = 'MA') AND universities.capacity > 14372 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'GA'\ncapacity = 15240\nfunding = 'private'",
+   "question": "How many private universities in Georgia with a capacity of 15240 are there?",
+   "seed": [5, 0, 1, 0, 0, 3, 0, 15240, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'GA' AND universities.capacity = 15240 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Kim Wilson'\nstudy = 'Sociology' OR study = 'Computer Science' OR study = 'Economics'\nhousing = 'Morgan House' OR housing = 'Underwood House'\ncafeteria = 1\nperformance > 2\nclasses = 9\nend_date > 2027",
+   "question": "How many pupils named Kim Wilson study Sociology, Computer Science, or Economics, live in Morgan House or Underwood House, use the cafeteria, have a performance score greater than 2, take 9 classes, and have an end date after 2027?",
+   "seed": [5, 1, 4, 0, 0, 0, 16, 7, 2, 9, 14, 4, 1, 1, 9, 0, 0, 1, 1, 0, 5, 1, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Kim Wilson' AND (pupils.study = 'Sociology' OR pupils.study = 'Computer Science' OR pupils.study = 'Economics') AND (pupils.housing = 'Morgan House' OR pupils.housing = 'Underwood House') AND pupils.cafeteria = 1 AND pupils.performance > 2 AND pupils.classes = 9 AND pupils.end_date > 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Kim Brown'\nstudy = 'Physics' OR study = 'Sociology' OR study = 'Classics'\nhousing = 'Davidson Hall' OR housing = 'Parker Hall' OR housing = 'Franklin Hall'\ncafeteria = 1",
+   "question": "How many pupils named Kim Brown study Physics, Sociology, or Classics, live in Davidson Hall, Parker Hall, or Franklin Hall, and use the cafeteria?",
+   "seed": [5, 0, 2, 0, 0, 0, 16, 4, 2, 3, 9, 13, 2, 8, 2, 3, 0, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Kim Brown' AND (pupils.study = 'Physics' OR pupils.study = 'Sociology' OR pupils.study = 'Classics') AND (pupils.housing = 'Davidson Hall' OR pupils.housing = 'Parker Hall' OR pupils.housing = 'Franklin Hall') AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MI' OR territory = 'OK'\ncapacity = 9703\nfunding = 'private'",
+   "question": "Which private schools in Michigan or Oklahoma with a capacity of 9703 are there?",
+   "seed": [5, 1, 1, 0, 1, 7, 10, 0, 9703, 0, 1, 0],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'MI' OR universities.territory = 'OK') AND universities.capacity = 9703 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MN' OR territory = 'GA'\ncapacity > 3176\nfunding = 'private'",
+   "question": "How many private universities in Minnesota or Georgia with a capacity greater than 3176 are there?",
+   "seed": [5, 1, 0, 0, 1, 5, 3, 1, 3176, 0, 1, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'MN' OR universities.territory = 'GA') AND universities.capacity > 3176 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'VT' OR territory = 'MN'\ncapacity = 4264\nfunding = 'public'",
+   "question": "How many public universities in Vermont or Minnesota with a capacity of 4264 are there?",
+   "seed": [5, 1, 0, 0, 1, 8, 5, 0, 4264, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'VT' OR universities.territory = 'MN') AND universities.capacity = 4264 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MA' OR territory = 'CO'\ncapacity < 12551\nfunding = 'private'",
+   "question": "How many private universities in Massachusetts or Colorado with a capacity less than 12551 are there?",
+   "seed": [5, 1, 0, 0, 1, 1, 9, 2, 12551, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'MA' OR universities.territory = 'CO') AND universities.capacity < 12551 AND universities.funding = 'private'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'CO' OR territory = 'VT'\ncapacity > 15466\nfunding = 'public'",
+   "question": "How many public universities in Colorado or Vermont with a capacity greater than 15466 are there?",
+   "seed": [5, 1, 0, 0, 1, 9, 8, 1, 15466, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE (universities.territory = 'CO' OR universities.territory = 'VT') AND universities.capacity > 15466 AND universities.funding = 'public'"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Tom Taylor'\nstudy = 'Art'\nhousing = 'Underwood House' OR housing = 'Davidson Hall'\ncafeteria = 1\nperformance = 3\nclasses = 13\nend_date < 2025",
+   "question": "How many pupils named Tom Taylor study Art, live in Underwood House or Davidson Hall, use the cafeteria, have a performance score of 3, take 13 classes, and have an end date before 2025?",
+   "seed": [5, 0, 4, 0, 0, 0, 13, 9, 0, 10, 1, 9, 8, 0, 0, 0, 2, 0, 9, 2, 3, 0],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Tom Taylor' AND pupils.study = 'Art' AND (pupils.housing = 'Underwood House' OR pupils.housing = 'Davidson Hall') AND pupils.cafeteria = 1 AND pupils.performance = 3 AND pupils.classes = 13 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Ron Smith'\nstudy = 'Chemistry' OR study = 'Economics' OR study = 'History'\nhousing = 'Franklin Hall' OR housing = 'Parker Hall'\ncafeteria = 1\nperformance > 4\nclasses = 13\nend_date = 2024",
+   "question": "How many pupils named Ron Smith study Chemistry, Economics, or History, live in Franklin Hall or Parker Hall, use the cafeteria, have a performance score greater than 4, take 13 classes, and have an end date of 2024?",
+   "seed": [6, 4, 0, 0, 0, 19, 0, 2, 2, 4, 5, 1, 3, 2, 0, 0, 1, 3, 0, 9, 0, 0, 1],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Ron Smith' AND (pupils.study = 'Chemistry' OR pupils.study = 'Economics' OR pupils.study = 'History') AND (pupils.housing = 'Franklin Hall' OR pupils.housing = 'Parker Hall') AND pupils.cafeteria = 1 AND pupils.performance > 4 AND pupils.classes = 13 AND pupils.end_date = 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT pupil_id)\ntables: pupils\nconditions: \nname = 'Mary Jones'\nstudy = 'Computer Science' OR study = 'Chemistry'\nhousing = 'Lawson Hall' OR housing = 'Carson Hall'\ncafeteria = 0",
+   "question": "How many pupils named Mary Jones study Computer Science or Chemistry, live in Lawson Hall or Carson Hall, and do not use the cafeteria?",
+   "seed": [6, 2, 0, 0, 0, 8, 3, 1, 14, 2, 1, 6, 5, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT pupils.pupil_id)\nFROM pupils\nWHERE pupils.name = 'Mary Jones' AND (pupils.study = 'Computer Science' OR pupils.study = 'Chemistry') AND (pupils.housing = 'Lawson Hall' OR pupils.housing = 'Carson Hall') AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: COUNT(DISTINCT school_id)\ntables: universities\nconditions: \nterritory = 'MI'\ncapacity > 7729\nfunding = 'private'",
+   "question": "How many private universities in Michigan with a capacity greater than 7729 are there?",
+   "seed": [5, 0, 0, 0, 0, 7, 1, 7729, 0, 1, 2],
+   "sql": "SELECT COUNT(DISTINCT universities.school_id)\nFROM universities\nWHERE universities.territory = 'MI' AND universities.capacity > 7729 AND universities.funding = 'private'"
+}
+]

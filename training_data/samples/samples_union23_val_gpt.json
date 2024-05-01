@@ -1,0 +1,603 @@
+[
+{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'IN'\nhousing = 'Norton Hall'",
+   "question": "What is the name of the store where pupils from Norton Hall live in Indiana?",
+   "seed": [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'IN' AND pupils.housing = 'Norton Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nend_date = 2027",
+   "question": "What is the name of the store where pupils from Massachusetts will end their studies in 2027?",
+   "seed": [0, 0, 1, 0, 0, 1, 2, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date = 2027\nstar_rating = 5",
+   "question": "Which pupils will end their studies in 2027 and have a store rating of 5?",
+   "seed": [1, 3, 1, 1, 1, 2, 0, 1, 2, 0, 5, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date = 2027 AND store.star_rating = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Philosophy'\nlocation = 'IN'",
+   "question": "Which pupils study Philosophy and live in Indiana?",
+   "seed": [1, 1, 1, 0, 0, 0, 7, 1, 0, 1, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Philosophy' AND store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Psychology'\nstar_rating <= 7",
+   "question": "Which pupils study Psychology and have a store rating less than or equal to 7?",
+   "seed": [1, 3, 0, 0, 0, 0, 0, 8, 2, 2, 7, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Psychology' AND store.star_rating <= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nend_date < 2027",
+   "question": "What is the name of the store where pupils from Massachusetts will end their studies before 2027?",
+   "seed": [0, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.end_date < 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Physics'\ncafeteria = 1\nlocation = 'CA'",
+   "question": "Which pupils study Physics, have a cafeteria, and live in California?",
+   "seed": [1, 1, 0, 0, 2, 0, 3, 0, 1, 0, 2, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Physics' AND pupils.cafeteria = 1 AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Underwood House'\ncafeteria = 1\nstar_rating = 1",
+   "question": "Which pupils live in Underwood House, have a cafeteria, and have a store rating of 1?",
+   "seed": [1, 3, 1, 0, 0, 3, 0, 9, 0, 2, 0, 1, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Underwood House' AND pupils.cafeteria = 1 AND store.star_rating = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 5\nperformance = 1",
+   "question": "What is the name of the store where pupils with a performance rating of 1 have a store rating less than or equal to 5?",
+   "seed": [0, 4, 0, 1, 2, 2, 5, 1, 0, 0, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 5 AND pupils.performance = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating = 7\nstudy = 'Sociology'",
+   "question": "What is the name of the store where pupils study Sociology and have a store rating of 7?",
+   "seed": [0, 2, 1, 1, 2, 0, 7, 0, 0, 0, 9, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating = 7 AND pupils.study = 'Sociology'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nhousing = 'Underwood House'\ncafeteria = 1",
+   "question": "What is the name of the store in Texas where pupils live in Underwood House and have a cafeteria?",
+   "seed": [0, 0, 1, 0, 4, 0, 3, 0, 9, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.housing = 'Underwood House' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Psychology'\ncafeteria = 1",
+   "question": "Which pupils study Psychology and have a cafeteria?",
+   "seed": [1, 0, 0, 2, 0, 8, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Psychology' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Computer Science'",
+   "question": "Which pupils study Computer Science?",
+   "seed": [1, 0, 0, 0, 0, 14, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Computer Science'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nhousing = 'Parker Hall'",
+   "question": "What is the name of the store where pupils from Parker Hall live in Massachusetts?",
+   "seed": [0, 1, 0, 1, 0, 0, 0, 1, 0, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.housing = 'Parker Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date = 2027",
+   "question": "What is the name of the store where pupils will end their studies in 2027?",
+   "seed": [0, 2, 1, 1, 0, 1, 2, 0, 1, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 2\nstudy = 'Art'\ncafeteria = 1",
+   "question": "Which pupils study Art, have a cafeteria, and have a store rating less than or equal to 2?",
+   "seed": [0, 4, 0, 1, 2, 2, 2, 0, 2, 0, 10, 0, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 2 AND pupils.study = 'Art' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Underwood House'\ncafeteria = 0",
+   "question": "Which pupils live in Underwood House but do not have a cafeteria?",
+   "seed": [1, 2, 1, 1, 0, 3, 0, 9, 1, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Underwood House' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date = 2026\nstar_rating = 8",
+   "question": "Which pupils will end their studies in 2026 and have a store rating of 8?",
+   "seed": [1, 3, 0, 0, 1, 2, 0, 2, 2, 0, 8, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date = 2026 AND store.star_rating = 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance < 2\nend_date < 2027",
+   "question": "What is the name of the store where pupils with a performance rating less than 2 will end their studies before 2027?",
+   "seed": [0, 4, 1, 1, 0, 1, 4, 2, 1, 2, 1, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance < 2 AND pupils.end_date < 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nperformance = 2\nend_date > 2024",
+   "question": "What is the name of the store where pupils with a performance rating of 2 will end their studies after 2024 in Massachusetts?",
+   "seed": [0, 1, 1, 1, 0, 0, 1, 4, 0, 1, 1, 0, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.performance = 2 AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Green Hall'\ncafeteria = 1",
+   "question": "Which pupils live in Green Hall and have a cafeteria?",
+   "seed": [1, 3, 0, 0, 0, 3, 0, 4, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Green Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Davidson Hall'\ncafeteria = 1\nstar_rating <= 6",
+   "question": "Which pupils live in Davidson Hall, have a cafeteria, and have a store rating less than or equal to 6?",
+   "seed": [1, 4, 1, 0, 0, 3, 0, 8, 0, 2, 2, 6, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1 AND store.star_rating <= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating = 5\nperformance < 3\nend_date < 2026",
+   "question": "What is the name of the store where pupils with a performance rating less than 3, ending their studies before 2026, have a store rating of 5?",
+   "seed": [0, 0, 2, 0, 5, 1, 4, 2, 2, 2, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating = 5 AND pupils.performance < 3 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance = 4\nlocation = 'CA'",
+   "question": "Which pupils have a performance rating of 4 and live in California?",
+   "seed": [1, 2, 0, 1, 1, 0, 0, 3, 1, 0, 2, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance = 4 AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 5\nstudy = 'Political Science'",
+   "question": "What is the name of the store where pupils study Political Science and have a store rating less than or equal to 5?",
+   "seed": [0, 4, 1, 0, 2, 2, 5, 0, 0, 0, 6, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 5 AND pupils.study = 'Political Science'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating = 4\nhousing = 'Green Hall'",
+   "question": "What is the name of the store where pupils from Green Hall live with a store rating of 4?",
+   "seed": [0, 1, 1, 2, 0, 4, 0, 1, 0, 4, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating = 4 AND pupils.housing = 'Green Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Psychology'\nstar_rating = 5",
+   "question": "Which pupils study Psychology and have a store rating of 5?",
+   "seed": [1, 0, 0, 0, 0, 8, 2, 0, 5, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Psychology' AND store.star_rating = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 7\nhousing = 'Davidson Hall'\ncafeteria = 1",
+   "question": "What is the name of the store where pupils from Davidson Hall live with a store rating less than or equal to 7 and have a cafeteria?",
+   "seed": [0, 1, 0, 2, 2, 7, 0, 3, 0, 8, 0, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 7 AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date > 2025\nlocation = 'IN'",
+   "question": "Which pupils will end their studies after 2025 and live in Indiana?",
+   "seed": [1, 1, 1, 1, 2, 1, 3, 1, 0, 1, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date > 2025 AND store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 7\nhousing = 'Green Hall'\ncafeteria = 1",
+   "question": "What is the name of the store where pupils from Green Hall live with a store rating greater than or equal to 7 and have a cafeteria?",
+   "seed": [0, 3, 1, 0, 2, 1, 7, 0, 3, 0, 4, 0, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 7 AND pupils.housing = 'Green Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Computer Science'\nstar_rating = 7",
+   "question": "What are the names of pupils studying Computer Science whose associated store has a star rating of 7?",
+   "seed": [1, 0, 0, 0, 0, 14, 2, 0, 7, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Computer Science' AND store.star_rating = 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Davidson Hall'",
+   "question": "What are the names of pupils staying in Davidson Hall?",
+   "seed": [1, 2, 1, 1, 0, 1, 0, 8, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Davidson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nhousing = 'Campbell Hall'",
+   "question": "What are the names of stores located in TX that are associated with pupils staying in Campbell Hall?",
+   "seed": [0, 4, 1, 0, 1, 0, 4, 0, 1, 0, 7, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.housing = 'Campbell Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Carson Hall'\ncafeteria = 1\nstar_rating = 10",
+   "question": "What are the names of pupils staying in Carson Hall who have a cafeteria and whose associated store has a star rating of 10?",
+   "seed": [1, 2, 0, 0, 0, 3, 0, 5, 0, 2, 0, 10, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Carson Hall' AND pupils.cafeteria = 1 AND store.star_rating = 10"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Morgan House'\ncafeteria = 0\nlocation = 'MA'",
+   "question": "What are the names of pupils staying in Morgan House who do not have a cafeteria and whose associated store is located in MA?",
+   "seed": [1, 0, 0, 3, 0, 1, 1, 1, 0, 0, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Morgan House' AND pupils.cafeteria = 0 AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 5\nstudy = 'Music'",
+   "question": "What are the names of stores with a star rating greater than or equal to 5 that are associated with pupils studying Music?",
+   "seed": [0, 3, 0, 0, 2, 1, 5, 0, 0, 0, 11, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 5 AND pupils.study = 'Music'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date > 2026\nlocation = 'TX'",
+   "question": "What are the names of pupils whose end date is after 2026 and whose associated store is located in TX?",
+   "seed": [1, 2, 0, 1, 1, 2, 1, 2, 1, 0, 4, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date > 2026 AND store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Norton Hall'\ncafeteria = 0\nlocation = 'TX'",
+   "question": "What are the names of pupils staying in Norton Hall who do not have a cafeteria and whose associated store is located in TX?",
+   "seed": [1, 4, 1, 0, 0, 3, 0, 0, 1, 1, 0, 4, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0 AND store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Philosophy'\ncafeteria = 1\nstar_rating <= 4",
+   "question": "What are the names of pupils studying Philosophy who have a cafeteria and whose associated store has a star rating less than or equal to 4?",
+   "seed": [1, 2, 0, 0, 0, 2, 0, 7, 0, 2, 2, 4, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Philosophy' AND pupils.cafeteria = 1 AND store.star_rating <= 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 8\nhousing = 'Norton Hall'",
+   "question": "What are the names of stores with a star rating greater than or equal to 8 that are associated with pupils staying in Norton Hall?",
+   "seed": [0, 2, 1, 0, 2, 1, 8, 0, 1, 0, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 8 AND pupils.housing = 'Norton Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Davidson Hall'\nlocation = 'MA'",
+   "question": "What are the names of pupils staying in Davidson Hall whose associated store is located in MA?",
+   "seed": [1, 1, 0, 0, 1, 0, 8, 1, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Davidson Hall' AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nperformance < 3",
+   "question": "What are the names of stores located in CA that are associated with pupils with a performance rating less than 3?",
+   "seed": [0, 2, 1, 0, 1, 0, 2, 1, 0, 2, 2, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.performance < 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Classics'\ncafeteria = 0\nlocation = 'MA'",
+   "question": "What are the names of pupils studying Classics who do not have a cafeteria and whose associated store is located in MA?",
+   "seed": [1, 0, 0, 2, 0, 13, 1, 1, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Classics' AND pupils.cafeteria = 0 AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nperformance < 3",
+   "question": "What are the names of stores located in CA that are associated with pupils with a performance rating less than 3?",
+   "seed": [0, 2, 0, 0, 1, 0, 2, 1, 0, 2, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.performance < 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Underwood House'\ncafeteria = 0\nlocation = 'MA'",
+   "question": "What are the names of pupils staying in Underwood House who do not have a cafeteria and whose associated store is located in MA?",
+   "seed": [1, 2, 0, 1, 0, 3, 0, 9, 1, 1, 0, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Underwood House' AND pupils.cafeteria = 0 AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nstudy = 'Math'\ncafeteria = 0",
+   "question": "What are the names of stores located in MA that are associated with pupils studying Math and do not have a cafeteria?",
+   "seed": [0, 3, 1, 0, 1, 0, 0, 0, 2, 0, 0, 1, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.study = 'Math' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Computer Science'\nstar_rating >= 5",
+   "question": "What are the names of pupils studying Computer Science whose associated store has a star rating greater than or equal to 5?",
+   "seed": [1, 1, 0, 0, 0, 0, 14, 2, 1, 5, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Computer Science' AND store.star_rating >= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Parker Hall'\nlocation = 'NY'",
+   "question": "What are the names of pupils staying in Parker Hall whose associated store is located in NY?",
+   "seed": [1, 0, 0, 1, 0, 2, 1, 0, 3, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Parker Hall' AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 9\nperformance = 4\nend_date = 2027",
+   "question": "What are the names of stores with a star rating greater than or equal to 9 that are associated with pupils with a performance rating of 4 and an end date of 2027?",
+   "seed": [0, 4, 0, 0, 2, 1, 9, 1, 4, 0, 3, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 9 AND pupils.performance = 4 AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance = 4\nstar_rating <= 7",
+   "question": "What are the names of pupils with a performance rating of 4 whose associated store has a star rating less than or equal to 7?",
+   "seed": [1, 2, 0, 1, 1, 0, 0, 3, 2, 2, 7, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance = 4 AND store.star_rating <= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'History'\nstar_rating >= 2",
+   "question": "What are the names of pupils studying History whose associated store has a star rating greater than or equal to 2?",
+   "seed": [1, 1, 0, 0, 0, 0, 5, 2, 1, 2, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'History' AND store.star_rating >= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Art'",
+   "question": "What are the names of stores associated with pupils studying Art?",
+   "seed": [0, 3, 0, 0, 0, 0, 0, 0, 10, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Art'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 5\nhousing = 'Franklin Hall'",
+   "question": "What are the names of stores with a star rating less than or equal to 5 that are associated with pupils staying in Franklin Hall?",
+   "seed": [0, 2, 0, 1, 2, 2, 5, 0, 1, 0, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 5 AND pupils.housing = 'Franklin Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Computer Science'\ncafeteria = 0\nstar_rating = 1",
+   "question": "What are the names of pupils studying Computer Science who do not have a cafeteria and whose associated store has a star rating of 1?",
+   "seed": [1, 2, 1, 1, 0, 2, 0, 14, 1, 2, 0, 1, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Computer Science' AND pupils.cafeteria = 0 AND store.star_rating = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 7\nend_date < 2025",
+   "question": "What are the names of stores with a star rating less than or equal to 7 that are associated with pupils with an end date before 2025?",
+   "seed": [0, 2, 1, 1, 2, 2, 7, 1, 2, 2, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 7 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Campbell Hall'\ncafeteria = 1\nlocation = 'MA'",
+   "question": "What are the names of pupils staying in Campbell Hall who have a cafeteria and whose associated store is located in MA?",
+   "seed": [1, 0, 0, 3, 0, 7, 0, 1, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Campbell Hall' AND pupils.cafeteria = 1 AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nperformance = 3",
+   "question": "What are the names of stores located in CA that are associated with pupils with a performance rating of 3?",
+   "seed": [0, 3, 0, 0, 1, 0, 2, 1, 0, 0, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.performance = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Computer Science'\ncafeteria = 1\nstar_rating <= 5",
+   "question": "What are the names of pupils studying Computer Science who have a cafeteria and whose associated store has a star rating less than or equal to 5?",
+   "seed": [1, 2, 1, 0, 0, 2, 0, 14, 0, 2, 2, 5, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Computer Science' AND pupils.cafeteria = 1 AND store.star_rating <= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nperformance < 4\nend_date < 2025",
+   "question": "What are the names of stores located in CA that are associated with pupils with a performance rating less than 4 and an end date before 2025?",
+   "seed": [0, 3, 1, 1, 1, 0, 2, 1, 4, 2, 3, 2, 3, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.performance < 4 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 7\nhousing = 'Norton Hall'",
+   "question": "What are the names of stores with a star rating less than or equal to 7 that are associated with pupils staying in Norton Hall?",
+   "seed": [0, 4, 0, 0, 2, 2, 7, 0, 1, 0, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 7 AND pupils.housing = 'Norton Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nperformance > 3\nend_date < 2026",
+   "question": "What are the names of pupils whose performance is greater than 3 and end date is before 2026?",
+   "seed": [1, 0, 1, 4, 1, 2, 2, 2, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.performance > 3 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date < 2026\nlocation = 'CA'",
+   "question": "What are the names of pupils whose end date is before 2026 and who are associated with a store located in California?",
+   "seed": [1, 0, 1, 2, 2, 2, 1, 0, 2, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date < 2026 AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 7\nstudy = 'Philosophy'",
+   "question": "What are the names of stores where the star rating is greater than or equal to 7 and pupils study Philosophy?",
+   "seed": [0, 2, 0, 1, 2, 1, 7, 0, 0, 0, 7, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 7 AND pupils.study = 'Philosophy'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nstudy = 'Chemistry'\ncafeteria = 0",
+   "question": "What are the names of stores where the location is California, pupils study Chemistry, and pupils do not use the cafeteria?",
+   "seed": [0, 0, 1, 0, 2, 0, 2, 0, 2, 1, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.study = 'Chemistry' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nend_date < 2027",
+   "question": "What are the names of pupils whose end date is before 2027?",
+   "seed": [1, 2, 1, 0, 1, 2, 2, 1, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.end_date < 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nperformance > 1\nend_date < 2026",
+   "question": "What are the names of stores where the location is Massachusetts, pupils' performance is greater than 1, and end date is before 2026?",
+   "seed": [0, 4, 1, 0, 1, 0, 0, 1, 4, 1, 0, 2, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.performance > 1 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Physics'\ncafeteria = 1\nlocation = 'NY'",
+   "question": "What are the names of pupils who study Physics, use the cafeteria, and are associated with a store located in New York?",
+   "seed": [1, 1, 0, 0, 2, 0, 3, 0, 1, 0, 3, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Physics' AND pupils.cafeteria = 1 AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Economics'\ncafeteria = 1\nlocation = 'NY'",
+   "question": "What are the names of pupils who study Economics, use the cafeteria, and are associated with a store located in New York?",
+   "seed": [1, 4, 0, 1, 0, 2, 0, 4, 0, 1, 0, 3, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Economics' AND pupils.cafeteria = 1 AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance = 2\nend_date = 2024\nstar_rating >= 2",
+   "question": "What are the names of pupils whose performance is 2, end date is 2024, and the associated store's star rating is greater than or equal to 2?",
+   "seed": [1, 4, 1, 0, 1, 4, 0, 1, 0, 0, 2, 1, 2, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance = 2 AND pupils.end_date = 2024 AND store.star_rating >= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Psychology'\nstar_rating = 7",
+   "question": "What are the names of pupils who study Psychology and are associated with a store with a star rating of 7?",
+   "seed": [1, 2, 1, 0, 0, 0, 0, 8, 2, 0, 7, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Psychology' AND store.star_rating = 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Carson Hall'\nstar_rating = 6",
+   "question": "What are the names of pupils who reside in Carson Hall and are associated with a store with a star rating of 6?",
+   "seed": [1, 1, 1, 0, 1, 0, 5, 2, 0, 6, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Carson Hall' AND store.star_rating = 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nstudy = 'English'",
+   "question": "What are the names of stores where the location is Massachusetts and pupils study English?",
+   "seed": [0, 0, 1, 0, 0, 0, 0, 0, 12, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.study = 'English'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 4\nhousing = 'Davidson Hall'\ncafeteria = 0",
+   "question": "What are the names of stores where the star rating is greater than or equal to 4, pupils reside in Davidson Hall, and do not use the cafeteria?",
+   "seed": [0, 3, 0, 0, 2, 1, 4, 0, 3, 0, 8, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 4 AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nperformance = 4\nend_date > 2026",
+   "question": "What are the names of stores where the location is Texas, pupils' performance is 4, and end date is after 2026?",
+   "seed": [0, 4, 0, 0, 1, 0, 4, 1, 4, 0, 3, 1, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.performance = 4 AND pupils.end_date > 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Franklin Hall'\ncafeteria = 1",
+   "question": "What are the names of pupils who reside in Franklin Hall and use the cafeteria?",
+   "seed": [1, 3, 1, 1, 0, 3, 0, 3, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Franklin Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'English'\ncafeteria = 1\nlocation = 'IN'",
+   "question": "What are the names of pupils who study English, use the cafeteria, and are associated with a store located in Indiana?",
+   "seed": [1, 3, 1, 1, 0, 2, 0, 12, 0, 1, 0, 1, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'English' AND pupils.cafeteria = 1 AND store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Morgan House'\nstar_rating = 8",
+   "question": "What are the names of pupils who reside in Morgan House and are associated with a store with a star rating of 8?",
+   "seed": [1, 1, 0, 0, 1, 0, 1, 2, 0, 8, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Morgan House' AND store.star_rating = 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 3\nhousing = 'Davidson Hall'\ncafeteria = 1",
+   "question": "What are the names of stores where the star rating is greater than or equal to 3, pupils reside in Davidson Hall, and use the cafeteria?",
+   "seed": [0, 2, 0, 1, 2, 1, 3, 0, 3, 0, 8, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 3 AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Underwood House'\nstar_rating = 1",
+   "question": "What are the names of pupils who reside in Underwood House and are associated with a store with a star rating of 1?",
+   "seed": [1, 4, 1, 0, 0, 1, 0, 9, 2, 0, 1, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Underwood House' AND store.star_rating = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 6\nhousing = 'Lawson Hall'",
+   "question": "What are the names of stores where the star rating is greater than or equal to 6 and pupils reside in Lawson Hall?",
+   "seed": [0, 0, 2, 1, 6, 0, 1, 0, 6, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 6 AND pupils.housing = 'Lawson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Classics'",
+   "question": "What are the names of pupils who study Classics?",
+   "seed": [1, 3, 0, 0, 0, 0, 0, 13, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Classics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date = 2024\nstar_rating >= 8",
+   "question": "What are the names of pupils whose end date is 2024 and are associated with a store with a star rating of 8?",
+   "seed": [1, 1, 0, 1, 2, 0, 0, 2, 1, 8, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date = 2024 AND store.star_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Economics'\ncafeteria = 0\nlocation = 'CA'",
+   "question": "What are the names of pupils who study Economics, do not use the cafeteria, and are associated with a store located in California?",
+   "seed": [1, 1, 1, 0, 2, 0, 4, 1, 1, 0, 2, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Economics' AND pupils.cafeteria = 0 AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nstudy = 'Philosophy'",
+   "question": "What are the names of stores where the location is California and pupils study Philosophy?",
+   "seed": [0, 1, 0, 1, 0, 2, 0, 0, 0, 7, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.study = 'Philosophy'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'NY'\nstudy = 'Sociology'\ncafeteria = 0",
+   "question": "What are the names of stores where the location is New York, pupils study Sociology, and do not use the cafeteria?",
+   "seed": [0, 1, 1, 1, 0, 3, 0, 2, 0, 9, 1, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'NY' AND pupils.study = 'Sociology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 3\nperformance = 1",
+   "question": "What are the names of stores where the star rating is greater than or equal to 3 and pupils' performance is 1?",
+   "seed": [0, 1, 1, 2, 1, 3, 1, 0, 0, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 3 AND pupils.performance = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Math'",
+   "question": "What are the names of stores where pupils study Math?",
+   "seed": [0, 2, 1, 0, 0, 0, 0, 0, 0, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Math'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'English'\nstar_rating = 9",
+   "question": "What are the names of pupils who study English and are associated with a store with a star rating of 9?",
+   "seed": [1, 2, 1, 1, 0, 0, 0, 12, 2, 0, 9, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'English' AND store.star_rating = 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'IN'\nstudy = 'Classics'",
+   "question": "What are the names of stores where the location is Indiana and pupils study Classics?",
+   "seed": [0, 0, 1, 0, 1, 0, 0, 0, 13, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'IN' AND pupils.study = 'Classics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance = 4\nend_date < 2027\nlocation = 'MA'",
+   "question": "What are the names of pupils whose performance is 4, end date is before 2027, and are associated with a store located in Massachusetts?",
+   "seed": [1, 0, 1, 4, 0, 3, 2, 1, 1, 0, 0, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance = 4 AND pupils.end_date < 2027 AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 2\nhousing = 'Parker Hall'",
+   "question": "What are the names of stores where pupils from Parker Hall live and the star rating of the store is less than or equal to 2?",
+   "seed": [0, 1, 1, 2, 2, 2, 0, 1, 0, 2, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 2 AND pupils.housing = 'Parker Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Art'",
+   "question": "What are the names of stores where pupils study Art?",
+   "seed": [0, 4, 0, 1, 0, 0, 0, 0, 10, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Art'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 8\nhousing = 'Green Hall'",
+   "question": "What are the names of stores where pupils from Green Hall live and the star rating of the store is less than or equal to 8?",
+   "seed": [0, 3, 1, 0, 2, 2, 8, 0, 1, 0, 4, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 8 AND pupils.housing = 'Green Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 5\nperformance < 3\nend_date = 2026",
+   "question": "What are the names of stores where the star rating is less than or equal to 5, pupils' performance is less than 3, and the end date is 2026?",
+   "seed": [0, 0, 2, 2, 5, 1, 4, 2, 2, 0, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 5 AND pupils.performance < 3 AND pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'English'\ncafeteria = 0\nlocation = 'IN'",
+   "question": "What are the names of pupils who study English, don't use the cafeteria, and the store is located in Indiana?",
+   "seed": [1, 1, 1, 0, 2, 0, 12, 1, 1, 0, 1, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'English' AND pupils.cafeteria = 0 AND store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating = 5\nstudy = 'Psychology'\ncafeteria = 1",
+   "question": "What are the names of stores where the star rating is 5, pupils study Psychology, and they use the cafeteria?",
+   "seed": [0, 0, 2, 0, 5, 0, 2, 0, 8, 0, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating = 5 AND pupils.study = 'Psychology' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 6\nstudy = 'Economics'",
+   "question": "What are the names of stores where the star rating is less than or equal to 6 and pupils study Economics?",
+   "seed": [0, 1, 1, 2, 2, 6, 0, 0, 0, 4, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 6 AND pupils.study = 'Economics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nperformance < 3",
+   "question": "What are the names of pupils whose performance is less than 3?",
+   "seed": [1, 1, 0, 1, 0, 2, 2, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.performance < 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date > 2026\nlocation = 'NY'",
+   "question": "What are the names of pupils whose end date is after 2026 and the store is located in New York?",
+   "seed": [1, 1, 1, 1, 2, 1, 2, 1, 0, 3, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date > 2026 AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance = 4\nstar_rating = 3",
+   "question": "What are the names of pupils whose performance is 4 and the store's star rating is 3?",
+   "seed": [1, 2, 0, 0, 1, 0, 0, 3, 2, 0, 3, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance = 4 AND store.star_rating = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Biology'",
+   "question": "What are the names of pupils who study Biology?",
+   "seed": [1, 3, 1, 1, 0, 0, 0, 1, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Biology'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'IN'\nperformance < 3\nend_date = 2024",
+   "question": "What are the names of stores located in Indiana where pupils' performance is less than 3 and the end date is 2024?",
+   "seed": [0, 4, 1, 1, 1, 0, 1, 1, 4, 2, 2, 0, 0, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'IN' AND pupils.performance < 3 AND pupils.end_date = 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'NY'\nperformance > 3",
+   "question": "What are the names of stores located in New York where pupils' performance is greater than 3?",
+   "seed": [0, 2, 0, 0, 1, 0, 3, 1, 0, 1, 2, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'NY' AND pupils.performance > 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nhousing = 'Parker Hall'",
+   "question": "What are the names of pupils who live in Parker Hall?",
+   "seed": [1, 0, 0, 1, 0, 2, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.housing = 'Parker Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nhousing = 'Lawson Hall'",
+   "question": "What are the names of stores located in Texas where pupils live in Lawson Hall?",
+   "seed": [0, 1, 1, 1, 0, 4, 0, 1, 0, 6, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.housing = 'Lawson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 9\nperformance = 2\nend_date > 2026",
+   "question": "What are the names of stores where the star rating is greater than or equal to 9, pupils' performance is 2, and the end date is after 2026?",
+   "seed": [0, 2, 0, 0, 2, 1, 9, 1, 4, 0, 1, 1, 2, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 9 AND pupils.performance = 2 AND pupils.end_date > 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Sociology'\nlocation = 'CA'",
+   "question": "What are the names of pupils who study Sociology and the store is located in California?",
+   "seed": [1, 0, 0, 0, 0, 9, 1, 0, 2, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Sociology' AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nhousing = 'Parker Hall'\ncafeteria = 1",
+   "question": "What are the names of stores located in California where pupils live in Parker Hall and use the cafeteria?",
+   "seed": [0, 3, 1, 1, 1, 0, 2, 0, 3, 0, 2, 0, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.housing = 'Parker Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'History'\ncafeteria = 0\nstar_rating <= 8",
+   "question": "What are the names of pupils who study History, don't use the cafeteria, and the store's star rating is less than or equal to 8?",
+   "seed": [1, 0, 0, 2, 0, 5, 1, 2, 2, 8, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'History' AND pupils.cafeteria = 0 AND store.star_rating <= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'NY'\nend_date < 2025",
+   "question": "What are the names of stores located in New York where the end date is before 2025?",
+   "seed": [0, 1, 0, 1, 0, 3, 1, 2, 2, 3, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'NY' AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Campbell Hall'\nlocation = 'CA'",
+   "question": "What are the names of pupils who live in Campbell Hall and the store is located in California?",
+   "seed": [1, 0, 0, 1, 0, 7, 1, 0, 2, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Campbell Hall' AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 4\nperformance > 3",
+   "question": "What are the names of stores where the star rating is greater than or equal to 4 and pupils' performance is greater than 3?",
+   "seed": [0, 4, 0, 0, 2, 1, 4, 1, 0, 1, 2, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 4 AND pupils.performance > 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nhousing = 'Franklin Hall'\ncafeteria = 1",
+   "question": "What are the names of stores located in Texas where pupils live in Franklin Hall and use the cafeteria?",
+   "seed": [0, 1, 0, 1, 0, 4, 0, 3, 0, 3, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.housing = 'Franklin Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 6\nperformance = 4\nend_date > 2024",
+   "question": "What are the names of stores where the star rating is greater than or equal to 6, pupils' performance is 4, and the end date is after 2024?",
+   "seed": [0, 3, 0, 1, 2, 1, 6, 1, 4, 0, 3, 1, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 6 AND pupils.performance = 4 AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 4\nstudy = 'Political Science'\ncafeteria = 0",
+   "question": "What are the names of stores where the star rating is less than or equal to 4, pupils study Political Science, and don't use the cafeteria?",
+   "seed": [0, 3, 1, 1, 2, 2, 4, 0, 2, 0, 6, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 4 AND pupils.study = 'Political Science' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nend_date = 2025\nlocation = 'TX'",
+   "question": "What are the names of pupils whose end date is 2025 and the store is located in Texas?",
+   "seed": [1, 1, 1, 1, 2, 0, 3, 1, 0, 4, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.end_date = 2025 AND store.location = 'TX'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Campbell Hall'\nstar_rating <= 8",
+   "question": "What are the names of pupils who live in Campbell Hall and the store's star rating is less than or equal to 8?",
+   "seed": [1, 3, 1, 1, 0, 1, 0, 7, 2, 2, 8, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Campbell Hall' AND store.star_rating <= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nend_date > 2024",
+   "question": "What are the names of stores located in Texas where the end date is after 2024?",
+   "seed": [0, 0, 1, 0, 4, 1, 2, 1, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Math'\nstar_rating >= 8",
+   "question": "What are the names of pupils who study Math and the store's star rating is greater than or equal to 8?",
+   "seed": [1, 2, 1, 0, 0, 0, 0, 0, 2, 1, 8, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Math' AND store.star_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nhousing = 'Morgan House'\ncafeteria = 1",
+   "question": "What are the names of stores located in California where pupils live in Morgan House and use the cafeteria?",
+   "seed": [0, 3, 1, 1, 1, 0, 2, 0, 3, 0, 1, 0, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.housing = 'Morgan House' AND pupils.cafeteria = 1"
+}
+]

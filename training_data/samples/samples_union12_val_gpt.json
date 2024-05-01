@@ -1,0 +1,483 @@
+[
+{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 32\nstar_rating = 4",
+   "question": "What are the names of instructors whose age is less than or equal to 32 and whose store's star rating is 4?",
+   "seed": [0, 4, 0, 1, 1, 1, 32, 1, 0, 4, 3],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 32 AND store.star_rating = 4"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'history'\nlevel = 11\ngrade <= 37\nlocation = 'MA' OR location = 'TX' OR location = 'IN'",
+   "question": "What are the names of instructors who teach history at level 11, whose grade is less than or equal to 37, and whose store is located in MA, TX, or IN?",
+   "seed": [0, 0, 0, 0, 5, 1, 5, 0, 14, 1, 37, 0, 2, 0, 4, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.class_subject = 'history' AND classes.level = 11 AND classes.grade <= 37 AND (store.location = 'MA' OR store.location = 'TX' OR store.location = 'IN')"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 55\nlocation = 'MA' OR location = 'NY'",
+   "question": "Which instructors whose age is less than or equal to 55 are associated with stores located in MA or NY?",
+   "seed": [0, 3, 1, 0, 1, 1, 55, 0, 1, 0, 3, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 55 AND (store.location = 'MA' OR store.location = 'NY')"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 80\nlocation = 'NY'",
+   "question": "Who are the instructors aged less than or equal to 80, associated with stores located in NY?",
+   "seed": [0, 2, 1, 0, 1, 1, 80, 0, 0, 3, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 80 AND store.location = 'NY'"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 21\nclass_subject = 'philosophy' OR class_subject = 'literature' OR class_subject = 'chemistry'\nyear >= 2005\nlocation = 'TX' OR location = 'CA' OR location = 'MA'",
+   "question": "Who are the instructors aged 21 or older, teaching philosophy, literature, or chemistry since 2005, and associated with stores in TX, CA, or MA?",
+   "seed": [0, 3, 1, 1, 2, 0, 21, 0, 2, 3, 7, 13, 2, 0, 2005, 0, 2, 4, 2, 0, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 21 AND (classes.class_subject = 'philosophy' OR classes.class_subject = 'literature' OR classes.class_subject = 'chemistry') AND classes.year >= 2005 AND (store.location = 'TX' OR store.location = 'CA' OR store.location = 'MA')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 90\nclass_subject = 'physics' OR class_subject = 'math' OR class_subject = 'music'\nlevel = 8\nstar_rating <= 2",
+   "question": "Who are the instructors aged less than or equal to 90, teaching physics, math, or music at level 8, and associated with stores having a star rating less than or equal to 2?",
+   "seed": [0, 2, 0, 1, 2, 1, 90, 0, 4, 3, 3, 0, 11, 0, 3, 8, 1, 2, 2, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 90 AND (classes.class_subject = 'physics' OR classes.class_subject = 'math' OR classes.class_subject = 'music') AND classes.level = 8 AND store.star_rating <= 2"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX'\nteacher_age <= 86\nclass_subject = 'english' OR class_subject = 'sociology' OR class_subject = 'art'\ngrade >= 89",
+   "question": "What are the names of stores in TX where instructors aged less than or equal to 86 teach English, sociology, or art at grade 89 or above?",
+   "seed": [1, 2, 1, 1, 0, 0, 4, 2, 1, 86, 0, 1, 3, 12, 9, 10, 0, 89, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND instructors.teacher_age <= 86 AND (classes.class_subject = 'english' OR classes.class_subject = 'sociology' OR classes.class_subject = 'art') AND classes.grade >= 89"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age >= 79\nstar_rating <= 6",
+   "question": "Who are the instructors aged 79 or older associated with stores having a star rating less than or equal to 6?",
+   "seed": [0, 4, 1, 0, 1, 0, 79, 1, 2, 6, 2],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 79 AND store.star_rating <= 6"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'CA' OR location = 'NY' OR location = 'TX'\nclass_subject = 'philosophy' OR class_subject = 'music'\nlevel = 11\ngrade <= 48\nyear <= 2001",
+   "question": "What are the names of stores in CA, NY, or TX, where philosophy or music is taught at level 11 with a grade less than or equal to 48 before 2001?",
+   "seed": [1, 1, 1, 0, 2, 2, 3, 4, 0, 0, 7, 2, 7, 11, 0, 3, 11, 1, 48, 1, 2001, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'CA' OR store.location = 'NY' OR store.location = 'TX') AND (classes.class_subject = 'philosophy' OR classes.class_subject = 'music') AND classes.level = 11 AND classes.grade <= 48 AND classes.year <= 2001"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'CA' OR location = 'IN' OR location = 'TX'\nclass_subject = 'chemistry' OR class_subject = 'sociology' OR class_subject = 'biology'\ngrade <= 33\nyear >= 2009",
+   "question": "What are the names of stores in CA, IN, or TX, where chemistry, sociology, or biology is taught at grade less than or equal to 33 since 2009?",
+   "seed": [1, 0, 0, 2, 2, 1, 4, 0, 0, 3, 3, 2, 9, 1, 1, 33, 0, 2009, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'CA' OR store.location = 'IN' OR store.location = 'TX') AND (classes.class_subject = 'chemistry' OR classes.class_subject = 'sociology' OR classes.class_subject = 'biology') AND classes.grade <= 33 AND classes.year >= 2009"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating = 10\nteacher_age >= 62 OR (class_subject = 'history' OR class_subject = 'english') AND grade <= 41",
+   "question": "What are the names of stores with a star rating of 10, where instructors aged 62 or older or teaching history or English have a grade less than or equal to 41?",
+   "seed": [1, 2, 1, 1, 1, 0, 10, 3, 0, 62, 0, 1, 2, 5, 12, 1, 41, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 10 AND (instructors.teacher_age >= 62 OR (classes.class_subject = 'history' OR classes.class_subject = 'english') AND classes.grade <= 41)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 52 OR (class_subject = 'physics' OR class_subject = 'economics' OR class_subject = 'english') AND level = 1 AND grade <= 24\nstar_rating >= 9",
+   "question": "Who are the instructors aged 52 or older or teaching physics, economics, or English at level 1 with a grade less than or equal to 24 associated with stores having a star rating of 9 or higher?",
+   "seed": [0, 0, 3, 0, 52, 0, 5, 3, 3, 4, 12, 0, 0, 1, 24, 1, 1, 9, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age >= 52 OR (classes.class_subject = 'physics' OR classes.class_subject = 'economics' OR classes.class_subject = 'english') AND classes.level = 1 AND classes.grade <= 24) AND store.star_rating >= 9"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX' OR location = 'NY' OR location = 'CA'\nstar_rating >= 6\nteacher_age <= 69 OR class_subject = 'art' AND grade >= 72 AND year >= 2015",
+   "question": "What are the names of stores in TX, NY, or CA with a star rating of 6 or higher, where instructors aged 69 or younger or teaching art have a grade of 72 or above since 2015?",
+   "seed": [1, 2, 1, 1, 2, 2, 4, 3, 2, 1, 6, 3, 1, 69, 0, 3, 1, 10, 0, 72, 0, 2015, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'TX' OR store.location = 'NY' OR store.location = 'CA') AND store.star_rating >= 6 AND (instructors.teacher_age <= 69 OR classes.class_subject = 'art' AND classes.grade >= 72 AND classes.year >= 2015)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'CA'\nstar_rating = 1\nclass_subject = 'chemistry' OR class_subject = 'art'\nlevel = 8\ngrade >= 64",
+   "question": "What are the names of stores in CA with a star rating of 1, where chemistry or art is taught at level 8 with a grade of 64 or above?",
+   "seed": [1, 1, 1, 2, 0, 2, 0, 1, 0, 0, 5, 2, 2, 10, 0, 11, 0, 64, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'CA' AND store.star_rating = 1 AND (classes.class_subject = 'chemistry' OR classes.class_subject = 'art') AND classes.level = 8 AND classes.grade >= 64"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 56\nclass_subject = 'physics' OR class_subject = 'psychology'\nlevel = 12\nyear >= 2008\nlocation = 'CA'\nstar_rating <= 9",
+   "question": "Who are the instructors aged less than or equal to 56 teaching physics or psychology at level 12 since 2008, associated with stores located in CA with a star rating less than or equal to 9?",
+   "seed": [0, 3, 1, 1, 2, 1, 56, 0, 6, 2, 3, 8, 0, 15, 0, 2008, 2, 0, 2, 2, 9, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 56 AND (classes.class_subject = 'physics' OR classes.class_subject = 'psychology') AND classes.level = 12 AND classes.year >= 2008 AND store.location = 'CA' AND store.star_rating <= 9"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'CA'\nstar_rating = 9\nclass_subject = 'poetry' OR class_subject = 'music' OR class_subject = 'economics'",
+   "question": "What are the names of stores in CA with a star rating of 9, where poetry, music, or economics is taught?",
+   "seed": [1, 3, 1, 0, 2, 0, 2, 0, 9, 0, 0, 0, 3, 14, 11, 4, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'CA' AND store.star_rating = 9 AND (classes.class_subject = 'poetry' OR classes.class_subject = 'music' OR classes.class_subject = 'economics')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'IN'\nclass_subject = 'english' OR class_subject = 'music' OR class_subject = 'economics'\nyear <= 2013",
+   "question": "What are the names of stores in IN, where English, music, or economics is taught before 2013?",
+   "seed": [1, 0, 0, 0, 1, 0, 0, 2, 3, 12, 11, 4, 1, 2013, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND (classes.class_subject = 'english' OR classes.class_subject = 'music' OR classes.class_subject = 'economics') AND classes.year <= 2013"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 51 OR (class_subject = 'literature' OR class_subject = 'chemistry') AND grade >= 76\nstar_rating = 10",
+   "question": "Who are the instructors aged 51 or older teaching literature or chemistry with a grade of 76 or above, associated with stores having a star rating of 10?",
+   "seed": [0, 1, 1, 3, 0, 51, 0, 1, 2, 13, 2, 0, 76, 1, 0, 10, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age >= 51 OR (classes.class_subject = 'literature' OR classes.class_subject = 'chemistry') AND classes.grade >= 76) AND store.star_rating = 10"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 43\nlocation = 'MA' OR location = 'CA'",
+   "question": "Who are the instructors aged 43 or younger associated with stores located in MA or CA?",
+   "seed": [0, 1, 1, 2, 1, 43, 0, 0, 0, 0, 1, 0, 2, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 43 AND (store.location = 'MA' OR store.location = 'CA')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating = 2\nteacher_age <= 36 OR (class_subject = 'psychology' OR class_subject = 'math') AND level = 7",
+   "question": "What are the names of stores with a star rating of 2, where instructors aged 36 or younger or teaching psychology or math at level 7?",
+   "seed": [1, 4, 0, 0, 1, 0, 2, 3, 1, 36, 0, 4, 2, 8, 0, 0, 3, 7, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 2 AND (instructors.teacher_age <= 36 OR (classes.class_subject = 'psychology' OR classes.class_subject = 'math') AND classes.level = 7)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 30 OR (class_subject = 'sociology' OR class_subject = 'poetry' OR class_subject = 'philosophy') AND level = 10 AND grade >= 88 AND year <= 2015\nlocation = 'MA' OR location = 'NY' OR location = 'CA'",
+   "question": "Who are the instructors aged 30 or younger or teaching sociology, poetry, or philosophy at level 10 with a grade of 88 or above since 2015, associated with stores located in MA, NY, or CA?",
+   "seed": [0, 2, 1, 0, 3, 1, 30, 0, 7, 3, 9, 14, 7, 0, 3, 10, 0, 88, 1, 2015, 0, 2, 0, 3, 2, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 30 OR (classes.class_subject = 'sociology' OR classes.class_subject = 'poetry' OR classes.class_subject = 'philosophy') AND classes.level = 10 AND classes.grade >= 88 AND classes.year <= 2015) AND (store.location = 'MA' OR store.location = 'NY' OR store.location = 'CA')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'sociology'\nyear <= 2010\nlocation = 'TX'\nstar_rating <= 3",
+   "question": "Who are the instructors teaching sociology before 2010, associated with stores located in TX with a star rating less than or equal to 3?",
+   "seed": [0, 1, 1, 0, 0, 2, 1, 9, 1, 2010, 2, 0, 4, 2, 3, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.class_subject = 'sociology' AND classes.year <= 2010 AND store.location = 'TX' AND store.star_rating <= 3"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating <= 8\nclass_subject = 'philosophy' OR class_subject = 'english'\nyear <= 2013",
+   "question": "What are the names of stores with a star rating of 8 or lower, where philosophy or English is taught before 2013?",
+   "seed": [1, 1, 1, 1, 2, 8, 0, 0, 2, 2, 7, 12, 1, 2013, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 8 AND (classes.class_subject = 'philosophy' OR classes.class_subject = 'english') AND classes.year <= 2013"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 86\nclass_subject = 'history' OR class_subject = 'economics'\ngrade >= 93\nyear >= 2005\nlocation = 'NY'",
+   "question": "Who are the instructors aged 86 or older teaching history or economics with a grade of 93 or above since 2005, associated with stores located in NY?",
+   "seed": [0, 3, 0, 1, 2, 0, 86, 0, 3, 2, 5, 4, 0, 93, 0, 2005, 0, 0, 3, 3],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 86 AND (classes.class_subject = 'history' OR classes.class_subject = 'economics') AND classes.grade >= 93 AND classes.year >= 2005 AND store.location = 'NY'"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 35 OR (class_subject = 'history' OR class_subject = 'poetry' OR class_subject = 'sociology') AND year >= 2004\nlocation = 'MA' OR location = 'NY' OR location = 'TX'\nstar_rating <= 8",
+   "question": "What are the names of instructors aged 35 or younger or teaching history, poetry, or sociology since 2004, associated with stores located in MA, NY, or TX with a star rating of 8 or lower?",
+   "seed": [0, 2, 1, 1, 3, 1, 35, 0, 2, 3, 5, 14, 9, 0, 2004, 2, 2, 0, 3, 4, 2, 8, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 35 OR (classes.class_subject = 'history' OR classes.class_subject = 'poetry' OR classes.class_subject = 'sociology') AND classes.year >= 2004) AND (store.location = 'MA' OR store.location = 'NY' OR store.location = 'TX') AND store.star_rating <= 8"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'music' OR class_subject = 'economics'\nlevel = 4\ngrade >= 92\nyear >= 2001\nlocation = 'CA' OR location = 'IN'\nstar_rating >= 5",
+   "question": "Who are the instructors teaching music or economics at level 4 with a grade of 92 or above since 2001, associated with stores located in CA or IN with a star rating of 5 or higher?",
+   "seed": [0, 3, 0, 1, 0, 0, 7, 2, 11, 4, 0, 3, 4, 0, 92, 0, 2001, 2, 1, 2, 1, 1, 5, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'music' OR classes.class_subject = 'economics') AND classes.level = 4 AND classes.grade >= 92 AND classes.year >= 2001 AND (store.location = 'CA' OR store.location = 'IN') AND store.star_rating >= 5"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX' OR location = 'MA' OR location = 'CA'\nstar_rating >= 5\nteacher_age >= 50 OR class_subject = 'biology' AND level = 1 AND grade <= 29",
+   "question": "What are the names of stores in TX, MA, or CA with a star rating of 5 or higher, where instructors aged 50 or older or teaching biology at level 1 with a grade of 29 or below?",
+   "seed": [1, 1, 1, 2, 2, 4, 0, 2, 1, 5, 3, 0, 50, 0, 5, 1, 1, 0, 4, 1, 29, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'TX' OR store.location = 'MA' OR store.location = 'CA') AND store.star_rating >= 5 AND (instructors.teacher_age >= 50 OR classes.class_subject = 'biology' AND classes.level = 1 AND classes.grade <= 29)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'CA'\nstar_rating >= 9\nteacher_age >= 73\ngrade >= 74\nyear >= 2020",
+   "question": "What are the names of stores in CA with a star rating of 9 or higher, where instructors aged 73 or older teach with a grade of 74 or above since 2020?",
+   "seed": [1, 0, 2, 0, 2, 1, 9, 2, 0, 73, 0, 3, 0, 0, 74, 0, 2020, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'CA' AND store.star_rating >= 9 AND instructors.teacher_age >= 73 AND classes.grade >= 74 AND classes.year >= 2020"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'history'\ngrade <= 26\nyear <= 2016\nlocation = 'TX' OR location = 'NY' OR location = 'MA'\nstar_rating <= 5",
+   "question": "Who are the instructors teaching history with a grade of 26 or below before 2016, associated with stores located in TX, NY, or MA with a star rating of 5 or lower?",
+   "seed": [0, 0, 0, 0, 3, 1, 5, 1, 26, 1, 2016, 2, 2, 4, 3, 0, 2, 5, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.class_subject = 'history' AND classes.grade <= 26 AND classes.year <= 2016 AND (store.location = 'TX' OR store.location = 'NY' OR store.location = 'MA') AND store.star_rating <= 5"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nlocation = 'NY' OR location = 'IN' OR location = 'MA'\nstar_rating = 4\nteacher_age <= 41",
+   "question": "What are the names of stores located in NY, IN, or MA with a star rating of 4, where instructors aged 41 or younger teach?",
+   "seed": [1, 0, 2, 2, 3, 1, 0, 0, 4, 1, 1, 41, 0],
+   "sql": "SELECT store.name\nFROM store\nINNER JOIN instructors ON store.name = instructors.name\nWHERE (store.location = 'NY' OR store.location = 'IN' OR store.location = 'MA') AND store.star_rating = 4 AND instructors.teacher_age <= 41"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'MA' OR location = 'NY' OR location = 'CA'\nteacher_age <= 22 OR class_subject = 'physics' AND level = 1 AND grade >= 60 AND year >= 2018",
+   "question": "What is the name of the store where classes are taught by instructors who are either younger than or 22 years old or teach physics classes at level 1 with a grade of at least 60 and a year starting from 2018, and the store is located in MA, NY, or CA?",
+   "seed": [1, 1, 1, 0, 2, 0, 3, 2, 3, 1, 22, 0, 7, 1, 3, 0, 0, 0, 60, 0, 2018, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'MA' OR store.location = 'NY' OR store.location = 'CA') AND (instructors.teacher_age <= 22 OR classes.class_subject = 'physics' AND classes.level = 1 AND classes.grade >= 60 AND classes.year >= 2018)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 26 OR year >= 2010\nstar_rating = 3",
+   "question": "What are the names of the instructors who either are younger than or 26 years old or started teaching classes from the year 2010 onwards, and the store they work in has a star rating of 3?",
+   "seed": [0, 1, 0, 3, 1, 26, 0, 2, 0, 0, 2010, 1, 0, 3, 3],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 26 OR classes.year >= 2010) AND store.star_rating = 3"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating <= 9\nteacher_age >= 43\nclass_subject = 'poetry' OR class_subject = 'art' OR class_subject = 'math'\nlevel = 1\ngrade <= 40",
+   "question": "What is the name of the store where instructors aged 43 or older teach classes in subjects such as poetry, art, or math at level 1 with a grade of no more than 40, and the store has a star rating of 9 or less?",
+   "seed": [1, 1, 0, 1, 2, 9, 2, 0, 43, 0, 5, 3, 14, 10, 0, 0, 0, 1, 40, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 9 AND instructors.teacher_age >= 43 AND (classes.class_subject = 'poetry' OR classes.class_subject = 'art' OR classes.class_subject = 'math') AND classes.level = 1 AND classes.grade <= 40"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX' OR location = 'IN' OR location = 'CA'\nstar_rating >= 2\nteacher_age <= 67\nclass_subject = 'english' OR class_subject = 'music'\ngrade >= 63\nyear <= 2008",
+   "question": "What is the name of the store located in TX, IN, or CA, with instructors aged 67 or younger who teach English or music classes with a grade of at least 63 starting from the year 2008 backwards, and the store has a star rating of at least 2?",
+   "seed": [1, 1, 0, 2, 2, 4, 1, 2, 1, 2, 2, 1, 67, 0, 3, 2, 12, 11, 0, 63, 1, 2008, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'TX' OR store.location = 'IN' OR store.location = 'CA') AND store.star_rating >= 2 AND instructors.teacher_age <= 67 AND (classes.class_subject = 'english' OR classes.class_subject = 'music') AND classes.grade >= 63 AND classes.year <= 2008"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'poetry' OR class_subject = 'music' OR class_subject = 'art'\nyear >= 2019\nlocation = 'NY'\nstar_rating <= 5",
+   "question": "What are the names of the instructors who teach poetry, music, or art classes starting from 2019 onwards with a store located in NY having a star rating of 5 or less?",
+   "seed": [0, 3, 1, 0, 0, 0, 2, 3, 14, 11, 10, 0, 2019, 2, 0, 3, 2, 5, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'poetry' OR classes.class_subject = 'music' OR classes.class_subject = 'art') AND classes.year >= 2019 AND store.location = 'NY' AND store.star_rating <= 5"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 31\nyear >= 2003\nlocation = 'TX'\nstar_rating = 1",
+   "question": "What are the names of the instructors who are 31 or younger and started teaching classes from the year 2003 onwards, with a store located in TX having a star rating of 1?",
+   "seed": [0, 4, 1, 0, 2, 1, 31, 0, 2, 0, 0, 2003, 2, 0, 4, 0, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 31 AND classes.year >= 2003 AND store.location = 'TX' AND store.star_rating = 1"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age >= 55\nlocation = 'NY'",
+   "question": "What are the names of the instructors aged 55 or older working in stores located in NY?",
+   "seed": [0, 0, 1, 0, 55, 0, 0, 3, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 55 AND store.location = 'NY'"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 46\nlocation = 'CA' OR location = 'NY' OR location = 'IN'",
+   "question": "What are the names of the instructors aged 46 or younger working in stores located in CA, NY, or IN?",
+   "seed": [0, 4, 0, 0, 1, 1, 46, 0, 2, 2, 3, 1, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 46 AND (store.location = 'CA' OR store.location = 'NY' OR store.location = 'IN')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'biology'\nlevel = 12\nyear <= 2013\nlocation = 'CA' OR location = 'MA' OR location = 'IN'",
+   "question": "What are the names of the instructors teaching sociology or biology classes at level 12 with a year no later than 2013, working in stores located in CA, MA, or IN?",
+   "seed": [0, 0, 0, 0, 6, 2, 9, 1, 0, 3, 12, 1, 2013, 0, 2, 2, 0, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'biology') AND classes.level = 12 AND classes.year <= 2013 AND (store.location = 'CA' OR store.location = 'MA' OR store.location = 'IN')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 60\nclass_subject = 'sociology' OR class_subject = 'history'\nlevel = 11\nyear <= 2005\nlocation = 'NY' OR location = 'TX' OR location = 'MA'\nstar_rating >= 9",
+   "question": "What are the names of the instructors aged 60 or older teaching sociology or history classes at level 11 with a year no later than 2005, working in stores located in NY, TX, or MA with a star rating of at least 9?",
+   "seed": [0, 1, 0, 2, 0, 60, 0, 6, 2, 9, 5, 0, 3, 11, 1, 2005, 2, 2, 3, 4, 0, 1, 9, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 60 AND (classes.class_subject = 'sociology' OR classes.class_subject = 'history') AND classes.level = 11 AND classes.year <= 2005 AND (store.location = 'NY' OR store.location = 'TX' OR store.location = 'MA') AND store.star_rating >= 9"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'MA'\nstar_rating = 5\nclass_subject = 'philosophy'\nlevel = 7\ngrade >= 86",
+   "question": "What is the name of the store located in MA with a star rating of 5 where philosophy classes at level 7 are taught with a grade of at least 86?",
+   "seed": [1, 3, 0, 1, 2, 0, 0, 0, 5, 0, 0, 5, 1, 7, 0, 10, 0, 86, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'MA' AND store.star_rating = 5 AND classes.class_subject = 'philosophy' AND classes.level = 7 AND classes.grade >= 86"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'philosophy' OR class_subject = 'history'\nlevel = 1\ngrade >= 76\nstar_rating = 2",
+   "question": "What are the names of the instructors who teach philosophy or history classes at level 1 with a grade of at least 76, working in stores with a star rating of 2?",
+   "seed": [0, 0, 0, 0, 5, 2, 7, 5, 0, 0, 0, 76, 1, 0, 2, 3],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'philosophy' OR classes.class_subject = 'history') AND classes.level = 1 AND classes.grade >= 76 AND store.star_rating = 2"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating = 10\nclass_subject = 'math'\nlevel = 2\nyear >= 2014",
+   "question": "What is the name of the store with a star rating of 10 where math classes at level 2 started from 2014 onwards?",
+   "seed": [1, 2, 0, 0, 1, 0, 10, 0, 0, 6, 1, 0, 0, 1, 0, 2014, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 10 AND classes.class_subject = 'math' AND classes.level = 2 AND classes.year >= 2014"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nlocation = 'IN' OR location = 'MA' OR location = 'CA'\nteacher_age <= 58",
+   "question": "What is the name of the store located in IN, MA, or CA with instructors aged 58 or younger?",
+   "seed": [1, 1, 1, 0, 2, 1, 0, 2, 1, 1, 58, 0],
+   "sql": "SELECT store.name\nFROM store\nINNER JOIN instructors ON store.name = instructors.name\nWHERE (store.location = 'IN' OR store.location = 'MA' OR store.location = 'CA') AND instructors.teacher_age <= 58"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'english' OR class_subject = 'history' OR class_subject = 'psychology'\nlevel = 7\ngrade >= 93\nstar_rating >= 7",
+   "question": "What are the names of the instructors who teach english, history, or psychology classes at level 7 with a grade of at least 93, working in stores with a star rating of at least 7?",
+   "seed": [0, 4, 0, 0, 0, 0, 5, 3, 12, 5, 8, 0, 3, 7, 0, 93, 1, 1, 7, 3],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'english' OR classes.class_subject = 'history' OR classes.class_subject = 'psychology') AND classes.level = 7 AND classes.grade >= 93 AND store.star_rating >= 7"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'NY' OR location = 'MA' OR location = 'IN'\nstar_rating = 8\nteacher_age >= 57\nlevel = 1",
+   "question": "What is the name of the store located in NY, MA, or IN with a star rating of 8 where instructors aged 57 or older teach classes at level 1?",
+   "seed": [1, 1, 0, 2, 2, 3, 0, 1, 0, 8, 2, 0, 57, 0, 4, 0, 0, 0, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'NY' OR store.location = 'MA' OR store.location = 'IN') AND store.star_rating = 8 AND instructors.teacher_age >= 57 AND classes.level = 1"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 58\nclass_subject = 'art'\nlevel = 5\nyear <= 2000\nlocation = 'IN' OR location = 'CA' OR location = 'TX'",
+   "question": "What are the names of the instructors aged 58 or older who teach art classes at level 5 with a year no later than 2000, working in stores located in IN, CA, or TX?",
+   "seed": [0, 4, 1, 1, 2, 0, 58, 0, 6, 1, 10, 0, 8, 1, 2000, 0, 2, 1, 2, 4, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 58 AND classes.class_subject = 'art' AND classes.level = 5 AND classes.year <= 2000 AND (store.location = 'IN' OR store.location = 'CA' OR store.location = 'TX')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'NY'\nteacher_age >= 56 OR class_subject = 'music' AND grade >= 66 AND year >= 2019",
+   "question": "What is the name of the store located in NY where instructors aged 56 or older teach music classes with a grade of at least 66 starting from 2019 onwards?",
+   "seed": [1, 3, 0, 0, 0, 0, 3, 3, 0, 56, 0, 3, 1, 11, 0, 66, 0, 2019, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'NY' AND (instructors.teacher_age >= 56 OR classes.class_subject = 'music' AND classes.grade >= 66 AND classes.year >= 2019)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'economics' OR class_subject = 'politics' OR class_subject = 'chemistry'\nstar_rating >= 7",
+   "question": "What are the names of the instructors who teach economics, politics, or chemistry classes working in stores with a star rating of at least 7?",
+   "seed": [0, 1, 1, 0, 0, 0, 3, 4, 6, 2, 1, 1, 7, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'economics' OR classes.class_subject = 'politics' OR classes.class_subject = 'chemistry') AND store.star_rating >= 7"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'art' OR class_subject = 'politics'\nlevel = 10\nlocation = 'TX' OR location = 'IN' OR location = 'CA'\nstar_rating = 4",
+   "question": "What are the names of the instructors who teach art or politics classes at level 10 working in stores located in TX, IN, or CA with a star rating of 4?",
+   "seed": [0, 3, 1, 1, 0, 0, 4, 2, 10, 6, 0, 3, 10, 2, 2, 4, 1, 2, 0, 4, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'art' OR classes.class_subject = 'politics') AND classes.level = 10 AND (store.location = 'TX' OR store.location = 'IN' OR store.location = 'CA') AND store.star_rating = 4"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 40 OR level = 7\nlocation = 'NY'\nstar_rating <= 3",
+   "question": "What are the names of the instructors aged 40 or older or teaching classes at level 7 working in stores located in NY with a star rating of 3 or less?",
+   "seed": [0, 0, 3, 0, 40, 0, 4, 0, 0, 3, 7, 2, 0, 3, 2, 3, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age >= 40 OR classes.level = 7) AND store.location = 'NY' AND store.star_rating <= 3"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age >= 53\nlocation = 'MA' OR location = 'IN' OR location = 'TX'\nstar_rating <= 8",
+   "question": "What are the names of the instructors aged 53 or older working in stores located in MA, IN, or TX with a star rating of 8 or less?",
+   "seed": [0, 2, 1, 1, 1, 0, 53, 2, 2, 0, 1, 4, 2, 8, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 53 AND (store.location = 'MA' OR store.location = 'IN' OR store.location = 'TX') AND store.star_rating <= 8"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'IN' OR location = 'NY'\nstar_rating >= 4\nteacher_age >= 88\nclass_subject = 'sociology'\nyear <= 2008",
+   "question": "What is the name of the store located in IN or NY with a star rating of at least 4 where instructors aged 88 or older teach sociology classes with a year no later than 2008?",
+   "seed": [1, 2, 1, 0, 2, 1, 1, 3, 1, 4, 2, 0, 88, 0, 2, 1, 9, 1, 2008, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'IN' OR store.location = 'NY') AND store.star_rating >= 4 AND instructors.teacher_age >= 88 AND classes.class_subject = 'sociology' AND classes.year <= 2008"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating <= 8\nteacher_age <= 38 OR (class_subject = 'psychology' OR class_subject = 'literature' OR class_subject = 'history') AND grade <= 28",
+   "question": "What is the name of the store with a star rating of 8 or less where instructors aged 38 or younger teach psychology, literature, or history classes with a grade of no more than 28?",
+   "seed": [1, 1, 1, 1, 2, 8, 3, 1, 38, 0, 1, 3, 8, 13, 5, 1, 28, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 8 AND (instructors.teacher_age <= 38 OR (classes.class_subject = 'psychology' OR classes.class_subject = 'literature' OR classes.class_subject = 'history') AND classes.grade <= 28)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating = 5\nteacher_age >= 54\nclass_subject = 'philosophy'\nlevel = 9",
+   "question": "What is the name of the store with a star rating of 5 where instructors aged 54 or older teach philosophy classes at level 9?",
+   "seed": [1, 2, 1, 0, 1, 0, 5, 2, 0, 54, 0, 4, 1, 7, 0, 3, 9, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 5 AND instructors.teacher_age >= 54 AND classes.class_subject = 'philosophy' AND classes.level = 9"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'IN'\nstar_rating <= 7\ngrade >= 87\nyear >= 2005",
+   "question": "What is the name of the store located in IN with a star rating of 7 or less where classes with a grade of at least 87 started from the year 2005 onwards?",
+   "seed": [1, 4, 1, 1, 2, 0, 1, 2, 7, 0, 0, 3, 0, 0, 87, 0, 2005, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND store.star_rating <= 7 AND classes.grade >= 87 AND classes.year >= 2005"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nstar_rating <= 3\nteacher_age <= 75",
+   "question": "What is the name of the store with a star rating of 3 or less where instructors aged 75 or younger work?",
+   "seed": [1, 4, 1, 0, 1, 2, 3, 1, 1, 75, 1],
+   "sql": "SELECT store.name\nFROM store\nINNER JOIN instructors ON store.name = instructors.name\nWHERE store.star_rating <= 3 AND instructors.teacher_age <= 75"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 77\nlocation = 'MA'\nstar_rating >= 8",
+   "question": "What are the names of the instructors aged 77 or younger working in stores located in MA with a star rating of at least 8?",
+   "seed": [0, 2, 0, 1, 1, 1, 77, 2, 0, 0, 1, 8, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 77 AND store.location = 'MA' AND store.star_rating >= 8"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 85 OR (class_subject = 'history' OR class_subject = 'psychology' OR class_subject = 'literature') AND level = 4 AND grade <= 28\nstar_rating = 9",
+   "question": "What are the names of the instructors aged 85 or younger or teaching history, psychology, or literature classes at level 4 with a grade of no more than 28 working in stores with a star rating of 9?",
+   "seed": [0, 0, 3, 1, 85, 0, 5, 3, 5, 8, 13, 0, 7, 1, 28, 1, 0, 9, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 85 OR (classes.class_subject = 'history' OR classes.class_subject = 'psychology' OR classes.class_subject = 'literature') AND classes.level = 4 AND classes.grade <= 28) AND store.star_rating = 9"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 39\nlocation = 'CA'\nstar_rating <= 8",
+   "question": "What are the names of the instructors aged 39 or younger working in stores located in CA with a star rating of 8 or less?",
+   "seed": [0, 4, 1, 1, 1, 1, 39, 2, 0, 2, 2, 8, 2],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 39 AND store.location = 'CA' AND store.star_rating <= 8"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 31\nstar_rating >= 7",
+   "question": "What are the names of instructors who are aged 31 or younger and work at stores with a star rating of 7 or higher?",
+   "seed": [0, 4, 1, 0, 1, 1, 31, 1, 1, 7, 3],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 31 AND store.star_rating >= 7"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'IN'\nstar_rating >= 6\nclass_subject = 'chemistry' OR class_subject = 'physics'\ngrade <= 42",
+   "question": "Which stores offer classes in chemistry or physics, with instructors aged 31 or older, and have a star rating of 6 or higher, where the grade is less than or equal to 42?",
+   "seed": [1, 4, 0, 0, 2, 0, 1, 1, 6, 0, 0, 1, 2, 2, 3, 1, 42, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND store.star_rating >= 6 AND (classes.class_subject = 'chemistry' OR classes.class_subject = 'physics') AND classes.grade <= 42"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'MA' OR location = 'IN' OR location = 'CA'\nstar_rating >= 8\nteacher_age <= 79\nclass_subject = 'politics' OR class_subject = 'poetry' OR class_subject = 'chemistry'\nlevel = 3\nyear <= 2007",
+   "question": "What are the names of stores in Massachusetts, Indiana, or California that have a star rating of 8 or higher, instructors aged 79 or younger, offer politics, poetry, or chemistry classes at level 3 with a year before 2007?",
+   "seed": [1, 1, 1, 2, 2, 0, 1, 2, 1, 8, 2, 1, 79, 0, 6, 3, 6, 14, 2, 0, 6, 1, 2007, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'MA' OR store.location = 'IN' OR store.location = 'CA') AND store.star_rating >= 8 AND instructors.teacher_age <= 79 AND (classes.class_subject = 'politics' OR classes.class_subject = 'poetry' OR classes.class_subject = 'chemistry') AND classes.level = 3 AND classes.year <= 2007"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 39\nclass_subject = 'psychology' OR class_subject = 'literature' OR class_subject = 'art'\nlevel = 5\ngrade >= 74\nstar_rating >= 9",
+   "question": "Who are the instructors aged 39 or older teaching psychology, literature, or art at level 5 with a grade of 74 or higher, and work at stores with a star rating of 9 or higher?",
+   "seed": [0, 4, 1, 1, 2, 0, 39, 0, 5, 3, 8, 13, 10, 0, 8, 0, 74, 1, 1, 9, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 39 AND (classes.class_subject = 'psychology' OR classes.class_subject = 'literature' OR classes.class_subject = 'art') AND classes.level = 5 AND classes.grade >= 74 AND store.star_rating >= 9"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 78\nlevel = 6\ngrade >= 63\nlocation = 'CA' OR location = 'MA'",
+   "question": "Which instructors aged 78 or older teach level 6 classes with a grade of 63 or higher in California or Massachusetts?",
+   "seed": [0, 4, 0, 0, 2, 0, 78, 0, 5, 0, 0, 9, 0, 63, 0, 1, 2, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 78 AND classes.level = 6 AND classes.grade >= 63 AND (store.location = 'CA' OR store.location = 'MA')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'IN' OR location = 'MA' OR location = 'CA'\nstar_rating <= 7\nteacher_age >= 60 OR (class_subject = 'physics' OR class_subject = 'philosophy' OR class_subject = 'politics') AND grade >= 73",
+   "question": "What are the names of stores in Indiana, Massachusetts, or California with a star rating of 7 or lower, and instructors aged 60 or older teaching physics, philosophy, or politics with a grade of 73 or higher?",
+   "seed": [1, 0, 2, 2, 1, 0, 2, 2, 7, 3, 0, 60, 0, 1, 3, 3, 7, 6, 0, 73, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'IN' OR store.location = 'MA' OR store.location = 'CA') AND store.star_rating <= 7 AND (instructors.teacher_age >= 60 OR (classes.class_subject = 'physics' OR classes.class_subject = 'philosophy' OR classes.class_subject = 'politics') AND classes.grade >= 73)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 67 OR (class_subject = 'math' OR class_subject = 'art') AND year >= 2010\nstar_rating <= 9",
+   "question": "Who are the instructors aged 67 or older teaching math or art since 2010 at stores with a star rating of 9 or lower?",
+   "seed": [0, 3, 1, 0, 3, 0, 67, 0, 2, 2, 0, 10, 0, 2010, 1, 2, 9, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age >= 67 OR (classes.class_subject = 'math' OR classes.class_subject = 'art') AND classes.year >= 2010) AND store.star_rating <= 9"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 49 OR (class_subject = 'english' OR class_subject = 'psychology' OR class_subject = 'music') AND level = 4 AND year >= 2005\nstar_rating >= 6",
+   "question": "Who are the instructors aged 49 or younger teaching English, psychology, or music at level 4 since 2005 at stores with a star rating of 6 or higher?",
+   "seed": [0, 4, 1, 1, 3, 1, 49, 0, 6, 3, 12, 8, 11, 0, 3, 4, 0, 2005, 1, 1, 6, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 49 OR (classes.class_subject = 'english' OR classes.class_subject = 'psychology' OR classes.class_subject = 'music') AND classes.level = 4 AND classes.year >= 2005) AND store.star_rating >= 6"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX'\nstar_rating <= 3\nclass_subject = 'economics'\nlevel = 6\nyear >= 2016",
+   "question": "Which stores in Texas have a star rating of 3 or lower and offer economics at level 6 since 2016?",
+   "seed": [1, 0, 2, 0, 4, 2, 3, 0, 0, 6, 1, 4, 0, 3, 6, 0, 2016, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND store.star_rating <= 3 AND classes.class_subject = 'economics' AND classes.level = 6 AND classes.year >= 2016"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'IN'\nstar_rating <= 8\nlevel = 1\ngrade >= 93\nyear <= 2000",
+   "question": "Which stores are in Indiana with a star rating of 8 or lower offering level 1 classes with a grade of 93 or higher before 2000?",
+   "seed": [1, 2, 1, 1, 2, 0, 1, 2, 8, 0, 0, 7, 0, 0, 0, 0, 93, 1, 2000, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND store.star_rating <= 8 AND classes.level = 1 AND classes.grade >= 93 AND classes.year <= 2000"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating <= 2\nteacher_age <= 55 OR class_subject = 'poetry' AND level = 3 AND grade <= 22",
+   "question": "What are the names of stores with a star rating of 2 or lower where instructors aged 55 or younger teach poetry at level 3 with a grade of 22 or lower?",
+   "seed": [1, 2, 0, 1, 1, 2, 2, 3, 1, 55, 0, 5, 1, 14, 0, 2, 1, 22, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 2 AND (instructors.teacher_age <= 55 OR classes.class_subject = 'poetry' AND classes.level = 3 AND classes.grade <= 22)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'biology' OR class_subject = 'economics'\ngrade >= 61\nyear <= 2015\nlocation = 'CA' OR location = 'MA' OR location = 'TX'",
+   "question": "Which stores in California, Massachusetts, or Texas offer biology or economics with a grade of 61 or higher before 2015?",
+   "seed": [0, 4, 0, 0, 0, 0, 3, 2, 1, 4, 0, 61, 1, 2015, 0, 2, 2, 0, 4, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'biology' OR classes.class_subject = 'economics') AND classes.grade >= 61 AND classes.year <= 2015 AND (store.location = 'CA' OR store.location = 'MA' OR store.location = 'TX')"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age >= 21\nlocation = 'MA' OR location = 'NY'",
+   "question": "Who are the instructors aged 21 or older working in Massachusetts or New York?",
+   "seed": [0, 1, 0, 1, 0, 21, 0, 1, 0, 3, 3],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 21 AND (store.location = 'MA' OR store.location = 'NY')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'chemistry' OR class_subject = 'politics' OR class_subject = 'psychology'\nlevel = 3\ngrade <= 47\nyear <= 2006\nstar_rating <= 4",
+   "question": "Who are the instructors teaching chemistry, politics, or psychology at level 3 with a grade of 47 or lower before 2006 at stores with a star rating of 4 or lower?",
+   "seed": [0, 4, 0, 1, 0, 0, 7, 3, 2, 6, 8, 0, 2, 1, 47, 1, 2006, 1, 2, 4, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'chemistry' OR classes.class_subject = 'politics' OR classes.class_subject = 'psychology') AND classes.level = 3 AND classes.grade <= 47 AND classes.year <= 2006 AND store.star_rating <= 4"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX'\nteacher_age >= 43 OR (class_subject = 'politics' OR class_subject = 'music' OR class_subject = 'biology') AND grade >= 62",
+   "question": "Which stores in Texas have instructors aged 43 or older teaching politics, music, or biology with a grade of 62 or higher?",
+   "seed": [1, 1, 0, 0, 0, 4, 3, 0, 43, 0, 1, 3, 6, 11, 1, 0, 62, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND (instructors.teacher_age >= 43 OR (classes.class_subject = 'politics' OR classes.class_subject = 'music' OR classes.class_subject = 'biology') AND classes.grade >= 62)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'NY'\nteacher_age >= 78\nclass_subject = 'music' OR class_subject = 'chemistry'\ngrade >= 76",
+   "question": "Which stores in New York have instructors aged 78 or older teaching music or chemistry with a grade of 76 or higher?",
+   "seed": [1, 2, 0, 1, 0, 0, 3, 2, 0, 78, 0, 1, 2, 11, 2, 0, 76, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'NY' AND instructors.teacher_age >= 78 AND (classes.class_subject = 'music' OR classes.class_subject = 'chemistry') AND classes.grade >= 76"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlevel = 7\nstar_rating >= 3",
+   "question": "Who are the instructors teaching level 7 classes at stores with a star rating of 3 or higher?",
+   "seed": [0, 3, 1, 0, 0, 0, 4, 0, 0, 10, 1, 1, 3, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 7 AND store.star_rating >= 3"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX' OR location = 'MA'\nteacher_age <= 34 OR (class_subject = 'poetry' OR class_subject = 'history' OR class_subject = 'politics') AND grade >= 67",
+   "question": "Which stores in Texas or Massachusetts have instructors aged 34 or younger teaching poetry, history, or politics with a grade of 67 or higher?",
+   "seed": [1, 2, 0, 0, 0, 1, 4, 0, 3, 1, 34, 0, 1, 3, 14, 5, 6, 0, 67, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'TX' OR store.location = 'MA') AND (instructors.teacher_age <= 34 OR (classes.class_subject = 'poetry' OR classes.class_subject = 'history' OR classes.class_subject = 'politics') AND classes.grade >= 67)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX'\nstar_rating = 2\nteacher_age >= 51 OR (class_subject = 'psychology' OR class_subject = 'politics' OR class_subject = 'chemistry') AND level = 5 AND grade >= 80",
+   "question": "Which stores in Texas have a star rating of 2 and instructors aged 51 or older teaching psychology, politics, or chemistry at level 5 with a grade of 80 or higher?",
+   "seed": [1, 1, 1, 2, 0, 4, 0, 2, 3, 0, 51, 0, 5, 3, 8, 6, 2, 0, 8, 0, 80, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND store.star_rating = 2 AND (instructors.teacher_age >= 51 OR (classes.class_subject = 'psychology' OR classes.class_subject = 'politics' OR classes.class_subject = 'chemistry') AND classes.level = 5 AND classes.grade >= 80)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 41\nlevel = 1\ngrade <= 35\nyear <= 2014\nstar_rating <= 2",
+   "question": "Who are the instructors aged 41 or younger teaching level 1 classes with a grade of 35 or lower before 2014 at stores with a star rating of 2 or lower?",
+   "seed": [0, 1, 0, 2, 1, 41, 0, 7, 0, 0, 4, 1, 35, 1, 2014, 1, 2, 2, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 41 AND classes.level = 1 AND classes.grade <= 35 AND classes.year <= 2014 AND store.star_rating <= 2"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating >= 5\nteacher_age <= 88\nclass_subject = 'sociology' OR class_subject = 'music' OR class_subject = 'philosophy'\nlevel = 12",
+   "question": "Which stores have a star rating of 5 or higher where instructors aged 88 or younger teach sociology, music, or philosophy at level 12?",
+   "seed": [1, 1, 0, 1, 1, 5, 2, 1, 88, 0, 4, 3, 9, 11, 7, 0, 3, 12, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating >= 5 AND instructors.teacher_age <= 88 AND (classes.class_subject = 'sociology' OR classes.class_subject = 'music' OR classes.class_subject = 'philosophy') AND classes.level = 12"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \ngrade <= 57\nstar_rating <= 8",
+   "question": "Who are the instructors teaching classes with a grade of 57 or lower at stores with a star rating of 8 or lower?",
+   "seed": [0, 4, 0, 1, 0, 0, 1, 0, 1, 57, 1, 2, 8, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.grade <= 57 AND store.star_rating <= 8"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 24 OR level = 9 AND grade <= 37\nlocation = 'IN' OR location = 'TX'\nstar_rating >= 2",
+   "question": "Who are the instructors aged 24 or younger teaching level 9 classes with a grade of 37 or lower in Indiana or Texas at stores with a star rating of 2 or higher?",
+   "seed": [0, 4, 0, 1, 3, 1, 24, 0, 5, 0, 0, 12, 1, 37, 2, 1, 1, 4, 1, 2, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 24 OR classes.level = 9 AND classes.grade <= 37) AND (store.location = 'IN' OR store.location = 'TX') AND store.star_rating >= 2"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 56 OR class_subject = 'economics' AND year <= 2002\nlocation = 'CA' OR location = 'TX' OR location = 'MA'",
+   "question": "Who are the instructors aged 56 or younger teaching economics before 2002 in California, Texas, or Massachusetts?",
+   "seed": [0, 1, 1, 3, 1, 56, 0, 2, 1, 4, 1, 2002, 0, 2, 2, 4, 0, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 56 OR classes.class_subject = 'economics' AND classes.year <= 2002) AND (store.location = 'CA' OR store.location = 'TX' OR store.location = 'MA')"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age >= 20\nstar_rating = 5",
+   "question": "Who are the instructors aged 20 or older working in stores with a star rating of 5?",
+   "seed": [0, 3, 1, 1, 1, 0, 20, 1, 0, 5, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 20 AND store.star_rating = 5"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'NY'\nteacher_age <= 72 OR year <= 2019",
+   "question": "Which stores are in New York where instructors aged 72 or younger teach classes before 2019?",
+   "seed": [1, 4, 0, 0, 0, 0, 3, 3, 1, 72, 0, 2, 0, 1, 2019, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'NY' AND (instructors.teacher_age <= 72 OR classes.year <= 2019)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 75 OR (class_subject = 'literature' OR class_subject = 'politics') AND grade <= 56\nstar_rating >= 5",
+   "question": "Who are the instructors aged 75 or older teaching literature or politics with a grade of 56 or lower at stores with a star rating of 5 or higher?",
+   "seed": [0, 1, 0, 3, 0, 75, 0, 1, 2, 13, 6, 1, 56, 1, 1, 5, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age >= 75 OR (classes.class_subject = 'literature' OR classes.class_subject = 'politics') AND classes.grade <= 56) AND store.star_rating >= 5"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'CA'\nstar_rating >= 9\nteacher_age >= 55",
+   "question": "Which stores in California have instructors aged 55 or older with a star rating of 9 or higher?",
+   "seed": [1, 2, 1, 0, 2, 0, 2, 1, 9, 2, 0, 55, 0, 0, 0, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'CA' AND store.star_rating >= 9 AND instructors.teacher_age >= 55"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nlocation = 'NY'\nteacher_age <= 72",
+   "question": "Who are the instructors aged 72 or younger working in stores in New York?",
+   "seed": [1, 2, 0, 1, 0, 0, 3, 1, 1, 72, 0],
+   "sql": "SELECT store.name\nFROM store\nINNER JOIN instructors ON store.name = instructors.name\nWHERE store.location = 'NY' AND instructors.teacher_age <= 72"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'philosophy' OR class_subject = 'psychology'\nlevel = 3\nlocation = 'MA'\nstar_rating >= 3",
+   "question": "Which stores in Massachusetts have instructors teaching philosophy or psychology at level 3 with a star rating of 3 or higher?",
+   "seed": [0, 4, 0, 1, 0, 0, 4, 2, 7, 8, 0, 6, 2, 0, 0, 1, 3, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'philosophy' OR classes.class_subject = 'psychology') AND classes.level = 3 AND store.location = 'MA' AND store.star_rating >= 3"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'CA' OR location = 'MA' OR location = 'TX'\nstar_rating >= 3\nclass_subject = 'physics'\ngrade >= 81",
+   "question": "What are the names of stores where classes on physics with a grade of at least 81 are taught by instructors whose names match those of the store, located in CA, MA, or TX, and have a star rating of at least 3?",
+   "seed": [1, 4, 1, 1, 2, 2, 2, 0, 4, 1, 3, 0, 0, 1, 1, 3, 0, 81, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'CA' OR store.location = 'MA' OR store.location = 'TX') AND store.star_rating >= 3 AND classes.class_subject = 'physics' AND classes.grade >= 81"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 63\ngrade <= 59\nyear >= 2003\nstar_rating = 4",
+   "question": "Which instructors teach classes at stores where the instructors' ages are at least 63, classes have a grade no higher than 59, were taught after 2003, and the store has a star rating of 4?",
+   "seed": [0, 4, 0, 0, 2, 0, 63, 0, 3, 0, 1, 59, 0, 2003, 1, 0, 4, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 63 AND classes.grade <= 59 AND classes.year >= 2003 AND store.star_rating = 4"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 72 OR class_subject = 'economics' AND level = 8 AND year <= 2001\nlocation = 'NY' OR location = 'TX' OR location = 'MA'\nstar_rating <= 2",
+   "question": "Who teaches classes on economics at level 8 before 2001 or instructors aged 72 or older, located in NY, TX, or MA, and the store has a star rating of 2 or less?",
+   "seed": [0, 3, 0, 0, 3, 0, 72, 0, 6, 1, 4, 0, 11, 1, 2001, 2, 2, 3, 4, 0, 2, 2, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age >= 72 OR classes.class_subject = 'economics' AND classes.level = 8 AND classes.year <= 2001) AND (store.location = 'NY' OR store.location = 'TX' OR store.location = 'MA') AND store.star_rating <= 2"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'psychology' OR class_subject = 'english'\ngrade <= 45\nyear <= 2003\nlocation = 'IN' OR location = 'NY' OR location = 'MA'",
+   "question": "Who teaches classes on psychology or english with a grade no higher than 45 before 2003, located in IN, NY, or MA?",
+   "seed": [0, 1, 0, 0, 0, 3, 2, 8, 12, 1, 45, 1, 2003, 0, 2, 1, 3, 0, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'psychology' OR classes.class_subject = 'english') AND classes.grade <= 45 AND classes.year <= 2003 AND (store.location = 'IN' OR store.location = 'NY' OR store.location = 'MA')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating <= 5\nteacher_age <= 42\nclass_subject = 'music' OR class_subject = 'biology' OR class_subject = 'english'\nlevel = 8\nyear <= 2006",
+   "question": "What are the names of stores where instructors aged no more than 42 teach music, biology, or english at level 8 before 2006, and the store has a star rating of 5 or less?",
+   "seed": [1, 3, 1, 0, 1, 2, 5, 2, 1, 42, 0, 6, 3, 11, 1, 12, 0, 3, 8, 1, 2006, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 5 AND instructors.teacher_age <= 42 AND (classes.class_subject = 'music' OR classes.class_subject = 'biology' OR classes.class_subject = 'english') AND classes.level = 8 AND classes.year <= 2006"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 40\nstar_rating = 10",
+   "question": "Who are the instructors aged no more than 40 teaching at stores with a star rating of 10?",
+   "seed": [0, 3, 0, 1, 1, 1, 40, 1, 0, 10, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 40 AND store.star_rating = 10"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age >= 73\nlocation = 'NY'\nstar_rating <= 9",
+   "question": "Who are the instructors aged 73 or older teaching at stores located in NY with a star rating of 9 or less?",
+   "seed": [0, 2, 0, 1, 1, 0, 73, 2, 0, 3, 2, 9, 0],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 73 AND store.location = 'NY' AND store.star_rating <= 9"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 53\nclass_subject = 'history' OR class_subject = 'economics'\ngrade >= 83\nlocation = 'NY'\nstar_rating = 7",
+   "question": "Who teaches history or economics classes with a grade of at least 83, located in NY with a star rating of 7 or more, and instructors aged no more than 53?",
+   "seed": [0, 1, 0, 2, 1, 53, 0, 1, 2, 5, 4, 0, 83, 2, 0, 3, 0, 7, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 53 AND (classes.class_subject = 'history' OR classes.class_subject = 'economics') AND classes.grade >= 83 AND store.location = 'NY' AND store.star_rating = 7"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'TX'\nstar_rating >= 8\nteacher_age >= 90\nclass_subject = 'philosophy' OR class_subject = 'economics'\nlevel = 7\ngrade >= 62\nyear <= 2017",
+   "question": "What are the names of stores located in TX with a star rating of 8 or more, instructors aged 90 or older, teaching philosophy or economics at level 7 with a grade of at least 62 before 2017?",
+   "seed": [1, 2, 0, 1, 2, 0, 4, 1, 8, 2, 0, 90, 0, 7, 2, 7, 4, 0, 10, 0, 62, 1, 2017, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND store.star_rating >= 8 AND instructors.teacher_age >= 90 AND (classes.class_subject = 'philosophy' OR classes.class_subject = 'economics') AND classes.level = 7 AND classes.grade >= 62 AND classes.year <= 2017"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'math'\nlevel = 1\ngrade >= 64\nstar_rating = 8",
+   "question": "Who teaches math at level 1 with a grade of at least 64 at stores with a star rating of 8?",
+   "seed": [0, 4, 1, 0, 0, 0, 5, 1, 0, 0, 4, 0, 64, 1, 0, 8, 3],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.class_subject = 'math' AND classes.level = 1 AND classes.grade >= 64 AND store.star_rating = 8"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 45\nstar_rating = 3",
+   "question": "Who are the instructors aged no more than 45 teaching at stores with a star rating of 3?",
+   "seed": [0, 0, 1, 1, 45, 1, 0, 3, 3],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 45 AND store.star_rating = 3"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'MA' OR location = 'IN'\nteacher_age <= 47 OR (class_subject = 'math' OR class_subject = 'psychology') AND grade <= 47",
+   "question": "What are the names of stores located in MA or IN, where instructors aged no more than 47 or classes on math or psychology with a grade of no more than 47 are taught?",
+   "seed": [1, 4, 0, 0, 0, 1, 0, 1, 3, 1, 47, 0, 1, 2, 0, 8, 1, 47, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'MA' OR store.location = 'IN') AND (instructors.teacher_age <= 47 OR (classes.class_subject = 'math' OR classes.class_subject = 'psychology') AND classes.grade <= 47)"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age >= 40\nclass_subject = 'psychology' OR class_subject = 'art'\ngrade >= 76\nstar_rating >= 6",
+   "question": "Who teaches psychology or art with a grade of at least 76 at stores with a star rating of at least 6 and aged 40 or older?",
+   "seed": [0, 0, 2, 0, 40, 0, 1, 2, 8, 10, 0, 76, 1, 1, 6, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 40 AND (classes.class_subject = 'psychology' OR classes.class_subject = 'art') AND classes.grade >= 76 AND store.star_rating >= 6"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating <= 2\ngrade <= 26",
+   "question": "What are the names of stores with a star rating of 2 or less where classes have a grade of 26 or less?",
+   "seed": [1, 0, 1, 2, 2, 0, 0, 1, 0, 1, 26, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 2 AND classes.grade <= 26"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating <= 3\nclass_subject = 'politics' OR class_subject = 'music'\nlevel = 6\ngrade >= 71",
+   "question": "What are the names of stores with a star rating of 3 or less where politics or music classes at level 6 have a grade of at least 71?",
+   "seed": [1, 1, 1, 1, 2, 3, 0, 0, 5, 2, 6, 11, 0, 3, 6, 0, 71, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 3 AND (classes.class_subject = 'politics' OR classes.class_subject = 'music') AND classes.level = 6 AND classes.grade >= 71"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating = 4\nteacher_age >= 63 OR class_subject = 'math' AND year <= 2013",
+   "question": "What are the names of stores with a star rating of 4 where instructors aged 63 or older or math classes before 2013 are taught?",
+   "seed": [1, 0, 1, 0, 4, 3, 0, 63, 0, 2, 1, 0, 1, 2013, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 4 AND (instructors.teacher_age >= 63 OR classes.class_subject = 'math' AND classes.year <= 2013)"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 40\nstar_rating <= 7",
+   "question": "Who are the instructors aged no more than 40 teaching at stores with a star rating of 7 or less?",
+   "seed": [0, 0, 1, 1, 40, 1, 2, 7, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 40 AND store.star_rating <= 7"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nlocation = 'CA'\nstar_rating <= 2\nteacher_age <= 40",
+   "question": "What are the names of stores in CA with a star rating of 2 or less where instructors aged no more than 40 teach?",
+   "seed": [1, 3, 0, 0, 2, 0, 2, 2, 2, 1, 1, 40, 1],
+   "sql": "SELECT store.name\nFROM store\nINNER JOIN instructors ON store.name = instructors.name\nWHERE store.location = 'CA' AND store.star_rating <= 2 AND instructors.teacher_age <= 40"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 74 OR level = 3\nlocation = 'TX'",
+   "question": "Who teaches at stores located in TX where instructors aged no more than 74 or classes at level 3 are taught?",
+   "seed": [0, 3, 0, 1, 3, 1, 74, 0, 4, 0, 0, 2, 0, 0, 4, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 74 OR classes.level = 3) AND store.location = 'TX'"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age <= 57\nlocation = 'TX'\nstar_rating = 5",
+   "question": "Who are the instructors aged no more than 57 teaching at stores located in TX with a star rating of 5?",
+   "seed": [0, 3, 1, 1, 1, 1, 57, 2, 0, 4, 0, 5, 2],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 57 AND store.location = 'TX' AND store.star_rating = 5"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 75 OR (class_subject = 'history' OR class_subject = 'philosophy') AND grade >= 80\nlocation = 'NY'\nstar_rating >= 9",
+   "question": "Who teaches history or philosophy with a grade of at least 80 or aged no more than 75 at stores located in NY with a star rating of 9 or more?",
+   "seed": [0, 0, 3, 1, 75, 0, 1, 2, 5, 7, 0, 80, 2, 0, 3, 1, 9, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (instructors.teacher_age <= 75 OR (classes.class_subject = 'history' OR classes.class_subject = 'philosophy') AND classes.grade >= 80) AND store.location = 'NY' AND store.star_rating >= 9"
+},{"pseudocode": "want: name\ntables: instructors, store\nconditions: \nteacher_age >= 23\nstar_rating >= 2",
+   "question": "Who are the instructors aged 23 or older teaching at stores with a star rating of at least 2?",
+   "seed": [0, 0, 1, 0, 23, 1, 1, 2, 1],
+   "sql": "SELECT instructors.name\nFROM instructors\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 23 AND store.star_rating >= 2"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'sociology' OR class_subject = 'psychology' OR class_subject = 'politics'\nlevel = 5\ngrade <= 46\nlocation = 'CA' OR location = 'MA'\nstar_rating = 5",
+   "question": "Who teaches sociology, psychology, or politics at level 5 with a grade of no more than 46 at stores located in CA or MA with a star rating of 5?",
+   "seed": [0, 4, 1, 1, 0, 0, 5, 3, 9, 8, 6, 0, 3, 5, 1, 46, 2, 1, 2, 0, 0, 5, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'sociology' OR classes.class_subject = 'psychology' OR classes.class_subject = 'politics') AND classes.level = 5 AND classes.grade <= 46 AND (store.location = 'CA' OR store.location = 'MA') AND store.star_rating = 5"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'IN' OR location = 'NY' OR location = 'MA'\nstar_rating >= 8\nteacher_age >= 73\nclass_subject = 'biology' OR class_subject = 'physics' OR class_subject = 'music'\ngrade <= 31",
+   "question": "What are the names of stores located in IN, NY, or MA with a star rating of 8 or more where biology, physics, or music classes with a grade of no more than 31 are taught by instructors aged 73 or older?",
+   "seed": [1, 1, 1, 2, 2, 1, 3, 0, 1, 8, 2, 0, 73, 0, 1, 3, 1, 3, 11, 1, 31, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'IN' OR store.location = 'NY' OR store.location = 'MA') AND store.star_rating >= 8 AND instructors.teacher_age >= 73 AND (classes.class_subject = 'biology' OR classes.class_subject = 'physics' OR classes.class_subject = 'music') AND classes.grade <= 31"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nstar_rating = 5\nteacher_age <= 54\nclass_subject = 'history'\nyear >= 2018",
+   "question": "What are the names of stores with a star rating of 5 where instructors aged no more than 54 teach history after 2018?",
+   "seed": [1, 1, 1, 1, 0, 5, 2, 1, 54, 0, 2, 1, 5, 0, 2018, 3],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 5 AND instructors.teacher_age <= 54 AND classes.class_subject = 'history' AND classes.year >= 2018"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'MA' OR location = 'TX'\nteacher_age >= 36\nclass_subject = 'literature' OR class_subject = 'sociology' OR class_subject = 'poetry'\ngrade <= 30\nyear <= 2008",
+   "question": "What are the names of stores located in MA or TX where instructors aged no more than 36 teach literature, sociology, or poetry with a grade of no more than 30 before 2008?",
+   "seed": [1, 1, 1, 0, 1, 0, 4, 2, 0, 36, 0, 3, 3, 13, 9, 14, 1, 30, 1, 2008, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'MA' OR store.location = 'TX') AND instructors.teacher_age >= 36 AND (classes.class_subject = 'literature' OR classes.class_subject = 'sociology' OR classes.class_subject = 'poetry') AND classes.grade <= 30 AND classes.year <= 2008"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nteacher_age <= 71\nclass_subject = 'math'\nlevel = 1\nyear >= 2002\nlocation = 'MA' OR location = 'CA'",
+   "question": "Who teaches math at level 1 after 2002 at stores located in MA or CA, aged no more than 71?",
+   "seed": [0, 3, 1, 1, 2, 1, 71, 0, 6, 1, 0, 0, 0, 0, 2002, 0, 1, 0, 2, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 71 AND classes.class_subject = 'math' AND classes.level = 1 AND classes.year >= 2002 AND (store.location = 'MA' OR store.location = 'CA')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'MA' OR location = 'TX' OR location = 'CA'\nstar_rating >= 3\nteacher_age >= 90\nclass_subject = 'english' OR class_subject = 'sociology' OR class_subject = 'psychology'\nlevel = 12\ngrade >= 89\nyear <= 2000",
+   "question": "What are the names of stores located in MA, TX, or CA with a star rating of at least 3 where instructors aged 90 or older teach english, sociology, or psychology at level 12 with a grade of at least 89 before 2000?",
+   "seed": [1, 1, 0, 2, 2, 0, 4, 2, 1, 3, 2, 0, 90, 0, 7, 3, 12, 9, 8, 0, 3, 12, 0, 89, 1, 2000, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'MA' OR store.location = 'TX' OR store.location = 'CA') AND store.star_rating >= 3 AND instructors.teacher_age >= 90 AND (classes.class_subject = 'english' OR classes.class_subject = 'sociology' OR classes.class_subject = 'psychology') AND classes.level = 12 AND classes.grade >= 89 AND classes.year <= 2000"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nlocation = 'NY' OR location = 'TX' OR location = 'CA'\nstar_rating <= 3\nteacher_age >= 83 OR class_subject = 'philosophy' OR class_subject = 'history' OR class_subject = 'politics'",
+   "question": "What are the names of stores located in NY, TX, or CA with a star rating of 3 or less where instructors aged no less than 83 or classes on philosophy, history, or politics are taught?",
+   "seed": [1, 1, 0, 2, 2, 3, 4, 2, 2, 3, 3, 0, 83, 0, 0, 3, 7, 5, 6, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (store.location = 'NY' OR store.location = 'TX' OR store.location = 'CA') AND store.star_rating <= 3 AND (instructors.teacher_age >= 83 OR classes.class_subject = 'philosophy' OR classes.class_subject = 'history' OR classes.class_subject = 'politics')"
+},{"pseudocode": "want: name\ntables: instructors, store, classes\nconditions: \nclass_subject = 'art' OR class_subject = 'economics' OR class_subject = 'philosophy'\nyear <= 2005\nlocation = 'IN'",
+   "question": "Who teaches art, economics, or philosophy before 2005 at stores located in IN?",
+   "seed": [0, 1, 0, 0, 0, 2, 3, 10, 4, 7, 1, 2005, 0, 0, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE (classes.class_subject = 'art' OR classes.class_subject = 'economics' OR classes.class_subject = 'philosophy') AND classes.year <= 2005 AND store.location = 'IN'"
+}
+]

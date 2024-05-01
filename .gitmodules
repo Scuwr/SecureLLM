@@ -1,0 +1,3 @@
+[submodule "tensor_parallel"]
+	path = tensor_parallel
+	url = https://github.com/BlackSamorez/tensor_parallel

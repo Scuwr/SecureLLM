@@ -1,0 +1,125 @@
+# SYNTAX
+# nickname : weight : name : main string : sql conditions
+# nickname has no effect and only helpful for debugging
+# weight affects how likely this node is to be chosen when expanding compared to other nodes with the same name
+# name is used for expanding nodes
+# main string is the part thats used to generate the natural language question
+# main sql is what specifies how the sql query needs to be set up to match the natural language question, seperated by ';'
+#  - T = AVG | MIN | MAX | COUNT | SUM   # the aggregate function to use
+#  - WANT = columnname         # the column requested for this query
+#  - TABLES = tablename        # the tables to use (only needed when WANT is not specified thus dont know which table to use)
+#  - CONDITIONS = sqlcondition  # the conditions to use
+#  - ADDER_PROPS={"comb":"OR"}  # json passed to the adder function to specify how to combine main sql  (defualt comb is AND)
+#  - REFS={"key":"val"}       # json passed to parent and can be referenced in parent's main sql
+
+
+
+:1: root : {whats_the} average {prop_number} {suffix} : T=AVG
+:1: root : {whats_the} maximum {prop_number} {suffix} : T=MAX
+:1: root : {whats_the} minimum {prop_number} {suffix} : T=MIN
+:1: root : {list_the} {prop_number} {suffix} : T=none
+:1: root : {whats_the} number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:1: root : Count the number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:1: root : {list_the} primary key of all {prop_countable} {suffix} : T=none
+:1: root : {list_the} names of all teachers {teacher_multi_cond} {suffix} : T=none ; WANT=instructors.name ; TABLES = instructors
+
+# suffixes and prefixes
+:1: list_the : list the : none
+:1: list_the : output the : none
+:1: list_the : output a list of the : none
+:1: list_the : provide a list of the : none
+:1: list_the : give a list of the : none
+:1: list_the : give me a list of the : none
+:1: whats_the : what is the : none
+:1: whats_the : what's the : none
+:1: whats_the : provide the : none
+:1: whats_the : output the : none
+
+
+:2: suffix : : none
+:1: suffix : in our records : none
+:1: suffix : in the school : none
+:1: suffix : in the database : none
+
+:1: prop_countable: teachers {teacher_multi_cond} : TABLES = instructors
+:1: prop_countable: {class} : TABLES = classes
+:1: prop_number: age of all teachers {teacher_multi_cond} : WANT=instructors.teacher_age ; TABLES = instructors
+:1: prop_number: grade of all {class} : WANT=classes.grade ; TABLES = classes
+
+:1: teacher_multi_cond: : none
+:3: teacher_multi_cond: {teacher_cond_taught} : none
+:2: teacher_multi_cond: {teacher_cond_age} : none
+:4: teacher_multi_cond: {teacher_cond_age} and {teacher_cond_taught} : none
+:4: teacher_multi_cond: {teacher_cond_age} or {teacher_cond_taught} : ADDER_PROPS={"comb":"OR"}
+:1: teacher_cond_taught: that taught {class} : TABLES = classes
+:1: teacher_cond_age: that are older than {number,20,90} : CONDITIONS=instructors.teacher_age >= {0}
+:1: teacher_cond_age: that are younger than {number,20,90} : CONDITIONS=instructors.teacher_age <= {0}
+
+# list all classes that were conducted before 2010
+# how many classes were conducted before 2010
+# list all teachers that taught classes that were conducted before 2010
+:1: class: {subject} classes : none
+:2: class: {subject} classes that {class_avg} : none
+:2: class: {subject} classes that {class_year} : none
+:2: class: {subject} classes that {class_avg} and {class_year}: none
+# with class level
+:2: class: {subject} classes {class_level_single} : none
+:2: class: {subject} classes {class_level_single} that {class_avg} : none
+:2: class: {subject} classes {class_level_single} that {class_year} : none
+:2: class: {subject} classes {class_level_single} that {class_avg} and {class_year}: none
+
+:1: class_level_single: for {class_level_th} : none
+:1: class_level_th: 1st graders : CONDITIONS=classes.level = 1
+:1: class_level_th: 2nd graders : CONDITIONS=classes.level = 2
+:1: class_level_th: 3rd graders : CONDITIONS=classes.level = 3
+:9: class_level_th: {number,4,12}th graders : CONDITIONS=classes.level = {0}
+:1: class_level_th: first graders : CONDITIONS=classes.level = 1
+:1: class_level_th: second graders : CONDITIONS=classes.level = 2
+:1: class_level_th: third graders : CONDITIONS=classes.level = 3
+:1: class_level_th: fourth graders : CONDITIONS=classes.level = 4
+:1: class_level_th: fifth graders : CONDITIONS=classes.level = 5
+:1: class_level_th: sixth graders : CONDITIONS=classes.level = 6
+:1: class_level_th: seventh graders : CONDITIONS=classes.level = 7
+:1: class_level_th: eighth graders : CONDITIONS=classes.level = 8
+:1: class_level_th: ninth graders : CONDITIONS=classes.level = 9
+:1: class_level_th: tenth graders : CONDITIONS=classes.level = 10
+:1: class_level_th: eleventh graders : CONDITIONS=classes.level = 11
+:1: class_level_th: twelfth graders : CONDITIONS=classes.level = 12
+
+:1: class_avg: achieved a grade higher than {number,60,95} : CONDITIONS=classes.grade >= {0}
+:1: class_avg: achieved a grade lower than {number,20,60} : CONDITIONS=classes.grade <= {0}
+
+:1: class_year: were conducted after {number,2000,2020} : CONDITIONS=classes.year >= {0}
+:1: class_year: were conducted before {number,2000,2020} : CONDITIONS=classes.year <= {0}
+
+:1: subject: : none
+:1: subject: {single_subject} : CONDITIONS=classes.class_subject = '{0}'
+:1: subject: {single_subject} or {single_subject} : CONDITIONS=classes.class_subject = '{0}' OR classes.class_subject = '{1}'
+:1: subject: {single_subject}, {single_subject}, or {single_subject} : CONDITIONS=classes.class_subject = '{0}' OR classes.class_subject = '{1}' OR classes.class_subject = '{2}'
+
+:1: single_subject : math
+:1: single_subject : biology
+:1: single_subject : chemistry
+:1: single_subject : physics
+:1: single_subject : economics
+:1: single_subject : history
+:1: single_subject : politics
+:1: single_subject : philosophy
+:1: single_subject : psychology
+:1: single_subject : sociology
+:1: single_subject : art
+:1: single_subject : music
+:1: single_subject : english
+:1: single_subject : literature
+:1: single_subject : poetry
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+{
+    "JOINs": [
+        {"TABLES": ["instructors", "classes"], "COLUMNS": [["teacher_id", "teacher_id"]]}
+    ],
+    "PKs": {
+        "instructors": "teacher_id",
+        "classes": "class_id"
+    }
+}
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------

@@ -1,0 +1,603 @@
+[
+{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age >= 50\nlocation = 'NY'\nstudy = 'Biology'\ncafeteria = 0",
+   "question": "What is the name of instructors whose age is greater than or equal to 50, located in 'NY', teaching Biology, and not using the cafeteria?",
+   "seed": [0, 1, 0, 2, 0, 50, 1, 0, 3, 0, 2, 0, 1, 1, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 50 AND store.location = 'NY' AND pupils.study = 'Biology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, classes\nconditions: \ngrade >= 76\nhousing = 'Parker Hall'\ncafeteria = 0",
+   "question": "What is the name of instructors whose grade is greater than or equal to 76, pupils are in Parker Hall, and not using the cafeteria?",
+   "seed": [0, 2, 0, 1, 1, 0, 1, 0, 0, 76, 0, 0, 3, 0, 2, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.grade >= 76 AND pupils.housing = 'Parker Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nperformance > 2\nend_date = 2026\nclass_subject = 'art'\ngrade >= 78\nstar_rating >= 2",
+   "question": "What is the name of pupils with a performance rating higher than 2, having an end date in 2026, studying art, with a class grade higher than or equal to 78, and attending a store with a star rating higher than or equal to 2?",
+   "seed": [2, 0, 1, 4, 1, 1, 0, 2, 1, 0, 1, 1, 10, 0, 78, 2, 1, 2, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance > 2 AND pupils.end_date = 2026 AND classes.class_subject = 'art' AND classes.grade >= 78 AND store.star_rating >= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nperformance > 3\nteacher_age <= 77\nstar_rating <= 2",
+   "question": "What is the name of pupils with a performance rating higher than 3, instructors aged less than or equal to 77, and attending a store with a star rating less than or equal to 2?",
+   "seed": [2, 4, 0, 0, 1, 0, 1, 2, 2, 1, 77, 2, 2, 2, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance > 3 AND instructors.teacher_age <= 77 AND store.star_rating <= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'IN'\nteacher_age >= 31\nstudy = 'Political Science'\ncafeteria = 0",
+   "question": "What is the name of stores located in 'IN', whose instructors are aged 31 or more, pupils are studying Political Science, and not using the cafeteria?",
+   "seed": [1, 3, 1, 1, 1, 0, 1, 2, 0, 31, 0, 2, 0, 6, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND instructors.teacher_age >= 31 AND pupils.study = 'Political Science' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating >= 9\nclass_subject = 'english'\nlevel = 4\nyear >= 2009\nhousing = 'Lawson Hall'",
+   "question": "What is the name of stores with a star rating higher than or equal to 9, teaching English at level 4 since 2009, where pupils are in Lawson Hall?",
+   "seed": [1, 3, 1, 0, 2, 1, 9, 1, 0, 6, 1, 12, 0, 7, 0, 2009, 0, 1, 0, 6, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating >= 9 AND classes.class_subject = 'english' AND classes.level = 4 AND classes.year >= 2009 AND pupils.housing = 'Lawson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nhousing = 'Franklin Hall'",
+   "question": "What is the name of stores located in 'MA' where pupils are in Franklin Hall?",
+   "seed": [1, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.housing = 'Franklin Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Computer Science'\nlocation = 'IN'",
+   "question": "What is the name of pupils studying Computer Science located in 'IN'?",
+   "seed": [2, 3, 1, 1, 0, 0, 0, 14, 0, 1, 0, 1, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Computer Science' AND store.location = 'IN'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 4\nyear <= 2020\nstar_rating <= 6\nstudy = 'English'\ncafeteria = 0",
+   "question": "What is the name of instructors teaching English, with a class level of 4 before 2020, attending a store with a star rating less than or equal to 6, and not using the cafeteria?",
+   "seed": [0, 3, 1, 0, 1, 0, 6, 0, 0, 7, 1, 2020, 2, 2, 6, 0, 2, 0, 12, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 4 AND classes.year <= 2020 AND store.star_rating <= 6 AND pupils.study = 'English' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 75\nstar_rating >= 2\nstudy = 'Sociology'\ncafeteria = 0",
+   "question": "What is the name of instructors aged less than or equal to 75, attending a store with a star rating higher than or equal to 2, teaching Sociology, and not using the cafeteria?",
+   "seed": [0, 4, 0, 0, 2, 1, 75, 2, 1, 2, 0, 2, 0, 9, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 75 AND store.star_rating >= 2 AND pupils.study = 'Sociology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Economics'\ncafeteria = 0\nteacher_age <= 79",
+   "question": "What is the name of pupils studying Economics and not using the cafeteria, whose instructors are aged less than or equal to 79?",
+   "seed": [2, 0, 0, 2, 0, 4, 1, 2, 1, 79, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Economics' AND pupils.cafeteria = 0 AND instructors.teacher_age <= 79"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, classes\nconditions: \nhousing = 'Franklin Hall'",
+   "question": "What is the name of pupils in Franklin Hall?",
+   "seed": [2, 3, 1, 1, 0, 1, 0, 3, 1, 0, 0, 0, 0, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.housing = 'Franklin Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nstudy = 'English'\nclass_subject = 'literature'\nlevel = 10\nstar_rating = 10",
+   "question": "What is the name of pupils studying English, attending a literature class at level 10, with a store rating of 10?",
+   "seed": [2, 4, 0, 0, 0, 0, 0, 12, 1, 0, 4, 1, 13, 0, 13, 2, 0, 10, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'English' AND classes.class_subject = 'literature' AND classes.level = 10 AND store.star_rating = 10"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating >= 9\nperformance < 3\nend_date < 2027",
+   "question": "What is the name of instructors attending a store with a star rating higher than or equal to 9, whose pupils have a performance rating lower than 3, and an end date before 2027?",
+   "seed": [0, 1, 0, 0, 2, 1, 9, 1, 4, 2, 2, 2, 1, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating >= 9 AND pupils.performance < 3 AND pupils.end_date < 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nhousing = 'Franklin Hall'\nclass_subject = 'music'\ngrade <= 50\nstar_rating <= 2",
+   "question": "What is the name of pupils in Franklin Hall, attending a music class with a grade lower than or equal to 50, and a store rating lower than or equal to 2?",
+   "seed": [2, 3, 0, 1, 0, 1, 0, 3, 1, 0, 1, 1, 11, 1, 50, 2, 2, 2, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.housing = 'Franklin Hall' AND classes.class_subject = 'music' AND classes.grade <= 50 AND store.star_rating <= 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 21\nstudy = 'Biology'\ncafeteria = 1",
+   "question": "What is the name of instructors aged less than or equal to 21, teaching Biology, and using the cafeteria?",
+   "seed": [0, 2, 1, 0, 2, 1, 21, 0, 0, 2, 0, 1, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 21 AND pupils.study = 'Biology' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'NY'\nhousing = 'Underwood House'",
+   "question": "What is the name of instructors located in 'NY' where pupils are in Underwood House?",
+   "seed": [0, 2, 0, 1, 0, 1, 0, 3, 0, 1, 0, 9, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'NY' AND pupils.housing = 'Underwood House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'NY'\nend_date < 2025",
+   "question": "What is the name of instructors located in 'NY' where pupils have an end date before 2025?",
+   "seed": [0, 1, 1, 0, 1, 0, 3, 1, 2, 2, 3, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'NY' AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nhousing = 'Campbell Hall'\nteacher_age <= 85\nstar_rating >= 6",
+   "question": "What is the name of pupils in Campbell Hall, whose instructors are aged less than or equal to 85, attending a store with a star rating higher than or equal to 6?",
+   "seed": [2, 1, 0, 0, 1, 0, 7, 2, 1, 85, 2, 1, 6, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.housing = 'Campbell Hall' AND instructors.teacher_age <= 85 AND store.star_rating >= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'MA'\nstudy = 'Math'",
+   "question": "What is the name of stores located in 'MA' where pupils are studying Math?",
+   "seed": [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'MA' AND pupils.study = 'Math'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'MA'\nteacher_age <= 61\nperformance = 4",
+   "question": "What is the name of stores located in 'MA' where instructors are aged less than or equal to 61 and pupils have a performance rating of 4?",
+   "seed": [1, 3, 0, 0, 1, 0, 0, 2, 1, 61, 1, 0, 0, 3, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'MA' AND instructors.teacher_age <= 61 AND pupils.performance = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 61\nstar_rating <= 9\nhousing = 'Morgan House'",
+   "question": "What is the name of instructors aged less than or equal to 61, attending a store with a star rating less than or equal to 9, and pupils are in Morgan House?",
+   "seed": [0, 2, 0, 1, 2, 1, 61, 2, 2, 9, 0, 1, 0, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 61 AND store.star_rating <= 9 AND pupils.housing = 'Morgan House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age >= 23\nlocation = 'NY'\nperformance < 3",
+   "question": "What is the name of instructors aged greater than or equal to 23, located in 'NY', and pupils have a performance rating lower than 3?",
+   "seed": [0, 1, 0, 2, 0, 23, 1, 0, 3, 1, 0, 2, 2, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 23 AND store.location = 'NY' AND pupils.performance < 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'IN'\nyear <= 2014\nstudy = 'Philosophy'",
+   "question": "What is the name of stores located in 'IN', teaching Philosophy before 2014, and pupils are studying Philosophy?",
+   "seed": [1, 1, 0, 1, 0, 1, 1, 0, 2, 0, 1, 2014, 0, 0, 0, 7, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND classes.year <= 2014 AND pupils.study = 'Philosophy'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nstudy = 'Political Science'\ncafeteria = 0\nclass_subject = 'math'\nyear >= 2013\nlocation = 'NY'",
+   "question": "What is the name of pupils studying Political Science, not using the cafeteria, attending a math class since 2013, and located in 'NY'?",
+   "seed": [2, 0, 0, 2, 0, 6, 1, 1, 0, 2, 1, 0, 0, 2013, 1, 0, 3, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'Political Science' AND pupils.cafeteria = 0 AND classes.class_subject = 'math' AND classes.year >= 2013 AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 26\nlocation = 'CA'\nperformance < 3",
+   "question": "What is the name of instructors aged less than or equal to 26, located in 'CA', and pupils have a performance rating lower than 3?",
+   "seed": [0, 0, 2, 1, 26, 1, 0, 2, 1, 0, 2, 2, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 26 AND store.location = 'CA' AND pupils.performance < 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'NY'\ngrade <= 51\nperformance = 2",
+   "question": "What is the name of stores located in 'NY' where classes have a grade lower than or equal to 51 and pupils have a performance rating of 2?",
+   "seed": [1, 1, 1, 1, 0, 3, 1, 0, 1, 0, 1, 51, 1, 0, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'NY' AND classes.grade <= 51 AND pupils.performance = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nclass_subject = 'chemistry'\nyear >= 2003\nlocation = 'TX'\nend_date = 2027",
+   "question": "What is the name of instructors teaching chemistry since 2003, located in 'TX', and pupils have an end date in 2027?",
+   "seed": [0, 3, 1, 0, 1, 0, 2, 1, 2, 0, 2003, 1, 0, 4, 1, 2, 0, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.class_subject = 'chemistry' AND classes.year >= 2003 AND store.location = 'TX' AND pupils.end_date = 2027"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating = 5\nend_date = 2025",
+   "question": "What is the name of stores with a star rating of 5 and pupils have an end date in 2025?",
+   "seed": [1, 1, 0, 2, 0, 5, 0, 1, 2, 0, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating = 5 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nhousing = 'Lawson Hall'\ncafeteria = 0\nclass_subject = 'politics'\nstar_rating >= 5",
+   "question": "What is the name of pupils in Lawson Hall, not using the cafeteria, attending a politics class, and store rating is higher than or equal to 5?",
+   "seed": [2, 4, 0, 0, 0, 3, 0, 6, 1, 1, 0, 0, 1, 6, 2, 1, 5, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.housing = 'Lawson Hall' AND pupils.cafeteria = 0 AND classes.class_subject = 'politics' AND store.star_rating >= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 65\nlocation = 'CA'\nstudy = 'Psychology'\ncafeteria = 1",
+   "question": "What is the name of the instructors whose age is less than or equal to 65, who teach Psychology, and have a cafeteria option, and are located in California?",
+   "seed": [0, 3, 0, 0, 2, 1, 65, 1, 0, 2, 0, 2, 0, 8, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 65 AND store.location = 'CA' AND pupils.study = 'Psychology' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 57\nstar_rating >= 8\nhousing = 'Morgan House'\ncafeteria = 0",
+   "question": "What is the name of the instructors whose age is less than or equal to 57, who teach at Morgan House, have no cafeteria option, and the store they are associated with has a star rating of 8 or higher?",
+   "seed": [0, 0, 2, 1, 57, 2, 1, 8, 0, 3, 0, 1, 1, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 57 AND store.star_rating >= 8 AND pupils.housing = 'Morgan House' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, classes\nconditions: \nstudy = 'Economics'\ncafeteria = 1\nlevel = 11",
+   "question": "What are the names of the pupils who study Economics, have a cafeteria option, and are in level 11 classes?",
+   "seed": [2, 3, 1, 0, 0, 2, 0, 4, 0, 1, 0, 4, 0, 0, 3, 11, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.study = 'Economics' AND pupils.cafeteria = 1 AND classes.level = 11"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance < 4\nstar_rating <= 5",
+   "question": "What are the names of the pupils whose performance is less than 4 and the store they are associated with has a star rating of 5 or less?",
+   "seed": [2, 0, 1, 0, 2, 3, 0, 2, 2, 5, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance < 4 AND store.star_rating <= 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nstudy = 'Political Science'\ncafeteria = 1\nlevel = 6\nyear <= 2005\nstar_rating <= 8",
+   "question": "What are the names of the pupils who study Political Science, have a cafeteria option, are in level 6 classes with a year no later than 2005, and the store they are associated with has a star rating of 8 or less?",
+   "seed": [2, 2, 1, 1, 0, 2, 0, 6, 0, 1, 0, 6, 0, 0, 9, 1, 2005, 2, 2, 8, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'Political Science' AND pupils.cafeteria = 1 AND classes.level = 6 AND classes.year <= 2005 AND store.star_rating <= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating <= 9\nend_date = 2025",
+   "question": "What is the name of the instructors whose store has a star rating of 9 or less and whose pupils' end date is 2025?",
+   "seed": [0, 4, 1, 0, 1, 0, 0, 0, 2, 2, 9, 1, 2, 0, 3, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 9 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating <= 9\nstudy = 'English'",
+   "question": "What is the name of the instructors whose store has a star rating of 9 or less and teach English?",
+   "seed": [0, 4, 1, 1, 0, 2, 2, 9, 0, 0, 0, 12, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 9 AND pupils.study = 'English'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating <= 2\nteacher_age >= 31\nhousing = 'Franklin Hall'",
+   "question": "What is the name of the store with a star rating of 2 or less, whose instructors' age is 31 or more, and whose pupils reside in Franklin Hall?",
+   "seed": [1, 2, 0, 0, 2, 2, 2, 2, 0, 31, 0, 1, 0, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 2 AND instructors.teacher_age >= 31 AND pupils.housing = 'Franklin Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating = 2\nteacher_age <= 48\nhousing = 'Franklin Hall'",
+   "question": "What is the name of the store with a star rating of 2, whose instructors' age is less than or equal to 48, and whose pupils reside in Franklin Hall?",
+   "seed": [1, 2, 0, 1, 2, 0, 2, 2, 1, 48, 0, 1, 0, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 2 AND instructors.teacher_age <= 48 AND pupils.housing = 'Franklin Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating <= 3\nlevel = 12\ngrade >= 64\nhousing = 'Franklin Hall'",
+   "question": "What is the name of the store with a star rating of 3 or less, whose classes are in level 12 with a grade of 64 or higher, and whose pupils reside in Franklin Hall?",
+   "seed": [1, 3, 1, 0, 2, 2, 3, 1, 0, 5, 0, 0, 3, 12, 0, 64, 0, 1, 0, 3, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 3 AND classes.level = 12 AND classes.grade >= 64 AND pupils.housing = 'Franklin Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nhousing = 'Parker Hall'\ncafeteria = 0\nteacher_age >= 44\nlocation = 'MA'",
+   "question": "What is the name of the store located in Massachusetts, whose instructors' age is 44 or more, whose pupils reside in Parker Hall, and have no cafeteria option?",
+   "seed": [2, 1, 0, 0, 3, 0, 2, 1, 2, 0, 44, 1, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.housing = 'Parker Hall' AND pupils.cafeteria = 0 AND instructors.teacher_age >= 44 AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nperformance > 3\nend_date = 2024\nclass_subject = 'physics'\nlocation = 'NY'",
+   "question": "What are the names of the pupils whose performance is higher than 3, end date is 2024, study physics, and are associated with a store located in New York?",
+   "seed": [2, 4, 1, 1, 1, 4, 1, 2, 0, 0, 1, 0, 0, 1, 3, 1, 0, 3, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance > 3 AND pupils.end_date = 2024 AND classes.class_subject = 'physics' AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nclass_subject = 'politics'\nlevel = 5\nyear >= 2018\nlocation = 'CA'\nhousing = 'Underwood House'",
+   "question": "What is the name of the instructors whose store is located in California, teach politics, have classes in level 5 with a year no earlier than 2018, and pupils reside in Underwood House?",
+   "seed": [0, 0, 1, 0, 6, 1, 6, 0, 3, 5, 0, 2018, 1, 0, 2, 0, 1, 0, 9, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.class_subject = 'politics' AND classes.level = 5 AND classes.year >= 2018 AND store.location = 'CA' AND pupils.housing = 'Underwood House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age >= 47\nend_date < 2025",
+   "question": "What is the name of the store whose instructors' age is 47 or more and whose pupils' end date is before 2025?",
+   "seed": [1, 4, 0, 0, 0, 2, 0, 47, 1, 2, 2, 3, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 47 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating >= 6\nclass_subject = 'math'\nhousing = 'Campbell Hall'",
+   "question": "What is the name of the store with a star rating of 6 or more, where classes are in math, pupils reside in Campbell Hall, and the instructors have a grade of 64 or higher?",
+   "seed": [1, 4, 1, 1, 2, 1, 6, 1, 0, 0, 1, 0, 0, 1, 0, 7, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating >= 6 AND classes.class_subject = 'math' AND pupils.housing = 'Campbell Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'TX'\nteacher_age <= 89\nend_date > 2025",
+   "question": "What is the name of the store located in Texas, whose instructors' age is 89 or less, and whose pupils' end date is after 2025?",
+   "seed": [1, 1, 0, 1, 0, 4, 2, 1, 89, 1, 2, 1, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND instructors.teacher_age <= 89 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 39\nstar_rating = 7\nend_date = 2026",
+   "question": "What is the name of the instructors whose age is 39 or less, whose store has a star rating of 7, and pupils' end date is 2026?",
+   "seed": [0, 0, 2, 1, 39, 2, 0, 7, 1, 2, 0, 2, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 39 AND store.star_rating = 7 AND pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'MA'\nteacher_age <= 48\nhousing = 'Norton Hall'",
+   "question": "What is the name of the store located in Massachusetts, whose instructors' age is 48 or less, and pupils reside in Norton Hall?",
+   "seed": [1, 3, 1, 1, 1, 0, 0, 2, 1, 48, 0, 1, 0, 0, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'MA' AND instructors.teacher_age <= 48 AND pupils.housing = 'Norton Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance < 4\nend_date > 2024\nstar_rating >= 8",
+   "question": "What are the names of the pupils whose performance is less than 4, end date is after 2024, and whose store has a star rating of 8 or more?",
+   "seed": [2, 0, 1, 4, 2, 3, 1, 0, 0, 2, 1, 8, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance < 4 AND pupils.end_date > 2024 AND store.star_rating >= 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nperformance < 4\nend_date = 2025\nclass_subject = 'psychology'\nlevel = 5\ngrade >= 94\nstar_rating <= 7",
+   "question": "What are the names of the pupils whose performance is less than 4, end date is 2025, study psychology, are in level 5 classes with a grade of 94 or higher, and the store they are associated with has a star rating of 7 or less?",
+   "seed": [2, 0, 1, 4, 2, 3, 0, 3, 1, 0, 5, 1, 8, 0, 8, 0, 94, 2, 2, 7, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance < 4 AND pupils.end_date = 2025 AND classes.class_subject = 'psychology' AND classes.level = 5 AND classes.grade >= 94 AND store.star_rating <= 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'TX'\nlevel = 11\nstudy = 'Mechanical Engineering'",
+   "question": "What is the name of the store located in Texas, where classes are in level 11 and pupils study Mechanical Engineering?",
+   "seed": [1, 2, 0, 0, 1, 0, 4, 1, 0, 4, 0, 0, 14, 0, 0, 0, 15, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND classes.level = 11 AND pupils.study = 'Mechanical Engineering'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating >= 4\nhousing = 'Norton Hall'\ncafeteria = 0",
+   "question": "What is the name of the instructors whose store has a star rating of 4 or more, whose pupils reside in Norton Hall, and have no cafeteria option?",
+   "seed": [0, 3, 1, 0, 0, 2, 1, 4, 0, 3, 0, 0, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating >= 4 AND pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 4\ngrade >= 62\nend_date = 2026",
+   "question": "What is the name of the store where classes are in level 4 with a grade of 62 or higher and pupils' end date is 2026?",
+   "seed": [1, 4, 0, 0, 0, 1, 0, 5, 0, 0, 7, 0, 62, 1, 2, 0, 2, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 4 AND classes.grade >= 62 AND pupils.end_date = 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nstudy = 'Biology'\ncafeteria = 1\nclass_subject = 'math'\nlevel = 6\ngrade <= 51\nlocation = 'NY'",
+   "question": "What are the names of the pupils who study Biology, have a cafeteria option, are in level 6 classes with a grade of 51 or lower, and are associated with a store located in New York?",
+   "seed": [2, 3, 1, 1, 0, 2, 0, 1, 0, 1, 0, 5, 1, 0, 0, 3, 6, 1, 51, 1, 0, 3, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'Biology' AND pupils.cafeteria = 1 AND classes.class_subject = 'math' AND classes.level = 6 AND classes.grade <= 51 AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'TX'\nteacher_age <= 64\nstudy = 'Classics'",
+   "question": "What are the names of the pupils who study Classics, have a cafeteria option, instructors' age is 64 or less, and are associated with a store located in Texas?",
+   "seed": [1, 2, 1, 0, 1, 0, 4, 2, 1, 64, 0, 0, 0, 13, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND instructors.teacher_age <= 64 AND pupils.study = 'Classics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstudy = 'English'\ncafeteria = 0\nteacher_age <= 47\nstar_rating = 7",
+   "question": "What are the names of the pupils who study English, have no cafeteria option, instructors' age is 47 or less, and are associated with a store with a star rating of 7?",
+   "seed": [2, 1, 1, 0, 2, 0, 12, 1, 2, 1, 47, 2, 0, 7, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'English' AND pupils.cafeteria = 0 AND instructors.teacher_age <= 47 AND store.star_rating = 7"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating = 6\nclass_subject = 'history'\nhousing = 'Davidson Hall'",
+   "question": "What is the name of the store with a star rating of 6, where classes are in history, and pupils reside in Davidson Hall?",
+   "seed": [1, 1, 0, 2, 0, 6, 1, 0, 0, 1, 5, 0, 1, 0, 8, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 6 AND classes.class_subject = 'history' AND pupils.housing = 'Davidson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating >= 8\nclass_subject = 'music'\nyear >= 2005\nhousing = 'Carson Hall'\ncafeteria = 1",
+   "question": "What is the name of the store with a star rating of 8 or more, where classes are in music with a year no earlier than 2005, pupils reside in Carson Hall, and have a cafeteria option?",
+   "seed": [1, 4, 0, 1, 2, 1, 8, 1, 0, 2, 1, 11, 0, 2005, 0, 3, 0, 5, 0, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating >= 8 AND classes.class_subject = 'music' AND classes.year >= 2005 AND pupils.housing = 'Carson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 2\nstar_rating <= 2\nhousing = 'Morgan House'",
+   "question": "What is the name of the instructors whose classes are in level 2, the store has a star rating of 2 or less, and pupils reside in Morgan House?",
+   "seed": [0, 2, 0, 0, 1, 0, 4, 0, 0, 1, 2, 2, 2, 0, 1, 0, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 2 AND store.star_rating <= 2 AND pupils.housing = 'Morgan House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'IN'\nhousing = 'Parker Hall'\ncafeteria = 0",
+   "question": "What is the name of the store located in Indiana, where pupils reside in Parker Hall and have no cafeteria option?",
+   "seed": [1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 3, 0, 2, 1, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND pupils.housing = 'Parker Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nstudy = 'Art'\nclass_subject = 'philosophy'\nstar_rating = 5",
+   "question": "What are the names of the pupils studying Art, enrolled in philosophy classes taught by instructors with a 5-star rating store?",
+   "seed": [2, 3, 1, 1, 0, 0, 0, 10, 1, 0, 0, 1, 7, 2, 0, 5, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'Art' AND classes.class_subject = 'philosophy' AND store.star_rating = 5"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstudy = 'Biology'\nstar_rating <= 3",
+   "question": "What are the names of the pupils studying Biology, attending stores with a star rating of 3 or less?",
+   "seed": [2, 4, 1, 0, 0, 0, 0, 1, 0, 2, 2, 3, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.study = 'Biology' AND store.star_rating <= 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'IN'\nlevel = 6\ngrade <= 35\nstudy = 'English'\ncafeteria = 0",
+   "question": "What are the names of the stores located in Indiana, where English pupils in grade 6 with a grade less than or equal to 35 study and don't use the cafeteria?",
+   "seed": [1, 0, 1, 0, 1, 1, 0, 5, 0, 0, 3, 6, 1, 35, 0, 2, 0, 12, 1, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND classes.level = 6 AND classes.grade <= 35 AND pupils.study = 'English' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nhousing = 'Davidson Hall'\ncafeteria = 1\nteacher_age <= 80\nstar_rating = 10",
+   "question": "What are the names of the pupils residing in Davidson Hall, using the cafeteria, taught by instructors under 80 years old, and having a 10-star rating store?",
+   "seed": [2, 4, 0, 0, 0, 3, 0, 8, 0, 2, 1, 80, 2, 0, 10, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 1 AND instructors.teacher_age <= 80 AND store.star_rating = 10"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 56\nstar_rating = 8\nend_date < 2026",
+   "question": "What are the names of the instructors whose age is less than or equal to 56, their store has an 8-star rating, and their pupils' end date is before 2026?",
+   "seed": [0, 4, 1, 0, 2, 1, 56, 2, 0, 8, 1, 2, 2, 2, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 56 AND store.star_rating = 8 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, classes\nconditions: \nperformance = 1\nclass_subject = 'economics'",
+   "question": "What are the names of the pupils performing well in economics classes?",
+   "seed": [2, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 4, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nWHERE pupils.performance = 1 AND classes.class_subject = 'economics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 84\nperformance = 3\nend_date < 2026",
+   "question": "What are the names of the instructors under 84 years old, whose pupils have a performance level of 3 and end date before 2026?",
+   "seed": [0, 0, 2, 1, 84, 0, 1, 4, 0, 2, 2, 2, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 84 AND pupils.performance = 3 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstudy = 'Psychology'\ncafeteria = 1\nteacher_age <= 83\nlocation = 'CA'",
+   "question": "What are the names of the pupils studying Psychology, using the cafeteria, taught by instructors under 83 years old, and located in California stores?",
+   "seed": [2, 3, 1, 0, 0, 2, 0, 8, 0, 2, 1, 83, 1, 0, 2, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'Psychology' AND pupils.cafeteria = 1 AND instructors.teacher_age <= 83 AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating <= 7\nteacher_age <= 37\nperformance < 4",
+   "question": "What are the names of the stores with a star rating of 7 or less, taught by instructors under 37 years old, and whose pupils' performance is less than 4?",
+   "seed": [1, 1, 1, 2, 2, 7, 2, 1, 37, 1, 0, 2, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 7 AND instructors.teacher_age <= 37 AND pupils.performance < 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age >= 34\nlocation = 'TX'\nperformance = 2",
+   "question": "What are the names of the instructors aged 34 or older, working in Texas stores, and having pupils with a performance level of 2?",
+   "seed": [0, 4, 0, 1, 2, 0, 34, 1, 0, 4, 1, 0, 0, 1, 1],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 34 AND store.location = 'TX' AND pupils.performance = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nperformance > 1\nend_date > 2024\nteacher_age >= 21\nlocation = 'NY'",
+   "question": "What are the names of the pupils with a performance level greater than 1, an end date after 2024, taught by instructors aged 21 or older, and located in New York stores?",
+   "seed": [2, 2, 0, 1, 1, 4, 1, 0, 1, 0, 2, 0, 21, 1, 0, 3, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance > 1 AND pupils.end_date > 2024 AND instructors.teacher_age >= 21 AND store.location = 'NY'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'CA'\nteacher_age >= 63\nstudy = 'Sociology'\ncafeteria = 0",
+   "question": "What are the names of the stores in California, taught by instructors aged 63 or older, having pupils studying Sociology and not using the cafeteria?",
+   "seed": [1, 4, 1, 0, 1, 0, 2, 2, 0, 63, 0, 2, 0, 9, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'CA' AND instructors.teacher_age >= 63 AND pupils.study = 'Sociology' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 4\nyear >= 2005\nlocation = 'CA'\nhousing = 'Davidson Hall'\ncafeteria = 0",
+   "question": "What are the names of the instructors teaching level 4 classes since 2005, in California stores, whose pupils reside in Davidson Hall and don't use the cafeteria?",
+   "seed": [0, 4, 1, 0, 1, 0, 6, 0, 0, 7, 0, 2005, 1, 0, 2, 0, 3, 0, 8, 1, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 4 AND classes.year >= 2005 AND store.location = 'CA' AND pupils.housing = 'Davidson Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 2\nstar_rating >= 2\nperformance = 2",
+   "question": "What are the names of the instructors teaching level 2 classes, with stores having a star rating of 2 or more, and pupils with a performance level of 2?",
+   "seed": [0, 3, 1, 1, 1, 0, 4, 0, 0, 5, 2, 1, 2, 1, 0, 0, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 2 AND store.star_rating >= 2 AND pupils.performance = 2"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'CA'\ngrade <= 34\nstudy = 'Political Science'",
+   "question": "What are the names of the stores in California, teaching classes with a grade less than or equal to 34, and having pupils studying Political Science?",
+   "seed": [1, 2, 0, 1, 1, 0, 2, 1, 0, 1, 0, 1, 34, 0, 0, 0, 6, 1],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'CA' AND classes.grade <= 34 AND pupils.study = 'Political Science'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'CA'\nlevel = 4\nstudy = 'Music'\ncafeteria = 1",
+   "question": "What are the names of the stores in California, teaching level 4 classes, where pupils study Music and use the cafeteria?",
+   "seed": [1, 0, 1, 0, 2, 1, 0, 4, 0, 0, 3, 4, 0, 2, 0, 11, 0, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'CA' AND classes.level = 4 AND pupils.study = 'Music' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstudy = 'Psychology'\ncafeteria = 0\nteacher_age >= 25\nstar_rating >= 6",
+   "question": "What are the names of the pupils studying Psychology, not using the cafeteria, taught by instructors aged 25 or older, and having stores with a star rating of 6 or more?",
+   "seed": [2, 4, 1, 0, 0, 2, 0, 8, 1, 2, 0, 25, 2, 1, 6, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.study = 'Psychology' AND pupils.cafeteria = 0 AND instructors.teacher_age >= 25 AND store.star_rating >= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'TX'\nteacher_age >= 54\nhousing = 'Carson Hall'",
+   "question": "What are the names of the stores in Texas, taught by instructors aged 54 or older, and having pupils residing in Carson Hall?",
+   "seed": [1, 4, 1, 1, 1, 0, 4, 2, 0, 54, 0, 1, 0, 5, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND instructors.teacher_age >= 54 AND pupils.housing = 'Carson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating <= 3\nend_date < 2025",
+   "question": "What are the names of the stores with a star rating of 3 or less, whose end date is before 2025?",
+   "seed": [1, 0, 2, 2, 3, 0, 1, 2, 2, 3, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating <= 3 AND pupils.end_date < 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating = 8\nperformance > 3\nend_date < 2026",
+   "question": "What are the names of the stores with an 8-star rating, having pupils with a performance level greater than 3 and an end date before 2026?",
+   "seed": [1, 3, 1, 1, 2, 0, 8, 1, 0, 0, 0, 1, 4, 1, 2, 2, 2, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 8 AND pupils.performance > 3 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nhousing = 'Norton Hall'\ncafeteria = 0",
+   "question": "What are the names of the stores in Texas, where pupils reside in Norton Hall and don't use the cafeteria?",
+   "seed": [1, 4, 1, 1, 1, 0, 4, 0, 0, 3, 0, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.housing = 'Norton Hall' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating = 6\nclass_subject = 'chemistry'\ngrade >= 74\nstudy = 'Computer Science'",
+   "question": "What are the names of the stores with a 6-star rating, teaching chemistry classes with a grade greater than or equal to 74, and having pupils studying Computer Science?",
+   "seed": [1, 0, 2, 0, 6, 1, 0, 1, 1, 2, 0, 74, 0, 0, 0, 14, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating = 6 AND classes.class_subject = 'chemistry' AND classes.grade >= 74 AND pupils.study = 'Computer Science'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nstudy = 'Chemistry'\ncafeteria = 0\nteacher_age <= 34",
+   "question": "What are the names of the pupils studying Chemistry, not using the cafeteria, and taught by instructors aged 34 or younger?",
+   "seed": [2, 1, 1, 0, 2, 0, 2, 1, 2, 1, 34, 0, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE pupils.study = 'Chemistry' AND pupils.cafeteria = 0 AND instructors.teacher_age <= 34"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 6\nyear >= 2003\nstar_rating = 4\nend_date < 2026",
+   "question": "What are the names of the instructors teaching level 6 classes since 2003, in California stores, with a 4-star rating and pupils whose end date is before 2026?",
+   "seed": [0, 0, 1, 0, 6, 0, 0, 9, 0, 2003, 2, 0, 4, 1, 2, 2, 2, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 6 AND classes.year >= 2003 AND store.star_rating = 4 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nperformance = 1\nend_date < 2026\nteacher_age >= 47\nstar_rating <= 9",
+   "question": "What are the names of the pupils with a performance level of 1, whose end date is before 2026, taught by instructors aged 47 or older, and having stores with a star rating of 9 or less?",
+   "seed": [2, 0, 1, 4, 0, 0, 2, 2, 2, 0, 47, 2, 2, 9, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance = 1 AND pupils.end_date < 2026 AND instructors.teacher_age >= 47 AND store.star_rating <= 9"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age >= 30\nlocation = 'CA'\nhousing = 'Underwood House'\ncafeteria = 0",
+   "question": "What are the names of the instructors aged 30 or older, teaching in California stores, with pupils residing in Underwood House and not using the cafeteria?",
+   "seed": [0, 3, 0, 0, 2, 0, 30, 1, 0, 2, 0, 3, 0, 9, 1, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 30 AND store.location = 'CA' AND pupils.housing = 'Underwood House' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 8\ngrade >= 82\nstar_rating = 5\nstudy = 'Math'\ncafeteria = 1",
+   "question": "What are the names of the instructors teaching level 8 classes, with a grade greater than or equal to 82, in stores with a 5-star rating, and having pupils studying Math who use the cafeteria?",
+   "seed": [0, 2, 0, 0, 1, 0, 5, 0, 0, 3, 8, 0, 82, 2, 0, 5, 0, 2, 0, 0, 0, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 8 AND classes.grade >= 82 AND store.star_rating = 5 AND pupils.study = 'Math' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nhousing = 'Franklin Hall'\nteacher_age <= 20\nstar_rating = 3",
+   "question": "What are the names of the pupils residing in Franklin Hall, taught by instructors aged 20 or younger, and having stores with a 3-star rating?",
+   "seed": [2, 2, 0, 1, 0, 1, 0, 3, 2, 1, 20, 2, 0, 3, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.housing = 'Franklin Hall' AND instructors.teacher_age <= 20 AND store.star_rating = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nend_date = 2025",
+   "question": "What are the names of the stores in Texas, whose end date is 2025?",
+   "seed": [1, 0, 1, 0, 4, 0, 1, 2, 0, 3, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age >= 30\nlocation = 'NY'\nstudy = 'Art'",
+   "question": "What are the names of the instructors aged 30 or older, teaching in New York stores, and having pupils studying Art?",
+   "seed": [0, 2, 0, 0, 2, 0, 30, 1, 0, 3, 0, 0, 0, 10, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age >= 30 AND store.location = 'NY' AND pupils.study = 'Art'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating >= 4\nstudy = 'Computer Science'\ncafeteria = 0",
+   "question": "What is the name of the store where pupils study Computer Science and the cafeteria is not available, and the store's star rating is at least 4?",
+   "seed": [1, 0, 2, 1, 4, 0, 0, 2, 0, 14, 1, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating >= 4 AND pupils.study = 'Computer Science' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'TX'\nclass_subject = 'art'\nlevel = 11\ngrade <= 43\nhousing = 'Morgan House'",
+   "question": "What is the name of the store where pupils from Morgan House taking art classes taught by instructors in Texas with a class level of 11 and a grade less than or equal to 43, and the store is located in Texas?",
+   "seed": [1, 0, 1, 0, 4, 1, 0, 5, 1, 10, 0, 14, 1, 43, 0, 1, 0, 1, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND classes.class_subject = 'art' AND classes.level = 11 AND classes.grade <= 43 AND pupils.housing = 'Morgan House'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating = 10\nend_date > 2024",
+   "question": "What is the name of the store where the store's star rating is 10 and pupils' end date is after 2024?",
+   "seed": [1, 1, 1, 2, 0, 10, 0, 1, 2, 1, 0, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating = 10 AND pupils.end_date > 2024"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, classes\nconditions: \ngrade >= 62\nhousing = 'Underwood House'\ncafeteria = 0",
+   "question": "What are the names of the instructors who teach classes where the grade is at least 62, pupils live in Underwood House, and cafeteria is not available?",
+   "seed": [0, 0, 1, 0, 1, 0, 0, 62, 0, 0, 3, 0, 9, 1, 1],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nWHERE classes.grade >= 62 AND pupils.housing = 'Underwood House' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nyear >= 2008\nstar_rating = 8\nstudy = 'Math'\ncafeteria = 1",
+   "question": "What are the names of the instructors who teach classes in or after 2008, store's star rating is 8, pupils study Math, and the cafeteria is available?",
+   "seed": [0, 1, 1, 1, 0, 2, 0, 0, 2008, 2, 0, 8, 0, 2, 0, 0, 0, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.year >= 2008 AND store.star_rating = 8 AND pupils.study = 'Math' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nend_date = 2026\nyear <= 2019\nlocation = 'MA'",
+   "question": "What are the names of the pupils who will end their study by 2026, taking classes taught by instructors in Massachusetts in or before 2019?",
+   "seed": [2, 3, 0, 1, 1, 2, 0, 2, 1, 0, 2, 0, 1, 2019, 1, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.end_date = 2026 AND classes.year <= 2019 AND store.location = 'MA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nperformance < 3\nteacher_age <= 30\nstar_rating = 6",
+   "question": "What are the names of the pupils who have a performance rating less than 3, being taught by instructors aged 30 or younger, and the store's star rating is 6?",
+   "seed": [2, 2, 1, 0, 1, 0, 2, 2, 2, 1, 30, 2, 0, 6, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance < 3 AND instructors.teacher_age <= 30 AND store.star_rating = 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating <= 5\nteacher_age >= 46\nend_date = 2025",
+   "question": "What is the name of the store where pupils' end date is 2025, instructors are aged 46 or older, and the store's star rating is at most 5?",
+   "seed": [1, 4, 1, 0, 2, 2, 5, 2, 0, 46, 1, 2, 0, 3, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 5 AND instructors.teacher_age >= 46 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nteacher_age <= 70\nlocation = 'MA'\nhousing = 'Campbell Hall'",
+   "question": "What are the names of the instructors who teach pupils living in Campbell Hall, aged 70 or younger, and the store is in Massachusetts?",
+   "seed": [0, 2, 1, 0, 2, 1, 70, 1, 0, 0, 0, 1, 0, 7, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE instructors.teacher_age <= 70 AND store.location = 'MA' AND pupils.housing = 'Campbell Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nclass_subject = 'physics'\nstar_rating <= 4\nhousing = 'Green Hall'\ncafeteria = 1",
+   "question": "What are the names of the instructors who teach physics classes, pupils live in Green Hall, the store's star rating is at most 4, and the cafeteria is available?",
+   "seed": [0, 4, 0, 0, 1, 0, 0, 1, 3, 2, 2, 4, 0, 3, 0, 4, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.class_subject = 'physics' AND store.star_rating <= 4 AND pupils.housing = 'Green Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'TX'\nclass_subject = 'art'\ngrade >= 95\nhousing = 'Davidson Hall'",
+   "question": "What is the name of the store where pupils from Davidson Hall taking art classes in Texas with a grade of at least 95?",
+   "seed": [1, 3, 1, 0, 1, 0, 4, 1, 0, 1, 1, 10, 0, 95, 0, 1, 0, 8, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND classes.class_subject = 'art' AND classes.grade >= 95 AND pupils.housing = 'Davidson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils\nconditions: \nstudy = 'Computer Science'\ncafeteria = 0",
+   "question": "What are the names of the pupils studying Computer Science and where the cafeteria is not available?",
+   "seed": [2, 3, 0, 0, 0, 2, 0, 14, 1, 0, 0, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nWHERE pupils.study = 'Computer Science' AND pupils.cafeteria = 0"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'TX'\nstudy = 'Political Science'",
+   "question": "What is the name of the store where pupils study Political Science and is located in Texas?",
+   "seed": [1, 4, 0, 1, 1, 0, 4, 0, 0, 0, 0, 6, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'TX' AND pupils.study = 'Political Science'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nstar_rating <= 8\nperformance > 1",
+   "question": "What are the names of the instructors who teach pupils with a performance rating greater than 1, and the store's star rating is at most 8?",
+   "seed": [0, 3, 0, 0, 0, 2, 2, 8, 1, 0, 1, 0, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 8 AND pupils.performance > 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'TX'\nteacher_age <= 49\nperformance = 3",
+   "question": "What is the name of the store where pupils' performance rating is 3, instructors are aged 49 or younger, and is located in Texas?",
+   "seed": [1, 2, 1, 0, 1, 0, 4, 2, 1, 49, 1, 0, 0, 2, 0],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND instructors.teacher_age <= 49 AND pupils.performance = 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nhousing = 'Morgan House'\nstar_rating = 8",
+   "question": "What are the names of the pupils living in Morgan House and where the store's star rating is 8?",
+   "seed": [2, 1, 1, 0, 1, 0, 1, 0, 2, 0, 8, 2],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.housing = 'Morgan House' AND store.star_rating = 8"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlevel = 9\ngrade >= 90\nstar_rating = 2\nperformance > 2\nend_date < 2026",
+   "question": "What are the names of the instructors who teach classes with a level of 9 or higher, a grade of at least 90, store's star rating is 2, pupils' performance rating is greater than 2, and the end date is before 2026?",
+   "seed": [0, 4, 0, 1, 1, 0, 5, 0, 0, 12, 0, 90, 2, 0, 2, 1, 4, 1, 1, 2, 2, 2],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.level = 9 AND classes.grade >= 90 AND store.star_rating = 2 AND pupils.performance > 2 AND pupils.end_date < 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils\nconditions: \nteacher_age <= 37\nperformance = 2\nend_date > 2025",
+   "question": "What are the names of the instructors who are aged 37 or younger, pupils' performance rating is 2, and the end date is after 2025?",
+   "seed": [0, 2, 0, 0, 2, 1, 37, 0, 1, 4, 0, 1, 1, 3, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nWHERE instructors.teacher_age <= 37 AND pupils.performance = 2 AND pupils.end_date > 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nlocation = 'CA'\nperformance < 3\nend_date > 2026",
+   "question": "What are the names of the pupils with a performance rating less than 3, whose end date is after 2026, and the store is located in California?",
+   "seed": [1, 3, 1, 1, 1, 0, 2, 0, 1, 4, 2, 2, 1, 2, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.location = 'CA' AND pupils.performance < 3 AND pupils.end_date > 2026"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating <= 8\nclass_subject = 'poetry'\nperformance < 3",
+   "question": "What is the name of the store where pupils have a performance rating less than 3, taking poetry classes taught by instructors, and the store's star rating is at most 8?",
+   "seed": [1, 3, 1, 1, 2, 2, 8, 1, 0, 0, 1, 14, 1, 0, 2, 2, 2],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating <= 8 AND classes.class_subject = 'poetry' AND pupils.performance < 3"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'TX'\nclass_subject = 'history'\nlevel = 7\ngrade >= 78\nhousing = 'Carson Hall'",
+   "question": "What is the name of the store where pupils from Carson Hall taking history classes in Texas with a class level of 7 and a grade of at least 78?",
+   "seed": [1, 0, 1, 0, 4, 1, 0, 5, 1, 5, 0, 3, 7, 0, 78, 0, 1, 0, 5, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'TX' AND classes.class_subject = 'history' AND classes.level = 7 AND classes.grade >= 78 AND pupils.housing = 'Carson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nhousing = 'Morgan House'\ncafeteria = 0\nlevel = 2\nyear >= 2002\nlocation = 'CA'",
+   "question": "What are the names of the pupils living in Morgan House, where the cafeteria is not available, taking classes with a level of 2 or lower since 2002, and the store is located in California?",
+   "seed": [2, 2, 1, 1, 0, 3, 0, 1, 1, 1, 0, 6, 0, 0, 5, 0, 2002, 1, 0, 2, 0],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.housing = 'Morgan House' AND pupils.cafeteria = 0 AND classes.level = 2 AND classes.year >= 2002 AND store.location = 'CA'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nstar_rating >= 5\nperformance = 4",
+   "question": "What are the names of the instructors who teach classes where the store's star rating is at least 5, and pupils' performance rating is 4?",
+   "seed": [0, 0, 1, 0, 0, 0, 2, 1, 5, 1, 0, 0, 3, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.star_rating >= 5 AND pupils.performance = 4"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'IN'\nstudy = 'Physics'\ncafeteria = 1",
+   "question": "What are the names of the instructors who teach pupils studying Physics in Indiana, and the cafeteria is available?",
+   "seed": [0, 4, 0, 1, 0, 1, 0, 1, 0, 2, 0, 3, 0, 2],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'IN' AND pupils.study = 'Physics' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store\nconditions: \nlocation = 'NY'\nstudy = 'Classics'",
+   "question": "What are the names of the instructors who teach pupils studying Classics in New York?",
+   "seed": [0, 4, 0, 1, 0, 1, 0, 3, 0, 0, 0, 13, 0],
+   "sql": "SELECT instructors.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'NY' AND pupils.study = 'Classics'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \ngrade <= 39\nlocation = 'MA'\nhousing = 'Carson Hall'\ncafeteria = 1",
+   "question": "What are the names of the instructors who teach classes with a grade of at most 39, pupils living in Carson Hall, and the cafeteria is available?",
+   "seed": [0, 3, 0, 1, 1, 0, 1, 0, 1, 39, 1, 0, 0, 0, 3, 0, 5, 0, 0],
+   "sql": "SELECT instructors.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE classes.grade <= 39 AND store.location = 'MA' AND pupils.housing = 'Carson Hall' AND pupils.cafeteria = 1"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, pupils, store, classes\nconditions: \nperformance = 2\nstar_rating <= 6",
+   "question": "What are the names of the pupils with a performance rating of 2, and the store's star rating is at most 6?",
+   "seed": [2, 2, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 2, 2, 6, 1],
+   "sql": "SELECT pupils.name\nFROM pupils\nINNER JOIN instructors ON pupils.name = instructors.name\nINNER JOIN classes ON instructors.teacher_id = classes.teacher_id\nINNER JOIN store ON store.name = instructors.name\nWHERE pupils.performance = 2 AND store.star_rating <= 6"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nstar_rating = 8\nhousing = 'Carson Hall'",
+   "question": "What are the names of the pupils living in Carson Hall where the store's star rating is 8?",
+   "seed": [1, 3, 0, 1, 2, 0, 8, 0, 0, 1, 0, 5, 1],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE store.star_rating = 8 AND pupils.housing = 'Carson Hall'"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: pupils, store\nconditions: \nperformance > 1\nend_date = 2025",
+   "question": "What are the names of the pupils with a performance rating greater than 1, and the end date is 2025?",
+   "seed": [1, 1, 1, 0, 0, 1, 4, 1, 0, 0, 3, 2],
+   "sql": "SELECT store.name\nFROM pupils\nINNER JOIN store ON store.name = pupils.name\nWHERE pupils.performance > 1 AND pupils.end_date = 2025"
+},{"is_zero_record": false,
+   "pseudocode": "want: name\ntables: instructors, store, pupils, classes\nconditions: \nlocation = 'MA'\nclass_subject = 'english'\ngrade <= 27\nperformance > 2",
+   "question": "What is the name of the store where pupils from Carson Hall taking English classes with a grade of at most 27, and pupils' performance rating is greater than 2?",
+   "seed": [1, 3, 0, 1, 1, 0, 0, 1, 0, 1, 1, 12, 1, 27, 1, 0, 1, 1, 0],
+   "sql": "SELECT store.name\nFROM classes\nINNER JOIN instructors ON instructors.teacher_id = classes.teacher_id\nINNER JOIN pupils ON pupils.name = instructors.name\nINNER JOIN store ON store.name = instructors.name\nWHERE store.location = 'MA' AND classes.class_subject = 'english' AND classes.grade <= 27 AND pupils.performance > 2"
+}
+]

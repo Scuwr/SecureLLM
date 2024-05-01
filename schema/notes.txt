@@ -1,0 +1,110 @@
+Commands:
+    To generate db:
+        python schema_table_populate.py
+    To generate data:
+        python schema_llm_data.py generate --schema ./schema_qgen1.txt --num_samples 100_000 --save_to ../training_data/samples/samples_1.json
+        python schema_llm_data.py generate --schema ./schema_qgen1.txt --num_samples 5000 --save_to ../training_data/samples/samples_1_val.json
+        python schema_llm_data.py generate --schema ./schema_qgen2.txt --num_samples 100_000 --save_to ../training_data/samples/samples_2.json
+        python schema_llm_data.py generate --schema ./schema_qgen2.txt --num_samples 5000 --save_to ../training_data/samples/samples_2_val.json
+        python schema_llm_data.py generate --schema ./schema_qgen3.txt --num_samples 100_000 --save_to ../training_data/samples/samples_3.json
+        python schema_llm_data.py generate --schema ./schema_qgen3.txt --num_samples 5000 --save_to ../training_data/samples/samples_3_val.json
+
+        python schema_llm_data.py generate --schema ./schema_qgen_union_12.txt --num_samples 3000 --save_to ../training_data/samples/samples_union12.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_12.txt --num_samples 3000 --save_to ../training_data/samples/samples_union12_val.json
+
+        python schema_llm_data.py generate --schema ./schema_qgen_union_13.txt --num_samples 3000 --save_to ../training_data/samples/samples_union13.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_13.txt --num_samples 3000 --save_to ../training_data/samples/samples_union13_val.json
+
+        python schema_llm_data.py generate --schema ./schema_qgen_union_23.txt --num_samples 3000 --save_to ../training_data/samples/samples_union23.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_23.txt --num_samples 3000 --save_to ../training_data/samples/samples_union23_val.json
+
+        python schema_llm_data.py generate --schema ./schema_qgen_union_123.txt --num_samples 10000 --save_to ../training_data/samples/samples_union123.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_123.txt --num_samples 10000 --save_to ../training_data/samples/samples_union123_val.json
+
+        python schema_llm_data.py generate --schema ./schema_qgen1.txt --num_samples 1000 --save_to ../training_data/samples/samples_1_val_gpt.json
+        python schema_llm_data.py generate --schema ./schema_qgen2.txt --num_samples 1000 --save_to ../training_data/samples/samples_2_val_gpt.json
+        python schema_llm_data.py generate --schema ./schema_qgen3.txt --num_samples 1000 --save_to ../training_data/samples/samples_3_val_gpt.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_12.txt --num_samples 10000 --save_to ../training_data/samples/samples_union12_val_gpt.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_13.txt --num_samples 10000 --save_to ../training_data/samples/samples_union13_val_gpt.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_23.txt --num_samples 10000 --save_to ../training_data/samples/samples_union23_val_gpt.json
+        python schema_llm_data.py generate --schema ./schema_qgen_union_123.txt --num_samples 10000 --save_to ../training_data/samples/samples_union123_val_gpt.json
+
+    To postprocess samples:
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_1.json --database ../training_data/databases/schema_1_{0}.db --qgen ./schema_qgen1.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_1_val.json --database ../training_data/databases/schema_1_{0}.db --qgen ./schema_qgen1.txt
+
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_2.json --database ../training_data/databases/schema_2_{0}.db --qgen ./schema_qgen2.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_2_val.json --database ../training_data/databases/schema_2_{0}.db --qgen ./schema_qgen2.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_3.json --database ../training_data/databases/schema_3_{0}.db --qgen ./schema_qgen3.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_3_val.json --database ../training_data/databases/schema_3_{0}.db --qgen ./schema_qgen3.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union12.json --database ../training_data/databases/schema_union12_{0}.db --qgen ./schema_qgen_union_12.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union12_val.json --database ../training_data/databases/schema_union12_{0}.db --qgen ./schema_qgen_union_12.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union13.json --database ../training_data/databases/schema_union13_{0}.db --qgen ./schema_qgen_union_13.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union13_val.json --database ../training_data/databases/schema_union13_{0}.db --qgen ./schema_qgen_union_13.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union23.json --database ../training_data/databases/schema_union23_{0}.db --qgen ./schema_qgen_union_23.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union23_val.json --database ../training_data/databases/schema_union23_{0}.db --qgen ./schema_qgen_union_23.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union123.json --database ../training_data/databases/schema_union123_{0}.db --qgen ./schema_qgen_union_123.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union123_val.json --database ../training_data/databases/schema_union123_{0}.db --qgen ./schema_qgen_union_123.txt
+
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_1_val_gpt.json --database ../training_data/databases/schema_1_{0}.db --qgen ./schema_qgen1.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_2_val_gpt.json --database ../training_data/databases/schema_2_{0}.db --qgen ./schema_qgen2.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_3_val_gpt.json --database ../training_data/databases/schema_3_{0}.db --qgen ./schema_qgen3.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union12_val_gpt.json --database ../training_data/databases/schema_union12_{0}.db --qgen ./schema_qgen_union_12.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union13_val_gpt.json --database ../training_data/databases/schema_union13_{0}.db --qgen ./schema_qgen_union_13.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union23_val_gpt.json --database ../training_data/databases/schema_union23_{0}.db --qgen ./schema_qgen_union_23.txt
+        python schema_llm_data.py postprocess --num_queries 1000 --query_file ../training_data/samples/samples_union123_val_gpt.json --database ../training_data/databases/schema_union123_{0}.db --qgen ./schema_qgen_union_123.txt
+
+    To check queries are valid:
+        python schema_llm_data.py check --database ../training_data/databases/schema_1_{0}.db --query_file ../training_data/samples/samples_1.json
+        python schema_llm_data.py check --database ../training_data/databases/schema_1_{0}.db --query_file ../training_data/samples/samples_1_val.json
+        python schema_llm_data.py check --database ../training_data/databases/schema_2_{0}.db --query_file ../training_data/samples/samples_2.json
+        python schema_llm_data.py check --database ../training_data/databases/schema_2_{0}.db --query_file ../training_data/samples/samples_2_val.json
+        python schema_llm_data.py check --database ../training_data/databases/schema_union_{0}.db --query_file ../training_data/samples/samples_union_12_val.json
+    To generate data from chatgpt:
+        python chatgpt.py --in_fn ../training_data/samples/samples_2_val.json
+notes:
+
+Important: > and >= are ambiguous 
+----------------------
+FOR CHAT GPT HELP:
+
+to get schema:
+        Below is a challenging problem that requires deep understanding of phrase structure grammar to build a natural language question alongside constraints fulfilling s database schema, You will be given 1 examples schema and grammar pair, then you are given a new schema and your task is to generate a compatible grammar that encompases the schema to the best of your ability.
+        The following is the example schema followed by it's grammar
+
+        ---------
+        EXAMPLE SCHEMA:
+        <COPY FROM DOC>
+        ---------------------------
+        ---------------------------
+        EXAMPLE GRAMMAR:
+        <COPY FROM TXT>
+        ---------------------------
+        ---------------------------
+        TEST SCHEMA:
+        <COPY FROM DOC>
+        ---------------------------
+        ---------------------------
+        YOUR GRAMMAR HERE:
+
+----------------------------------------------
+to get struct:
+
+        Great now do the same task for the following struct that is provided for you that corresponds to the example schema given above
+
+        EXAMPLE STRUCT OUTPUT:
+        {
+            "JOINs": [
+                {"TABLES": ["teachers", "classes"], "COLUMNS": ["teacher_id"]}
+            ],
+            "PKs": {
+                "teachers": "teacher_id",
+                "classes": "class_id"
+            }
+        }
+
+        PROVIDE YOUR STRUCT OUTPUT HERE:
+        {
+            "JOINs": [ <YOU ANSWER HERE>
+
+----------------------------------------------

@@ -1,0 +1,140 @@
+:2: root : {whats_the} average {prop_number} {suffix} : T=AVG
+:2: root : {whats_the} maximum {prop_number} {suffix} : T=MAX
+:2: root : {whats_the} minimum {prop_number} {suffix} : T=MIN
+:2: root : {list_the} {prop_number} {suffix} : T=none
+:1: root : {whats_the} number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:1: root : Count the number of {prop_countable} {suffix} : T=COUNT  #  DISTINCT PK
+:1: root : {list_the} primary key of all {prop_countable} {suffix} : T=none
+# ROOT APPLIANCES
+:1: root : {list_the} manufacturers of all {prop_countable} {suffix} : T=none ; WANT=appliance.company
+:1: root : {list_the} appliance types of all {prop_countable} {suffix} : T=none ; WANT=appliance.type
+# ROOT STORES
+:3: root: {list_the} names of all managers {manager_multi_cond} {suffix} : T=none ; WANT=store.name
+
+# suffixes and prefixes
+:1: list_the : list the : none
+:1: list_the : output {pre_alistof?} the : none
+:1: list_the : provide {pre_me?} {pre_alistof?} the : none
+:1: list_the : give {pre_me?} {pre_alistof?} the : none
+:1: list_the : show {pre_me?} {pre_alistof?} the : none
+:1: whats_the : what is the : none
+:1: whats_the : what's the : none
+:1: pre_me? : me : none
+:1: pre_me? : : none
+:1: pre_alistof? : a list of : none
+:1: pre_alistof? : : none
+
+:2: suffix : : none
+
+
+:1: prop_countable: appliances {appliance_multi_cond} : TABLES = appliance
+:1: prop_number: rating of all appliances {appliance_multi_cond} : WANT=appliance.appliance_rating
+
+
+:1: appliance_multi_cond: : none
+:2: appliance_multi_cond: {appliance_cond_type} : none
+:2: appliance_multi_cond: {appliance_cond_manufacturer} : none
+:2: appliance_multi_cond: {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_type} and {appliance_cond_manufacturer} : none
+:2: appliance_multi_cond: {appliance_cond_type} and {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_manufacturer} and {appliance_cond_rating} : none
+:2: appliance_multi_cond: {appliance_cond_type} or {appliance_cond_manufacturer} : ADDER_PROPS={"comb":"OR"}
+:2: appliance_multi_cond: {appliance_cond_type} or {appliance_cond_rating} : ADDER_PROPS={"comb":"OR"}
+:2: appliance_multi_cond: {appliance_cond_manufacturer} or {appliance_cond_rating} : ADDER_PROPS={"comb":"OR"}
+
+:1: appliance_cond_type: that are {appliance_type}s : CONDITIONS=appliance.type = '{0}'
+:1: appliance_cond_type: that are {appliance_type}s or {appliance_type}s : CONDITIONS=appliance.type = '{0}' OR appliance.type = '{1}'
+:1: appliance_cond_type: that are {appliance_type}s, {appliance_type}s, or {appliance_type}s : CONDITIONS=appliance.type = '{0}' OR appliance.type = '{1}' OR appliance.type = '{2}'
+
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}'
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer} or {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}' OR appliance.company = '{1}'
+:1: appliance_cond_manufacturer: that are manufactured by {appliance_manufacturer}, {appliance_manufacturer}, or {appliance_manufacturer} : CONDITIONS=appliance.company = '{0}' OR appliance.company = '{1}' OR appliance.company = '{2}'
+
+:1: appliance_cond_rating: with an appliance rating of {number,1,10} stars : CONDITIONS=appliance.appliance_rating = {0}
+:1: appliance_cond_rating: with an appliance rating higher than {number,2,9} stars : CONDITIONS=appliance.appliance_rating >= {0}
+:1: appliance_cond_rating: with an appliance rating lower than {number,2,9} stars : CONDITIONS=appliance.appliance_rating <= {0}
+
+
+:1: appliance_type : Refrigerator
+:1: appliance_type : Dishwasher
+:1: appliance_type : Oven
+:1: appliance_type : Microwave
+:1: appliance_type : Blender
+
+:1: appliance_manufacturer : LG
+:1: appliance_manufacturer : GE
+:1: appliance_manufacturer : Sony
+:1: appliance_manufacturer : Samsung
+:1: appliance_manufacturer : Panasonic
+:1: appliance_manufacturer : Bosch
+
+
+
+# --- Queries related to the manager table
+:1: prop_countable: managers {manager_multi_cond} : TABLES = store
+:1: prop_number: rating of all managers {manager_multi_cond} : WANT=store.star_rating
+
+:1: manager_multi_cond: : none
+:3: manager_multi_cond: {manager_cond_state} : none
+:3: manager_multi_cond: {manager_cond_rating} : none
+:3: manager_multi_cond: {manager_cond_state} and {manager_cond_rating} : none
+
+:1: manager_cond_state: located in {manager_state} : CONDITIONS=store.location = '{0}'
+:1: manager_cond_state: located in {manager_state} or {manager_state} : CONDITIONS=store.location = '{0}' OR store.location = '{1}'
+:1: manager_cond_state: located in {manager_state}, {manager_state}, or {manager_state} : CONDITIONS=store.location = '{0}' OR store.location = '{1}' OR store.location = '{2}'
+
+:1: manager_cond_rating: with a rating of {number,1,10} stars : CONDITIONS=store.star_rating = {0}
+:1: manager_cond_rating: with a rating higher than or equal to {number,2,9} stars : CONDITIONS=store.star_rating >= {0}
+:1: manager_cond_rating: with a rating lower than or equal to {number,2,9} stars : CONDITIONS=store.star_rating <= {0}
+
+:1: manager_state : MA
+:1: manager_state : IN
+:1: manager_state : CA
+:1: manager_state : NY
+:1: manager_state : TX
+
+
+
+# --- Queries related to the inventory table
+:1: prop_number: width of all appliances in the inventory {inventory_multi_cond} : WANT=inventory.width
+:1: prop_number: height of all appliances in the inventory {inventory_multi_cond} : WANT=inventory.height
+:1: prop_number: value of all appliances in the inventory {inventory_multi_cond} : WANT=inventory.value
+
+:1: inventory_multi_cond: : none
+:2: inventory_multi_cond: {inventory_cond_available} : none
+:2: inventory_multi_cond: {inventory_cond_unit} : none
+:2: inventory_multi_cond: {inventory_cond_available} and {inventory_cond_unit} : none
+:2: inventory_multi_cond: {inventory_cond_available} or {inventory_cond_unit} : ADDER_PROPS={"comb":"OR"}
+
+:6: inventory_multi_cond: {inventory_cond_available} in managers {manager_multi_cond} : none
+
+
+:1: inventory_cond_unit : which are taller than or equal to {number,1,100} inches : CONDITIONS=inventory.height >= {0}
+:1: inventory_cond_unit : with height more than or equal to {number,1,100} inches : CONDITIONS=inventory.height >= {0}
+:1: inventory_cond_unit : which are thinner than or equal to {number,1,100} inches : CONDITIONS=inventory.height <= {0}
+:1: inventory_cond_unit : with height less than or equal to {number,1,100} inches : CONDITIONS=inventory.height <= {0}
+:1: inventory_cond_unit : which are wider than or equal to {number,1,100} inches : CONDITIONS=inventory.width >= {0}
+:1: inventory_cond_unit : with width more than or equal to {number,1,100} inches : CONDITIONS=inventory.width >= {0}
+:1: inventory_cond_unit : with width less than or equal to {number,1,100} inches : CONDITIONS=inventory.width <= {0}
+:1: inventory_cond_unit : with width less than or equal to {number,1,100} inches : CONDITIONS=inventory.width <= {0}
+
+:2: inventory_cond_available: that are currently available : CONDITIONS=inventory.available = 1
+:1: inventory_cond_available: that are currently not available : CONDITIONS=inventory.available = 0
+:1: inventory_cond_available: that are currently unavailable : CONDITIONS=inventory.available = 0
+
+
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
+{
+    "JOINs": [
+        {"TABLES": ["appliance", "inventory"], "COLUMNS": [["appliance_id", "appliance_id"]]},
+        {"TABLES": ["store", "inventory"], "COLUMNS": [["store_id", "store_id"]]},
+        {"TABLES": ["appliance", "store"], "LINKING_TABLES": ["inventory"]}
+    ],
+    "PKs": {
+        "appliance": "appliance_id",
+        "store": "store_id",
+        "inventory": "inventory_id"
+    }
+}
+
+-----------------------------------SCHEMA-SECTION-SEPERATOR-----------------------------------
