@@ -16,6 +16,8 @@ Finally make sure all `.sh` files are executable. Go to `./SecureLLM` and run `c
 
 To get the results for all columns of all 3 tables run the bash script `run_all.sh` inside `./SecureLLM`
 
+To print all the results into tables (once `run_all.sh` finishes) run `python print_tables.py`
+
 For individual tables run the following:
 
 For Table 1 results:
