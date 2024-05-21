@@ -16,7 +16,7 @@ class DBManager:
         self.txt_out_path = self.db_path.parent / (self.db_path.stem + '.txt')
         assert self.txt_out_path != self.db_path, "txt_out_path cannot be the same as db_path"
         assert os.path.exists(Path(self.db_path).parent), f'Path does not exist for file:\n\t{Path(self.db_path)}'
-        print(f'Opening database: {self.db_path}')
+        # print(f'Opening database: {self.db_path}')
         self.con = sqlite3.connect(db_path)
         self.cur = self.con.cursor()
         # check and create tables
