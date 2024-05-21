@@ -1,3 +1,4 @@
+mkdir logs
 
 echo For Table 1 results:
 
