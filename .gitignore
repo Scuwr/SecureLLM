@@ -20,7 +20,6 @@ wandb/*
 !sandbox.ipynb
 !schema/schemas.ipynb
 !experiments.ipynb
-!experiments_arkareem.ipynb
 
 schema/schema_data/
 schema/schema_data_*/
