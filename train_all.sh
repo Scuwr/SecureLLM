@@ -25,15 +25,15 @@ export SAVE_PATH="./trained_models/SQL/M3.pt"
 echo " -------- Pairs for ./trained_models/6NF/ --------"
 
 export TRAIN_STR="schemapseudo_1:1000"
-export SAVE_PATH="./trained_models/SQL/M1.pt"
+export SAVE_PATH="./trained_models/6NF/M1.pt"
 ./train_one.sh
 
 export TRAIN_STR="schemapseudo_2:1000"
-export SAVE_PATH="./trained_models/SQL/M2.pt"
+export SAVE_PATH="./trained_models/6NF/M2.pt"
 ./train_one.sh
 
 export TRAIN_STR="schemapseudo_3:1000"
-export SAVE_PATH="./trained_models/SQL/M3.pt"
+export SAVE_PATH="./trained_models/6NF/M3.pt"
 ./train_one.sh
 
 
