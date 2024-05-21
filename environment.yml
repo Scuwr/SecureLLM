@@ -3,6 +3,7 @@ channels:
   - defaults
 dependencies:
 - python=3.11.4
+- pip
 - pip:
   - torch==2.0.1
   - tqdm==4.65.0
