@@ -1,0 +1,38 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/6NF_obf/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schemapseudo_1_val~mapping=1:120,schemapseudo_2_val~mapping=1:120,schemapseudo_3_val~mapping=1:120,schemapseudo_union12_val~mapping=1:120,schemapseudo_union13_val~mapping=1:120,schemapseudo_union23_val~mapping=1:120,schemapseudo_union123_val~mapping=1:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schemapseudo_1_val', 'schemapseudo_2_val', 'schemapseudo_3_val', 'schemapseudo_union123_val', 'schemapseudo_union12_val', 'schemapseudo_union13_val', 'schemapseudo_union23_val', 'no_acc', 'unk']
+{'schemapseudo_1_val': {'v': [53, 120, 20], 'to_print': '44.2% (20)', 'to_save': None}, 'schemapseudo_2_val': {'v': [81, 120, 29], 'to_print': '67.5% (29)', 'to_save': None}, 'schemapseudo_3_val': {'v': [83, 120, 34], 'to_print': '69.2% (34)', 'to_save': None}, 'schemapseudo_union123_val': {'v': [0, 120, 67], 'to_print': '0.0% (67)', 'to_save': None}, 'schemapseudo_union12_val': {'v': [14, 120, 53], 'to_print': '11.7% (53)', 'to_save': None}, 'schemapseudo_union13_val': {'v': [1, 120, 84], 'to_print': '0.8% (84)', 'to_save': None}, 'schemapseudo_union23_val': {'v': [0, 120, 81], 'to_print': '0.0% (81)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schemapseudo_1_val~mapping=1:120,schemapseudo_2_val~mapping=1:120,schemapseudo_3_val~mapping=1:120,schemapseudo_union12_val~mapping=1:120,schemapseudo_union13_val~mapping=1:120,schemapseudo_union23_val~mapping=1:120,schemapseudo_union123_val~mapping=1:120
+Model root: ./trained_models/6NF_obf/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schemapseudo_1_val,44.166666666666664,1.475,0.18634603822103815
+schemapseudo_2_val,67.5,0.85,0.19023883523883528
+schemapseudo_3_val,69.16666666666667,1.075,0.060072969963430985
+schemapseudo_union123_val,0.0,4.408333333333333,0.48166666666666647
+schemapseudo_union12_val,11.666666666666666,5.133333333333334,0.3407040727304207
+schemapseudo_union13_val,0.8333333333333334,3.091666666666667,0.45245370370370414
+schemapseudo_union23_val,0.0,2.191666666666667,0.33518518518518514

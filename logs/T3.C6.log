@@ -1,0 +1,38 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/SQL_obf/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schema_1_val~mapping=1:120,schema_2_val~mapping=1:120,schema_3_val~mapping=1:120,schema_union12_val~mapping=1:120,schema_union13_val~mapping=1:120,schema_union23_val~mapping=1:120,schema_union123_val~mapping=1:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schema_1_val', 'schema_2_val', 'schema_3_val', 'schema_union123_val', 'schema_union12_val', 'schema_union13_val', 'schema_union23_val', 'no_acc', 'unk']
+{'schema_1_val': {'v': [32, 120, 77], 'to_print': '26.7% (77)', 'to_save': None}, 'schema_2_val': {'v': [40, 120, 64], 'to_print': '33.3% (64)', 'to_save': None}, 'schema_3_val': {'v': [105, 120, 14], 'to_print': '87.5% (14)', 'to_save': None}, 'schema_union123_val': {'v': [0, 120, 110], 'to_print': '0.0% (110)', 'to_save': None}, 'schema_union12_val': {'v': [1, 120, 105], 'to_print': '0.8% (105)', 'to_save': None}, 'schema_union13_val': {'v': [0, 120, 116], 'to_print': '0.0% (116)', 'to_save': None}, 'schema_union23_val': {'v': [0, 120, 103], 'to_print': '0.0% (103)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schema_1_val~mapping=1:120,schema_2_val~mapping=1:120,schema_3_val~mapping=1:120,schema_union12_val~mapping=1:120,schema_union13_val~mapping=1:120,schema_union23_val~mapping=1:120,schema_union123_val~mapping=1:120
+Model root: ./trained_models/SQL_obf/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schema_1_val,26.666666666666668,3.3916666666666666,0.5070016326266326
+schema_2_val,33.333333333333336,2.025,0.44737704425204433
+schema_3_val,87.5,0.43333333333333335,0.04622457435924929
+schema_union123_val,0.0,5.616666666666666,0.9006944444444442
+schema_union12_val,0.8333333333333334,7.125,0.5979701170074622
+schema_union13_val,0.0,3.2416666666666667,0.6672222222222223
+schema_union23_val,0.0,2.6083333333333334,0.6083333333333333

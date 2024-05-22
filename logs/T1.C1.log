@@ -1,0 +1,40 @@
+Creating table models
+Creating table metadata
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/SQL/
+Models: ['M123E']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schema_1_val', 'schema_2_val', 'schema_3_val', 'schema_union123_val', 'schema_union12_val', 'schema_union13_val', 'schema_union23_val', 'no_acc', 'unk']
+{'schema_1_val': {'v': [120, 120, 0], 'to_print': '100.0% (0)', 'to_save': None}, 'schema_2_val': {'v': [116, 120, 4], 'to_print': '96.7% (4)', 'to_save': None}, 'schema_3_val': {'v': [120, 120, 0], 'to_print': '100.0% (0)', 'to_save': None}, 'schema_union123_val': {'v': [118, 120, 2], 'to_print': '98.3% (2)', 'to_save': None}, 'schema_union12_val': {'v': [119, 120, 0], 'to_print': '99.2% (0)', 'to_save': None}, 'schema_union13_val': {'v': [120, 120, 0], 'to_print': '100.0% (0)', 'to_save': None}, 'schema_union23_val': {'v': [120, 120, 0], 'to_print': '100.0% (0)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+Model root: ./trained_models/SQL/
+Models: ['M123E']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schema_1_val,100.0,0.0,0.0
+schema_2_val,96.66666666666667,0.0,0.0
+schema_3_val,100.0,0.0,0.0
+schema_union123_val,98.33333333333333,0.016666666666666666,0.002430555555555555
+schema_union12_val,99.16666666666667,0.14166666666666666,0.00787037037037037
+schema_union13_val,100.0,0.0,0.0
+schema_union23_val,100.0,0.0,0.0

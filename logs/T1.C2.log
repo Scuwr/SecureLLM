@@ -1,0 +1,39 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/SQL/
+Models: ['M123']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schema_1_val', 'schema_2_val', 'schema_3_val', 'schema_union123_val', 'schema_union12_val', 'schema_union13_val', 'schema_union23_val', 'no_acc', 'unk']
+{'schema_1_val': {'v': [118, 120, 0], 'to_print': '98.3% (0)', 'to_save': None}, 'schema_2_val': {'v': [120, 120, 0], 'to_print': '100.0% (0)', 'to_save': None}, 'schema_3_val': {'v': [120, 120, 0], 'to_print': '100.0% (0)', 'to_save': None}, 'schema_union123_val': {'v': [0, 120, 91], 'to_print': '0.0% (91)', 'to_save': None}, 'schema_union12_val': {'v': [0, 120, 111], 'to_print': '0.0% (111)', 'to_save': None}, 'schema_union13_val': {'v': [2, 120, 107], 'to_print': '1.7% (107)', 'to_save': None}, 'schema_union23_val': {'v': [2, 120, 89], 'to_print': '1.7% (89)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+Generation did not finish for (1/840) samples. Consider increasing gen_max_len, currently 480
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+Model root: ./trained_models/SQL/
+Models: ['M123']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schema_1_val,98.33333333333333,0.11666666666666667,0.010416666666666666
+schema_2_val,100.0,0.0,0.0
+schema_3_val,100.0,0.0,0.0
+schema_union123_val,0.0,6.241666666666666,1.0174305555555558
+schema_union12_val,0.0,6.708333333333333,0.5187614834354385
+schema_union13_val,1.6666666666666667,1.9333333333333333,0.4125694444444445
+schema_union23_val,1.6666666666666667,2.216666666666667,0.5020833333333334

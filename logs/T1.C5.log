@@ -1,0 +1,39 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/SQL/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraMaxDiffElemConfig'>
+Weights: None
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schema_1_val', 'schema_2_val', 'schema_3_val', 'schema_union123_val', 'schema_union12_val', 'schema_union13_val', 'schema_union23_val', 'no_acc', 'unk']
+{'schema_1_val': {'v': [9, 120, 107], 'to_print': '7.5% (107)', 'to_save': None}, 'schema_2_val': {'v': [36, 120, 83], 'to_print': '30.0% (83)', 'to_save': None}, 'schema_3_val': {'v': [32, 120, 88], 'to_print': '26.7% (88)', 'to_save': None}, 'schema_union123_val': {'v': [0, 120, 102], 'to_print': '0.0% (102)', 'to_save': None}, 'schema_union12_val': {'v': [0, 120, 104], 'to_print': '0.0% (104)', 'to_save': None}, 'schema_union13_val': {'v': [0, 120, 120], 'to_print': '0.0% (120)', 'to_save': None}, 'schema_union23_val': {'v': [0, 120, 105], 'to_print': '0.0% (105)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+Generation did not finish for (3/840) samples. Consider increasing gen_max_len, currently 480
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+Model root: ./trained_models/SQL/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraMaxDiffElemConfig'>
+Weights: None
+
+=== Results ===
+schema_1_val,7.5,2.825,0.414085197210197
+schema_2_val,30.0,1.5666666666666667,0.2990094396344396
+schema_3_val,26.666666666666668,1.5583333333333333,0.19356291426724856
+schema_union123_val,0.0,5.766666666666667,0.8946527777777774
+schema_union12_val,0.0,8.125,0.7079060435823208
+schema_union13_val,0.0,3.308333333333333,0.6499999999999999
+schema_union23_val,0.0,3.15,0.7402777777777781

@@ -1,0 +1,38 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/6NF/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schemapseudo_1_val:120,schemapseudo_2_val:120,schemapseudo_3_val:120,schemapseudo_union12_val:120,schemapseudo_union13_val:120,schemapseudo_union23_val:120,schemapseudo_union123_val:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schemapseudo_1_val', 'schemapseudo_2_val', 'schemapseudo_3_val', 'schemapseudo_union123_val', 'schemapseudo_union12_val', 'schemapseudo_union13_val', 'schemapseudo_union23_val', 'no_acc', 'unk']
+{'schemapseudo_1_val': {'v': [69, 120, 15], 'to_print': '57.5% (15)', 'to_save': None}, 'schemapseudo_2_val': {'v': [92, 120, 12], 'to_print': '76.7% (12)', 'to_save': None}, 'schemapseudo_3_val': {'v': [39, 120, 81], 'to_print': '32.5% (81)', 'to_save': None}, 'schemapseudo_union123_val': {'v': [10, 120, 98], 'to_print': '8.3% (98)', 'to_save': None}, 'schemapseudo_union12_val': {'v': [29, 120, 42], 'to_print': '24.2% (42)', 'to_save': None}, 'schemapseudo_union13_val': {'v': [10, 120, 98], 'to_print': '8.3% (98)', 'to_save': None}, 'schemapseudo_union23_val': {'v': [10, 120, 107], 'to_print': '8.3% (107)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schemapseudo_1_val:120,schemapseudo_2_val:120,schemapseudo_3_val:120,schemapseudo_union12_val:120,schemapseudo_union13_val:120,schemapseudo_union23_val:120,schemapseudo_union123_val:120
+Model root: ./trained_models/6NF/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schemapseudo_1_val,57.5,0.925,0.12575186387686388
+schemapseudo_2_val,76.66666666666667,0.24166666666666667,0.06959304584304585
+schemapseudo_3_val,32.5,1.425,0.0971551593881991
+schemapseudo_union123_val,8.333333333333334,2.316666666666667,0.24722222222222215
+schemapseudo_union12_val,24.166666666666668,2.816666666666667,0.20556677962945663
+schemapseudo_union13_val,8.333333333333334,2.1166666666666667,0.33467592592592577
+schemapseudo_union23_val,8.333333333333334,1.6,0.2444444444444444

@@ -1,0 +1,38 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/6NF/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schemapseudo_1_val_gpt:120,schemapseudo_2_val_gpt:120,schemapseudo_3_val_gpt:120,schemapseudo_union12_val_gpt:120,schemapseudo_union13_val_gpt:120,schemapseudo_union23_val_gpt:120,schemapseudo_union123_val_gpt:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schemapseudo_1_val_gpt', 'schemapseudo_2_val_gpt', 'schemapseudo_3_val_gpt', 'schemapseudo_union123_val_gpt', 'schemapseudo_union12_val_gpt', 'schemapseudo_union13_val_gpt', 'schemapseudo_union23_val_gpt', 'no_acc', 'unk']
+{'schemapseudo_1_val_gpt': {'v': [28, 120, 81], 'to_print': '23.3% (81)', 'to_save': None}, 'schemapseudo_2_val_gpt': {'v': [47, 120, 60], 'to_print': '39.2% (60)', 'to_save': None}, 'schemapseudo_3_val_gpt': {'v': [33, 120, 75], 'to_print': '27.5% (75)', 'to_save': None}, 'schemapseudo_union123_val_gpt': {'v': [12, 120, 99], 'to_print': '10.0% (99)', 'to_save': None}, 'schemapseudo_union12_val_gpt': {'v': [5, 120, 114], 'to_print': '4.2% (114)', 'to_save': None}, 'schemapseudo_union13_val_gpt': {'v': [9, 120, 101], 'to_print': '7.5% (101)', 'to_save': None}, 'schemapseudo_union23_val_gpt': {'v': [11, 120, 88], 'to_print': '9.2% (88)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schemapseudo_1_val_gpt:120,schemapseudo_2_val_gpt:120,schemapseudo_3_val_gpt:120,schemapseudo_union12_val_gpt:120,schemapseudo_union13_val_gpt:120,schemapseudo_union23_val_gpt:120,schemapseudo_union123_val_gpt:120
+Model root: ./trained_models/6NF/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schemapseudo_1_val_gpt,23.333333333333332,2.175,0.2489505055130055
+schemapseudo_2_val_gpt,39.166666666666664,1.7333333333333334,0.2937097162097162
+schemapseudo_3_val_gpt,27.5,2.5416666666666665,0.22974832222236638
+schemapseudo_union123_val_gpt,10.0,2.191666666666667,0.2192129629629629
+schemapseudo_union12_val_gpt,4.166666666666667,6.175,0.4009107499583762
+schemapseudo_union13_val_gpt,7.5,1.8916666666666666,0.2671759259259256
+schemapseudo_union23_val_gpt,9.166666666666666,1.5,0.2314814814814814

@@ -1,0 +1,39 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/SQL/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraSumConfig'>
+Weights: None
+val_str: schema_1_val_gpt:120,schema_2_val_gpt:120,schema_3_val_gpt:120,schema_union12_val_gpt:120,schema_union13_val_gpt:120,schema_union23_val_gpt:120,schema_union123_val_gpt:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schema_1_val_gpt', 'schema_2_val_gpt', 'schema_3_val_gpt', 'schema_union123_val_gpt', 'schema_union12_val_gpt', 'schema_union13_val_gpt', 'schema_union23_val_gpt', 'no_acc', 'unk']
+{'schema_1_val_gpt': {'v': [4, 120, 115], 'to_print': '3.3% (115)', 'to_save': None}, 'schema_2_val_gpt': {'v': [3, 120, 113], 'to_print': '2.5% (113)', 'to_save': None}, 'schema_3_val_gpt': {'v': [1, 120, 119], 'to_print': '0.8% (119)', 'to_save': None}, 'schema_union123_val_gpt': {'v': [0, 120, 119], 'to_print': '0.0% (119)', 'to_save': None}, 'schema_union12_val_gpt': {'v': [0, 120, 120], 'to_print': '0.0% (120)', 'to_save': None}, 'schema_union13_val_gpt': {'v': [1, 120, 118], 'to_print': '0.8% (118)', 'to_save': None}, 'schema_union23_val_gpt': {'v': [1, 120, 116], 'to_print': '0.8% (116)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+Generation did not finish for (22/840) samples. Consider increasing gen_max_len, currently 480
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schema_1_val_gpt:120,schema_2_val_gpt:120,schema_3_val_gpt:120,schema_union12_val_gpt:120,schema_union13_val_gpt:120,schema_union23_val_gpt:120,schema_union123_val_gpt:120
+Model root: ./trained_models/SQL/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraSumConfig'>
+Weights: None
+
+=== Results ===
+schema_1_val_gpt,3.3333333333333335,7.533333333333333,1.0791261285011289
+schema_2_val_gpt,2.5,4.616666666666666,0.9642391173641174
+schema_3_val_gpt,0.8333333333333334,10.508333333333333,1.0771971838003191
+schema_union123_val_gpt,0.0,4.341666666666667,0.6704166666666665
+schema_union12_val_gpt,0.0,10.633333333333333,0.9089920131754499
+schema_union13_val_gpt,0.8333333333333334,3.1,0.5952777777777779
+schema_union23_val_gpt,0.8333333333333334,2.558333333333333,0.5784722222222223

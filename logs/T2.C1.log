@@ -1,0 +1,38 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/SQL/
+Models: ['M123E']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schema_1_val_gpt:120,schema_2_val_gpt:120,schema_3_val_gpt:120,schema_union12_val_gpt:120,schema_union13_val_gpt:120,schema_union23_val_gpt:120,schema_union123_val_gpt:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schema_1_val_gpt', 'schema_2_val_gpt', 'schema_3_val_gpt', 'schema_union123_val_gpt', 'schema_union12_val_gpt', 'schema_union13_val_gpt', 'schema_union23_val_gpt', 'no_acc', 'unk']
+{'schema_1_val_gpt': {'v': [105, 120, 6], 'to_print': '87.5% (6)', 'to_save': None}, 'schema_2_val_gpt': {'v': [74, 120, 14], 'to_print': '61.7% (14)', 'to_save': None}, 'schema_3_val_gpt': {'v': [68, 120, 25], 'to_print': '56.7% (25)', 'to_save': None}, 'schema_union123_val_gpt': {'v': [25, 120, 74], 'to_print': '20.8% (74)', 'to_save': None}, 'schema_union12_val_gpt': {'v': [35, 120, 74], 'to_print': '29.2% (74)', 'to_save': None}, 'schema_union13_val_gpt': {'v': [40, 120, 66], 'to_print': '33.3% (66)', 'to_save': None}, 'schema_union23_val_gpt': {'v': [60, 120, 36], 'to_print': '50.0% (36)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schema_1_val_gpt:120,schema_2_val_gpt:120,schema_3_val_gpt:120,schema_union12_val_gpt:120,schema_union13_val_gpt:120,schema_union23_val_gpt:120,schema_union123_val_gpt:120
+Model root: ./trained_models/SQL/
+Models: ['M123E']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schema_1_val_gpt,87.5,0.25,0.03805916305916305
+schema_2_val_gpt,61.666666666666664,0.9916666666666667,0.18863636363636357
+schema_3_val_gpt,56.666666666666664,1.1416666666666666,0.14533056060726335
+schema_union123_val_gpt,20.833333333333332,1.4416666666666667,0.20090277777777782
+schema_union12_val_gpt,29.166666666666668,3.3666666666666667,0.2452028212728677
+schema_union13_val_gpt,33.333333333333336,0.6083333333333333,0.10722222222222218
+schema_union23_val_gpt,50.0,0.6,0.12361111111111107

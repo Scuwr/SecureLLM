@@ -1,0 +1,38 @@
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+Model root: ./trained_models/SQL/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+
+=== Starting Script ===
+Hugging Face Llama Model successfully loaded
+Slora Configuration loaded and initialized
+Adapter checkpoints loaded and linked
+Starting validation test
+Using KV Cache
+['schema_1_val', 'schema_2_val', 'schema_3_val', 'schema_union123_val', 'schema_union12_val', 'schema_union13_val', 'schema_union23_val', 'no_acc', 'unk']
+{'schema_1_val': {'v': [20, 120, 92], 'to_print': '16.7% (92)', 'to_save': None}, 'schema_2_val': {'v': [72, 120, 40], 'to_print': '60.0% (40)', 'to_save': None}, 'schema_3_val': {'v': [104, 120, 16], 'to_print': '86.7% (16)', 'to_save': None}, 'schema_union123_val': {'v': [0, 120, 98], 'to_print': '0.0% (98)', 'to_save': None}, 'schema_union12_val': {'v': [1, 120, 98], 'to_print': '0.8% (98)', 'to_save': None}, 'schema_union13_val': {'v': [3, 120, 103], 'to_print': '2.5% (103)', 'to_save': None}, 'schema_union23_val': {'v': [3, 120, 97], 'to_print': '2.5% (97)', 'to_save': None}, 'no_acc': {'count': 0, 'to_save': None}, 'unk': {'to_save': None}}
+
+=== Inputs ===
+GPU: 0
+Sample Size: 120
+val_str: schema_1_val:120,schema_2_val:120,schema_3_val:120,schema_union12_val:120,schema_union13_val:120,schema_union23_val:120,schema_union123_val:120
+Model root: ./trained_models/SQL/
+Models: ['M1', 'M2', 'M3']
+Negated Models: []
+Config Type: <class 'modeling.secureLLM.slora.SloraLogitConfig'>
+Weights: None
+
+=== Results ===
+schema_1_val,16.666666666666668,3.0083333333333333,0.3997260378510378
+schema_2_val,60.0,0.9083333333333333,0.22343073593073587
+schema_3_val,86.66666666666667,0.525,0.06509275360862049
+schema_union123_val,0.0,4.858333333333333,0.7415972222222218
+schema_union12_val,0.8333333333333334,7.083333333333333,0.5741211636732146
+schema_union13_val,2.5,2.7,0.5270138888888889
+schema_union23_val,2.5,1.9416666666666667,0.4409722222222224
