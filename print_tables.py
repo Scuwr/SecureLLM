@@ -40,7 +40,7 @@ def generate_table(table_num, round_digits=1, maincol='tree-norm', acc_cols=[], 
     mean_std.columns = mean_std.columns.droplevel(0)
     mean_std.loc[:, 'mean'] = mean_std['mean'].astype(float).round(2)
     mean_std.loc[:, 'std'] = mean_std['std'].astype(float).round(2)
-    mean_std['mean_std'] = mean_std['mean'].astype(str) + ' \pm ' + mean_std['std'].astype(str)
+    mean_std['mean_std'] = mean_std['mean'].astype(str) + ' +- ' + mean_std['std'].astype(str)
 
     new_df.loc[:, maincol] = new_df[maincol].astype(float).round(round_digits).astype(str)
     if acc_cols:
@@ -48,11 +48,12 @@ def generate_table(table_num, round_digits=1, maincol='tree-norm', acc_cols=[], 
         show_acc_for = df['name'].str.contains('|'.join(acc_cols))
 
         accs = df.loc[show_acc_for, 'acc'].astype(float).round(1).astype(str)
-        new_df.loc[show_acc_for, maincol] = new_df.loc[show_acc_for, maincol] + ' (' + accs + ')'
+        new_df.loc[show_acc_for, maincol] = new_df.loc[show_acc_for, maincol] + ' (' + accs + '%)'
     new_df.loc[:, 'dataset'] = new_df['dataset'].str.replace('schemapseudo', 'schema').str.replace('_val', '').str.replace('schema_', 'S').str.replace('union', '').str.replace('_gpt', '') # rename datasets to just S#
     new_df = new_df.pivot(index='dataset', columns='name', values=maincol)
     to_sort = ['S1', 'S2', 'S3', 'S12', 'S13', 'S23', 'S123']  # sort rows by this order
     new_df = new_df.reindex(to_sort)
+    new_df.loc['mu +- std'] = mean_std['mean_std'].to_dict()  # new row for 'mu +- std'
     if COLS_TO_BOLD:  # find minimums for row and bold them
         min_values = new_df.copy()
         piped = '|'.join(COLS_TO_BOLD)
@@ -63,11 +64,32 @@ def generate_table(table_num, round_digits=1, maincol='tree-norm', acc_cols=[], 
             # cols that contained piped
             cols = new_df.columns[new_df.columns.str.contains(piped)]
             new_df.loc[dname, cols] = new_df.loc[dname, cols].apply(lambda x: f'\\textbf{{{x}}}' if re.match(rf'{min_val}( |$)', x) else x)
-    new_df.loc['mu +- std'] = mean_std['mean_std'].to_dict()  # new row for 'mu +- std'
     print(new_df)
     if print_sql:
+        latex_df = new_df.copy()
+        # if column has "\d+ .+" then add \phantom{0} to it
+        def add_phantom(x):
+            s = r'([\d\.]+?) (\(.+)'
+            v12 = re.match(s, x)
+            if v12:
+                zero_count = 8 - len(v12.group(2))
+                if zero_count > 0:
+                    phantom_str = '{' + '0' * zero_count + '}'
+                    return f'{v12.group(1)} \\phantom{phantom_str}{v12.group(2)}'
+            return x
+        latex_df = latex_df.applymap(add_phantom)  # add phantom 0 to columns with accuracy
+        dataset_mapping = {'S1': '$\\text{Silos}_1$', 'S2': '$\\text{Silos}_2$', 'S3': '$\\text{Silos}_3$', 'S12': '$\\text{Silos}_{1 \cup 2}$', 'S13': '$\\text{Silos}_{1 \cup 3}$', 'S23': '$\\text{Silos}_{2 \cup 3}$', 'S123': '$\\text{Silos}_{1 \cup 2 \cup 3}$'}
+        latex_df = latex_df.rename(index=dataset_mapping)
+        latex = latex_df.to_latex()
+        latex = latex[latex.find('\\midrule')+len('\\midrule'):latex.rfind('\\bottomrule')]  # remove everything before midrule and after bottomrule
+        latex = latex.replace('%', '\\%')  # replace % with \%
+        latex = latex.replace('mu +- std', '\midrule $\\mu\\pm\\sigma$')  # replace mu +- std with latex
+        latex = re.sub(r'\\textbf\{(\d+.\d+) \+\- (\d+.\d+)\}', r'$\\boldsymbol{\1\\pm\2}$', latex)  # replace bolded +- values with latex
+        latex = re.sub(r'(\d+.\d+) \+\- (\d+.\d+)', r'$\1\\pm\2$', latex)  # replace 1.2 +- 0.3 with latex
         print('----------- SQL -----------')
-        print(new_df.to_latex())
+        print(latex)
+        with open(f'logs/table{table_num}.tex', 'w') as f:
+            f.write(latex)
     new_df.to_csv(f'logs/table{table_num}.csv', index=False)
 
 
