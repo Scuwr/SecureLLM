@@ -57,12 +57,12 @@ def generate_table(table_num, round_digits=1, maincol='tree-norm', acc_cols=[], 
         min_values = new_df.copy()
         piped = '|'.join(COLS_TO_BOLD)
         min_values = min_values.loc[:, min_values.columns.str.contains(piped)]  # dont calculate minimums over c1 or c2
-        min_values = min_values.apply(lambda x: x.str.extract(r'(.*?)[ $]')[0].astype(float), axis=1).min(axis=1)
+        min_values = min_values.apply(lambda x: x.str.extract(r'(.*?)( |$)')[0].astype(float), axis=1).min(axis=1)
         for dname in new_df.index:
             min_val = min_values[dname]
             # cols that contained piped
             cols = new_df.columns[new_df.columns.str.contains(piped)]
-            new_df.loc[dname, cols] = new_df.loc[dname, cols].apply(lambda x: f'\\textbf{{{x}}}' if re.match(rf'{min_val}[ $]', x) else x)
+            new_df.loc[dname, cols] = new_df.loc[dname, cols].apply(lambda x: f'\\textbf{{{x}}}' if re.match(rf'{min_val}( |$)', x) else x)
     new_df.loc['mu +- std'] = mean_std['mean_std'].to_dict()  # new row for 'mu +- std'
     print(new_df)
     if print_sql:
